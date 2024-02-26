@@ -12,11 +12,11 @@ const Admin = require('../models/admindb.js');
 
 const signupController = {
 
-    getSignUp: function (req, res) {
+    get_signup: function (req, res) {
         res.render('SignUp',res);
     },
 
-    postSignUp: async function (req, res) {
+    post_signup: async function (req, res) {
 
         var errors = validationResult(req);
 
@@ -58,7 +58,7 @@ const signupController = {
         
     },
 
-    getCheckID: async function (req, res) {
+    get_check_ID: async function (req, res) {
 
         
         var idNumber = req.query.idNumber;
@@ -74,7 +74,7 @@ const signupController = {
         
     },
 
-    getCheckEmail: async function (req, res) {
+    get_check_email: async function (req, res) {
 
         var email = req.query.email;
         var result = await db.findOne(User, {email: email}, 'email');

@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 
 //Mongo DB Modules
-const MongoStore = require('connect-mongo')(session);
+const mongo_store = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 
 // import module `hbs`
@@ -28,7 +28,7 @@ app.use(session({
     secret: 'sessionID',
     cookie: {maxAge: 7*24*60*60*3000},
     saveUninitialized: false,
-    store: new MongoStore({mongooseConnection: db, autoRemove: 'disabled'}),
+    store: new mongo_store({mongooseConnection: db, autoRemove: 'disabled'}),
     resave: false
 }));
 

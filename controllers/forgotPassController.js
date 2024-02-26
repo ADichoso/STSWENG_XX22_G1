@@ -6,11 +6,11 @@ const Admin = require('../models/admindb.js');
 
 const forgotPassController = {
 
-    getForgotPassword: function (req, res) {
+    get_forgot_password: function (req, res) {
         res.render('ForgotPassword', res);
     },
 
-    postForgotPassword: async function (req, res){
+    post_forgot_password: async function (req, res){
 
         var query = {email: req.body.user_email, securityCode: req.body.user_securityCode};
 
@@ -46,7 +46,7 @@ const forgotPassController = {
 
     },
 
-    postChangeFPassword: async function (req, res){
+    post_change_F_password: async function (req, res){
 
         var newPassword0 = req.body.user_newPassword0;
         var newPassword1 = req.body.user_newPassword1;

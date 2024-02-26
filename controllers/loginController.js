@@ -8,7 +8,7 @@ const Admin = require('../models/admindb.js');
 
 const loginController = {
 
-    getLogin: async function (req, res) {
+    get_login: async function (req, res) {
 
         if ( req.session.idNumber ){
 
@@ -32,7 +32,7 @@ const loginController = {
         
     },
     
-    postLogin: async function (req, res) {
+    post_login: async function (req, res) {
         const idNumber = req.body.user_idNumber;
         const password = req.body.user_password;
 

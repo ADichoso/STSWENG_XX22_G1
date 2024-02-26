@@ -12,7 +12,7 @@ const saltRounds = 10;
 
 const profileController = {
 
-    getProfile: async function (req, res) {
+    get_profile: async function (req, res) {
       
       if ( req.session.idNumber != req.query.idNumber ) {
         const query = { idNumber: req.session.idNumber };
@@ -61,7 +61,7 @@ const profileController = {
         
     },
 
-    getProfileAdmin: async function (req, res) {
+    get_profile_admin: async function (req, res) {
 
       if ( req.session.idNumber != req.query.idNumber ) {
         const query = { idNumber: req.session.idNumber };
@@ -110,7 +110,7 @@ const profileController = {
 
     },
 
-    postChangePublicInfo: async function (req, res) {
+    post_change_public_info: async function (req, res) {
       var query = {idNumber: req.body.idNumber };
       const projection = { idNumber: 1, firstName: 1, lastName: 1, designation: 1, passengerType: 1 };
 
@@ -147,7 +147,7 @@ const profileController = {
 
     },
 
-    postChangePrivateInfo: async function (req, res) {
+    post_change_private_info: async function (req, res) {
       var query = {idNumber: req.body.idNumber };
       const projection = { idNumber: 1, designation: 1};
 
@@ -171,7 +171,7 @@ const profileController = {
 
     },
 
-    postChangePassword: async function (req, res) {
+    post_change_password: async function (req, res) {
       var query = {idNumber: req.body.idNumber};
       const projection = { idNumber: 1, password: 1 };
 
@@ -195,7 +195,7 @@ const profileController = {
 
     },
 
-    postChangeCode: async function (req, res) {
+    post_change_code: async function (req, res) {
       
       var query = {idNumber: req.body.idNumber};
       const projection = { idNumber: 1, securityCode: 1 };
@@ -223,7 +223,7 @@ const profileController = {
 
     },
 
-    postDeleteAccount: async function (req, res) {
+    post_delete_account: async function (req, res) {
       var query = {idNumber: req.body.idNumber};
       const projection = { idNumber: 1, password: 1 };
     
@@ -268,7 +268,7 @@ const profileController = {
 
     },
 
-    getLogout: function (req, res) {
+    get_logout: function (req, res) {
       req.session.destroy(function(err) {
         if(err) throw err;
         res.redirect('/');

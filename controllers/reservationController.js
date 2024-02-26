@@ -8,7 +8,7 @@ const Reservation = require('../models/reservationdb.js');
 
 const reservationController = {
 
-    getReservations: async function (req, res) {
+    get_reservations: async function (req, res) {
 		
 		if ( req.session.idNumber != req.query.idNumber ) {
 			res.redirect('/Reservation?idNumber=' + req.session.idNumber );
@@ -31,7 +31,7 @@ const reservationController = {
 		
     },
 
-    getReservationAdmin: async function (req, res) {
+    get_reservation_admin: async function (req, res) {
 
 		if ( req.session.idNumber != req.query.idNumber ){
 
@@ -60,7 +60,7 @@ const reservationController = {
     },
 
 	//Add reservation
-	postReservations: async function (req, res) {
+	post_reservations: async function (req, res) {
         /*
             when submitting forms using HTTP POST method
             the values in the input fields are stored in `req.body` object
@@ -129,7 +129,7 @@ const reservationController = {
 
     },
 
-	postUpdateReservations: async function (req, res){
+	post_update_reservations: async function (req, res){
 		var curr ={
 			startCampus: req.body.eCurrStartCampus,
 			date: req.body.eCurrDate,
@@ -176,7 +176,7 @@ const reservationController = {
 		
 	},
 
-	postDelete: async function (req, res){
+	post_delete: async function (req, res){
 		var rsv = {
 			startCampus: req.body.dCurrStartCampus,
 			date: req.body.dCurrDate,
@@ -201,13 +201,13 @@ const reservationController = {
 
 	},
 
-	getSearchUser: async function (req, res){
+	get_search_user: async function (req, res){
 
 		res.redirect('/ReservationAdmin?idNumber=' + req.query.idNumber);
 
 	},
 
-	postSearchUser: async function (req, res){
+	post_search_user: async function (req, res){
 
 		var idNumber = req.body.user_idNumber;
 		var adminId = req.body.adminId;
@@ -237,7 +237,7 @@ const reservationController = {
 
 	},
 
-	postSearchUserUpdate: async function (req, res){
+	post_search_user_update: async function (req, res){
 		var curr ={
 			startCampus: req.body.eCurrStartCampus,
 			date: req.body.eCurrDate,
@@ -300,7 +300,7 @@ const reservationController = {
 
 	},
 
-	postSearchUserDelete: async function (req, res){
+	post_search_user_delete: async function (req, res){
 		var rsv = {
 			startCampus: req.body.dCurrStartCampus,
 			date: req.body.dCurrDate,

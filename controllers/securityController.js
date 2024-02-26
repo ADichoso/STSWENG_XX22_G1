@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 
 const securityController = {
 
-    getSecurity: async function (req, res) {
+    get_security: async function (req, res) {
 
         const query = {idNumber: req.query.idNumber};
 
@@ -37,7 +37,7 @@ const securityController = {
         res.render('Security', details);
     },
 
-    postSecurity: async function (req, res) {
+    post_security: async function (req, res) {
 
         const idNumber = req.body.idNumber;
         const securityCode = req.body.user_securityCode;

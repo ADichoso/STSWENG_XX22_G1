@@ -11,7 +11,7 @@ const validation = {
         function which returns an array of validation middlewares
         called when the client sends an HTTP POST request for `/signup`
     */
-    signupValidation: function () {
+    signup_validation: function () {
 
         /*
             object `validation` is an array of validation middlewares.

@@ -11,7 +11,7 @@ const Admin = require('../models/admindb.js');
 */
 const controller = {
 
-    getIndex: async function (req, res) {
+    get_index: async function (req, res) {
 
         var details = {};
 
@@ -44,27 +44,27 @@ const controller = {
         
     },
 
-    getLogin: function (req, res) {
+    get_login: function (req, res) {
         res.render('Login',res);
     },
 
-    getSignUp: function (req, res) {
+    get_signup: function (req, res) {
         res.render('SignUp',res);
     },
     
-    getSearch: function (req, res) {
+    get_search: function (req, res) {
         res.render('Search', res);
     },
 
-    getProfile: function (req, res){
+    get_profile: function (req, res){
         res.render('Profile', res);
     },
 
-    getProfileAdmin: function (req, res){
+    get_profile_admin: function (req, res){
         res.render('ProfileAdmin', res);
     },
 
-    getSettings: async function (req, res){
+    get_settings: async function (req, res){
 
         if ( req.session.idNumber != req.query.idNumber) {
             res.status(200).redirect('/Settings?idNumber=' + req.session.idNumber);     
@@ -107,19 +107,19 @@ const controller = {
 
     },
 
-    getSchedule: function (req, res){
+    get_schedule: function (req, res){
         res.render('Schedule', res);
     },
 
-    getReservation: function (req, res){
+    get_reservation: function (req, res){
         res.render('Reservation', res);
     },
 
-    getReservationAdmin: function (req, res){
+    get_reservation_admin: function (req, res){
         res.render('ReservationAdmin', res);
     },
 
-    getError: function (req, res) {
+    get_error: function (req, res) {
         res.render('Error', res);
     },
 

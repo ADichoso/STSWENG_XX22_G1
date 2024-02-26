@@ -1,7 +1,7 @@
 const Reservation = require('../models/reservationdb.js');
 
 const scheduleController = {
-    getReservations: async (req, res) => {
+    get_reservations: async (req, res) => {
       try {
         const { date, location, time } = req.params;
         const { buttonClicked } = req.query;
