@@ -124,7 +124,7 @@ $(document).ready(function () {
                 return callback(false);
             }
         } else {
-            $("error_box").css('dsplay', 'block');
+            $("#error_box").css('display', 'block');
             $('#error_message').text('Invalid Email.');
             return callback(false);
         }
