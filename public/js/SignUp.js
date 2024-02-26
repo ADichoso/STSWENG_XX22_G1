@@ -123,8 +123,11 @@ $(document).ready(function () {
                 $('#error_message').text('Email already registered.');
                 return callback(false);
             }
+        } else {
+            $("error_box").css('dsplay', 'block');
+            $('#error_message').text('Invalid Email.');
+            return callback(false);
         }
-
     }
 
 
