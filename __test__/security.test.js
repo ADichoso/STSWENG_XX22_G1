@@ -1,6 +1,7 @@
 const securityController = require('../controllers/securityController.js');
 const User = require('../models/userdb.js');
 const Admin = require('../models/admindb.js');
+const Driver = require('../models/driverdb.js');
 
 const bcrypt = require('bcrypt');
 var req = {};
