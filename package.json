@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --color --coverage"
+    "test": "jest --color --coverage",
+    "run": "npx supervisor index.js"
   },
   "author": "",
   "license": "ISC",
