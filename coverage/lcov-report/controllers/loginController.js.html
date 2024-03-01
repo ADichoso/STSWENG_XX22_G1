@@ -142,15 +142,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -165,20 +165,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -190,7 +190,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -207,19 +207,19 @@ const Admin = require('../models/admindb.js');
 &nbsp;
 const loginController = {
 &nbsp;
-    getLogin: async function (req, res) {
+    get_login: async function (req, res) {
 &nbsp;
-        if ( req.session.idNumber ){
+        if ( req.session.id_number ){
 &nbsp;
-          const query = { idNumber: req.session.idNumber };
-          const projection = { idNumber: 1 };
-          const result = await db.findOne(User, query, projection);
-          const result2 = await db.findOne(Admin, query, projection);
+          const query = { id_number: req.session.id_number };
+          const projection = { id_number: 1 };
+          const result = await db.find_one(User, query, projection);
+          const result2 = await db.find_one(Admin, query, projection);
 &nbsp;
           if (result) {
-            res.status(200).redirect('/Profile?idNumber=' + req.session.idNumber);     
+            res.status(200).redirect('/Profile?id_number=' + req.session.id_number);     
           } else if (result2) {
-            res.status(200).redirect('/ProfileAdmin?idNumber=' + req.session.idNumber);  
+            res.status(200).redirect('/ProfileAdmin?id_number=' + req.session.id_number);  
           } else {
             res.render('Login', { isValid: false })
           }
@@ -231,26 +231,26 @@ const loginController = {
         
     },
     
-    postLogin: async function (req, res) {
-        const idNumber = req.body.user_idNumber;
+    post_login: async function (req, res) {
+        const id_number = req.body.user_idNumber;
         const password = req.body.user_password;
 &nbsp;
         try {
-          const query = { idNumber: idNumber };
-          const projection = { idNumber: 1, password: 1};
-          const result = await db.findOne(User, query, projection);
-          const result2 = await db.findOne(Admin, query, projection);
+          const query = { id_number: id_number };
+          const projection = { id_number: 1, password: 1};
+          const result = await db.find_one(User, query, projection);
+          const result2 = await db.find_one(Admin, query, projection);
           
           if (result &amp;&amp; await bcrypt.compare(password, result.password)) {
 &nbsp;
-            req.session.idNumber = result.idNumber;
+            req.session.id_number = result.id_number;
 &nbsp;
-            res.redirect('/SecurityCheck?idNumber=' + idNumber);      
+            res.redirect('/SecurityCheck?id_number=' + id_number);      
           } else if (result2 &amp;&amp; await bcrypt.compare(password, result2.password)) {
           
-            req.session.idNumber = result2.idNumber;
+            req.session.id_number = result2.id_number;
 &nbsp;
-            res.redirect('/SecurityCheck?idNumber=' + idNumber);
+            res.redirect('/SecurityCheck?id_number=' + id_number);
 &nbsp;
           } else {
             res.render('Login', { isValid: false })
@@ -271,7 +271,7 @@ module.exports = loginController;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-02-29T14:26:59.864Z
+                at 2024-03-01T13:48:40.485Z
             </div>
         <script src="../prettify.js"></script>
         <script>
