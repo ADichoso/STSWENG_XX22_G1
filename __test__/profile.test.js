@@ -13,7 +13,7 @@ jest.mock('../models/driverdb.js');
 
 describe('profileController', () => {
     describe('getProfile', () => {
-        test('should render profile page with details of session user if session.id_number != query.id_number', () => {
+        test('should render user profile page with details of session user if session.id_number != query.id_number', () => {
             const req = { session: { id_number: '123456789' }, query: { id_number: '123456789' } };
             const res = { render: jest.fn() };
             const details = {
@@ -31,6 +31,10 @@ describe('profileController', () => {
 
         })
 
+        test.todo('should render admin user profile page with details of query id_number if session.id_number != query.id_number')
+
+        test.todo('should render driver user profile page with details of query id_number if session.id_number != query.id_number')
+        
         test('should render profile page with details of query id_number if session.id_number == query.id_number', () => {
             const req = { session: { id_number: '123456789' }, query: { id_number: '123456789' } };
             const res = { render: jest.fn() };
@@ -47,5 +51,25 @@ describe('profileController', () => {
             expect(User.getProfile).toBeCalledWith('123456789');
             expect(res.render).toBeCalledWith('profile', { details: details });
         })
+
+        test('should render the error page if an error occurs', () => {
+            const req = {session : {id_number: '123456789'}, query: { id_number: '123456789'} }
+            const res = {render: jest.fn()}
+            const details = {
+                id_number: '123456789',
+                first_name: 'Austin',
+                last_name: 'Tester',
+                designation: 'Designation',
+                passengerType: 'Passenger'
+            }
+            User.getProfile.mockResolvedValue(null)
+
+            profile_controller.getProfile(req, res)
+
+            expect(User.getProfile).toBeCalledWith('123456789')
+            expect(res.render).toBeCalledWith('Error', res)
+        })
+
+
     })
 })
