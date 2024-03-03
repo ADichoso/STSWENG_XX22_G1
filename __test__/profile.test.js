@@ -435,7 +435,7 @@ describe('profileController', () => {
         
     });
     
-    describe('post_change_private_info', async () => {
+    describe('post_change_private_info', () => {
         const req = {body: {id_number: "123456789", designation: "Faculty"}}
         const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis};
         const details = {
@@ -483,7 +483,7 @@ describe('profileController', () => {
         
     })
 
-    describe('post_change_password', async () => {
+    describe('post_change_password', () => {
         const req = {body: {id_number: '123456789'}, new_password: 'hello_world'}
         test("should change a user's password if the old password is correct", async () => {
             const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis()}
@@ -575,21 +575,21 @@ describe('profileController', () => {
 
     })
 
-    describe('post_change_code', async () =>{
+    describe('post_change_code', () =>{
         const req = {body: {id_number: '123456789', new_code: '1234'}}
         const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis()}
         const db_result = { id_number: '123456789', code: '4321' }
         const find_one_mock = jest.spyOn(db, 'find_one')
         
         
-        test.todo("should change the user's code if the old code is correct", async () => {
+        test("should change the user's code if the old code is correct", async () => {
             find_one_mock.mockResolvedValueOnce(db_result).
             expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, { id_number: 1, code: 1 })
             expect(res.status).toBeCalledWith(200)
             expect(res.redirect).toBeCalledWith('/Profile?id_number=123456789&code_change_success=true')
         })
 
-        test.todo("should change the admin's code if the old code is correct", async () => {
+        test("should change the admin's code if the old code is correct", async () => {
             find_one_mock.mockResolvedValueOnce(null).mockResolvedValueOnce(db_result)
             expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, { id_number: 1, code: 1 })
             expect(find_one_mock).toBeCalledWith(Admin, {id_number: '123456789'}, { id_number: 1, code: 1 })
@@ -598,7 +598,7 @@ describe('profileController', () => {
             expect(res.redirect).toBeCalledWith('/ProfileAdmin?id_number=123456789&code_change_success=true')
         })
 
-        test.todo("should change the driver's code if the old code is correct", async () => {
+        test("should change the driver's code if the old code is correct", async () => {
             find_one_mock.mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(db_result)
             expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, { id_number: 1, code: 1 })
             expect(find_one_mock).toBeCalledWith(Admin, {id_number: '123456789'}, { id_number: 1, code: 1 })
@@ -608,12 +608,12 @@ describe('profileController', () => {
             expect(res.redirect).toBeCalledWith('/ProfileDriver?id_number=123456789&code_change_success=true')
         })
 
-        test.todo("should render the error page if an error occurs", async () => {
+        test("should render the error page if an error occurs", async () => {
             expect(res.status).toBeCalledWith(500)
             expect(res.render).toBeCalledWith('Error', res)
         })
 
-        test.todo("should redirect to the settings page if the action is unsuccessful", async () => {
+        test("should redirect to the settings page if the action is unsuccessful", async () => {
             find_one_mock.mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(null)
             expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, { id_number: 1, code: 1 })
             expect(find_one_mock).toBeCalledWith(Admin, {id_number: '123456789'}, { id_number: 1, code: 1 })
@@ -623,7 +623,7 @@ describe('profileController', () => {
         })
     })
 
-    describe('post_delete_account', async () => {
+    describe('post_delete_account', () => {
         const req = {body: {id_number: "123456789", password: "abcde12345"}}
         const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis, render: jest.fn()};
         const details = {
@@ -705,7 +705,7 @@ describe('profileController', () => {
 
     })
 
-    describe('get_logout', async () => {
+    describe('get_logout', () => {
         test('should destroy the session and redirect to /', async () => {
             const req = {session: {destroy: jest.fn()}}
             const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis()}
