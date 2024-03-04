@@ -72,26 +72,21 @@
                 width: 20rem;
                 height: 20rem;
                 background-size: cover;
-                filter: grayscale();
+                filter: grayscale(100%);
+                transition: filter 200ms;
             }
 
             @keyframes card_click{
-                0%      {transform: rotateX(0)      rotateY(0deg)    rotateZ(0)}
-                10%     {transform: rotateX(5deg)   rotateY(0deg)    rotateZ(-10deg)}
-                20%,25%     {transform: rotateX(-10deg) rotateY(-90deg) rotateZ(20deg)}
-                50%     {transform: rotateX(-10deg) rotateY(-180deg) rotateZ(20deg)}
-                75%     {transform: rotateX(-10deg) rotateY(-270deg) rotateZ(20deg)}
-                90%     {transform: rotateX(5deg)   rotateY(-360deg) rotateZ(-10deg)}
-                100%    {transform: rotateX(0)      rotateY(-360deg) rotateZ(0)}
+                0%, 100% {scale: 1;}
+                20% {scale: .95;}
+            }
 
-                0% {scale: 1;}
-                20%,25% {scale: 1.1;}
-                90% {scale: .95;}
-                100% {scale: 1;}
+            .member_card:active > img{
+                filter: grayscale(0%);
             }
 
             .member_card:active{
-                animation: card_click 400ms ease-in-out;
+                animation: card_click 200ms ease-in-out;
             }
 
             .member_card > div {
@@ -119,7 +114,40 @@
                 text-align: center;
             }
 
-            
+
+            .schedule_row {
+                display: flex; 
+                justify-content: space-between;
+                align-items: center;
+                padding: 1.25rem 0;
+                overflow-x: hidden;
+                overflow-y: hidden;
+                text-wrap:nowrap;
+                width: 100%;
+            }
+
+            .schedule_clickable_row {
+                display: flex; 
+                width: 100%;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1.25rem 0;
+                overflow-x: hidden;
+                overflow-y: hidden;
+                text-wrap:nowrap;
+            }
+
+            .schedule_container {
+                overflow-x: hidden;
+                overflow-y: hidden;
+            }
+
+            .schedule_page {
+                width: 100% !important; 
+                height: auto;
+                overflow-x: hidden;
+            }
+
 
         </style>
     </head>
@@ -152,26 +180,414 @@
 
                 <p>Simplify your shuttle booking and secure your seat effortlessly with our user-friendly platform.  Experience the convenience of booking shuttles with just a few clicks and enjoy a stress-free journey to your destination.</p>
                 
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
                     <button class="primary_button">Get Started</button>
                     <button class="secondary_button" onclick="$('.card_bottom')[0].scrollIntoView({behavior: 'smooth', block: 'start'});">About Us</button>
                 </div>
             </div>
 
             <div class="card_top">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h2>Schedule</h2>
+                <div class="schedule_row">
+                    <h2>Schedules</h2>
                     <button id="schedule_button"><div class="arrow_h"></div></button>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h3>Destination</h3>
-                    <h3>Days</h3>
+                <div class="schedule_container">
+                    <!-- SCHEDULE SELECTOR START -->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Destination</h3>
+                            <h3>Days</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_clickable_row">
+                            <p>Manila → Laguna </p>
+                            <p>M-S</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>Laguna → Manila </p>
+                            <p>M-S</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Central </p>
+                            <p>M-F</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Pavilion </p>
+                            <p>M-F</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Carmona </p>
+                            <p>M-F</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Waltermart </p>
+                            <p>M-F</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Paseo </p>
+                            <p>S</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Carmona </p>
+                            <p>S</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Waltermart </p>
+                            <p>S</p>
+                        </div>
+                    </div>
+                    <!-- SCHEDULE SELECTOR END-->
+
+                    <!-- MANILA TO LAGUNA START-->
+                    <div class="schedule_page" >
+                        <div class="schedule_row">
+                            <h3>Line 1</h3>
+                            <h3>Manila → Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-S</h3>
+                            <h3>Yuchenco Bldg.</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>Trip #</h3>
+                            <h3>Designated Time</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE101</p>
+                            <p>6:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE102</p>
+                            <p>7:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE103</p>
+                            <p>9:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE104</p>
+                            <p>11:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE105</p>
+                            <p>1:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE106</p>
+                            <p>2:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE107</p>
+                            <p>3:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE108</p>
+                            <p>5:10 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE109</p>
+                            <p>6:15 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE110</p>
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- MANILA TO LAGUNA END-->
+
+                    <!-- LAGUNA TO MANILA START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 1</h3>
+                            <h3>Laguna → Manila</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-S</h3>
+                            <h3>East Canopy MMR</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>Trip #</h3>
+                            <h3>Designated Time</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE151</p>
+                            <p>5:45 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE152</p>
+                            <p>6:15 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE153</p>
+                            <p>7:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE154</p>
+                            <p>8:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE155</p>
+                            <p>9:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE156</p>
+                            <p>11:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE157</p>
+                            <p>1:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE158</p>
+                            <p>2:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE159</p>
+                            <p>3:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE160</p>
+                            <p>5:10 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE161</p>
+                            <p>6:15 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE162</p>
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- LAGUNA TO MANILA END-->
+
+                    <!-- DLSU LAGUNA TO LAGUNA CENTRAL START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 2</h3>
+                            <h3>DLSU Laguna ↔ Laguna Central</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-F</h3>
+                            <h3>Laguna Central</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Laguna Central</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>9:00 AM</p>
+                            <p>6:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>11:30 AM</p>
+                            <p>6:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>4:45 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:10 PM</p>
+                            <p>12:15 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:30 PM</p>
+                            <p>1:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>6:00 PM</p>
+                            <p>3:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>6:30 PM</p>
+                            <p>3:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>7:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO LAGUNA CENTRAL END-->
+                   
+                    <!-- DLSU LAGUNA TO PAVILION START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 3</h3>
+                            <h3>DLSU Laguna ↔ Pavilion</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-F</h3>
+                            <h3>Shell Pavillion</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Pavilion</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>4:45 PM</p>
+                            <p>5:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:10 PM</p>
+                            <p>6:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:30 PM</p>
+                            <p>6:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>6:00 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO PAVILION END-->
+
+                    <!-- DLSU LAGUNA TO CARMONA START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 4</h3>
+                            <h3>DLSU Laguna ↔ Carmona</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-F</h3>
+                            <h3>Carmona Covered Walk</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>7-Eleven Sto. Tomas</h3>
+                            <h3>Malamig Terminal</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Carmona</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>4:45 PM</p>
+                            <p>6:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:10 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>6:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO CARMONA END-->
+
+                    <!-- DLSU LAGUNA TO WALTERMART START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 4</h3>
+                            <h3>DLSU Laguna ↔ Waltermart</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-F</h3>
+                            <h3>Caltex Waltermart</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Waltermart</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>4:45 PM</p>
+                            <p>6:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:10 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>6:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO WALTERMART END-->
+
+                    <!-- DLSU LAGUNA TO PASEO SAT START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 2</h3>
+                            <h3>DLSU Laguna ↔ Paseo</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>S</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Waltermart</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>12:10 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO PASEO SAT START END-->
+
+                    <!-- DLSU LAGUNA TO CARMONA SAT START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 4</h3>
+                            <h3>DLSU Laguna ↔ Carmona</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>S</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Carmona</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>12:10 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO CARMONA SAT START END-->
+
+                    <!-- DLSU LAGUNA TO WALTERMART SAT START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 5</h3>
+                            <h3>DLSU Laguna ↔ Waltermart</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>S</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Waltermart</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>12:10 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO WALTERMART SAT START END-->
                 </div>
                 <hr>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <p>Manila → Laguna </p>
-                    <p>M-S</p>
-                </div>
             </div>
             <div class="card_bottom">
                 <div>
@@ -294,9 +710,34 @@
                 $(".navbar_content").toggleClass("navbar_open");
             })
 
+            
+
+            //schedule functionality
+            function show_schedule_page(x, duration){
+                $( ".schedule_page").each(function(i, obj) {
+                    if (i != x) $(obj).hide({duration: duration});
+                    else $(obj).show({duration: duration})
+
+                    if (x!=0) $(".arrow_h").addClass("arrow_h_pressed");
+                });
+            }
+
             $("#schedule_button").on("click", function(){
-                $(".arrow_h").toggleClass("arrow_h_pressed");
+                if ($(".arrow_h").hasClass("arrow_h_pressed")){
+                    $(".arrow_h").removeClass("arrow_h_pressed");
+                    show_schedule_page(0, 400)
+                }
             })
+
+            show_schedule_page(0,0);
+
+            $(".schedule_clickable_row").each(function(i, obj) {
+                $(obj).on("click", function(){
+                    show_schedule_page(i+1, 400);
+                })
+            });
+
+            
         </script>
     </body>
 </html>
