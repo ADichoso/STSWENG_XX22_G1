@@ -45,12 +45,12 @@ describe('profileController', () => {
                 first_name: 'Austin',
                 last_name: 'Tester',
                 designation: 'Designation',
-                passengerType: 'Passenger'
+                passenger_type: 'Passenger'
             }
 
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(details);
 
-            await profile_controller.getProfile(req, res);
+            await profile_controller.get_profile(req, res);
 
             expect(find_one_mock).toBeCalledWith(User, { id_number: '123456789' }, 'id_number first_name last_name designation passenger_type profile_picture');
             
@@ -65,10 +65,10 @@ describe('profileController', () => {
                 first_name: 'Austin',
                 last_name: 'Tester',
                 designation: 'Designation',
-                passengerType: 'Passenger'
+                passenger_type: 'Passenger'
             }
 
-            await profile_controller.getProfile(req, res)
+            await profile_controller.get_profile(req, res)
 
             expect(res.status).toBeCalledWith(500)
             expect(res.render).toBeCalledWith('Error', res)
@@ -109,7 +109,7 @@ describe('profileController', () => {
                 first_name: 'Austin',
                 last_name: 'Tester',
                 designation: 'Designation',
-                passengerType: 'Passenger'
+                passenger_type: 'Passenger'
             }
             
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(details)
@@ -129,7 +129,7 @@ describe('profileController', () => {
                 first_name: 'Austin',
                 last_name: 'Tester',
                 designation: 'Designation',
-                passengerType: 'Passenger'
+                passenger_type: 'Passenger'
             }
 
             await profile_controller.get_profile_admin(req,res)
