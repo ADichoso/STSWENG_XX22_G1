@@ -36,7 +36,48 @@ describe('profileController', () => {
 
         })
 
+        test('should redirect admin profile page with details of session admin if session.id_number != query.id_number', async () => {
+            const req = { session: { id_number: '123456789' }, query: { id_number: '000000000' } };
+            const res = { status: jest.fn().mockReturnThis(), redirect: jest.fn() };
+            const details = {
+                id_number: '123456789',
+                first_name: 'Austin',
+                last_name: 'Tester',
+                designation: 'Designation',
+                passenger_type: 'Passenger'
+            }
 
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(details).mockResolvedValueOnce(null);
+
+            await profile_controller.get_profile(req, res);
+            expect(find_one_mock).toHaveBeenCalledWith(User, { id_number: '123456789' }, { id_number: 1 });
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, { id_number: '123456789' }, { id_number: 1 });
+            expect(res.status).toBeCalledWith(200);
+            expect(res.redirect).toBeCalledWith('/ProfileAdmin?id_number=123456789');
+
+        })
+
+        test('should redirect driver profile page with details of session driver if session.id_number != query.id_number', async () => {
+            const req = { session: { id_number: '123456789' }, query: { id_number: '000000000' } };
+            const res = { status: jest.fn().mockReturnThis(), redirect: jest.fn() };
+            const details = {
+                id_number: '123456789',
+                first_name: 'Austin',
+                last_name: 'Tester',
+                designation: 'Designation',
+                passenger_type: 'Passenger'
+            }
+
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(details);
+
+            await profile_controller.get_profile(req, res);
+            expect(find_one_mock).toHaveBeenCalledWith(User, { id_number: '123456789' }, { id_number: 1 });
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, { id_number: '123456789' }, { id_number: 1 });
+            expect(find_one_mock).toHaveBeenCalledWith(Driver, { id_number: '123456789' }, { id_number: 1 });
+            expect(res.status).toBeCalledWith(200);
+            expect(res.redirect).toBeCalledWith('/ProfileDriver?id_number=123456789');
+
+        })
         test('should render profile page with details of query id_number if session.id_number == query.id_number', async () => {
             const req = { session: { id_number: '123456789' }, query: { id_number: '123456789' } };
             const res = { render: jest.fn() };
@@ -100,12 +141,54 @@ describe('profileController', () => {
             expect(res.status).toBeCalledWith(200)
             expect(res.redirect).toBeCalledWith('/ProfileAdmin?id_number=123456789')
         })
+        test('should redirect to user page if session.id_number != query.id_number and session id is a user', async () => {
+            const req = { session: { id_number: '123456789' }, query: {id_number: '321'} }
+            const res = { status: jest.fn().mockReturnThis(), redirect: jest.fn()}
+            const details = {
+                id_number: '123456789',
+                first_name: 'Austin',
+                last_name: 'Tester',
+                designation: 'Designation',
+                passenger_type: 'Passenger'
+            }
 
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(details).mockResolvedValueOnce(null)
+
+            await profile_controller.get_profile_admin(req,res)
+            
+            expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, {id_number: 1});
+            expect(find_one_mock).toBeCalledWith(Admin, {id_number: '123456789'}, {id_number: 1});
+
+            expect(res.status).toBeCalledWith(200)
+            expect(res.redirect).toBeCalledWith('/Profile?id_number=123456789')
+        })
+        test('should redirect to driver page if session.id_number != query.id_number and session id is a driver', async () => {
+            const req = { session: { id_number: '123456789' }, query: {id_number: '321'} }
+            const res = { status: jest.fn().mockReturnThis(), redirect: jest.fn()}
+            const details = {
+                id_number: '123456789',
+                first_name: 'Austin',
+                last_name: 'Tester',
+                designation: 'Designation',
+                passenger_type: 'Passenger'
+            }
+
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(details)
+
+            await profile_controller.get_profile_admin(req,res)
+            
+            expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, {id_number: 1});
+            expect(find_one_mock).toBeCalledWith(Admin, {id_number: '123456789'}, {id_number: 1});
+            expect(find_one_mock).toBeCalledWith(Driver, {id_number: '123456789'}, {id_number: 1});
+
+            expect(res.status).toBeCalledWith(200)
+            expect(res.redirect).toBeCalledWith('/ProfileDriver?id_number=123456789')
+        })
         test('should render users profile page with details of query id_number if session.id_number == query.id_number', async () => {
             const req = { session: { id_number: '123456789' }, query: {id_number: '123456789'} }
             const res = { status: jest.fn().mockReturnThis(), render: jest.fn() }
             const details = {
-                idNumber: '123456789',
+                id_number: '123456789',
                 first_name: 'Austin',
                 last_name: 'Tester',
                 designation: 'Designation',
@@ -118,14 +201,14 @@ describe('profileController', () => {
 
             expect(find_one_mock).toHaveBeenCalledTimes(1)
             expect(find_one_mock).toBeCalledWith(Admin, {id_number: '123456789'}, 'id_number first_name last_name designation passenger_type profile_picture')
-            expect(res.render).toBeCalledWith('Profile', {details: details})
+            expect(res.render).toBeCalledWith('ProfileAdmin', {details: details})
         })
 
         test('should render the error page if an error occurs', async () => {
             const req = {session: {id_number: '123456789'}, query: {id_number: '123456789'}}
             const res = {render: jest.fn(), status: jest.fn().mockReturnThis()}
             const details = {
-                idNumber: '123456789',
+                id_number: '123456789',
                 first_name: 'Austin',
                 last_name: 'Tester',
                 designation: 'Designation',
@@ -163,7 +246,50 @@ describe('profileController', () => {
             expect(res.status).toBeCalledWith(200)
             expect(res.redirect).toBeCalledWith('/ProfileDriver?id_number=123456789')
         })
+        test('should redirect to user page if session.id_number != query.id_number and session is a user', async () => {
+            const req = { session: { id_number: '123456789' }, query: {id_number: '000000000'} }
+            const res = { status: jest.fn().mockReturnThis(), redirect: jest.fn()}
+            const details = {
+                id_number: '123456789',
+                first_name: 'Austin',
+                last_name: 'Tester',
+                designation: 'Designation',
+                passenger_type: 'Passenger'
+            }
 
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(details).mockResolvedValueOnce(null).mockResolvedValueOnce(null)
+
+            await profile_controller.get_profile_driver(req,res)
+
+            expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '123456789'}, {id_number: 1})
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '123456789'}, {id_number: 1})
+            expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '123456789'}, {id_number: 1})
+
+            expect(res.status).toBeCalledWith(200)
+            expect(res.redirect).toBeCalledWith('/Profile?id_number=123456789')
+        })
+        test('should redirect to admin page if session.id_number != query.id_number and session is a admin', async () => {
+            const req = { session: { id_number: '123456789' }, query: {id_number: '000000000'} }
+            const res = { status: jest.fn().mockReturnThis(), redirect: jest.fn()}
+            const details = {
+                id_number: '123456789',
+                first_name: 'Austin',
+                last_name: 'Tester',
+                designation: 'Designation',
+                passenger_type: 'Passenger'
+            }
+
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(details).mockResolvedValueOnce(null)
+
+            await profile_controller.get_profile_driver(req,res)
+
+            expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '123456789'}, {id_number: 1})
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '123456789'}, {id_number: 1})
+            expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '123456789'}, {id_number: 1})
+
+            expect(res.status).toBeCalledWith(200)
+            expect(res.redirect).toBeCalledWith('/ProfileAdmin?id_number=123456789')
+        })
         test('should render profile page with details of query id_number if session.id_number == query.id_number', async () => {
             const req = { session: { id_number: '123456789' }, query: {id_number: '123456789'} }
             const res = { render: jest.fn() }
@@ -180,7 +306,7 @@ describe('profileController', () => {
             await profile_controller.get_profile_driver(req,res)
 
             expect(find_one_mock).toHaveBeenCalledWith(Driver , {id_number: '123456789'}, 'id_number first_name last_name designation passenger_type profile_picture')
-            expect(res.render).toBeCalledWith('Profile', {details: details})
+            expect(res.render).toBeCalledWith('ProfileDriver', {details: details})
         })
 
         test('should render the error page if an error occurs', async () => {
@@ -228,7 +354,7 @@ describe('profileController', () => {
             expect(update_one_mock).toHaveBeenCalledWith(User, query, {first_name: req.body.new_first_name, last_name: req.body.new_last_name});
 
             expect(res.status).toBeCalledWith(200);
-            expect(res.redirect).toBeCalledWith(`/Profile?id_number=123456789&infoChangeSuccess=true`);
+            expect(res.redirect).toBeCalledWith(`/Profile?id_number=123456789&info_change_success=true`);
         })
 
         test('admin changes first name and last name', async () => {
@@ -259,7 +385,7 @@ describe('profileController', () => {
             expect(update_one_mock).toHaveBeenCalledWith(Admin, query, {first_name: req.body.new_first_name, last_name: req.body.new_last_name});
 
             expect(res.status).toBeCalledWith(200);
-            expect(res.redirect).toBeCalledWith(`/ProfileAdmin?id_number=000000000&infoChangeSuccess=true`);
+            expect(res.redirect).toBeCalledWith(`/ProfileAdmin?id_number=000000000&info_change_success=true`);
         })
 
         test('driver changes first name and last name', async () => {
@@ -291,7 +417,7 @@ describe('profileController', () => {
             expect(update_one_mock).toHaveBeenCalledWith(Driver, query, {first_name: req.body.new_first_name, last_name: req.body.new_last_name});
 
             expect(res.status).toBeCalledWith(200);
-            expect(res.redirect).toBeCalledWith(`/ProfileDriver?id_number=000000000&infoChangeSuccess=true`);
+            expect(res.redirect).toBeCalledWith(`/ProfileDriver?id_number=000000000&info_change_success=true`);
         });
 
         test('user changes profile picture', async () => {
@@ -318,10 +444,10 @@ describe('profileController', () => {
             await profile_controller.post_change_public_info(req, res);
 
             expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number first_name last_name designation passenger_type profile_picture');
-            expect(update_one_mock).toHaveBeenCalledWith(User, query, {profilePicture: "images/profilepictures/" + req.body.idNumber + ".png"});
+            expect(update_one_mock).toHaveBeenCalledWith(User, query, {profilePicture: "images/profilepictures/" + req.body.id_number + ".png"});
 
             expect(res.status).toBeCalledWith(200);
-            expect(res.redirect).toBeCalledWith(`/Profile?id_number=123456789&infoChangeSuccess=true`);
+            expect(res.redirect).toBeCalledWith(`/Profile?id_number=123456789&info_change_success=true`);
 
         })
 
@@ -348,10 +474,10 @@ describe('profileController', () => {
             await profile_controller.post_change_public_info(req, res);
             expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number first_name last_name designation passenger_type profile_picture');
             expect(find_one_mock).toHaveBeenCalledWith(Admin, query, 'id_number first_name last_name designation passenger_type profile_picture');
-            expect(update_one_mock).toHaveBeenCalledWith(Admin, query, {profilePicture: "images/profilepictures/" + req.body.idNumber + ".png"});
+            expect(update_one_mock).toHaveBeenCalledWith(Admin, query, {profilePicture: "images/profilepictures/" + req.body.id_number + ".png"});
 
             expect(res.status).toBeCalledWith(200);
-            expect(res.redirect).toBeCalledWith(`/ProfileAdmin?id_number=123456789&infoChangeSuccess=true`);
+            expect(res.redirect).toBeCalledWith(`/ProfileAdmin?id_number=123456789&info_change_success=true`);
         });
 
         test('driver changes profile picture', async () => {
@@ -380,10 +506,10 @@ describe('profileController', () => {
             expect(find_one_mock).toHaveBeenCalledWith(Admin, query, 'id_number first_name last_name designation passenger_type profile_picture');
             expect(find_one_mock).toHaveBeenCalledWith(Driver, query, 'id_number first_name last_name designation passenger_type profile_picture');
            
-            expect(update_one_mock).toHaveBeenCalledWith(Driver, query, {profilePicture: "images/profilepictures/" + req.body.idNumber + ".png"});
+            expect(update_one_mock).toHaveBeenCalledWith(Driver, query, {profilePicture: "images/profilepictures/" + req.body.id_number + ".png"});
 
             expect(res.status).toBeCalledWith(200);
-            expect(res.redirect).toBeCalledWith(`/ProfileDriver?id_number=123456789&infoChangeSuccess=true`);
+            expect(res.redirect).toBeCalledWith(`/ProfileDriver?id_number=123456789&info_change_success=true`);
         });
 
         test('should render the error page if an error occurs', async () => {
@@ -429,7 +555,7 @@ describe('profileController', () => {
             expect(find_one_mock).toHaveBeenCalledWith(Admin, query, 'id_number first_name last_name designation passenger_type profile_picture');
             expect(find_one_mock).toHaveBeenCalledWith(Driver, query, 'id_number first_name last_name designation passenger_type profile_picture');
 
-            expect(res.redirect).toBeCalledWith(`/Settings?id_number=123456789&infoChangeSuccess=true`);
+            expect(res.redirect).toBeCalledWith(`/Settings?id_number=123456789&info_change_success=true`);
         });
 
         
@@ -456,7 +582,7 @@ describe('profileController', () => {
             expect(find_one_mock).toHaveBeenCalledWith(User, query, projection);
 
             expect(res.status).toBeCalledWith(200);
-            expect(res.redirect).toBeCalledWith('/Profile?idNumber=' + req.body.id_number + '&infoChangeSuccess=true');
+            expect(res.redirect).toBeCalledWith('/Profile?id_number=' + req.body.id_number + '&info_change_success=true');
         });
 
         test('should change designation of an Admin in the database then redirect to /ProfileAdmin', async () => {
@@ -467,7 +593,7 @@ describe('profileController', () => {
             expect(find_one_mock).toHaveBeenCalledWith(Admin, query, projection);
 
             expect(res.status).toBeCalledWith(200);
-            expect(res.redirect).toBeCalledWith('/ProfileAdmin?idNumber=' + req.body.id_number + '&infoChangeSuccess=true');
+            expect(res.redirect).toBeCalledWith('/ProfileAdmin?id_number=' + req.body.id_number + '&info_change_success=true');
         });
         
         test('should redirect to settings page if info change has not been successful', async () => {
@@ -478,7 +604,7 @@ describe('profileController', () => {
             expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number first_name last_name designation passenger_type profile_picture');
             expect(find_one_mock).toHaveBeenCalledWith(Admin, query, 'id_number first_name last_name designation passenger_type profile_picture');
 
-            expect(res.redirect).toBeCalledWith('/Settings?idNumber=' + req.body.id_number + '&infoChangeSuccess=false');
+            expect(res.redirect).toBeCalledWith('/Settings?id_number=' + req.body.id_number + '&info_change_success=false');
         });
         
     })
