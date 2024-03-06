@@ -32,7 +32,7 @@ async function addAdminUser(){
     passengerType: 'Employee',
     profilePicture: 'images/profilepictures/Default.png'
   };
-  var result = db.insertOne(Admin, user);
+  var result = db.insert_one(Admin, user);
   console.log('Admin User successfully added');
 
   var { password, securityCode } = await generateInfo('maui', '1234');
@@ -47,7 +47,7 @@ async function addAdminUser(){
     passengerType: 'Employee',
     profilePicture: 'images/profilepictures/Default.png' 
   };
-  var result = db.insertOne(Admin, user);
+  var result = db.insert_one(Admin, user);
   console.log('Admin User successfully added');
 
   var { password, securityCode } = await generateInfo('benmar', '1234');
@@ -62,7 +62,7 @@ async function addAdminUser(){
     passengerType: 'Employee',
     profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(Admin, user);
+var result = db.insert_one(Admin, user);
 console.log('Admin User successfully added');
 
 var { password, securityCode } = await generateInfo('nathan', '1234');
@@ -77,7 +77,7 @@ var user = {
   passengerType: 'Employee',
   profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(Admin, user);
+var result = db.insert_one(Admin, user);
 console.log('Admin User successfully added');
 
 var { password, securityCode } = await generateInfo('itadmin', '1234');
@@ -92,7 +92,7 @@ var user = {
     passengerType: 'Employee',
     profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(Admin, user);
+var result = db.insert_one(Admin, user);
 console.log('User successfully added');
 
 }
@@ -111,7 +111,7 @@ var user = {
   passengerType: 'Student',
   profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(User, user);
+var result = db.insert_one(User, user);
 console.log('User successfully added');
   
 
@@ -127,7 +127,7 @@ var user = {
   passengerType: 'Student',
   profilePicture: 'images/profilepictures/Default.png'    
 };
-var result = db.insertOne(User, user);
+var result = db.insert_one(User, user);
 console.log('User successfully added');
   
 
@@ -143,7 +143,7 @@ var user = {
   passengerType: 'Student',
   profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(User, user);
+var result = db.insert_one(User, user);
 console.log('User successfully added');
   
 
@@ -159,7 +159,7 @@ var user = {
   passengerType: 'Student',
   profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(User, user);
+var result = db.insert_one(User, user);
 console.log('User successfully added');
   
 
@@ -175,7 +175,7 @@ var user = {
   passengerType: 'Student',
   profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(User, user);
+var result = db.insert_one(User, user);
 console.log('User successfully added');
 
 }
@@ -192,7 +192,7 @@ var rsv = {
   exitTime: '03:00 PM',
   idNumber: '12345678'
 };
-var result = db.insertOne(Reservation, rsv);
+var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
 
 var rsv = {
@@ -204,7 +204,7 @@ var rsv = {
   exitTime: '04:45 PM',
   idNumber: '12345671'
 };
-var result = db.insertOne(Reservation, rsv);
+var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
 
 var rsv = {
@@ -216,7 +216,7 @@ var rsv = {
   exitTime: '04:45 PM',
   idNumber: '12345672'
 };
-var result = db.insertOne(Reservation, rsv);
+var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
 
 var rsv = {
@@ -228,7 +228,7 @@ var rsv = {
   exitTime: '04:45 PM',
   idNumber: '12345673'
 };
-var result = db.insertOne(Reservation, rsv);
+var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
 
 var rsv = {
@@ -240,5 +240,5 @@ var rsv = {
   exitTime: '04:45 PM',
   idNumber: '12345674'
 };
-var result = db.insertOne(Reservation, rsv);
+var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
