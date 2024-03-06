@@ -30,9 +30,9 @@
                 <hr>
                 <div class="input">
                     <form action="/SecurityCheck" id="loginForm" method="post">
-                        <input type="hidden" name="idNumber" value="{{idNumber}}">
-                        <label for="user_securityCode"></label>
-                        <input type="password" placeholder="Enter 4-Digit Security Code" class="fillup" name="user_securityCode" id="user_securityCode" required pattern="[0-9]+" minlength="4" maxlength="4" >
+                        <input type="hidden" name="id_number" value="{{id_number}}">
+                        <label for="user_security_code"></label>
+                        <input type="password" placeholder="Enter 4-Digit Security Code" class="fillup" name="user_security_code" id="user_security_code" required pattern="[0-9]+" minlength="4" maxlength="4" >
                         <button type="submit" class="toggle_btn" > Submit <style> .toggle_btn{ font-size: large; font-weight: bold;} </style> </button>
                     </form>
                 </div>

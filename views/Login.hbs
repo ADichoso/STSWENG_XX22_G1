@@ -15,10 +15,10 @@
 
              window.onload = function(){
 
-                var check = "{{isValid}}";
-                var checkCodeChange = "{{codeChange}}";
-                var checkLoginCode = "{{isCodeCorrect}}"
-                var checkRegistered = "{{isRegistered}}"
+                var check = "{{is_valid}}";
+                var check_code_change = "{{code_change}}";
+                var check_login_code = "{{is_code_correct}}"
+                var check_registered = "{{is_registered}}"
 
                 document.getElementById("error_box").style.display = "none";
 
@@ -30,7 +30,7 @@
                     }, 3000);
                 }
 
-                if ( checkCodeChange == "true"){
+                if ( check_code_change == "true"){
                     document.getElementById("success_box").style.display = "block";
                     $("#success_message").text("Password changed successfully!");
                     
@@ -43,7 +43,7 @@
                     document.getElementById("success_box").style.display = "none";
                 }
 
-                if ( checkLoginCode == "false" ){
+                if ( check_login_code == "false" ){
 
                     document.getElementById("error_box").style.display = "block";
                     $("#error_message").text("Security code is incorrect. Please try again.");
@@ -53,7 +53,7 @@
                     }, 3000);
                 }
 
-                if ( checkRegistered == "true" ){
+                if ( check_registered == "true" ){
                     document.getElementById("success_box").style.display = "block";
                     $("#success_message").text("Account registered successfully!");
                     

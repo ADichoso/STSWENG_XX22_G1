@@ -22,19 +22,19 @@ const validation = {
         */
         var validation = [
 
-            check('user_firstName', 'First name should not be empty.').notEmpty(),
+            check('user_first_name', 'First name should not be empty.').notEmpty(),
             
-            check('user_lastName', 'Last name should not be empty.').notEmpty(),
+            check('user_last_name', 'Last name should not be empty.').notEmpty(),
 
             check('user_email', 'Email should not be empty.').notEmpty(),
 
-            check('user_idNumber', 'ID number should not be empty.').notEmpty(),
-            check('user_idNumber', 'ID number should contain 8 digits.').isLength({min: 8, max: 8}),
+            check('user_id_number', 'ID number should not be empty.').notEmpty(),
+            check('user_id_number', 'ID number should contain 8 digits.').isLength({min: 8, max: 8}),
 
             check('user_password', 'Password should not be empty.').notEmpty(),
 
-            check('user_securityCode', 'Security code should not be empty.').notEmpty(),
-            check('user_securityCode', 'Security code should contain 4 digits.').isLength({min: 4, max: 4}),
+            check('user_security_code', 'Security code should not be empty.').notEmpty(),
+            check('user_security_code', 'Security code should contain 4 digits.').isLength({min: 4, max: 4}),
         ];
 
         return validation;

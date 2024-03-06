@@ -35,7 +35,7 @@ const searchController = {
       
         const projection = 'idNumber firstName lastName designation passengerType profilePicture';
       
-        const result = await db.findOne(User, query, projection);
+        const result = await db.find_one(User, query, projection);
       
         if (result != null) {
       
@@ -69,7 +69,7 @@ const searchController = {
 
         var userID = req.query.idNumber;
 
-		    const result = await db.findMany(Reservation, {idNumber: userID}, {_id:0, __v:0});
+		    const result = await db.find_many(Reservation, {idNumber: userID}, {_id:0, __v:0});
 
         res.render('SearchReservation', {result: result, idNumber: userID});
 

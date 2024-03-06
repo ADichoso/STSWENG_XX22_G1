@@ -10,21 +10,22 @@ const reservationController = {
 
     get_reservations: async function (req, res) {
 		
-		if ( req.session.idNumber != req.query.idNumber ) {
-			res.redirect('/Reservation?idNumber=' + req.session.idNumber );
+		if ( req.session.id_number != req.query.id_number ) {
+			res.redirect('/Reservation?id_number=' + req.session.id_number );
 		}else{
-			var userID = req.query.idNumber;
-			const query = { idNumber: userID };
-			const projection = { idNumber: 1 };
+			const query = { id_number: req.query.id_number };
+			const projection = "id_number";
 			
-			const isAdmin = await db.findOne(Admin, query, projection);
+			const is_admin = await db.find_one(Admin, query, projection);
 	
-			const result = await db.findMany(Reservation, {idNumber: userID}, {_id:0, __v:0});
-	
-			if ( isAdmin != null ) {
-				res.render('Reservation', {displayUI: 1, result: result, idNumber: userID, isAdmin: true});
+			const result = await db.find_many(Reservation, query);
+            
+            console.log(query)
+            console.log(result)
+			if ( is_admin != null ) {
+				res.render('Reservation', {display_UI: 1, result: result, id_number: req.query.id_number, is_admin: true});
 			} else {
-				res.render('Reservation', {displayUI: 0, result: result, idNumber: userID, isAdmin: false});
+				res.render('Reservation', {display_UI: 0, result: result, id_number: req.query.id_number, is_admin: false});
 			}
 		}
 
@@ -33,25 +34,25 @@ const reservationController = {
 
     get_reservation_admin: async function (req, res) {
 
-		if ( req.session.idNumber != req.query.idNumber ){
+		if ( req.session.id_number != req.query.id_number ){
 
-			var userID = req.session.idNumber;
-			const query = { idNumber: userID };
-			const projection = { idNumber: 1 };
+			var userID = req.session.id_number;
+			const query = { id_number: userID };
+			const projection = "id_number";
 
-			const isAdmin = await db.findOne(Admin, query, projection);
+			const isAdmin = await db.find_one(Admin, query, projection);
 
 			if ( isAdmin != null ){
-				res.redirect('/ReservationAdmin?idNumber=' + req.session.idNumber );
+				res.redirect('/ReservationAdmin?id_number=' + req.session.id_number );
 			}else{
 				res.render('Error');
 			}
 			
 		}else{
-			var userID = req.query.idNumber;
+			var userID = req.query.id_number;
 
 			const details = {
-				idNumber: userID,
+				id_number: userID,
 			}
 	
 			res.render('ReservationAdmin', details);
@@ -70,12 +71,12 @@ const reservationController = {
         */		
 		if (req.body.user_idNumber != ""){
 
-			const idNumber = req.body.user_idNumber;
+			const id_number = req.body.user_idNumber;
 
-			const query = { idNumber: idNumber};
-			const projection = { idNumber: 1 };
-			const result = await db.findOne(User, query, projection);
-			const result2 = await db.findOne(Admin, query, projection);
+			const query = { id_number: id_number};
+			const projection = "id_number";
+			const result = await db.find_one(User, query, projection);
+			const result2 = await db.find_one(Admin, query, projection);
 			
 			if (result) {
 				var idNum = req.body.user_idNumber;
@@ -101,28 +102,28 @@ const reservationController = {
 		  };
 
 		if ( rsv.entryLoc == "Entry Location" || rsv.entryTime == "Entry Time" || rsv.exitLoc == "Exit Location" || rsv.exitTime == "Exit Time" ){
-			res.redirect('/Reservation?idNumber=' + req.body.adminId + '&reserveUserSuccess=false');
+			res.redirect('/Reservation?id_number=' + req.body.adminId + '&reserveUserSuccess=false');
 			console.log('Reservation failed to add');
 		}
 		else{
 
 			var result;
 			if (idNum !== 0) {
-				rsv.idNumber = idNum;
-				result = await db.insertOne(Reservation, rsv);
+				rsv.id_number = idNum;
+				result = await db.insert_one(Reservation, rsv);
 			}
 			/*
-				calls the function insertOne()
+				calls the function insert_one()
 				defined in the `database` object in `../models/db.js`
 				this function adds a document to collection `reservations`
 			*/
 			
 			if ( result ){
 				console.log('Reservation successfully added');
-				res.redirect('/Reservation?idNumber=' + req.body.adminId + '&reserveUserSuccess=true');
+				res.redirect('/Reservation?id_number=' + req.body.adminId + '&reserveUserSuccess=true');
 			}
 			else{
-				res.redirect('/Reservation?idNumber=' + req.body.adminId + '&reserveUserSuccess=false');
+				res.redirect('/Reservation?id_number=' + req.body.adminId + '&reserveUserSuccess=false');
 				console.log('Reservation failed to add');
 			}
 		}
@@ -137,7 +138,7 @@ const reservationController = {
 			entryTime: req.body.eCurrEntryTime,
 			exitLoc: req.body.eCurrExitLoc,
 			exitTime: req.body.eCurrExitTime,
-			idNumber: req.body.eCurrIdNumber
+			id_number: req.body.eCurrIdNumber
 		}
 
 		var upd = {
@@ -147,11 +148,11 @@ const reservationController = {
 			entryTime: req.body.ehiddenEntryTime,
 			exitLoc: req.body.ehiddenExitLoc,
 			exitTime: req.body.ehiddenExitTime,
-			idNumber: req.body.ehiddenIdNumber
+			id_number: req.body.ehiddenIdNumber
 		}
 		
 		if ( upd.entryLoc == "Entry Location" || upd.entryTime == "Entry Time" || upd.exitLoc == "Exit Location" || upd.exitTime == "Exit Time" ){
-			res.redirect('/Reservation?idNumber=' + req.body.ehiddenIdNumber + '&isUpdateSuccess=false');
+			res.redirect('/Reservation?id_number=' + req.body.ehiddenIdNumber + '&isUpdateSuccess=false');
 			console.log('Reservation failed to add');
 		}
 		else{
@@ -161,11 +162,11 @@ const reservationController = {
 			console.log(upd.exitLoc);
 			console.log(upd.exitTime);
 
-			var found = await db.findOne(Reservation, curr);
+			var found = await db.find_one(Reservation, curr);
 			if(found){
 				await Reservation.updateOne(curr, upd);
 				console.log('succesfully updated');
-				res.redirect('/Reservation?idNumber=' + req.body.ehiddenIdNumber + '&isUpdateSuccess=true');
+				res.redirect('/Reservation?id_number=' + req.body.ehiddenIdNumber + '&isUpdateSuccess=true');
 			}
 			else{
 				console.log("Code monkeys did an oopsie daisy");
@@ -184,7 +185,7 @@ const reservationController = {
 			entryTime: req.body.dCurrEntryTime,
 			exitLoc: req.body.dCurrExitLoc,
 			exitTime: req.body.dCurrExitTime,
-			idNumber: req.body.dCurrIdNumber
+			id_number: req.body.dCurrIdNumber
 		};
 
 		console.log('to delete');
@@ -192,7 +193,7 @@ const reservationController = {
 		var deleted = await Reservation.deleteOne(rsv);
 		if(deleted){
 			console.log('succesfully deleted');
-			res.redirect('/Reservation?idNumber=' + req.body.dCurrIdNumber + '&isDeleteSuccess=true');
+			res.redirect('/Reservation?id_number=' + req.body.dCurrIdNumber + '&isDeleteSuccess=true');
 		}
 		else{
 			console.log("Code monkeys did an oopsie daisy");
@@ -203,32 +204,32 @@ const reservationController = {
 
 	get_search_user: async function (req, res){
 
-		res.redirect('/ReservationAdmin?idNumber=' + req.query.idNumber);
+		res.redirect('/ReservationAdmin?id_number=' + req.query.id_number);
 
 	},
 
 	post_search_user: async function (req, res){
 
-		var idNumber = req.body.user_idNumber;
+		var id_number = req.body.user_idNumber;
 		var adminId = req.body.adminId;
 
-		const isFoundUser = await db.findOne(User, {idNumber: idNumber}, {idNumber: 1});
-		const isFoundAdmin = await db.findOne(Admin, {idNumber: idNumber}, {idNumber: 1});
+		const isFoundUser = await db.find_one(User, {id_number: id_number}, {id_number: 1});
+		const isFoundAdmin = await db.find_one(Admin, {id_number: id_number}, {id_number: 1});
 
 		if ( isFoundUser == null && isFoundAdmin == null ){
-			res.redirect('/ReservationAdmin?idNumber=' + adminId + '&isSearchUserValid=false');
+			res.redirect('/ReservationAdmin?id_number=' + adminId + '&isSearchUserValid=false');
 		}
 		else{
 
 			console.log('test');
 
-			const result = await db.findMany(Reservation, {idNumber: idNumber}, "");
+			const result = await db.find_many(Reservation, {id_number: id_number}, "");
 
 			if ( result.length !== 0 ){
 				res.render('ReservationAdmin', {result: result, adminId: adminId});
 			} 
 			else {
-				res.redirect('/ReservationAdmin?idNumber=' + adminId + '&reservationList=false');
+				res.redirect('/ReservationAdmin?id_number=' + adminId + '&reservationList=false');
 			}
 
 		}
@@ -245,7 +246,7 @@ const reservationController = {
 			entryTime: req.body.eCurrEntryTime,
 			exitLoc: req.body.eCurrExitLoc,
 			exitTime: req.body.eCurrExitTime,
-			idNumber: req.body.eCurrIdNumber
+			id_number: req.body.eCurrIdNumber
 		}
 
 		var upd = {
@@ -255,7 +256,7 @@ const reservationController = {
 			entryTime: req.body.ehiddenEntryTime,
 			exitLoc: req.body.ehiddenExitLoc,
 			exitTime: req.body.ehiddenExitTime,
-			idNumber: req.body.ehiddenIdNumber
+			id_number: req.body.ehiddenIdNumber
 		}
 
 		console.log("current reservation:");
@@ -270,7 +271,7 @@ const reservationController = {
 				console.log("OH NO THE CODE MONKEYS DID AN OOPSIE WOOPSIE");
 				adminId = 1111111;
 			}
-			const result = await db.findMany(Reservation, {idNumber: upd.idNumber}, {_id:0, __v:0});
+			const result = await db.find_many(Reservation, {id_number: upd.id_number}, {_id:0, __v:0});
 
 			res.render('ReservationAdmin', {result, result, adminId: adminId, isUpdateSuccess: false});
 			console.log('Reservation failed to add');
@@ -278,7 +279,7 @@ const reservationController = {
 		}
 		else{
 			
-			var found = await db.findOne(Reservation, curr);
+			var found = await db.find_one(Reservation, curr);
 			if(found){
 				await Reservation.updateOne(curr, upd);
 				console.log('Succesfully updated');
@@ -288,7 +289,7 @@ const reservationController = {
 					console.log("OH NO THE CODE MONKEYS DID AN OOPSIE WOOPSIE");
 					adminId = 1111111;
 				}
-				const result = await db.findMany(Reservation, {idNumber: upd.idNumber}, {_id:0, __v:0});
+				const result = await db.find_many(Reservation, {id_number: upd.id_number}, {_id:0, __v:0});
 				res.render('ReservationAdmin', {result: result, adminId: adminId, isUpdateSuccess: true});
 			}
 			else{
@@ -308,7 +309,7 @@ const reservationController = {
 			entryTime: req.body.dCurrEntryTime,
 			exitLoc: req.body.dCurrExitLoc,
 			exitTime: req.body.dCurrExitTime,
-			idNumber: req.body.dCurrIdNumber
+			id_number: req.body.dCurrIdNumber
 		};
 
 		console.log('to delete');
@@ -322,7 +323,7 @@ const reservationController = {
 				console.log("OH NO THE CODE MONKEYS DID AN OOPSIE WOOPSIE");
 				adminId = 1111111;
 			}
-			const result = await db.findMany(Reservation, {idNumber: rsv.idNumber}, {_id:0, __v:0});
+			const result = await db.find_many(Reservation, {id_number: rsv.id_number}, {_id:0, __v:0});
 			res.render('ReservationAdmin', {result: result, adminId: adminId, isDeleteSuccess: true});
 		}
 		else{

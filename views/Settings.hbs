@@ -9,7 +9,7 @@
             var buttons = document.getElementsByClassName("tab");
             var panels = document.getElementsByClassName("panel");
 			
-            function showPanel(i){
+            function show_panel(i){
                 //This just resets all the backgound colour and text colour for all buttons
 				for(const button of buttons){
 					button.style.backgroundColor="";
@@ -77,10 +77,10 @@
 					}, 3000);
 				}
 
-				var adminLink = '/ProfileAdmin?idNumber=' + {{idNumber}};
-                var userLink = '/Profile?idNumber=' + {{idNumber}};
+				var adminLink = '/ProfileAdmin?id_number=' + {{details.id_number}};
+                var userLink = '/Profile?id_number=' + {{details.id_number}};
 
-                if ( {{isAdmin}} == true ){
+                if ( {{details.is_admin}} == true ){
                     document.getElementById('backButton').setAttribute('href', adminLink);
                 }
                 else{
@@ -162,9 +162,9 @@
                 <hr style="position: relative; margin-top: 25px; border: 2px solid white;">
                 
                 <div id="tab_list">
-                    <button onclick="showPanel(0)" class="tab"> Profile </button>
-                    <button onclick="showPanel(1)" class="tab"> Password </button>
-                    <button onclick="showPanel(2)" class="tab"> Delete Account </button>
+                    <button onclick="show_panel(0)" class="tab"> Profile </button>
+                    <button onclick="show_panel(1)" class="tab"> Password </button>
+                    <button onclick="show_panel(2)" class="tab"> Delete Account </button>
                 </div>
 
             </div>
@@ -173,29 +173,29 @@
 
                 <div class="panel" id="profile_tab" style="display: flex; flex-direction: vertical;">
                     <!-- First Name, Last Name, Student Number, Designation, Type of Passenger -->
-                    <div style="background-color: white; border-radius: 25px; width:auto; padding: 25px;">
+                    <div style="background-color: white; border-radius: 25px; width:auto; padding: 25px;">  
 						<h1>Public info</h1>
 						<hr>
 						<form id="public_change" action="/ChangePublicInfo" method="post" enctype="multipart/form-data">
-							<input type="hidden" name="idNumber" value="{{idNumber}}">
+							<input type="hidden" name="id_number" value="{{details.id_number}}">
 							<div style="display: flex;">
 								<div style="margin-right: 20px;">
-									<label for="currentFirstName"><h2>Current First Name:</h2></label>
-									<input type="text" placeholder="{{firstName}}" id="currentFirstName" name="currentFirstName" readonly disabled>
+									<label for="current_first_name"><h2>Current First Name:</h2></label>
+									<input type="text" placeholder="{{details.first_name}}" id="current_first_name" name="current_first_name" readonly disabled>
 								</div>
 								<div>
-									<label for="currentLastName"><h2>Current Last Name:</h2></label>
-									<input type="text" placeholder="{{lastName}}" id="currentLastName" name="currentLastName" readonly disabled>
+									<label for="current_last_name"><h2>Current Last Name:</h2></label>
+									<input type="text" placeholder="{{details.last_name}}" id="current_last_name" name="current_last_name" readonly disabled>
 								</div>
 							</div>
 							<div style="display: flex;">
 								<div style="margin-right: 20px;">
-									<label for="newFirstName"><h2>New First Name:</h2></label>
-									<input type="text" placeholder="Enter First Name" id="newFirstName" name="newFirstName">
+									<label for="new_first_name"><h2>New First Name:</h2></label>
+									<input type="text" placeholder="Enter First Name" id="new_first_name" name="new_first_name">
 								</div>
 								<div>
-									<label for="newLastName"><h2>New Last Name:</h2></label>
-									<input type="text" placeholder="Enter Last Name" id="newLastName" name="newLastName">
+									<label for="new_last_name"><h2>New Last Name:</h2></label>
+									<input type="text" placeholder="Enter Last Name" id="new_last_name" name="new_last_name">
 								</div>
 							</div>
 							<div>
@@ -207,21 +207,21 @@
 						</form>
 					</div>
 
-					<script>/*This shows Profile tab automatically at page load*/showPanel(0);</script>
+					<script>/*This shows Profile tab automatically at page load*/show_panel(0);</script>
 					
 					<div style="background-color: white; border-radius: 25px; width:auto; padding: 25px; margin-top: 15px">
 						<h1>Private info</h1>
 						<hr>
 						<form id="private_change", action="/ChangePrivateInfo" method="post">
-							<input type="hidden" name="idNumber" value="{{idNumber}}">
+							<input type="hidden" name="id_number" value="{{details.id_number}}">
 							<div style="display: flex;">
 								<div style="margin-right: 20px;">
-									<label for="oldDesignation"><h2>Current Designation: </h2></label>
-									<input type="text" placeholder="{{designation}}" id="oldDesignation" name="oldDesignation" readonly disabled>
+									<label for="old_designation"><h2>Current Designation: </h2></label>
+									<input type="text" placeholder="{{details.designation}}" id="old_designation" name="old_designation" readonly disabled>
 								</div>
 								<div>
-									<label for="newDesignation"><h2>New Designation: <br> <h2></label>
-									<select id="newDesignation" name="newDesignation" style="height: 50px; margin-top: 10px; font-size: 24px; border-radius: 5px; width: 300px">
+									<label for="new_designation"><h2>New Designation: <br> <h2></label>
+									<select id="new_designation" name="new_designation" style="height: 50px; margin-top: 10px; font-size: 24px; border-radius: 5px; width: 300px">
 										<option value="Guest">Guest</option>
 										<option value="Student">Student</option>
 										<option value="Faculty">Faculty</option>
@@ -233,14 +233,14 @@
 								</div>
 							</div>
 							
-							<div style="display:flex;" id="changePassengerType">
+							<div style="display:flex;" id="change_passenger_type">
 								<div style="margin-right: 20px;">
-									<label for="oldPassengerType"><h2>Current Passenger Type: </h2></label>
-									<input type="text" placeholder="{{passengerType}}" id="oldPassengerType" name="oldPassengerType" readonly disabled>
+									<label for="old_passenger_type"><h2>Current Passenger Type: </h2></label>
+									<input type="text" placeholder="{{details.passenger_type}}" id="old_passenger_type" name="old_passenger_type" readonly disabled>
 								</div>
 							</div>
 							
-							<button onclick="submitForm('private_change')", class="submitButton">Save Changes</button>
+							<button onclick="submit_form('private_change')", class="submitButton">Save Changes</button>
 						</form>
 					</div>
 					
@@ -251,14 +251,14 @@
 						<h1>Password Change</h1>
 						<hr>
 						<form id="pass_change" action="/ChangePassword" method="post">
-							<input type="hidden" name="idNumber" value="{{idNumber}}">
+							<input type="hidden" name="id_number" value="{{details.id_number}}">
 							<div>
-								<label for="currentPassword"><h2>Current Password: <br> <h2></label>
-								<input type="password" placeholder="Current Password" id="currentPassword" name="currentPassword">
+								<label for="current_password"><h2>Current Password: <br> <h2></label>
+								<input type="password" placeholder="Current Password" id="current_password" name="current_password">
 							</div>
 							<div>
-								<label for="newPassword"><h2>New Password: <br> <h2></label>
-								<input type="password" placeholder="New Password" id="newPassword" name="newPassword">
+								<label for="new_password"><h2>New Password: <br> <h2></label>
+								<input type="password" placeholder="New Password" id="new_password" name="new_password">
 							</div>
 							
 							<button type="submit" class="submitButton">Save Password</button>
@@ -268,15 +268,15 @@
 					<div style="background-color: white; border-radius: 25px; width:auto; padding: 25px; margin-top: 20px;">
 						<h1>Two Authentication</h1>
 						<hr>
-						<form id="pass_change" action="/ChangeCode" method="post">
-							<input type="hidden" name="idNumber" value="{{idNumber}}">
+						<form id="code_change" action="/ChangeCode" method="post">
+							<input type="hidden" name="id_number" value="{{details.id_number}}">
 							<div>
-								<label for="currentSecCode"><h2>Current Security Code: <br> <h2></label>
-								<input type="password" placeholder="4-Digit Security Code" id="currentSecCode" name="currentSecCode" pattern="[0-9]+" minlength="4" maxlength="4" >
+								<label for="current_sec_code"><h2>Current Security Code: <br> <h2></label>
+								<input type="password" placeholder="4-Digit Security Code" id="current_sec_code" name="current_sec_code" pattern="[0-9]+" minlength="4" maxlength="4" >
 							</div>
 							<div>
-								<label for="newSecCode"><h2>New Security Code: <br> <h2></label>
-								<input type="password" placeholder="4-Digit Security Code" id="newSecCode" name="newSecCode" pattern="[0-9]+" minlength="4" maxlength="4" >
+								<label for="new_sec_code"><h2>New Security Code: <br> <h2></label>
+								<input type="password" placeholder="4-Digit Security Code" id="new_sec_code" name="new_sec_code" pattern="[0-9]+" minlength="4" maxlength="4" >
 							</div>
 							
 							<button type="submit" class="submitButton">Save Changes</button>
@@ -294,7 +294,7 @@
 							<div>
 								<label for="password"><h2>Current Password: <br> <h2></label>
 								<input type="password" placeholder="Password" id="password" name="Password">
-								<input type="hidden" name="idNumber" value="{{idNumber}}">
+								<input type="hidden" name="id_number" value="{{details.id_number}}">
 							</div>
 							
 							<button type="submit" class="submitButton" style="width: auto; ">Delete Account</button>

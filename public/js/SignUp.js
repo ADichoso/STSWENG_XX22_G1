@@ -1,34 +1,34 @@
 $(document).ready(function () {
 
-    function isFilled() {
+    function is_filled() {
 
-        var user_firstName = validator.trim($('#user_firstName').val());
-        var user_lastName = validator.trim($('#user_lastName').val());
+        var user_first_name = validator.trim($('#user_first_name').val());
+        var user_last_name = validator.trim($('#user_last_name').val());
         var user_email = validator.trim($('#user_email').val());
-        var user_idNumber = validator.trim($('#user_idNumber').val());
+        var user_id_number = validator.trim($('#user_id_number').val());
         var user_password = validator.trim($('#user_password').val());
-        var user_securityCode = validator.trim($('#user_securityCode').val());
+        var user_security_code = validator.trim($('#user_security_code').val());
         var user_designation = $('#user_designation').val() || ''; 
-        var user_passengerType = $('#user_passengerType').val() || ''; 
+        var user_passenger_type = $('#user_passenger_type').val() || ''; 
 
         /*
             checks if the trimmed values in fields are not empty
         */
-        var fNameEmpty = validator.isEmpty(user_firstName);;
-        var lNameEmpty = validator.isEmpty(user_lastName);
+        var fNameEmpty = validator.isEmpty(user_first_name);;
+        var lNameEmpty = validator.isEmpty(user_last_name);
         var emailEmpty = validator.isEmpty(user_email);
-        var idNumEmpty = validator.isEmpty(user_idNumber);
+        var idNumEmpty = validator.isEmpty(user_id_number);
         var passwordEmpty = validator.isEmpty(user_password);
-        var securityCodeEmpty = validator.isEmpty(user_securityCode);
+        var securityCodeEmpty = validator.isEmpty(user_security_code);
         var designationEmpty = validator.isEmpty(user_designation);
-        var passengerTypeEmpty = validator.isEmpty(user_passengerType);
+        var passengerTypeEmpty = validator.isEmpty(user_passenger_type);
 
         return !fNameEmpty && !lNameEmpty && !emailEmpty && !idNumEmpty && !passwordEmpty && !securityCodeEmpty && !designationEmpty && !passengerTypeEmpty;
     }
 
-    async function isValidID(field, callback) {
+    async function is_valid_ID(field, callback) {
 
-        var idNum = validator.trim($('#user_idNumber').val());
+        var idNum = validator.trim($('#user_id_number').val());
 
         var onlyNumbers = /^[0-9]*$/;
         if (!onlyNumbers.test(idNum)) {
@@ -38,17 +38,17 @@ $(document).ready(function () {
         }
         else{
 
-            var isValidLength = validator.isLength(idNum, {min: 8, max: 8});
+            var is_valid_length = validator.isLength(idNum, {min: 8, max: 8});
 
-            if(isValidLength) {
+            if(is_valid_length) {
                 
-                const result = await $.get('/getCheckID', {idNumber: idNum} ) 
+                const result = await $.get('/getCheckID', {id_number: idNum} ) 
                 
                 if ( result != null ) {
 
-                    if( result.idNumber != idNum ) {
+                    if( result.id_number != idNum ) {
 
-                        if(field.is($('#user_idNumber'))){
+                        if(field.is($('#user_id_number'))){
                             $('#error_message').text('');
                         }
                                 
@@ -56,7 +56,7 @@ $(document).ready(function () {
                     }
                     else {
 
-                        if(field.is($('#user_idNumber'))){
+                        if(field.is($('#user_id_number'))){
                             $('#error_box').css('display', 'block');
                             $('#error_message').text('ID number already registered.');
                         }
@@ -74,9 +74,9 @@ $(document).ready(function () {
                 }
 
             }
-            else if ( !isValidLength ){
+            else if ( !is_valid_length ){
 
-                if(field.is($('#user_idNumber'))){
+                if(field.is($('#user_id_number'))){
                     $('#error_box').css('display', 'block');
                     $('#error_message').text('ID number should contain exactly 8 digits.');
                 }
@@ -91,7 +91,7 @@ $(document).ready(function () {
 
     function isValidSecurityCode(callback) {
 
-        var securityCode = validator.trim($('#user_securityCode').val());
+        var securityCode = validator.trim($('#user_security_code').val());
 
         var onlyNumbers = /^[0-9]*$/;
         if (!onlyNumbers.test(securityCode)) {
@@ -131,7 +131,7 @@ $(document).ready(function () {
     }
 
 
-    async function validateField(field, fieldName, error) {
+    async function validate_field(field, fieldName, error) {
 
         var value = validator.trim(field.val());
         var empty = validator.isEmpty(value);
@@ -152,7 +152,7 @@ $(document).ready(function () {
             
         }
             
-        var filled = isFilled();
+        var filled = is_filled();
 
         var validEmail;
         await isValidEmail( function(boolean){
@@ -164,7 +164,7 @@ $(document).ready(function () {
             validSecurityCode = boolean;
         });
 
-        isValidID(field, function (validID) {
+        is_valid_ID(field, function (validID) {
 
             if( filled && validID && validSecurityCode && validEmail ) {
                 $('#submit').prop('disabled', false);
@@ -180,32 +180,32 @@ $(document).ready(function () {
         });
     }
 
-    $('#user_firstName').keyup(function () {
-        validateField($('#user_firstName'), 'First name', $('#error_message'));
+    $('#user_first_name').keyup(function () {
+        validate_field($('#user_first_name'), 'First name', $('#error_message'));
     });
 
-    $('#user_lastName').keyup(function () {
-        validateField($('#user_lastName'), 'Last name', $('#error_message'));
+    $('#user_last_name').keyup(function () {
+        validate_field($('#user_last_name'), 'Last name', $('#error_message'));
     });
 
     $('#user_email').keyup(function () {
-        validateField($('#user_email'), 'Email', $('#error_message'));
+        validate_field($('#user_email'), 'Email', $('#error_message'));
     });
 
-    $('#user_idNumber').keyup(function () {
-        validateField($('#user_idNumber'), 'ID Number', $('#error_message'));
+    $('#user_id_number').keyup(function () {
+        validate_field($('#user_id_number'), 'ID Number', $('#error_message'));
     });
 
-    $('#user_securityCode').keyup(function () {
-        validateField($('#user_securityCode'), 'Security Code', $('#error_message'));
+    $('#user_security_code').keyup(function () {
+        validate_field($('#user_security_code'), 'Security Code', $('#error_message'));
     });
 
     $('#user_designation').on('change', function () {
-        validateField($('#user_designation'), 'Designation', $('#error_message'));
+        validate_field($('#user_designation'), 'Designation', $('#error_message'));
     });
     
-    $('#user_passengerType').on('change', function () {
-        validateField($('#user_passengerType'), 'Passenger Type', $('#error_message'));
+    $('#user_passenger_type').on('change', function () {
+        validate_field($('#user_passenger_type'), 'Passenger Type', $('#error_message'));
     });
     
 

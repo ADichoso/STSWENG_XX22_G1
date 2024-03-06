@@ -15,20 +15,20 @@ const controller = {
 
         var details = {};
 
-        if ( req.session.idNumber ) {
+        if ( req.session.id_number ) {
 
-            const query = { idNumber: req.session.idNumber };
-            const projection = { firstName: 1};
-            const result = await db.findOne(User, query, projection);
-            const result2 = await db.findOne(Admin, query, projection);
+            const query = { id_number: req.session.id_number };
+            const projection = "first_name";
+            const result = await db.find_one(User, query, projection);
+            const result2 = await db.find_one(Admin, query, projection);
 
             if (result) {
                 details = {
-                    firstName : result.firstName,
+                    first_name : result.first_name,
                 };
             } else if (result2) {
                 details = {
-                    firstName : result2.firstName,
+                    first_name : result2.first_name,
                 };
             }
 
@@ -36,7 +36,7 @@ const controller = {
 
         }else{
             details = {
-                firstName : 'Login',
+                first_name : 'Login',
             }
 
             res.render('index', details);
@@ -66,40 +66,40 @@ const controller = {
 
     get_settings: async function (req, res){
 
-        if ( req.session.idNumber != req.query.idNumber) {
-            res.status(200).redirect('/Settings?idNumber=' + req.session.idNumber);     
+        if ( req.session.id_number != req.query.id_number) {
+            res.status(200).redirect('/Settings?id_number=' + req.session.id_number);     
         } else {
 
-            var query = {idNumber: req.query.idNumber};
-            const projection = 'idNumber firstName lastName designation passengerType';
+            var query = {id_number: req.query.id_number};
+            const projection = 'id_number first_name last_name designation passenger_type';
     
-            const resultUser = await db.findOne(User, query, projection);
-            const resultAdmin = await db.findOne(Admin, query, projection);
+            const resultUser = await db.find_one(User, query, projection);
+            const resultAdmin = await db.find_one(Admin, query, projection);
     
             var details = {};
             
             if ( resultUser != null ) {
                 details = {
-                    idNumber: resultUser.idNumber,
-                    firstName: resultUser.firstName,
-                    lastName: resultUser.lastName,
+                    id_number: resultUser.id_number,
+                    first_name: resultUser.first_name,
+                    last_name: resultUser.last_name,
                     designation: resultUser.designation,
-                    passengerType: resultUser.passengerType,
-                    isAdmin: false,
+                    passenger_type: resultUser.passenger_type,
+                    is_admin: false,
                 };
             }
             else if ( resultAdmin != null ) {
                 details = {
-                    idNumber: resultAdmin.idNumber,
-                    firstName: resultAdmin.firstName,
-                    lastName: resultAdmin.lastName,
+                    id_number: resultAdmin.id_number,
+                    first_name: resultAdmin.first_name,
+                    last_name: resultAdmin.last_name,
                     designation: resultAdmin.designation,
-                    passengerType: resultAdmin.passengerType,
-                    isAdmin: true,
+                    passenger_type: resultAdmin.passenger_type,
+                    is_admin: true,
                 };
             }
             
-            res.render('Settings', details);
+            res.render('Settings', {"details": details});
 
         }
 
