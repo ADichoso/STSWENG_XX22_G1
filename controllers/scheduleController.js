@@ -15,7 +15,7 @@ const scheduleController = {
             return res.status(200).json(reservations);
         }
 
-        else if (buttonClicked=== 'exit') {
+        else if (buttonClicked === 'exit') {
 
             const { date, location, time } = req.params;
             const reservations = await Reservation.find ({

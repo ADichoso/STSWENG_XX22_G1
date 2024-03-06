@@ -21,15 +21,20 @@ const schedule_controller = require('../controllers/scheduleController.js');
 
 const validation = require('../helpers/validations.js');
 
+const path = require("path");
+
+const pfp_path = path.join(__dirname, '..', '/public/profilepictures')
+console.log(pfp_path)
+
 const multer = require('multer');
 const storage = multer.diskStorage({
 
   destination: (req, file, cb) => {
-    cb(null, 'public/images/profilepictures')
+    cb(null, "./public/profilepictures")
   },
 
   filename: (req, file, cb) => {
-    cb(null, req.body.idNumber + '.png')
+    cb(null, req.body.id_number + '.png')
   }
 
 })
@@ -80,6 +85,7 @@ app.get('/Logout', profile_controller.get_logout);
 
 // Profile settings
 app.get('/Settings', controller.get_settings);
+//app.post('/ChangePublicInfo', profile_controller.post_change_public_info);
 app.post('/ChangePublicInfo', upload.single("dp"), profile_controller.post_change_public_info);
 app.post('/ChangePrivateInfo', profile_controller.post_change_private_info);
 app.post('/ChangePassword', profile_controller.post_change_password);

@@ -7,8 +7,8 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const User = require('../models/userdb.js');
-
 const Admin = require('../models/admindb.js');
+const Driver = require('../models/driverdb.js');
 
 const signupController = {
 
@@ -32,23 +32,23 @@ const signupController = {
         }else{
 
             const user = {
-                firstName: req.body.user_firstName,
-                lastName: req.body.user_lastName,
+                first_name: req.body.user_first_name,
+                last_name: req.body.user_last_name,
                 email: req.body.user_email,
-                idNumber: req.body.user_idNumber,
+                id_number: req.body.user_id_number,
                 password: await bcrypt.hash(req.body.user_password, saltRounds),
-                securityCode: await bcrypt.hash(req.body.user_securityCode, saltRounds),
+                security_code: await bcrypt.hash(req.body.user_security_code, saltRounds),
                 designation: req.body.user_designation,
-                passengerType: req.body.user_passengerType,
-                profilePicture: "images/profilepictures/Default.png"
+                passenger_type: req.body.user_passenger_type,
+                profile_picture: "images/profilepictures/Default.png"
             }
     
-            var result = await db.insertOne(User, user);
+            var result = await db.insert_one(User, user);
     
             if( result ){
                 console.log(result);
                 console.log('User successfully added');
-                res.render('Login', {isRegistered: true});
+                res.render('Login', {is_registered: true});
             }
             else{
                 console.log('User not added');
@@ -59,33 +59,37 @@ const signupController = {
     },
 
     get_check_ID: async function (req, res) {
-
+        var id_number = req.query.id_number;
+        const user_result = await db.find_one(User, {id_number: id_number});
+        const admin_result = await db.find_one(Admin, {id_number: id_number});
+        const driver_result = await db.find_one(Driver, {id_number: id_number});
         
-        var idNumber = req.query.idNumber;
-        var result = await db.findOne(User, {idNumber: idNumber});
-        var result2 = await db.findOne(Admin, {idNumber: idNumber});
-        if ( result ){
-            res.send(result);
-        }else if (result2) {
-            res.send(result2);
-        }else{
+        if (user_result)
+            res.send(user_result);
+        else if (admin_result)
+            res.send(admin_result);
+        else if (driver_result)
+            res.send(driver_result);
+        else
             res.send(null);
-        }
         
     },
 
     get_check_email: async function (req, res) {
-
         var email = req.query.email;
-        var result = await db.findOne(User, {email: email}, 'email');
-        var result2 = await db.findOne(Admin, {email: email}, 'email');
-        if ( result ){
-            res.send(result);
-        }else if (result2) {
-            res.send(result2);
-        }else{
+        
+        const user_result = await db.find_one(User, {email: email}, 'email');
+        const admin_result = await db.find_one(Admin, {email: email}, 'email');
+        const driver_result = await db.find_one(Driver, {email: email}, 'email');
+        
+        if (user_result)
+            res.send(user_result);
+        else if (admin_result)
+            res.send(admin_result);
+        else if (driver_result)
+            res.send(driver_result);
+        else
             res.send(null);
-        }
 
     },
 

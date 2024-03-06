@@ -11,7 +11,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
             window.onload = function() {
-                leftClick();
+                left_click();
             };
         </script>
     </head>
@@ -41,7 +41,7 @@
 
                 <h1 style="position: relative; color: white; left: 50px; top: 40px;"> Schedule </h1>
                 <p style="position: relative; color: white; left: 50px; margin-top: 40px; font-style: italic;"> View seats availability of a schedule </p>
-                <button id="view_schedule_btn" onclick="showScheduleForm();"> View Schedule </button> 
+                <button id="view_schedule_btn" onclick="show_schedule_form();"> View Schedule </button> 
                 <style> 
                     #view_schedule_btn{
                         position: absolute; 
@@ -83,15 +83,15 @@
                         <form onsubmit="return findMatchingSeats(event);" novalidate>
                             <div class="button_box">
                                 <div id="btn"></div>
-                                <button type="button" class="switch" id="entry_btn" onclick="leftClick();" style="text-align: center; left: 10px;" onchange="changeTimeSlots();"> Entry </button>
-                                <button type="button" class="switch" id="exit_btn" onclick="rightClick();" style="right: -30px;" onchange="changeTimeSlots();"> Exit </button> 
+                                <button type="button" class="switch" id="entry_btn" onclick="left_click();" style="text-align: center; left: 10px;" onchange="change_time_slots();"> Entry </button>
+                                <button type="button" class="switch" id="exit_btn" onclick="right_click();" style="right: -30px;" onchange="change_time_slots();"> Exit </button> 
                             </div>
     
                             <input type="date" placeholder="Date" class="fillup" required name="user_date" id="user_date">
     
                             <div class="location">
                                 <img src="../images/Help.png" style="width: 25px; height: 25px; position: relative; filter:invert(1); top: 15px; left:10px; cursor: help;" title="Select a designated location">
-                                <select required name="user_location" id="user_location" class="fillup" style="width: 190px; margin: 10px; position: relative; left: 5px; " onchange="changeTimeSlots();">
+                                <select required name="user_location" id="user_location" class="fillup" style="width: 190px; margin: 10px; position: relative; left: 5px; " onchange="change_time_slots();">
                                     <option value="" disabled selected hidden s> Select Location </option>
                                 </select>
                                 <select required name="user_entryTime" id="user_entryTime" class="fillup" style="width: 120px; ">
@@ -99,13 +99,13 @@
                                 </select>
                             </div>
 
-                            <button type="submit" class="toggle_btn" id="reserve_btn" onclick="hideScheduleForm();"> View Schedule <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
+                            <button type="submit" class="toggle_btn" id="reserve_btn" onclick="hide_schedule_form();"> View Schedule <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
                         </form>
                         
                     </div>
     
                     <div class="subtext">
-                        <a onclick="cancelScheduleForm();" style="cursor:pointer;">Cancel </a>
+                        <a onclick="cancel_schedule_form();" style="cursor:pointer;">Cancel </a>
                     </div>
     
                 </div>

@@ -48,7 +48,7 @@ const securityController = {
       
         try {
             const query = { id_number: id_number };
-            const projection = { id_number: 1, security_code: 1};
+            const projection = "id_number security_code";
             const user_result = await db.find_one(User, query, projection);
             const admin_result = await db.find_one(Admin, query, projection);
             const driver_result = await db.find_one(Driver, query, projection);

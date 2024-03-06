@@ -13,23 +13,22 @@
     </head>
 
     <body>
-
         <script>
             window.onload = function() {
 
                 document.getElementById("success_box").style.display = "none";
                 document.getElementById("error_box").style.display = "none";
 
-                readyHTML({{displayUI}});
+                ready_HTML({{display_UI}});
 				
 				{{#each result}}
-					hideScheduleForm(true, ["{{startCampus}}", "{{date}}", "{{entryLoc}}", "{{entryTime}}", "{{exitLoc}}", "{{exitTime}}", {{idNumber}}], false);
+					hideScheduleForm(true, ["{{start_campus}}", "{{date}}", "{{entry_loc}}", "{{entry_time}}", "{{exit_loc}}", "{{exit_time}}", {{id_number}}], false);
 				{{/each}}
 
-                var adminLink = '/ProfileAdmin?idNumber=' + {{idNumber}};
-                var userLink = '/Profile?idNumber=' + {{idNumber}};
+                var adminLink = '/ProfileAdmin?id_number=' + {{id_number}};
+                var userLink = '/Profile?id_number=' + {{id_number}};
 
-                if ( {{isAdmin}} == true ){
+                if ({{is_admin}} == true){
                     document.getElementById('backButton').setAttribute('href', adminLink);
                 }
                 else{
@@ -114,8 +113,8 @@
 
                 <h1 style="position: relative; color: white; left: 50px; top: 40px;"> Reserve </h1>
                 <p style="position: relative; color: white; left: 50px; margin-top: 40px; font-style: italic;"> Reserve your spot now on your designated place </p>
-                <button class="reserve_btn" id="reserve_schedule_btn" onclick="showUserForm();"> Reserve schedule </button> 
-                <button class="reserve_btn" id="reserveUser_schedule_btn" onclick="showAdminForm();" style="margin-left: 20px; display: none;"> User reserve </button> 
+                <button class="reserve_btn" id="reserve_schedule_btn" onclick="show_user_form();"> Reserve schedule </button> 
+                <button class="reserve_btn" id="reserveUser_schedule_btn" onclick="show_admin_form();" style="margin-left: 20px; display: none;"> User reserve </button> 
                 <style> 
                     .reserve_btn{
                         position: absolute; 
@@ -215,8 +214,8 @@
                         <form action="/Reservation" method="post">
                             <div class="button_box">
                                 <div id="btn"></div>
-                                <button type="button" class="switch" id="laguna_btn" onclick="leftClick();"> Laguna </button>
-                                <button type="button" class="switch" id="manila_btn" onclick="rightClick();"> Manila </button> 
+                                <button type="button" class="switch" id="laguna_btn" onclick="left_click();"> Laguna </button>
+                                <button type="button" class="switch" id="manila_btn" onclick="right_click();"> Manila </button> 
                             </div>
                             
                             <label for="user_idNumber"></label>
@@ -234,7 +233,7 @@
     
                             <div class="entry">
                                 <img src="../images/Help.png" style="width: 25px; height: 25px; position: relative; filter:invert(1); top: 15px; left:10px; cursor: help;" title="From home, location going to be picked up.">
-                                <select required name="user_entry" id="user_entry" class="fillup" onchange="readyChangeTime('user_entry','user_entryTime');" style="width: 185px; margin: 10px; position: relative; left: 5px; ">
+                                <select required name="user_entry" id="user_entry" class="fillup" onchange="ready_change_time('user_entry','user_entryTime');" style="width: 185px; margin: 10px; position: relative; left: 5px; ">
                                     <option value="" disabled selected hidden s> Entry Location </option>
                                     <option value="0"> Paseo -> DLSU LC </option>
                                     <option value="1"> Carmona -> DLSU LC  </option>
@@ -261,7 +260,7 @@
     
                             <div class="exit"> </style>
                                 <img src="../images/Help.png" style="width: 25px; height: 25px; position: relative; filter:invert(1); top: 15px; left:10px; cursor: help;" title="From De La Salle University, location going to be dropped-off.">
-                                <select required name="user_exit" id="user_exit" class="fillup" onchange="readyChangeTime('user_exit','user_exitTime');" style="width: 185px; margin: 10px; position: relative; left: 5px;">
+                                <select required name="user_exit" id="user_exit" class="fillup" onchange="ready_change_time('user_exit','user_exitTime');" style="width: 185px; margin: 10px; position: relative; left: 5px;">
                                     <option value="" disabled selected hidden s> Exit Location </option>
                                     <option value="0"> DLSU LC -> DLSU Manila </option>
                                     <option value="1"> DLSU LC -> Paseo </option>
@@ -287,13 +286,13 @@
                                 </select>
                             </div>
 								
-                            <button type="submit" class="toggle_btn" id="reserve_btn" onclick="populateFields()"><!--onclick="hideScheduleForm();"--> Reserve <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
+                            <button type="submit" class="toggle_btn" id="reserve_btn" onclick="populate_fields()"><!--onclick="hideScheduleForm();"--> Reserve <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
                         </form>
                         
                     </div>
     
                     <div class="subtext">
-                        <a onclick="cancelScheduleForm();" style="cursor:pointer;">Cancel </a>
+                        <a onclick="cancel_schedule_form();" style="cursor:pointer;">Cancel </a>
                     </div>
     
                 </div>
@@ -306,8 +305,8 @@
                         <form action="/ReservationUpdate" method="post">
                             <div class="button_box">
                                 <div id="ebtn"></div>
-                                <button type="button" class="switch" id="laguna_btn" onclick="eleftClick();"> Laguna </button>
-                                <button type="button" class="switch" id="manila_btn" onclick="erightClick();"> Manila </button> 
+                                <button type="button" class="switch" id="laguna_btn" onclick="e_left_click();"> Laguna </button>
+                                <button type="button" class="switch" id="manila_btn" onclick="e_right_click();"> Manila </button> 
                             </div>
 							
 							<input type="hidden" id="ehiddenStartCampus" required name="ehiddenStartCampus" value="">
@@ -329,7 +328,7 @@
     
                             <div class="entry">
                                 <img src="../images/Help.png" style="width: 25px; height: 25px; position: relative; filter:invert(1); top: 15px; left:10px; cursor: help;" title="From home, location going to be picked up.">
-                                <select name="editUser_entry" id="editUser_entry" class="fillup" onchange="readyChangeTime('editUser_entry','editUser_entryTime');" style="width: 185px; margin: 10px; position: relative; left: 5px; ">
+                                <select name="editUser_entry" id="editUser_entry" class="fillup" onchange="ready_change_time('editUser_entry','editUser_entryTime');" style="width: 185px; margin: 10px; position: relative; left: 5px; ">
                                     <option value="" disabled selected hidden s> Entry Location </option>
                                     <option value="0"> Paseo -> DLSU LC </option>
                                     <option value="1"> Carmona -> DLSU LC  </option>
@@ -356,7 +355,7 @@
     
                             <div class="exit"> </style>
                                 <img src="../images/Help.png" style="width: 25px; height: 25px; position: relative; filter:invert(1); top: 15px; left:10px; cursor: help;" title="From De La Salle University, location going to be dropped-off.">
-                                <select name="editUser_exit" id="editUser_exit" class="fillup" onchange="readyChangeTime('editUser_exit','editUser_exitTime');" style="width: 185px; margin: 10px; position: relative; left: 5px;">
+                                <select name="editUser_exit" id="editUser_exit" class="fillup" onchange="ready_change_time('editUser_exit','editUser_exitTime');" style="width: 185px; margin: 10px; position: relative; left: 5px;">
                                     <option value="" disabled selected hidden s> Exit Location </option>
                                     <option value="0"> DLSU LC -> DLSU Manila </option>
                                     <option value="1"> DLSU LC -> Paseo </option>
@@ -382,13 +381,13 @@
                                 </select>
                             </div>
     
-                            <button type="submit" class="toggle_btn" id="edit_btn" onclick="hideEditForm();"> Confirm <style> .toggle_btn{ font-size: large; font-weight: bold; margin-top: 15px;}</style></button>
+                            <button type="submit" class="toggle_btn" id="edit_btn" onclick="hide_edit_form();"> Confirm <style> .toggle_btn{ font-size: large; font-weight: bold; margin-top: 15px;}</style></button>
                         </form>
                         
                     </div>
     
                     <div class="subtext">
-                        <a onclick="cancelEditForm();" style="cursor:pointer;">Cancel </a>
+                        <a onclick="cancel_edit_form();" style="cursor:pointer;">Cancel </a>
                     </div>
     
                 </div>
@@ -422,9 +421,9 @@
 							<input type="hidden" id="dCurrEntryTime" name="dCurrEntryTime" value="">
 							<input type="hidden" id="dCurrExitLoc" name="dCurrExitLoc" value="">
 							<input type="hidden" id="dCurrExitTime" name="dCurrExitTime" value="">
-                            <button type="submit" class="toggle_btn" id="delete_btn" onclick="hideDeleteForm();"> Delete <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
+                            <button type="submit" class="toggle_btn" id="delete_btn" onclick="hide_delete_form();"> Delete <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
 						</form>
-                            <button type="submit" class="toggle_btn" id="cancel_btn" onclick="cancelDeleteForm();"> Cancel</button>
+                            <button type="submit" class="toggle_btn" id="cancel_btn" onclick="cancel_delete_form();"> Cancel</button>
 						                    
                     </div>
     

@@ -29,7 +29,7 @@ var user_schema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    passenger_tye: {
+    passenger_type: {
         type: String,
         required: true,
     },
