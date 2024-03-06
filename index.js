@@ -12,7 +12,7 @@ const hbs = require('hbs');
 
 //Connect to MongoDB
 mongoose.connect('mongodb+srv://MauriesLopez:679914164@shuttlereservation.nagtzpm.mongodb.net/?retryWrites=true&w=majority');
-
+// mongoose.connect('mongodb+srv://dbUser:H4RCbGxtzVbJIHde@shuttlereservation.nagtzpm.mongodb.net/');
 
 // import module `routes` from `./routes/routes.js`
 const routes = require('./routes/routes.js');
