@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 // ccapdev-mongoose is the name of the database
-const url = 'mongodb+srv://MauriesLopez:679914164@shuttlereservation.nagtzpm.mongodb.net/?retryWrites=true&w=majority';
+const url = 'mongodb+srv://stagingUser:p0mLAsanPyUXVjQa@dlsushuttlereservation.1oeold4.mongodb.net/';
 
 
 // additional connection options
