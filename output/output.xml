@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.12.2 on win32)" generated="2024-03-07T18:33:56.178342" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="E:\YEAR 3 TERM 2\STSWENG\STSWENG_XX22_G1\__test__">
+<suite id="s1-s1" name="Login Test Suite" source="E:\YEAR 3 TERM 2\STSWENG\STSWENG_XX22_G1\__test__\login.robot">
+<test id="s1-s1-t1" name="Login - Valid Username and Password" line="12">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:33:56.423305" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<arg>http://localhost:3000/login</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-03-07T18:33:56.423305" elapsed="2.387910"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2024-03-07T18:33:58.812544" elapsed="0.120416"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>0</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" start="2024-03-07T18:33:58.934218" elapsed="0.000000"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:33:58.948313" level="INFO">Current page contains element 'id=user_id_number'.</msg>
+<arg>id=user_id_number</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-03-07T18:33:58.935273" elapsed="0.013040"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:33:58.958969" level="INFO">Current page contains element 'id=user_password'.</msg>
+<arg>id=user_password</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-03-07T18:33:58.948313" elapsed="0.010656"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:33:58.958969" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
+<arg>id=user_id_number</arg>
+<arg>12170585</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-03-07T18:33:58.958969" elapsed="0.089347"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:33:59.049812" level="INFO">Typing text '111111' into text field 'id=user_password'.</msg>
+<arg>id=user_password</arg>
+<arg>111111</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-03-07T18:33:59.049812" elapsed="0.066719"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:33:59.117530" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-03-07T18:33:59.117530" elapsed="0.560102"/>
+</kw>
+<kw name="Get Location" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:33:59.720002" level="INFO">${url} = http://localhost:3000/SecurityCheck?id_number=12170585</msg>
+<var>${url}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="PASS" start="2024-03-07T18:33:59.678662" elapsed="0.041340"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${url}</arg>
+<arg>http://localhost:3000/SecurityCheck?id_number=12170585</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-03-07T18:33:59.720002" elapsed="0.001047"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2024-03-07T18:33:59.721049" elapsed="2.118661"/>
+</kw>
+<status status="PASS" start="2024-03-07T18:33:56.422112" elapsed="5.417598"/>
+</test>
+<test id="s1-s1-t2" name="Login - Invalid Details" line="24">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:34:01.840847" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<arg>http://localhost:3000/login</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-03-07T18:34:01.840847" elapsed="2.066658"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2024-03-07T18:34:03.908009" elapsed="0.123568"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>0</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" start="2024-03-07T18:34:04.031577" elapsed="0.001000"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:34:04.040999" level="INFO">Current page contains element 'id=user_id_number'.</msg>
+<arg>id=user_id_number</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-03-07T18:34:04.032577" elapsed="0.008422"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:34:04.048955" level="INFO">Current page contains element 'id=user_password'.</msg>
+<arg>id=user_password</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-03-07T18:34:04.040999" elapsed="0.007956"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:34:04.049980" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
+<arg>id=user_id_number</arg>
+<arg>12170585</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-03-07T18:34:04.049980" elapsed="0.079258"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:34:04.130354" level="INFO">Typing text 'password' into text field 'id=user_password'.</msg>
+<arg>id=user_password</arg>
+<arg>password</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-03-07T18:34:04.129238" elapsed="0.061649"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:34:04.191890" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-03-07T18:34:04.190887" elapsed="0.269071"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=error_box</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-03-07T18:34:04.461045" elapsed="0.025098"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-03-07T18:34:04.497684" level="INFO">Current page contains text 'Invalid User/Password. Check your input'.</msg>
+<arg>Invalid User/Password. Check your input</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-03-07T18:34:04.486143" elapsed="0.011541"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2024-03-07T18:34:04.497684" elapsed="2.092112"/>
+</kw>
+<status status="PASS" start="2024-03-07T18:34:01.840847" elapsed="4.748949"/>
+</test>
+<doc>A test suite for valid login.
+
+This test has a workflow that is created using keywords
+directly from SeleniumLibrary.</doc>
+<status status="PASS" start="2024-03-07T18:33:56.205862" elapsed="10.385084"/>
+</suite>
+<status status="PASS" start="2024-03-07T18:33:56.180873" elapsed="10.410073"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="Test">Test</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s1" name="Login Test Suite">Test.Login Test Suite</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
