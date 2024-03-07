@@ -1,13 +1,18 @@
 // import module `express`
 const express = require('express');
-
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+
+//Mongo DB Modules
+const mongo_store = require('connect-mongo')(session);
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://MauriesLopez:679914164@shuttlereservation.nagtzpm.mongodb.net/?retryWrites=true&w=majority');
 
 // import module `hbs`
 const hbs = require('hbs');
+
+
+//Connect to MongoDB
+mongoose.connect('mongodb+srv://MauriesLopez:679914164@shuttlereservation.nagtzpm.mongodb.net/?retryWrites=true&w=majority');
+
 
 // import module `routes` from `./routes/routes.js`
 const routes = require('./routes/routes.js');
@@ -23,7 +28,7 @@ app.use(session({
     secret: 'sessionID',
     cookie: {maxAge: 7*24*60*60*3000},
     saveUninitialized: false,
-    store: new MongoStore({mongooseConnection: db, autoRemove: 'disabled'}),
+    store: new mongo_store({mongooseConnection: db, autoRemove: 'disabled'}),
     resave: false
 }));
 
@@ -69,9 +74,6 @@ app.use(function (req, res) {
     // render `../views/error.hbs`
     res.render('Error', details);
 });
-
-// connects to the database
-//db.connect();
 
 // binds the server to a specific port
 app.listen(port, function () {

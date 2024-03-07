@@ -20,30 +20,30 @@
                 document.getElementById("error_box").style.display = "none";
 
                 {{#each result}}
-					hideScheduleForm(true, ["{{startCampus}}", "{{date}}", "{{entryLoc}}", "{{entryTime}}", "{{exitLoc}}", "{{exitTime}}", {{idNumber}}], false);
+					hideScheduleForm(true, ["{{start_campus}}", "{{date}}", "{{entry_loc}}", "{{entry_time}}", "{{exit_loc}}", "{{exit_time}}", {{id_number}}], false);
 				{{/each}}
 				
-				console.log({{adminId}});
-				function adminIdCheck(adminId = null){
-					if (adminId == null){
-						idNo = new URLSearchParams(window.location.search).get('idNumber');
-						document.getElementById('backButton').setAttribute('href', '/ProfileAdmin?idNumber='+ idNo);
-						document.getElementById('adminId').value = idNo;
+				console.log({{admin_ID}});
+				function admin_ID_check(admin_ID = null){
+					if (admin_ID == null){
+						var ID_num = new URLSearchParams(window.location.search).get('id_number');
+						document.getElementById('backButton').setAttribute('href', '/ProfileAdmin?id_number='+ ID_num);
+						document.getElementById('admin_ID').value = ID_num;
 					}
 					else{
-						document.getElementById('adminId').value = adminId;
-						document.getElementById('eAdminId').value = adminId;
-						document.getElementById('dAdminId').value = adminId;
+						document.getElementById('admin_ID').value = admin_ID;
+						document.getElementById('e_admin_ID').value = admin_ID;
+						document.getElementById('d_admin_ID').value = admin_ID;
 					}
 				}
-				adminIdCheck({{adminId}});
+				admin_ID_check({{admin_ID}});
 
-                var searchUserStatus = new URLSearchParams(window.location.search).get('isSearchUserValid');
-                var searchUserResvListStatus = new URLSearchParams(window.location.search).get('reservationList');
-                var searchUserUpdateStatus = "{{isUpdateSuccess}}";
-                var searchUserDeleteSatus = "{{isDeleteSuccess}}";
+                var search_user_status = new URLSearchParams(window.location.search).get('is_search_user_valid');
+                var search_user_resv_list_status = new URLSearchParams(window.location.search).get('reservation_list');
+                var search_user_update_status = "{{is_update_success}}";
+                var search_user_delete_status = "{{is_delete_success}}";
 
-                if ( searchUserStatus == "false" ){
+                if ( search_user_status == "false" ){
                     document.getElementById("error_box").style.display = "block";
                     $("#error_message").text("No user found. Check the inputted ID Number.");
 
@@ -52,7 +52,7 @@
                     }, 3000);
                 }
 
-                if ( searchUserResvListStatus == "false" ){
+                if ( search_user_resv_list_status == "false" ){
                     document.getElementById("error_box").style.display = "block";
                     $("#error_message").text("No reservation/s found.");
 
@@ -61,7 +61,7 @@
                     }, 3000);
                 }
 
-                if ( searchUserUpdateStatus == "true" ){
+                if ( search_user_update_status == "true" ){
                     document.getElementById("success_box").style.display = "block";
                     $("#success_message").text('Reservation successfully updated!');
 
@@ -69,7 +69,7 @@
                         document.getElementById("success_box").style.display = "none";
                     }, 3000);
                 }
-                else if ( searchUserUpdateStatus == "false" ){
+                else if ( search_user_update_status == "false" ){
                     document.getElementById("error_box").style.display = "block";
                     $("#error_message").text("Reservation failed to update. Try again.");
 
@@ -79,7 +79,7 @@
 
                 }
 
-                if ( searchUserDeleteSatus == "true" ){
+                if ( search_user_delete_status == "true" ){
                     document.getElementById("success_box").style.display = "block";
                     $("#success_message").text('Reservation successfully deleted!');
 
@@ -94,7 +94,7 @@
         <div class = "banner"> 
 
             <div class="navbar">
-				<a href="/ProfileAdmin?idNumber={{adminId}}" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
+				<a href="/ProfileAdmin?id_number={{admin_ID}}" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
 
                 <div id="success_box">
                     <p id="success_message"> Success! </p>
@@ -117,7 +117,7 @@
 
                 <h1 style="position: relative; color: white; left: 50px; top: 40px;"> User Remove Reservation </h1>
                 <p style="position: relative; color: white; left: 50px; margin-top: 40px; font-style: italic;"> Delete/Edit a user reservation </p>
-                <button id="search_user_btn" onclick="showSearchForm();" style="margin-left: 50px;"> Search User  </button> 
+                <button id="search_user_btn" onclick="show_search_form();" style="margin-left: 50px;"> Search User  </button> 
                 <style> 
                     #search_user_btn{
                         position: absolute; 
@@ -154,7 +154,7 @@
                     <div class="input">
                         <form action="/SearchUser" method="post">
                             <label for="user_idNumber"></label>
-							<input type="hidden" id="adminId" name="adminId" value="">
+							<input type="hidden" id="admin_ID" name="admin_ID" value="">
                             <input type="text" placeholder="ID Number" class="fillup" name="user_idNumber" id="user_idNumber" required style="position: relative; margin-top: 40px;" pattern="[0-9]+" minlength="8" maxlength="8">
                             <button type="submit" class="toggle_btn" id="reserve_btn" style="position: relative; font-size: large; font-weight: bold; margin-top: 60px;"> Search </button>
                         
@@ -163,7 +163,7 @@
                     </div>
     
                     <div class="subtext">
-                        <a onclick="cancelScheduleForm();" style="cursor:pointer;">Cancel </a>
+                        <a onclick="cancel_schedule_form();" style="cursor:pointer;">Cancel </a>
                     </div>
     
                 </div>
@@ -176,10 +176,10 @@
                         <form action="/SearchUserUpdate" method="post">
                             <div class="button_box">
                                 <div id="ebtn"></div>
-                                <button type="button" class="switch" id="laguna_btn" onclick="eleftClick();"> Laguna </button>
-                                <button type="button" class="switch" id="manila_btn" onclick="erightClick();"> Manila </button> 
+                                <button type="button" class="switch" id="laguna_btn" onclick="e_left_click();"> Laguna </button>
+                                <button type="button" class="switch" id="manila_btn" onclick="e_right_click();"> Manila </button> 
                             </div>
-							<input type="hidden" id="eAdminId" name="eAdminId" value="">
+							<input type="hidden" id="e_admin_ID" name="e_admin_ID" value="">
 							<input type="hidden" id="ehiddenStartCampus" required name="ehiddenStartCampus" value="">
 							<input type="hidden" id="ehiddenIdNumber" required name="ehiddenIdNumber" value="">
 							<input type="hidden" id="ehiddenEntryLoc" name="ehiddenEntryLoc" value="">
@@ -252,13 +252,13 @@
                                 </select>
                             </div>
     
-                            <button type="submit" class="toggle_btn" id="edit_btn" onclick="hideEditForm();"> Confirm <style> .toggle_btn{ font-size: large; font-weight: bold; margin-top: 15px;}</style></button>
+                            <button type="submit" class="toggle_btn" id="edit_btn" onclick="hide_edit_form();"> Confirm <style> .toggle_btn{ font-size: large; font-weight: bold; margin-top: 15px;}</style></button>
                         </form>
                         
                     </div>
     
                     <div class="subtext">
-                        <a onclick="cancelEditForm();" style="cursor:pointer;">Cancel </a>
+                        <a onclick="cancel_edit_form();" style="cursor:pointer;">Cancel </a>
                     </div>
     
                 </div>
@@ -284,7 +284,7 @@
                     <hr>
                     <div class="input">
                         <form action="/SearchUserDelete" method="post">
-							<input type="hidden" id="dAdminId" name="dAdminId" value="">
+							<input type="hidden" id="d_admin_ID" name="d_admin_ID" value="">
 							<input type="hidden" id="dCurrStartCampus" required name="dCurrStartCampus" value="">
 							<input type="hidden" id="dCurrIdNumber" required name="dCurrIdNumber" value="">
 							<input type="hidden" id="dCurrDate" name="dCurrDate" value="">
@@ -292,9 +292,9 @@
 							<input type="hidden" id="dCurrEntryTime" name="dCurrEntryTime" value="">
 							<input type="hidden" id="dCurrExitLoc" name="dCurrExitLoc" value="">
 							<input type="hidden" id="dCurrExitTime" name="dCurrExitTime" value="">
-                            <button type="submit" class="toggle_btn" id="delete_btn" onclick="hideDeleteForm();"> Delete <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
+                            <button type="submit" class="toggle_btn" id="delete_btn" onclick="hide_delete_form();"> Delete <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
 						</form>
-                            <button type="submit" class="toggle_btn" id="cancel_btn" onclick="cancelDeleteForm();"> Cancel</button>
+                            <button type="submit" class="toggle_btn" id="cancel_btn" onclick="cancel_delete_form();"> Cancel</button>
 						                    
                     </div>
     

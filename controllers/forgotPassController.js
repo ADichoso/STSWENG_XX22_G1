@@ -6,16 +6,16 @@ const Admin = require('../models/admindb.js');
 
 const forgotPassController = {
 
-    getForgotPassword: function (req, res) {
+    get_forgot_password: function (req, res) {
         res.render('ForgotPassword', res);
     },
 
-    postForgotPassword: async function (req, res){
+    post_forgot_password: async function (req, res){
 
         var query = {email: req.body.user_email, securityCode: req.body.user_securityCode};
 
-        const resultUser = await db.findOne(User, query, 'idNumber email securityCode');
-        const resultAdmin = await db.findOne(Admin, query, 'idNumber email securityCode');
+        const resultUser = await db.find_one(User, query, 'idNumber email securityCode');
+        const resultAdmin = await db.find_one(Admin, query, 'idNumber email securityCode');
 
         var details = {};
 
@@ -46,7 +46,7 @@ const forgotPassController = {
 
     },
 
-    postChangeFPassword: async function (req, res){
+    post_change_F_password: async function (req, res){
 
         var newPassword0 = req.body.user_newPassword0;
         var newPassword1 = req.body.user_newPassword1;
@@ -56,8 +56,8 @@ const forgotPassController = {
             var query = {idNumber: req.body.idNumber};
             const projection = { idNumber: 1, password: 1};
 
-            const resultUser = await db.findOne(User, query, projection);
-            const resultAdmin = await db.findOne(Admin, query, projection);
+            const resultUser = await db.find_one(User, query, projection);
+            const resultAdmin = await db.find_one(Admin, query, projection);
 
             if ( resultUser != null ) {
                 await User.updateOne(query, {password: req.body.user_newPassword1})

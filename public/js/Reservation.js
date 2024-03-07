@@ -1,53 +1,53 @@
-var functionCalled = 0; // 0 = left (Laguna), 1 = right (Manila)
-var adminFunctionCall = 0; // 0 = registered user, 1 = admin
-var editFunctionCalled = 0;
+var function_called = 0; // 0 = left (Laguna), 1 = right (Manila)
+var admin_function_call = 0; // 0 = registered user, 1 = admin
+var edit_function_called = 0;
 var count = null;
 
-function leftClick(){
-    functionCalled = 0;
+function left_click(){
+    function_called = 0;
     btn.style.left = '0';
     locationChangeFormHelper(0, false);
 }
 
-function rightClick(){
-    functionCalled = 1;
+function right_click(){
+    function_called = 1;
     btn.style.left = '160px';
     locationChangeFormHelper(1, false);
 }
 
-function getStartCampus(){
-	return functionCalled;
+function get_start_campus(){
+	return function_called;
 }
 
-function eleftClick(){
-    editFunctionCalled = 0;
+function e_left_click(){
+    edit_function_called = 0;
     ebtn.style.left = '0';
     locationChangeFormHelper(0, true);
 }
 
-function erightClick(){
-    editFunctionCalled = 1;
+function e_right_click(){
+    edit_function_called = 1;
     ebtn.style.left = '160px';
     locationChangeFormHelper(1, true);
 }
 
-function egetStartCampus(){
-	return editFunctionCalled;
+function e_get_start_campus(){
+	return edit_function_called;
 }
 
-function showUserForm(){
-    adminFunctionCall = 0;
-    showScheduleForm();
+function show_user_form(){
+    admin_function_call = 0;
+    show_schedule_form();
 }
 
-function showAdminForm(){
-    adminFunctionCall = 1;
-    showScheduleForm();
+function show_admin_form(){
+    admin_function_call = 1;
+    show_schedule_form();
 }
 
-function readyHTML(displayUI){
+function ready_HTML(display_UI){
     
-    if ( displayUI == 1 ){ //Admin 
+    if ( display_UI == 1 ){ //Admin 
         document.getElementById('reserveUser_schedule_btn').style.display = 'inline';
     }
     else{ //User
@@ -57,7 +57,7 @@ function readyHTML(displayUI){
     
 }
 
-function showScheduleForm() {
+function show_schedule_form() {
 	var doc = document;
     var scheduleForm = null;
     var date_box = document.getElementById('user_date');
@@ -67,7 +67,7 @@ function showScheduleForm() {
     var exitTimeBox = doc.getElementById('user_exitTime');
     var idBox = doc.getElementById('user_idNumber');
 
-    if ( adminFunctionCall == 0 ){
+    if ( admin_function_call == 0 ){
         idBox.style.display = 'none';
         idBox.type = 'hidden';
         scheduleForm = document.getElementsByClassName('form_box')[0];
@@ -134,12 +134,12 @@ function showScheduleForm() {
 	
 }
 
-function fillHiddenField(_box, _hiddenBox){
+function fill_hidden_field(_box, _hiddenBox){
 	var box = document.getElementById(_box);
 	var hiddenBox = document.getElementById(_hiddenBox);
 	hiddenBox.value = box.options[box.selectedIndex].text;
 }
-function populateFields(){
+function populate_fields(){
 	var startCampusBox = document.getElementById('hiddenStartCampus');
 	
 	var idNumberBox = document.getElementById('user_idNumber');
@@ -162,14 +162,14 @@ function populateFields(){
 	else
 		hiddenIdNumberBox.value = getIdNumber();
 	
-	fillHiddenField('user_entry', 'hiddenEntryLoc');
-	fillHiddenField('user_entryTime', 'hiddenEntryTime');
-	fillHiddenField('user_exit', 'hiddenExitLoc');
-	fillHiddenField('user_exitTime', 'hiddenExitTime');
+	fill_hidden_field('user_entry', 'hiddenEntryLoc');
+	fill_hidden_field('user_entryTime', 'hiddenEntryTime');
+	fill_hidden_field('user_exit', 'hiddenExitLoc');
+	fill_hidden_field('user_exitTime', 'hiddenExitTime');
 }
 
 function getIdNumber(){
-	return new URLSearchParams(window.location.search).get('idNumber');
+	return new URLSearchParams(window.location.search).get('id_number');
 }
 function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
 
@@ -280,10 +280,10 @@ function hideEditForm(i){
 	
 	idNumberBox.value = document.getElementById(i).getAttribute('linkedidnumber'); //Get the number linked to the reservation instead
 	
-	fillHiddenField('editUser_entry', 'ehiddenEntryLoc');
-	fillHiddenField('editUser_entryTime', 'ehiddenEntryTime');
-	fillHiddenField('editUser_exit', 'ehiddenExitLoc');
-	fillHiddenField('editUser_exitTime', 'ehiddenExitTime');
+	fill_hidden_field('editUser_entry', 'ehiddenEntryLoc');
+	fill_hidden_field('editUser_entryTime', 'ehiddenEntryTime');
+	fill_hidden_field('editUser_exit', 'ehiddenExitLoc');
+	fill_hidden_field('editUser_exitTime', 'ehiddenExitTime');
 	
 	//^^^from edit form
 	//vvv get current data
@@ -361,7 +361,7 @@ function createTextInfo(main_div, resultArr = []){
     main_div.appendChild(text_info);
 
     var locationValue;
-    if ( functionCalled == 0 ){
+    if ( function_called == 0 ){
         locationValue = document.getElementById('laguna_btn');
     }
     else{
@@ -460,17 +460,17 @@ function createTextInfo(main_div, resultArr = []){
 
 }
 
-function cancelScheduleForm(){
+function cancel_schedule_form(){
     var scheduleForm = document.getElementsByClassName('form_box')[0];
     scheduleForm.style.display = 'none';
 }
 
-function readyChangeTime( location_id, time_id ){
-    changeEntryTimeSlots(location_id, time_id);
+function ready_change_time( location_id, time_id ){
+    change_entry_time_slots(location_id, time_id);
 
 }
 
-function changeEntryTimeSlots(location_id, time_id){
+function change_entry_time_slots(location_id, time_id){
     
     var timeSlots = document.getElementById(time_id);
     timeSlots.innerHTML = '';
@@ -478,7 +478,7 @@ function changeEntryTimeSlots(location_id, time_id){
     var selectedLocation = document.getElementById(location_id);
     var location = selectedLocation.options[selectedLocation.selectedIndex].value;
 
-    if( functionCalled == 0 || editFunctionCalled == 0 ){ //From Laguna
+    if( function_called == 0 || edit_function_called == 0 ){ //From Laguna
 
 
         if ( location_id == 'user_entry' || location_id == 'editUser_entry'){ //Entry Point
@@ -487,23 +487,23 @@ function changeEntryTimeSlots(location_id, time_id){
                                     "08:30 AM", "09:00 AM", "09:30 AM", "10:30 AM", "11:30 AM", 
                                     "12:30 PM", "01:00 PM", "02:00 PM", "03:00 PM", "03:30 PM",
                                     "04:40 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 1 ){
                 var storage_time = ["06:30 AM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 2 ){
                 var storage_time = ["05:30 AM", "06:00 AM", "06:30 AM", "07:30 AM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 3 ){
                 var storage_time = ["06:30 AM", "07:00 AM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else{
                 var storage_time = ["N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
         }
     
@@ -512,47 +512,47 @@ function changeEntryTimeSlots(location_id, time_id){
                 var storage_time = ["05:45 AM", "06:15 AM", "07:00 AM", "08:00 AM", "09:00 AM", 
                                     "11:00 AM", "01:00 PM", "02:30 PM", "03:30 PM", "05:10 PM", 
                                     "06:15 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 1 ){
                 var storage_time = ["09:00 AM", "11:30 AM", "04:45 PM", "05:10 AM", "05:30 PM", 
                                     "06:00 PM", "06:30 PM", "07:00 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 2 ){
                 var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
                                     "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 3 ){
                 var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
                                     "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 4 ){
                 var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
                                     "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else{
                 var storage_time = ["N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
         }
     }
-    else if (functionCalled == 1 || editFunctionCalled == 1)
+    else if (function_called == 1 || edit_function_called == 1)
     { //From Manila
 
         if ( location_id == 'user_entry' || location_id == 'editUser_entry'){ //Entry Point
             if ( location == 0 ){
                 var storage_time = ["06:00 AM", "07:30 AM", "09:30 PM", "11:00 AM", "01:00 PM",
                                     "02:30 PM", "03:30 PM", "05:10 PM", "06:15 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 1 ){
                 var storage_time = ["05:45 AM", "06:15 AM", "07:00 AM", "11:00 AM", "01:00 PM",
                                     "02:30 PM", "03:30 PM", "05:10 PM", "06:15 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
         }
 
@@ -561,31 +561,31 @@ function changeEntryTimeSlots(location_id, time_id){
                 var storage_time = ["05:45 AM", "06:15 AM", "07:00 AM", "08:00 AM", "09:00 AM", 
                                     "11:00 AM", "01:00 PM", "02:30 PM", "03:30 PM", "05:10 PM", 
                                     "06:15 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 1 ){
                 var storage_time = ["09:00 AM", "11:30 AM", "04:45 PM", "05:10 AM", "05:30 PM", 
                                     "06:00 PM", "06:30 PM", "07:00 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 2 ){
                 var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
                                     "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 3 ){
                 var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
                                     "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else if ( location == 4 ){
                 var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
                                     "N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
             else{
                 var storage_time = ["N/A"];
-                changeTimeHelper( time_id, storage_time );
+                change_time_helper( time_id, storage_time );
             }
         }
         
@@ -594,7 +594,7 @@ function changeEntryTimeSlots(location_id, time_id){
 
 }
 
-function changeTimeHelper( time_id, storage_time ){
+function change_time_helper( time_id, storage_time ){
 
     var timeSlots = document.getElementById(time_id);
 
@@ -659,8 +659,8 @@ function locationChangeFormHelper(location, isEditButton){
     
         }
 
-        changeEntryTimeSlots('user_entry', 'user_entryTime')
-        changeEntryTimeSlots('user_exit', 'user_exitTime')
+        change_entry_time_slots('user_entry', 'user_entryTime')
+        change_entry_time_slots('user_exit', 'user_exitTime')
 
     }
     else{
@@ -707,8 +707,8 @@ function locationChangeFormHelper(location, isEditButton){
             }
         }
 
-        changeEntryTimeSlots('editUser_entry', 'editUser_entryTime')
-        changeEntryTimeSlots('editUser_exit', 'editUser_exitTime')
+        change_entry_time_slots('editUser_entry', 'editUser_entryTime')
+        change_entry_time_slots('editUser_exit', 'editUser_exitTime')
 
     }
   

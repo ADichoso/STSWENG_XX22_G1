@@ -6,11 +6,11 @@ const Reservation = require('../models/reservationdb.js');
 
 const searchController = {
 
-    getSearch : function (req, res) {
+    get_search : function (req, res) {
         res.render('Search', res);
     },
 
-    postUserSearch : async function (req, res) {
+    post_user_search : async function (req, res) {
         let payload = req.body.payload.trim();
         let search = await User.find(
             {
@@ -30,12 +30,12 @@ const searchController = {
         res.send({payload: search});
     },
 
-    getSearchProfile : async function (req, res) {
+    get_search_profile : async function (req, res) {
       const query = {idNumber: req.query.idNumber};
       
         const projection = 'idNumber firstName lastName designation passengerType profilePicture';
       
-        const result = await db.findOne(User, query, projection);
+        const result = await db.find_one(User, query, projection);
       
         if (result != null) {
       
@@ -65,11 +65,11 @@ const searchController = {
 
     },
 
-    getSearchReservation : async function (req, res) {
+    get_search_reservation : async function (req, res) {
 
         var userID = req.query.idNumber;
 
-		    const result = await db.findMany(Reservation, {idNumber: userID}, {_id:0, __v:0});
+		    const result = await db.find_many(Reservation, {idNumber: userID}, {_id:0, __v:0});
 
         res.render('SearchReservation', {result: result, idNumber: userID});
 

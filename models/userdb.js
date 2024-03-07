@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 
-var UserSchema = new mongoose.Schema({
-    firstName: {
+var user_schema = new mongoose.Schema({
+    first_name: {
         type: String,
         required: true,
     },
-    lastName: {
+    last_name: {
         type: String,
         require: true,
     },
@@ -13,7 +13,7 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    idNumber: {
+    id_number: {
         type: Number,
         required: true,
     },
@@ -21,7 +21,7 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    securityCode: {
+    security_code: {
         type: String,
         required: true,
     },
@@ -29,14 +29,14 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    passengerType: {
+    passenger_type: {
         type: String,
         required: true,
     },
-    profilePicture:{
+    profile_picture:{
         type: String,
         required: false,
     }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', user_schema);
