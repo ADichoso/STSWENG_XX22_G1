@@ -350,7 +350,7 @@ describe('profileController', () => {
     describe('post_change_public_info', () => {
         test('user changes first name and last name', async () => {
             const req = { body: {id_number : '123456789', new_first_name: "Josh", new_last_name: "Natividad"}};
-            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis} //status is added here for formality (since all the previous ones had status for redirects)
+            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
                 id_number: '123456789',
                 first_name: 'Austin',
@@ -379,7 +379,7 @@ describe('profileController', () => {
 
         test('admin changes first name and last name', async () => {
             const req = {body: {id_number : '000000000',new_first_name: "Josh", new_last_name: "Natividad"} };
-            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis} //status is added here for formality (since all the previous ones had status for redirects)
+            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
                 id_number: '000000000',
                 first_name: 'Austin',
@@ -410,7 +410,7 @@ describe('profileController', () => {
 
         test('driver changes first name and last name', async () => {
             const req = { body: {id_number : '000000000', new_first_name: "Josh", new_last_name: "Natividad"}};
-            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis} //status is added here for formality (since all the previous ones had status for redirects)
+            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
                 id_number: '000000000',
                 first_name: 'Austin',
@@ -442,7 +442,7 @@ describe('profileController', () => {
 
         test('user changes profile picture', async () => {
             const req = { body: {id_number : '123456789'}, file: {original_name: "123456789"} }; //im not sure how original_name works so im just gonna set it to id
-            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis} //status is added here for formality (since all the previous ones had status for redirects)
+            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
                 id_number: '123456789',
                 first_name: 'Austin',
@@ -473,7 +473,7 @@ describe('profileController', () => {
 
         test('admin changes profile picture', async () => {
             const req = { body: {id_number : '123456789'}, file: {original_name: "123456789"} }; //im not sure how original_name works so im just gonna set it to id
-            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis} //status is added here for formality (since all the previous ones had status for redirects)
+            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
                 id_number: '123456789',
                 first_name: 'Austin',
@@ -502,7 +502,7 @@ describe('profileController', () => {
 
         test('driver changes profile picture', async () => {
             const req = { body: {id_number : '123456789'}, file: {original_name: "123456789"} }; //im not sure how original_name works so im just gonna set it to id
-            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis} //status is added here for formality (since all the previous ones had status for redirects)
+            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
                 id_number: '123456789',
                 first_name: 'Austin',
@@ -534,7 +534,7 @@ describe('profileController', () => {
 
         test('should render the error page if an error occurs', async () => {
             const req = { body: {id_number : '123456789'}, file: {original_name: "123456789"} }; //im not sure how original_name works so im just gonna set it to id
-            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis} //status is added here for formality (since all the previous ones had status for redirects)
+            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
                 id_number: '123456789',
                 first_name: 'Austin',
@@ -558,7 +558,7 @@ describe('profileController', () => {
 
         test('should redirect to setting page if info change has not been successful', async() => {
             const req = { body: {id_number : '123456789'}, file: {original_name: "123456789"} }; //im not sure how original_name works so im just gonna set it to id
-            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis} //status is added here for formality (since all the previous ones had status for redirects)
+            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
                 id_number: '123456789',
                 first_name: 'Austin',
@@ -583,7 +583,7 @@ describe('profileController', () => {
     
     describe('post_change_private_info', () => {
         const req = {body: {id_number: "123456789", designation: "Faculty"}}
-        const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis};
+        const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis()};
         const details = {
             id_number: '123456789',
             first_name: 'Austin',
