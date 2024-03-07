@@ -6,3 +6,5 @@ pip install robotframework-seleniumlibrary
 
 echo Running Test Scripts
 robot --outputdir ./__test__/output/ ./__test__/. 
+python3 -m robot --outputdir ./__test__/output/ ./__test__/. 
+py -m robot --outputdir ./__test__/output/ ./__test__/. 
