@@ -74,36 +74,36 @@ app.get('/SearchReservation', searchController.getSearchReservation);
 app.get('/Profile', validation.securityCodeValidation, profileController.getProfile);
 
 // Admin profile settings
-app.get('/ProfileAdmin', profileController.getProfileAdmin);
+app.get('/ProfileAdmin', validation.securityCodeValidation, profileController.getProfileAdmin);
 
-app.get('/Logout', profileController.getLogout);
+app.get('/Logout', validation.securityCodeValidation, profileController.getLogout);
 
 // Profile settings
-app.get('/Settings', controller.getSettings);
-app.post('/ChangePublicInfo', upload.single("dp"), profileController.postChangePublicInfo);
-app.post('/ChangePrivateInfo', profileController.postChangePrivateInfo);
-app.post('/ChangePassword', profileController.postChangePassword);
-app.post('/DeleteAccount', profileController.postDeleteAccount);
-app.post('/ChangeCode', profileController.postChangeCode);
+app.get('/Settings', validation.securityCodeValidation, controller.getSettings);
+app.post('/ChangePublicInfo', validation.securityCodeValidation, upload.single("dp"), profileController.postChangePublicInfo);
+app.post('/ChangePrivateInfo', validation.securityCodeValidation, profileController.postChangePrivateInfo);
+app.post('/ChangePassword', validation.securityCodeValidation, profileController.postChangePassword);
+app.post('/DeleteAccount', validation.securityCodeValidation, profileController.postDeleteAccount);
+app.post('/ChangeCode', validation.securityCodeValidation, profileController.postChangeCode);
 
 // Schedule
-app.get('/Schedule', controller.getSchedule);
-app.get('/Schedule/:date/:location/:time', scheduleController.getReservations);
+app.get('/Schedule', validation.securityCodeValidation, controller.getSchedule);
+app.get('/Schedule/:date/:location/:time', validation.securityCodeValidation, scheduleController.getReservations);
 
 // Reservation
-app.get('/Reservation', reservationController.getReservations);
-app.post('/Reservation', reservationController.postReservations);
+app.get('/Reservation', validation.securityCodeValidation, reservationController.getReservations);
+app.post('/Reservation', validation.securityCodeValidation, reservationController.postReservations);
 //Reservation Update and DeleteAccount
-app.post('/ReservationUpdate', reservationController.postUpdateReservations);
-app.post('/ReservationDelete', reservationController.postDelete);
+app.post('/ReservationUpdate', validation.securityCodeValidation, reservationController.postUpdateReservations);
+app.post('/ReservationDelete', validation.securityCodeValidation, reservationController.postDelete);
 
 // Admin Reservation
-app.get('/ReservationAdmin', reservationController.getReservationAdmin);
-app.get('/SearchUser', reservationController.getSearchUser)
-app.post('/SearchUser', reservationController.postSearchUser);
+app.get('/ReservationAdmin', validation.securityCodeValidation, reservationController.getReservationAdmin);
+app.get('/SearchUser', validation.securityCodeValidation, reservationController.getSearchUser)
+app.post('/SearchUser', validation.securityCodeValidation, reservationController.postSearchUser);
 // Admin Reservation Update and Delete
-app.post('/SearchUserUpdate', reservationController.postSearchUserUpdate);
-app.post('/SearchUserDelete', reservationController.postSearchUserDelete);
+app.post('/SearchUserUpdate', validation.securityCodeValidation, reservationController.postSearchUserUpdate);
+app.post('/SearchUserDelete', validation.securityCodeValidation, reservationController.postSearchUserDelete);
 
 /*
     exports the object `app` (defined above)
