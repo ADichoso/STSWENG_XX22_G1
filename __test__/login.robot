@@ -6,8 +6,6 @@ Documentation     A test suite for valid login.
 ...               directly from SeleniumLibrary.
 Library           SeleniumLibrary
 
-*** Variables ***
-${OUTPUT DIR}     ../automated_testing/output
 *** Test Cases ***
 Login - Valid Username and Password
     Open Browser    http://localhost:3000/login    Chrome
