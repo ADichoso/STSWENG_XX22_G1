@@ -1,7 +1,7 @@
 ---
 name: Unit Test Concern
 about: Raise any Unit Test Concerns Here!
-title: "[UT]"
+title: "[UT] - Lastname | Concern Title"
 labels: bug, concern
 assignees: austinatividad, Lunarianerino
 

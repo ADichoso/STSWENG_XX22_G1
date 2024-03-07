@@ -1,10 +1,10 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "[FEATURE]"
+title: "[FEATURE] - Feature Request Title"
 labels: enhancement
-assignees: ADichoso, Lunarianerino, mauries-lopez, austinatividad, kenStinks, zivan-c,
-  ren-malthalash
+assignees: ADichoso, austinatividad, kenStinks, Lunarianerino, mauries-lopez, ren-malthalash,
+  zivan-c
 
 ---
 
