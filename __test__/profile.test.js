@@ -534,7 +534,7 @@ describe('profileController', () => {
 
         test('should render the error page if an error occurs', async () => {
             const req = { body: {id_number : '123456789'}, file: {original_name: "123456789"} }; //im not sure how original_name works so im just gonna set it to id
-            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
+            const res = { render: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
                 id_number: '123456789',
                 first_name: 'Austin',
