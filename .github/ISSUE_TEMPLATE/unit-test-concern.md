@@ -3,7 +3,7 @@ name: Unit Test Concern
 about: Raise any Unit Test Concerns Here!
 title: "[UT]"
 labels: bug, concern
-assignees: Lunarianerino, austinatividad
+assignees: austinatividad, Lunarianerino
 
 ---
 

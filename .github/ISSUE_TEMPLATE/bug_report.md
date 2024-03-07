@@ -3,8 +3,8 @@ name: Bug report
 about: Create a report to help us improve
 title: "[BUG]"
 labels: bug
-assignees: ADichoso, Lunarianerino, mauries-lopez, austinatividad, kenStinks, zivan-c,
-  ren-malthalash
+assignees: ADichoso, austinatividad, kenStinks, Lunarianerino, mauries-lopez, ren-malthalash,
+  zivan-c
 
 ---
 
