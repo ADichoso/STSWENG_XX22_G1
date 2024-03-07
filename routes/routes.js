@@ -71,7 +71,7 @@ app.get('/SearchProfile', searchController.getSearchProfile);
 app.get('/SearchReservation', searchController.getSearchReservation);
 
 // User profile settings
-app.get('/Profile', profileController.getProfile);
+app.get('/Profile', validation.securityCodeValidation, profileController.getProfile);
 
 // Admin profile settings
 app.get('/ProfileAdmin', profileController.getProfileAdmin);

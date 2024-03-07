@@ -40,6 +40,26 @@ const validation = {
         return validation;
 
     },
+
+    securityCodeValidation: function(req, res, next) 
+    {
+        if(req.session.idNumber)
+        {
+            if(req.session.isSecCodeValid)
+                next();
+            else
+            {
+                req.session.destroy();
+                res.redirect(`/Login`);
+            }
+        }
+        else
+        {
+            req.session.destroy();
+            res.redirect(`/Login`);
+        }
+       
+    }
     
 }
 

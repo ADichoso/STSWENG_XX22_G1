@@ -48,10 +48,15 @@ const securityController = {
           const result = await db.findOne(User, query, projection);
           const result2 = await db.findOne(Admin, query, projection);
 
-          if (result != null && await bcrypt.compare(securityCode, result.securityCode)) 
+          if (result != null && await bcrypt.compare(securityCode, result.securityCode)) {
+            console.log("User logging !");
+            req.session.isSecCodeValid = true;
 			res.status(200).redirect('/Profile?idNumber=' + idNumber);
-          else if ( result2 != null && await bcrypt.compare(securityCode, result2.securityCode))
+          }
+          else if ( result2 != null && await bcrypt.compare(securityCode, result2.securityCode)){
+            req.session.isSecCodeValid = true;
 			res.status(200).redirect('/ProfileAdmin?idNumber=' + idNumber);
+          }
           else
             res.render('Login', { isCodeCorrect: false });
 		

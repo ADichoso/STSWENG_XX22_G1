@@ -27,7 +27,7 @@
                     <li><a href="#schedules"> Schedules </a></li>
                     <li><a href="#staff"> Staff </a></li>
                     <li><a href="/Search"> Search </a></li>
-                    <li><a href="/Login"> {{firstName}} </a></li>
+                    <li><a href="/Login"> {{#if isSecCodeValid}}{{firstName}}{{else}}Login{{/if}} </a></li>
                 </ul>
             </div>
 

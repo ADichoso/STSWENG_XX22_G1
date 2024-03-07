@@ -24,7 +24,7 @@ const controller = {
 
             if (result) {
                 details = {
-                    firstName : result.firstName,
+                    firstName : result.firstName,   
                 };
             } else if (result2) {
                 details = {
@@ -32,14 +32,11 @@ const controller = {
                 };
             }
 
+            details.isSecCodeValid = req.session.isSecCodeValid;
             res.render('index', details);
 
         }else{
-            details = {
-                firstName : 'Login',
-            }
-
-            res.render('index', details);
+            res.render('index');
         }
         
     },
