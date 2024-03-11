@@ -82,9 +82,9 @@ describe('SecurityController - post_security', () => {
 
         await securityController.post_security(req, res);
         
-        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '99999999'}, {id_number: 1, security_code: 1});
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '99999999'}, {id_number: 1, security_code: 1});
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '99999999'}, {id_number: 1, security_code: 1});
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '99999999'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '99999999'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '99999999'}, "id_number security_code");
 
         expect(bcrypt.compare).toHaveBeenCalledWith('1234', '1234');
         expect(res.status).toHaveBeenCalledWith(200);
@@ -102,9 +102,9 @@ describe('SecurityController - post_security', () => {
 
         await securityController.post_security(req, res);
         
-        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, {id_number: 1, security_code: 1});
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, {id_number: 1, security_code: 1});
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, {id_number: 1, security_code: 1});
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, "id_number security_code");
 
         expect(bcrypt.compare).toHaveBeenCalled();
         expect(res.status).toHaveBeenCalledWith(200);
@@ -122,9 +122,9 @@ describe('SecurityController - post_security', () => {
 
         await securityController.post_security(req, res);
 
-        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, {id_number: 1, security_code: 1});
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, {id_number: 1, security_code: 1});
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, {id_number: 1, security_code: 1});
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, "id_number security_code");
 
         expect(bcrypt.compare).toHaveBeenCalled();
         expect(res.status).toHaveBeenCalledWith(200);
@@ -142,9 +142,9 @@ describe('SecurityController - post_security', () => {
 
         await securityController.post_security(req, res);
         
-        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, {id_number: 1, security_code: 1});
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, {id_number: 1, security_code: 1});
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, {id_number: 1, security_code: 1});
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, "id_number security_code");
 
         expect(bcrypt.compare).toHaveBeenCalled();
         expect(res.render).toHaveBeenCalledWith('Login', {is_code_correct: false});
@@ -159,9 +159,9 @@ describe('SecurityController - post_security', () => {
 
         await securityController.post_security(req, res);
         
-        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, {id_number: 1, security_code: 1});
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, {id_number: 1, security_code: 1})
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, {id_number: 1, security_code: 1});
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, "id_number security_code")
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, "id_number security_code");
         expect(res.render).toHaveBeenCalledWith('Login', {is_code_correct: false});
     });
 });
