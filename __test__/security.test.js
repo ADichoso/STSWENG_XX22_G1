@@ -87,6 +87,7 @@ describe('SecurityController - post_security', () => {
         expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '99999999'}, "id_number security_code");
 
         expect(bcrypt.compare).toHaveBeenCalledWith('1234', '1234');
+        expect(req.session.is_sec_code_valid).toBe(true);
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.redirect).toHaveBeenCalledWith('/ProfileAdmin?id_number=99999999');
     });
@@ -107,6 +108,7 @@ describe('SecurityController - post_security', () => {
         expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, "id_number security_code");
 
         expect(bcrypt.compare).toHaveBeenCalled();
+        expect(req.session.is_sec_code_valid).toBe(true);
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.redirect).toHaveBeenCalledWith('/Profile?id_number=12345678');
     });
@@ -127,6 +129,7 @@ describe('SecurityController - post_security', () => {
         expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, "id_number security_code");
 
         expect(bcrypt.compare).toHaveBeenCalled();
+        expect(req.session.is_sec_code_valid).toBe(true);
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.redirect).toHaveBeenCalledWith('/ProfileDriver?id_number=12345678');
     });
