@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.59% </span>
+                <span class="strong">89.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>35/37</span>
+                <span class='fraction'>33/37</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.59% </span>
+                <span class="strong">89.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/37</span>
+                <span class='fraction'>33/37</span>
             </div>
         
             
@@ -134,7 +134,9 @@
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -170,7 +172,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -180,27 +181,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -240,7 +244,6 @@ const securityController = {
               id_number: driver_result.id_number
             }
         }
-&nbsp;
         else <span class="missing-if-branch" title="else path not taken" >E</span>{
 <span class="cstat-no" title="statement not covered" >          console.log('User does not exist.');</span>
         }
@@ -250,28 +253,31 @@ const securityController = {
 &nbsp;
     post_security: async function (req, res) {
 &nbsp;
-        const id_number = req.body.id_number;
-        const security_code = req.body.user_security_code;
+        const { id_number, security_code } = req.body;
       
-        try {
-            const query = { id_number: id_number };
-            const projection = "id_number security_code";
-            const user_result = await db.find_one(User, query, projection);
-            const admin_result = await db.find_one(Admin, query, projection);
-            const driver_result = await db.find_one(Driver, query, projection);
+        const query = { id_number: id_number };
+        const projection = "id_number security_code";
+        const user_result = await db.find_one(User, query, projection);
+        const admin_result = await db.find_one(Admin, query, projection);
+        const driver_result = await db.find_one(Driver, query, projection);
 &nbsp;
-            if (user_result != null &amp;&amp; await bcrypt.compare(security_code, user_result.security_code)) 
-			    res.status(200).redirect('/Profile?id_number=' + id_number);
-            else if (admin_result != null &amp;&amp; await bcrypt.compare(security_code, admin_result.security_code))
-			    res.status(200).redirect('/ProfileAdmin?id_number=' + id_number);
-            else if (driver_result != null &amp;&amp; await bcrypt.compare(security_code, driver_result.security_code))
-			    res.status(200).redirect('/ProfileDriver?id_number=' + id_number);
-            else
-                res.render('Login', { is_code_correct: false });
-		
-        } catch (err) {
-<span class="cstat-no" title="statement not covered" >          res.status(500).send(err);</span>
+        if (user_result &amp;&amp; await bcrypt.compare(security_code, user_result.security_code)) 
+        {
+            req.session.is_sec_code_valid = true;
+<span class="cstat-no" title="statement not covered" >            res.status(200).redirect('/Profile?id_number=' + id_number);</span>
         }
+        else if (admin_result &amp;&amp; await bcrypt.compare(security_code, admin_result.security_code))
+        {
+            req.session.is_sec_code_valid = true;
+<span class="cstat-no" title="statement not covered" >            res.status(200).redirect('/ProfileAdmin?id_number=' + id_number);</span>
+        }
+        else if (driver_result &amp;&amp; await bcrypt.compare(security_code, driver_result.security_code))
+        {
+            req.session.is_sec_code_valid = true;
+<span class="cstat-no" title="statement not covered" >            res.status(200).redirect('/ProfileDriver?id_number=' + id_number);</span>
+        }
+        else
+            res.render('Login', { is_code_correct: false });
     }
 }
 &nbsp;
@@ -283,7 +289,7 @@ module.exports = securityController;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-06T10:50:34.915Z
+                at 2024-03-11T09:19:38.767Z
             </div>
         <script src="../prettify.js"></script>
         <script>

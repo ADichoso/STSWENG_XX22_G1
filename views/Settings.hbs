@@ -34,12 +34,12 @@
       
 				document.getElementById("error_box").style.display = "none";
 
-				var infoChangeSuccess = new URLSearchParams(window.location.search).get('infoChangeSuccess');
-				var pwChangeSuccess = new URLSearchParams(window.location.search).get('pwChangeSuccess');
-				var codeChangeSuccess = new URLSearchParams(window.location.search).get('codeChangeSuccess');
-				var deleteSuccess = new URLSearchParams(window.location.search).get('deleteSuccess');
+				var info_change_success = new URLSearchParams(window.location.search).get('info_change_success');
+				var pw_change_success = new URLSearchParams(window.location.search).get('pw_change_success');
+				var code_change_success = new URLSearchParams(window.location.search).get('code_change_success');
+				var delete_success = new URLSearchParams(window.location.search).get('delete_success');
 				
-				if (infoChangeSuccess != null && infoChangeSuccess == "false"){
+				if (info_change_success != null && info_change_success == "false"){
 					document.getElementById("error_box").style.display = "block";
 					$("#error_message").text("Info couldn't be changed. Please try again.");
 					
@@ -48,7 +48,7 @@
 					}, 3000);
 				}
 
-				if(pwChangeSuccess != null && pwChangeSuccess=="false"){
+				if(pw_change_success != null && pw_change_success=="false"){
 					document.getElementById("error_box").style.display = "block";
 					$("#error_message").text("Current password was wrong. Please try again.");
 					
@@ -57,7 +57,7 @@
 					}, 3000);
 				}
 				
-				if(codeChangeSuccess != null && codeChangeSuccess=="false"){
+				if(code_change_success != null && code_change_success=="false"){
         
 					document.getElementById("error_box").style.display = "block";
 					$("#error_message").text("Current Security Code was wrong. Please try again.");
@@ -67,7 +67,7 @@
 					}, 3000);
 				}
 
-				if(deleteSuccess != null && deleteSuccess=="false"){
+				if(delete_success != null && delete_success=="false"){
 
 					document.getElementById("error_box").style.display = "block";
 					$("#error_message").text("Current password was wrong. Please try again.");

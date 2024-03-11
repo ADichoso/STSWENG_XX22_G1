@@ -409,10 +409,10 @@ describe('profileController', () => {
         })
 
         test('driver changes first name and last name', async () => {
-            const req = { body: {id_number : '000000000', new_first_name: "Josh", new_last_name: "Natividad"}};
+            const req = { body: {id_number : '11111111', new_first_name: "Josh", new_last_name: "Natividad"}};
             const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
-                id_number: '000000000',
+                id_number: '11111111',
                 first_name: 'Austin',
                 last_name: 'Tester',
                 designation: 'Designation',
@@ -437,11 +437,59 @@ describe('profileController', () => {
             expect(update_one_mock).toHaveBeenCalledWith(Driver, query, {first_name: req.body.new_first_name, last_name: req.body.new_last_name});
 
             expect(res.status).toBeCalledWith(200);
-            expect(res.redirect).toBeCalledWith(`/ProfileDriver?id_number=000000000&info_change_success=true`);
+            expect(res.redirect).toBeCalledWith(`/ProfileDriver?id_number=11111111&info_change_success=true`);
         });
 
-        test('user changes profile picture', async () => {
-            const req = { body: {id_number : '123456789'}, file: {original_name: "123456789"} }; //im not sure how original_name works so im just gonna set it to id
+        test('should render the error page if an error occurs', async () => {
+            const req = { body: {id_number : '123456789'}}; //im not sure how original_name works so im just gonna set it to id
+            const res = { render: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
+            const details = {
+                id_number: '123456789',
+                first_name: 'Austin',
+                last_name: 'Tester',
+                designation: 'Designation',
+                passenger_type: 'Passenger'
+            };
+
+            //Simulating update_one return flags
+            const update_one_flags = {
+                n: 1,
+                nModified: 1, 
+                ok: 1
+            }
+
+            await profile_controller.post_change_public_info(req, res);
+
+            expect(res.status).toBeCalledWith(500);
+            expect(res.render).toBeCalledWith('Error', res);
+        });
+
+        test('should redirect to setting page if info change has not been successful', async () => {
+            const req = { body: {id_number : '123456789'}}; //im not sure how original_name works so im just gonna set it to id
+            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
+            const details = {
+                id_number: '123456789',
+                first_name: 'Austin',
+                last_name: 'Tester',
+                designation: 'Designation',
+                passenger_type: 'Passenger'
+            };
+            const query = {id_number: req.body.id_number};
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(null); //easiest method to reach unsuccessful state; not really how it should happen
+
+            await profile_controller.post_change_public_info(req, res);
+
+            expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number first_name last_name designation passenger_type profile_picture');
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, query, 'id_number first_name last_name designation passenger_type profile_picture');
+            expect(find_one_mock).toHaveBeenCalledWith(Driver, query, 'id_number first_name last_name designation passenger_type profile_picture');
+
+            expect(res.redirect).toBeCalledWith(`/Settings?id_number=123456789&info_change_success=false`); //DAPAT FALSE
+        });
+    });
+    
+    describe('post_change_profile_picture', () => {
+        test('user changes profile picture', async () => { //Move this to post_change_profile_picture Please:  Aaron
+            const req = { body: {id_number : '123456789'}, file: {original_name: "lmao.png"} }; //im not sure how original_name works so im just gonna set it to id
             const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
                 id_number: '123456789',
@@ -459,27 +507,23 @@ describe('profileController', () => {
             }
             const query = {id_number: req.body.id_number};
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(details).mockResolvedValueOnce(null).mockResolvedValueOnce(null);
-            const update_one_mock = jest.spyOn(db, 'update_one').mockResolvedValueOnce(update_one_flags) //im not sure if this is necessary lmao just remove if it isnt ig
+            const update_one_mock = jest.spyOn(db, 'update_one').mockResolvedValueOnce(update_one_flags).mockResolvedValueOnce(null).mockResolvedValueOnce(null); //im not sure if this is necessary lmao just remove if it isnt ig
 
-            await profile_controller.post_change_public_info(req, res);
+            await profile_controller.post_change_profile_picture(req, res);
 
-            expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number first_name last_name designation passenger_type profile_picture');
-            expect(update_one_mock).toHaveBeenCalledWith(User, query, {profilePicture: "images/profilepictures/" + req.body.id_number + ".png"});
+            expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number profile_picture');
+            expect(update_one_mock).toHaveBeenCalledWith(User, query, {profile_picture: "images/profilepictures/" + req.body.id_number + ".png"});
 
             expect(res.status).toBeCalledWith(200);
             expect(res.redirect).toBeCalledWith(`/Profile?id_number=123456789&info_change_success=true`);
 
-        })
+        });
 
         test('admin changes profile picture', async () => {
             const req = { body: {id_number : '123456789'}, file: {original_name: "123456789"} }; //im not sure how original_name works so im just gonna set it to id
             const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
-                id_number: '123456789',
-                first_name: 'Austin',
-                last_name: 'Tester',
-                designation: 'Designation',
-                passenger_type: 'Passenger'
+                id_number: '123456789'
             };
             const query = {id_number: req.body.id_number};
             //Simulating update_one return flags
@@ -489,12 +533,13 @@ describe('profileController', () => {
                 ok: 1
             }
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(details).mockResolvedValueOnce(null);
-            const update_one_mock = jest.spyOn(db, 'update_one').mockResolvedValueOnce(update_one_flags) //im not sure if this is necessary lmao just remove if it isnt ig
+            const update_one_mock = jest.spyOn(db, 'update_one').mockResolvedValueOnce(null).mockResolvedValueOnce(update_one_flags).mockResolvedValueOnce(null); //im not sure if this is necessary lmao just remove if it isnt ig
             
-            await profile_controller.post_change_public_info(req, res);
-            expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number first_name last_name designation passenger_type profile_picture');
-            expect(find_one_mock).toHaveBeenCalledWith(Admin, query, 'id_number first_name last_name designation passenger_type profile_picture');
-            expect(update_one_mock).toHaveBeenCalledWith(Admin, query, {profilePicture: "images/profilepictures/" + req.body.id_number + ".png"});
+            await profile_controller.post_change_profile_picture(req, res);
+
+            expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number profile_picture');
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, query, 'id_number profile_picture');
+            expect(update_one_mock).toHaveBeenCalledWith(Admin, query, {profile_picture: "images/profilepictures/" + req.body.id_number + ".png"});
 
             expect(res.status).toBeCalledWith(200);
             expect(res.redirect).toBeCalledWith(`/ProfileAdmin?id_number=123456789&info_change_success=true`);
@@ -518,15 +563,15 @@ describe('profileController', () => {
                 ok: 1
             }
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(details);
-            const update_one_mock = jest.spyOn(db, 'update_one').mockResolvedValueOnce(update_one_flags) //im not sure if this is necessary lmao just remove if it isnt ig
+            const update_one_mock = jest.spyOn(db, 'update_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(update_one_flags); //im not sure if this is necessary lmao just remove if it isnt ig
 
-            await profile_controller.post_change_public_info(req, res);
+            await profile_controller.post_change_profile_picture(req, res);
 
-            expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number first_name last_name designation passenger_type profile_picture');
-            expect(find_one_mock).toHaveBeenCalledWith(Admin, query, 'id_number first_name last_name designation passenger_type profile_picture');
-            expect(find_one_mock).toHaveBeenCalledWith(Driver, query, 'id_number first_name last_name designation passenger_type profile_picture');
+            expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number profile_picture');
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, query, 'id_number profile_picture');
+            expect(find_one_mock).toHaveBeenCalledWith(Driver, query, 'id_number profile_picture');
            
-            expect(update_one_mock).toHaveBeenCalledWith(Driver, query, {profilePicture: "images/profilepictures/" + req.body.id_number + ".png"});
+            expect(update_one_mock).toHaveBeenCalledWith(Driver, query, {profile_picture: "images/profilepictures/" + req.body.id_number + ".png"});
 
             expect(res.status).toBeCalledWith(200);
             expect(res.redirect).toBeCalledWith(`/ProfileDriver?id_number=123456789&info_change_success=true`);
@@ -534,29 +579,15 @@ describe('profileController', () => {
 
         test('should render the error page if an error occurs', async () => {
             const req = { body: {id_number : '123456789'}, file: {original_name: "123456789"} }; //im not sure how original_name works so im just gonna set it to id
-            const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
-            const details = {
-                id_number: '123456789',
-                first_name: 'Austin',
-                last_name: 'Tester',
-                designation: 'Designation',
-                passenger_type: 'Passenger'
-            };
+            const res = { render: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
 
-            //Simulating update_one return flags
-            const update_one_flags = {
-                n: 1,
-                nModified: 1, 
-                ok: 1
-            }
+            await profile_controller.post_change_profile_picture(req, res);
 
-            await profile_controller.post_change_public_info(req, res);
-
-            expect(res.status).toBeCalledWith(500)
-            expect(res.render).toBeCalledWith('Error', res)
+            expect(res.status).toBeCalledWith(500);
+            expect(res.render).toBeCalledWith('Error', res);
         });
 
-        test('should redirect to setting page if info change has not been successful', async() => {
+        test('should redirect to setting page if info change has not been successful', async () => {
             const req = { body: {id_number : '123456789'}, file: {original_name: "123456789"} }; //im not sure how original_name works so im just gonna set it to id
             const res = { redirect: jest.fn(), status: jest.fn().mockReturnThis()} //status is added here for formality (since all the previous ones had status for redirects)
             const details = {
@@ -569,18 +600,18 @@ describe('profileController', () => {
             const query = {id_number: req.body.id_number};
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(null); //easiest method to reach unsuccessful state; not really how it should happen
 
-            await profile_controller.post_change_public_info(req, res);
+            await profile_controller.post_change_profile_picture(req, res);
 
-            expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number first_name last_name designation passenger_type profile_picture');
-            expect(find_one_mock).toHaveBeenCalledWith(Admin, query, 'id_number first_name last_name designation passenger_type profile_picture');
-            expect(find_one_mock).toHaveBeenCalledWith(Driver, query, 'id_number first_name last_name designation passenger_type profile_picture');
+            expect(find_one_mock).toHaveBeenCalledWith(User, query, 'id_number profile_picture');
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, query, 'id_number profile_picture');
+            expect(find_one_mock).toHaveBeenCalledWith(Driver, query, 'id_number profile_picture');
 
-            expect(res.redirect).toBeCalledWith(`/Settings?id_number=123456789&info_change_success=true`);
+            expect(res.redirect).toBeCalledWith(`/Settings?id_number=123456789&info_change_success=false`); //Dapat False
         });
 
         
     });
-    
+
     describe('post_change_private_info', () => {
         const req = {body: {id_number: "123456789", designation: "Faculty"}}
         const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis()};
@@ -630,19 +661,25 @@ describe('profileController', () => {
     })
 
     describe('post_change_password', () => {
-        const req = {body: {id_number: '123456789'}, new_password: 'hello_world'}
+        const req = {body: {id_number: '123456789', current_password: 'goodbye_world'}, new_password: 'hello_world'}
+        
         test("should change a user's password if the old password is correct", async () => {
             const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis()}
             const resultUser = {
                 id_number: '123456789',
                 password: 'goodbye_world'
             }
+            const projection = 'id_number password'
 
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(resultUser)
 
+            bcrypt.compare.mockResolvedValueOnce(true);
+
             await profile_controller.post_change_password(req, res)
 
-            expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, { id_number: 1, password: 1 })
+            
+            expect(bcrypt.compare).toHaveBeenCalled();
+            expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, projection)
             expect(res.status).toBeCalledWith(200)
             expect(res.redirect).toBeCalledWith('/Profile?id_number=123456789&pw_change_success=true')
         })
@@ -656,9 +693,15 @@ describe('profileController', () => {
 
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(resultAdmin)
             const projection = 'id_number password'
+
+            bcrypt.compare.mockResolvedValueOnce(true);
+
+            await profile_controller.post_change_password(req, res)
+
+            expect(bcrypt.compare).toHaveBeenCalled();
             expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, projection)
             expect(find_one_mock).toBeCalledWith(Admin, {id_number: '123456789'}, projection)
-
+            
             expect(res.status).toBeCalledWith(200)
             expect(res.redirect).toBeCalledWith('/ProfileAdmin?id_number=123456789&pw_change_success=true')
         })
@@ -670,10 +713,13 @@ describe('profileController', () => {
                 password: 'goodbye_world'
             }
 
-            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(resultDriver)
-
-            await profile_controller.post_change_password(req, res)
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(resultDriver);
             const projection = 'id_number password'
+
+            bcrypt.compare.mockResolvedValueOnce(true);
+            await profile_controller.post_change_password(req, res);
+
+            expect(bcrypt.compare).toHaveBeenCalled();
             expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, projection)
             expect(find_one_mock).toBeCalledWith(Admin, {id_number: '123456789'}, projection)
             expect(find_one_mock).toBeCalledWith(Driver, {id_number: '123456789'}, projection)
@@ -684,12 +730,6 @@ describe('profileController', () => {
 
         test("should render the error page if an error occurs", async () => {
             const res = {render: jest.fn(), status: jest.fn().mockReturnThis()}
-            const result = {
-                id_number: '123456789',
-                password: 'goodbye_world'
-            }
-
-            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(null)
 
             await profile_controller.post_change_password(req, res)
 
@@ -713,21 +753,26 @@ describe('profileController', () => {
             expect(find_one_mock).toBeCalledWith(Driver, {id_number: '123456789'}, projection)
 
             
-            expect(res.redirect).toBeCalledWith('/Settings?id_number=123456789&pw_change_success=true')
+            expect(res.redirect).toBeCalledWith('/Settings?id_number=123456789&pw_change_success=false')
         })
 
     })
 
     describe('post_change_code', () =>{
-        const req = {body: {id_number: '123456789', new_code: '1234'}}
-        const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis()}
-        const projection = 'id_number code'
+        const req = {body: {id_number: '123456789', current_sec_code: '4321', new_sec_code: '1234'}}
+        const res = {render: jest.fn(), redirect: jest.fn(), status: jest.fn().mockReturnThis()}
+        const projection = 'id_number security_code'
         
         
         test("should change the user's code if the old code is correct", async () => {
             const db_result = { id_number: '123456789', code: '4321' }
-            const find_one_mock = jest.spyOn(db, 'find_one')
-            find_one_mock.mockResolvedValueOnce(db_result).
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(db_result);
+            bcrypt.compare.mockResolvedValueOnce(true);
+
+
+            await profile_controller.post_change_code(req, res);
+
+            expect(bcrypt.compare).toHaveBeenCalled();
             expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, projection)
             expect(res.status).toBeCalledWith(200)
             expect(res.redirect).toBeCalledWith('/Profile?id_number=123456789&code_change_success=true')
@@ -735,8 +780,12 @@ describe('profileController', () => {
 
         test("should change the admin's code if the old code is correct", async () => {
             const db_result = { id_number: '123456789', code: '4321' }
-            const find_one_mock = jest.spyOn(db, 'find_one')
-            find_one_mock.mockResolvedValueOnce(null).mockResolvedValueOnce(db_result)
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(db_result);
+            bcrypt.compare.mockResolvedValueOnce(true);
+
+            await profile_controller.post_change_code(req, res);
+
+            expect(bcrypt.compare).toHaveBeenCalled();
             expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, projection)
             expect(find_one_mock).toBeCalledWith(Admin, {id_number: '123456789'}, projection)
 
@@ -746,8 +795,12 @@ describe('profileController', () => {
 
         test("should change the driver's code if the old code is correct", async () => {
             const db_result = { id_number: '123456789', code: '4321' }
-            const find_one_mock = jest.spyOn(db, 'find_one')
-            find_one_mock.mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(db_result)
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(db_result);
+            bcrypt.compare.mockResolvedValueOnce(true);
+
+            await profile_controller.post_change_code(req, res);
+
+            expect(bcrypt.compare).toHaveBeenCalled();
             expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, projection)
             expect(find_one_mock).toBeCalledWith(Admin, {id_number: '123456789'}, projection)
             expect(find_one_mock).toBeCalledWith(Driver, {id_number: '123456789'}, projection)
@@ -757,28 +810,36 @@ describe('profileController', () => {
         })
 
         test("should render the error page if an error occurs", async () => {
-            const find_one_mock = jest.spyOn(db, 'find_one')
+            const res = {render: jest.fn(), status: jest.fn().mockReturnThis()}
+
+            await profile_controller.post_change_code(req, res);
+
             expect(res.status).toBeCalledWith(500)
             expect(res.render).toBeCalledWith('Error', res)
         })
 
         test("should redirect to the settings page if the action is unsuccessful", async () => {
-            const find_one_mock = jest.spyOn(db, 'find_one')
-            find_one_mock.mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(null)
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(null);
+            bcrypt.compare.mockResolvedValueOnce(true);
+
+            await profile_controller.post_change_code(req, res);
+
+            expect(bcrypt.compare).toHaveBeenCalled();
             expect(find_one_mock).toBeCalledWith(User, {id_number: '123456789'}, projection)
             expect(find_one_mock).toBeCalledWith(Admin, {id_number: '123456789'}, projection)
             expect(find_one_mock).toBeCalledWith(Driver, {id_number: '123456789'}, projection)
 
+            expect(res.status).toBeCalledWith(500)
             expect(res.redirect).toBeCalledWith('/Settings?id_number=123456789&code_change_success=false')
         })
     })
 
     describe('post_delete_account', () => {
         const req = {body: {id_number: "123456789", password: "abcde12345"}, session : {destroy: jest.fn()}}
-        const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis, render: jest.fn()};
+        const res = {redirect: jest.fn(), status: jest.fn().mockReturnThis(), render: jest.fn()};
         const details = {
             id_number: '123456789',
-            password: 'hashed_password'
+            password: 'abcde12345'
         };
         const query = {id_number: req.body.id_number};
         const projection = "id_number password";
@@ -789,6 +850,7 @@ describe('profileController', () => {
         test('user deleting account', async () => {
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(details).mockResolvedValueOnce(null);
             const delete_one_mock = jest.spyOn(db, 'delete_one').mockResolvedValue(delete_return);
+            const delete_many_mock = jest.spyOn(db, 'delete_many').mockResolvedValue(delete_return);
             bcrypt.compare.mockResolvedValue(true);
 
             await profile_controller.post_delete_account(req, res);
@@ -798,8 +860,8 @@ describe('profileController', () => {
             expect(find_one_mock).toHaveBeenCalledWith(Driver, query, projection);
 
             expect(bcrypt.compare).toHaveBeenCalled();
-            expect(delete_one_mock).toHaveBeenCalled(User, query);
-            expect(delete_one_mock).toHaveBeenCalled(Reservation, query);
+            expect(delete_one_mock).toHaveBeenCalledWith(User, query);
+            expect(delete_many_mock).toHaveBeenCalledWith(Reservation, query);
 
             expect(req.session.destroy).toBeCalled();
             expect(res.render).toBeCalledWith('index', {first_name: 'Login'});
@@ -808,6 +870,7 @@ describe('profileController', () => {
         test('admin deleting account', async () => {
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(details);
             const delete_one_mock = jest.spyOn(db, 'delete_one').mockResolvedValue(delete_return);
+            const delete_many_mock = jest.spyOn(db, 'delete_many').mockResolvedValue(delete_return);
             bcrypt.compare.mockResolvedValue(true);
 
             await profile_controller.post_delete_account(req, res);
@@ -817,8 +880,8 @@ describe('profileController', () => {
             expect(find_one_mock).toHaveBeenCalledWith(Driver, query, projection);
 
             expect(bcrypt.compare).toHaveBeenCalled();
-            expect(delete_one_mock).toHaveBeenCalled(Admin, query);
-            expect(delete_one_mock).toHaveBeenCalled(Reservation, query);
+            expect(delete_one_mock).toHaveBeenCalledWith(Admin, query);
+            expect(delete_many_mock).toHaveBeenCalledWith(Reservation, query);
 
             expect(req.session.destroy).toBeCalled();
             expect(res.render).toBeCalledWith('index', {first_name: 'Login'});
@@ -827,6 +890,7 @@ describe('profileController', () => {
         test('driver deleting account', async () => {
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(details);
             const delete_one_mock = jest.spyOn(db, 'delete_one').mockResolvedValue(delete_return);
+            const delete_many_mock = jest.spyOn(db, 'delete_many').mockResolvedValue(delete_return);
 
             bcrypt.compare.mockResolvedValue(true);
 
@@ -837,24 +901,28 @@ describe('profileController', () => {
             expect(find_one_mock).toHaveBeenCalledWith(Driver, query, projection);
 
             expect(bcrypt.compare).toHaveBeenCalled();
-            expect(delete_one_mock).toHaveBeenCalled(Driver, query);
-            it.todo("Edit driver deleting account test when driver has other databases that would be impacted, for now only instances in driver db will be deleted");
+            expect(delete_one_mock).toHaveBeenCalledWith(Driver, query);
+            expect(delete_many_mock).toHaveBeenCalledWith(Reservation, query);
 
             expect(req.session.destroy).toBeCalled();
             expect(res.render).toBeCalledWith('index', {first_name: 'Login'});
         });
 
         test('reload the page when an error occurs', async () => {
-            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(details).mockResolvedValueOnce(null);
+            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(null);
+            bcrypt.compare.mockResolvedValue(true);
 
-            find_one_mock.mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce(null)
+            await profile_controller.post_delete_account(req, res);
+
             expect(find_one_mock).toHaveBeenCalledWith(User, query, projection);
             expect(find_one_mock).toHaveBeenCalledWith(Admin, query, projection);
             expect(find_one_mock).toHaveBeenCalledWith(Driver, query, projection);
 
-            expect(res.redirect).toBeCalledWith('/Settings?id_number=123456789&code_change_success=false')
+            expect(bcrypt.compare).toHaveBeenCalled();
+            
+            expect(res.status).toBeCalledWith(500);
+            expect(res.redirect).toBeCalledWith('/Settings?id_number=123456789&delete_success=false')
         })
-
     })
 
     describe('get_logout', () => {
@@ -867,16 +935,6 @@ describe('profileController', () => {
             expect(req.session.destroy).toBeCalled()
             expect(res.status).toBeCalledWith(200)
             expect(res.redirect).toBeCalledWith('/')
-        })
-
-        test('should render the error page if an error occurs', async () => {
-            const req = {session: {destroy: jest.fn()}}
-            const res = {render: jest.fn(), status: jest.fn().mockReturnThis()}
-
-            await profile_controller.get_logout(req, res)
-
-            expect(res.status).toBeCalledWith(500)
-            expect(res.render).toBeCalledWith('Error', res)
-        })
+        });
     })
 })
