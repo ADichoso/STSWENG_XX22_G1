@@ -82,7 +82,7 @@ describe('loginController', () => {
 
   describe('post_login', () => {
     test('should redirect to SecurityCheck page if login is successful', async () => {
-      const req = { body: { user_id_number: '123456789', user_password: 'password' }, session: {} };
+      const req = { body: { id_number: '123456789', user_password: 'password' }, session: {} };
       const res = { redirect: jest.fn() };
       const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({ id_number: '123456789', password: 'hashed' });
       bcrypt.compare.mockResolvedValueOnce(true);
@@ -96,7 +96,7 @@ describe('loginController', () => {
     });
 
     test('should redirect to SecurityCheck page if admin login is successful', async () => {
-      const req = { body: { user_id_number: '123456789', user_password: 'password' }, session: {} };
+      const req = { body: { id_number: '123456789', user_password: 'password' }, session: {} };
       const res = { redirect: jest.fn() };
       const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(false).mockResolvedValueOnce({ id_number: '123456789', password: 'hashedPassword' });
       bcrypt.compare.mockResolvedValueOnce(true);
@@ -111,7 +111,7 @@ describe('loginController', () => {
     });
 
     test('should redirect to SecurityCheck page if driver login is successful', async () => {
-      const req = { body: { user_id_number: '123456789', user_password: 'password' }, session: {} };
+      const req = { body: { id_number: '123456789', user_password: 'password' }, session: {} };
       const res = { redirect: jest.fn() };
       const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(false).mockResolvedValueOnce(false).mockResolvedValueOnce({ id_number: '123456789', password: 'hashedPassword' });
       bcrypt.compare.mockResolvedValueOnce(true);
@@ -127,7 +127,7 @@ describe('loginController', () => {
     });
 
     test('should render login page with is_valid false if login fails', async () => {
-      const req = { body: { user_id_number: '123456789', user_password: 'password' }, session: {} };
+      const req = { body: { id_number: '123456789', user_password: 'password' }, session: {} };
       const res = { render: jest.fn() };
       const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(false);
 
@@ -138,7 +138,7 @@ describe('loginController', () => {
     });
 
     test('should handle error by sending 500 status', async () => {
-      const req = { body: { user_id_number: '123456789', user_password: 'password' }, session: {} };
+      const req = { body: { id_number: '123456789', user_password: 'password' }, session: {} };
       const res = { status: jest.fn().mockReturnThis(), send: jest.fn() };
       const find_one_mock = jest.spyOn(db, 'find_one').mockRejectedValueOnce('Error');
 

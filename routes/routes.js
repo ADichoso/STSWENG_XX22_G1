@@ -81,6 +81,10 @@ app.get('/Profile', profile_controller.get_profile);
 // Admin profile settings
 app.get('/ProfileAdmin', profile_controller.get_profile_admin);
 
+// Admin profile settings
+app.get('/ProfileDriver', profile_controller.get_profile_driver);
+
+
 app.get('/Logout', profile_controller.get_logout);
 
 // Profile settings

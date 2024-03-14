@@ -36,8 +36,10 @@ const loginController = {
     },
     
     post_login: async function (req, res, next) {
-        const id_number = req.body.user_id_number;
+        const id_number = req.body.id_number;
         const password = req.body.user_password;
+
+        console.log("REQ" + req.body.id_number);
 
         try {
             const query = { id_number: id_number };

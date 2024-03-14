@@ -65,7 +65,7 @@ function show_schedule_form() {
     var entryTimeBox = doc.getElementById('user_entryTime');
     var exitBox = doc.getElementById('user_exit');
     var exitTimeBox = doc.getElementById('user_exitTime');
-    var idBox = doc.getElementById('user_idNumber');
+    var idBox = doc.getElementById('id_number');
 
     if ( admin_function_call == 0 ){
         idBox.style.display = 'none';
@@ -142,7 +142,7 @@ function fill_hidden_field(_box, _hiddenBox){
 function populate_fields(){
 	var startCampusBox = document.getElementById('hiddenStartCampus');
 	
-	var idNumberBox = document.getElementById('user_idNumber');
+	var idNumberBox = document.getElementById('id_number');
 	var hiddenIdNumberBox = document.getElementById('hiddenIdNumber');
 	var adminIdBox = document.getElementById('adminId');
 	
