@@ -76,6 +76,66 @@
         </style>
     </head>
     <body>
+        <script> 
+
+             window.onload = function(){
+
+                var check = "{{isValid}}";
+                var checkCodeChange = "{{codeChange}}";
+                var checkLoginCode = "{{isCodeCorrect}}"
+                var checkRegistered = "{{isRegistered}}"
+
+                document.getElementById("error_box").style.display = "none";
+
+                if ( check == "false" ){
+                    document.getElementById("error_box").style.display = "block";
+
+                    setTimeout(function(){
+                        document.getElementById("error_box").style.display = "none";
+                    }, 3000);
+                }
+
+                if ( checkCodeChange == "true"){
+                    document.getElementById("success_box").style.display = "block";
+                    $("#success_message").text("Password changed successfully!");
+                    
+
+                    setTimeout(function(){
+                        document.getElementById("success_box").style.display = "none";
+                    }, 3000);
+                }
+                else{
+                    document.getElementById("success_box").style.display = "none";
+                }
+
+                if ( checkLoginCode == "false" ){
+
+                    document.getElementById("error_box").style.display = "block";
+                    $("#error_message").text("Security code is incorrect. Please try again.");
+
+                    setTimeout(function(){
+                        document.getElementById("error_box").style.display = "none";
+                    }, 3000);
+                }
+
+                if ( checkRegistered == "true" ){
+                    document.getElementById("success_box").style.display = "block";
+                    $("#success_message").text("Account registered successfully!");
+                    
+
+                    setTimeout(function(){
+                        document.getElementById("success_box").style.display = "none";
+                    }, 3000);
+                }
+
+             }
+
+            $("#loginForm").submit(function(e){
+                e.preventDefault();
+            });
+            
+        </script>
+        
         <div class="navbar">
             <div class="navbar_top">
                 <img src="../images/DLSU_Logo.png">
