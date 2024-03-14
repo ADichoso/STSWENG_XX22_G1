@@ -23,6 +23,7 @@ h2{
     font-size: 3rem;
     font-weight: 700;
     line-height: 0rem;
+    text-wrap: nowrap;
 }
 
 h3{
@@ -100,7 +101,7 @@ button{
 }
 
 .navbar_open{
-    height: 52rem;
+    height: 38rem;
 }
 
 .navbar_content > a {
@@ -120,6 +121,7 @@ button{
     height: 3rem;
     transform: translateY(-1rem) scaleY(100%) rotate(45deg);
     transition: 300ms;
+    cursor:pointer;
 }
 
 .arrow_pressed {
@@ -133,31 +135,38 @@ button{
     padding: .2rem;
     width: 3rem;
     height: 3rem;
-    transform: translateX(2rem) scaleX(0%) rotate(135deg);
+    transform: translateX(5rem) scaleX(0%) rotate(135deg);
     transition: 300ms;
+
+    cursor:pointer;
 }
 
 .arrow_h_pressed {
-    transform: translateX(2rem) scaleX(-100%) rotate(135deg);
+    transform: translateX(5rem) scaleX(100%) rotate(135deg);
 }
 
 .landing_background{
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+
     background-image:
     linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 28, 39, 0.25)),
     url("../images/DLSU_Background0.png");
     z-index: 1;
     background-size: cover;
-    width: auto;
-    height: 120rem;
-    filter: blur(.5rem);
+    width: 100%;
+    height: 100%;
+    filter: blur(.25rem);
 }
 
 .landing{
     display: flex;
     flex-direction: column;
     z-index: 1000;
-    width: auto;
+    
+    width: 100%;
     height: auto;
     position: absolute;
     top: 0;
@@ -188,19 +197,29 @@ button{
     width: 25rem;
     height: 6rem;
     font-size: 3rem;
+    cursor:pointer;
+    transition: 150ms scale;
+
+    margin-left: 0;
+    align-self: center;
 }
 
 @keyframes button_click{
-    0%      {background: linear-gradient(90deg, rgba(0, 119, 30, 1) 0%, rgba(0, 119, 30, 0) 50%, rgba(0, 119, 30, 0) 100%); scale: .95;}
-    25%     {background: linear-gradient(90deg, rgba(0, 119, 30, .5) 0%, rgba(0, 119, 30, 1) 50%, rgba(0, 119, 30, 0) 100%)}
-    75%     {background: linear-gradient(90deg, rgba(0, 119, 30, 0) 0%, rgba(0, 119, 30, 1) 50%, rgba(0, 119, 30, .5) 100%)}
-    100%    {background: linear-gradient(90deg, rgba(0, 119, 30, 0) 0%, rgba(0, 119, 30, 0) 50%, rgba(0, 119, 30, 1) 100%)}
+    0%      {
+        background-position-x: -100%; 
+        scale: .95;}
+    100%      {
+        background-position-x: 200%; 
+            }
 }
 
 .secondary_button{
     border-color: white;
     color:white;
-    background-image: linear-gradient(90deg, rgba(0, 119, 30, 0) 0%, rgba(0, 119, 30, 0) 50%, rgba(0, 119, 30, 0) 100%);
+    background-image: linear-gradient(90deg, rgba(0, 119, 30, 0) 0%, rgba(0, 119, 30, 1) 50%, rgba(0, 119, 30, 0) 100%);
+    background-repeat: no-repeat;
+    background-size: 50% 100%;
+    background-position-x: 200%;
 
     border-radius: 1rem;
     border-style: solid;
@@ -209,8 +228,124 @@ button{
     width: 25rem;
     height: 6rem;
     font-size: 3rem;
+    cursor:pointer;
+    transition: 150ms scale;
+
+    margin-left: 0;
+    align-self: center;
 }
 
 .secondary_button:active{
     animation: button_click 150ms;
 }
+
+.secondary_button:hover, .primary_button:hover{
+    scale: 1.02;
+}
+
+.primary_button:active{
+    scale: 0.95;
+}
+
+.navbar_desktop {
+    display: none;
+    margin-left: auto;
+    margin-right: 2rem;
+    height: 100%;
+}
+
+.navbar_desktop > a {
+    background-image: linear-gradient(to bottom, rgba(0, 119, 30, 0), rgba(0, 119, 30, 0), rgba(0, 119, 30, 0.24));
+    background-size: 100% 200%;
+    color: white;
+    text-decoration: none;
+    font-size: 2.5rem;
+    text-wrap: nowrap;
+    vertical-align: middle;
+
+    padding: 4rem 1vw;
+    width: auto;
+
+    background-position-y: 0%;
+    transition: scale 200ms, background-position-y 200ms;
+    
+}
+
+.navbar_desktop > a:hover {
+    scale: 1.05;
+    background-position-y: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 1px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgb(15, 16, 16);
+  }
+
+  @keyframes scrollbar_anim {
+    from {background-position-y: 100%;}    
+    to {background-position-y: 0%;}  
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:linear-gradient(to bottom, rgba(0, 119, 30, 0), rgba(0, 119, 30, 1), rgba(0, 119, 30, 0)) ;
+  
+  }
+  
+
+@media (min-aspect-ratio: 4/3) {
+    :root {
+        font-size: .58vw;
+    }
+
+    .navbar_desktop {
+        display: flex;
+        
+    }
+
+    #navbar_button{
+        display: none;
+    }
+
+    .landing_box{
+        margin: 20rem 20rem 10rem 20rem;
+        display: flex;
+        flex-direction: column;
+        
+        align-items: center;
+        text-align: center;
+        padding: 6rem 4rem;
+        gap: 4rem;
+        border-radius: 3rem;
+        background-color: rgba(15, 16, 16, 0.63);
+    }
+    
+    .card_top {
+        padding: 5rem 25rem 5rem 25rem;
+    }
+    
+    .card_bottom{
+        padding: 12rem 25rem 2rem 25rem;
+        gap: 5rem;
+    }
+
+    .navbar_content {
+        display: none;
+    }
+
+    .arrow_h {
+        transform: translateX(12rem) scaleX(0%) rotate(135deg);
+    }
+
+    .arrow_h_pressed {
+        transform: translateX(12rem) scaleX(100%) rotate(135deg);
+    }
+
+}
+
+
