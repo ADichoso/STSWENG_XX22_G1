@@ -1,0 +1,351 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background-color: black;
+    color: white;
+}
+
+hr{
+    width: 100%;
+    color: white;
+}
+
+h1 {
+    font-size: 6rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+h2{
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 0rem;
+    text-wrap: nowrap;
+}
+
+h3{
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+h6 {
+    font-size: 2.5rem;
+    font-weight: 100;
+    margin: 0;
+    letter-spacing: .7rem;
+}
+
+p, li {
+    font-size: 2.5rem;
+    text-align: left;
+    font-weight: 300;
+    margin: 0;
+    line-height: 3rem;
+    letter-spacing: .05rem;
+}
+
+ul{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.navbar{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2000;
+}
+
+.navbar_top{
+    display: flex;
+    width: 100%;
+    height: 10rem;
+    background-color: rgba(0, 119, 30, 0.425);
+    padding: 0 1rem 0 1.5rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbar_top > img{
+    width: 5rem;
+    height: 5rem;
+}
+
+button{
+    margin-left: auto;
+    width: 20%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+}
+
+.navbar_content {
+    display: flex;
+    height: 0;
+    overflow-y: hidden;
+
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.47);
+    backdrop-filter: blur(.5rem);
+    box-shadow: 0rem 1rem 4rem black;
+
+    transition: 200ms
+}
+
+.navbar_open{
+    height: 38rem;
+}
+
+.navbar_content > a {
+    background-image: linear-gradient(to bottom, rgba(0, 119, 30, 0), rgba(0, 119, 30, 0.24));
+    color: white;
+    text-decoration: none;
+    font-size: 3rem;
+    padding: 2rem 4rem;
+}
+
+.arrow {
+    border: solid white;
+    border-width: 0 .2rem .2rem 0;
+    display: inline-block;
+    padding: .2rem;
+    width: 3rem;
+    height: 3rem;
+    transform: translateY(-1rem) scaleY(100%) rotate(45deg);
+    transition: 300ms;
+    cursor:pointer;
+}
+
+.arrow_pressed {
+    transform: translateY(1rem) scaleY(-100%) rotate(45deg);
+}
+
+.arrow_h {
+    border: solid white;
+    border-width: 0 .2rem .2rem 0;
+    display: inline-block;
+    padding: .2rem;
+    width: 3rem;
+    height: 3rem;
+    transform: translateX(5rem) scaleX(0%) rotate(135deg);
+    transition: 300ms;
+
+    cursor:pointer;
+}
+
+.arrow_h_pressed {
+    transform: translateX(5rem) scaleX(100%) rotate(135deg);
+}
+
+.landing_background{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 28, 39, 0.25)),
+    url("../images/DLSU_Background0.png");
+    z-index: 1;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    filter: blur(.25rem);
+}
+
+.landing{
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.landing_box{
+    margin: 16rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 4rem;
+    gap: 3rem;
+    border-radius: 3rem;
+    background-color: rgba(15, 16, 16, 0.63);
+}
+
+.primary_button{
+    border-color: white;
+    color:white;
+    background-color: rgba(0, 119, 30, 1);
+
+    border-radius: 1rem;
+    border-style: solid;
+    border-width: .2rem;
+
+    width: 25rem;
+    height: 6rem;
+    font-size: 3rem;
+    cursor:pointer;
+    transition: 150ms scale;
+
+    margin-left: 0;
+    align-self: center;
+}
+
+@keyframes button_click{
+    0%      {
+        background-position-x: -100%; 
+        scale: .95;}
+    100%      {
+        background-position-x: 200%; 
+            }
+}
+
+.secondary_button{
+    border-color: white;
+    color:white;
+    background-image: linear-gradient(90deg, rgba(0, 119, 30, 0) 0%, rgba(0, 119, 30, 1) 50%, rgba(0, 119, 30, 0) 100%);
+    background-repeat: no-repeat;
+    background-size: 50% 100%;
+    background-position-x: 200%;
+
+    border-radius: 1rem;
+    border-style: solid;
+    border-width: .2rem;
+
+    width: 25rem;
+    height: 6rem;
+    font-size: 3rem;
+    cursor:pointer;
+    transition: 150ms scale;
+
+    margin-left: 0;
+    align-self: center;
+}
+
+.secondary_button:active{
+    animation: button_click 150ms;
+}
+
+.secondary_button:hover, .primary_button:hover{
+    scale: 1.02;
+}
+
+.primary_button:active{
+    scale: 0.95;
+}
+
+.navbar_desktop {
+    display: none;
+    margin-left: auto;
+    margin-right: 2rem;
+    height: 100%;
+}
+
+.navbar_desktop > a {
+    background-image: linear-gradient(to bottom, rgba(0, 119, 30, 0), rgba(0, 119, 30, 0), rgba(0, 119, 30, 0.24));
+    background-size: 100% 200%;
+    color: white;
+    text-decoration: none;
+    font-size: 2.5rem;
+    text-wrap: nowrap;
+    vertical-align: middle;
+
+    padding: 4rem 1vw;
+    width: auto;
+
+    background-position-y: 0%;
+    transition: scale 200ms, background-position-y 200ms;
+    
+}
+
+.navbar_desktop > a:hover {
+    scale: 1.05;
+    background-position-y: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 1px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgb(15, 16, 16);
+  }
+
+  @keyframes scrollbar_anim {
+    from {background-position-y: 100%;}    
+    to {background-position-y: 0%;}  
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:linear-gradient(to bottom, rgba(0, 119, 30, 0), rgba(0, 119, 30, 1), rgba(0, 119, 30, 0)) ;
+  
+  }
+  
+
+@media (min-aspect-ratio: 4/3) {
+    :root {
+        font-size: .58vw;
+    }
+
+    .navbar_desktop {
+        display: flex;
+        
+    }
+
+    #navbar_button{
+        display: none;
+    }
+
+    .landing_box{
+        margin: 20rem 20rem 10rem 20rem;
+        display: flex;
+        flex-direction: column;
+        
+        align-items: center;
+        text-align: center;
+        padding: 6rem 4rem;
+        gap: 4rem;
+        border-radius: 3rem;
+        background-color: rgba(15, 16, 16, 0.63);
+    }
+    
+    .card_top {
+        padding: 5rem 25rem 5rem 25rem;
+    }
+    
+    .card_bottom{
+        padding: 12rem 25rem 2rem 25rem;
+        gap: 5rem;
+    }
+
+    .navbar_content {
+        display: none;
+    }
+
+    .arrow_h {
+        transform: translateX(12rem) scaleX(0%) rotate(135deg);
+    }
+
+    .arrow_h_pressed {
+        transform: translateX(12rem) scaleX(100%) rotate(135deg);
+    }
+
+}
+
+
