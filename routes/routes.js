@@ -76,35 +76,35 @@ app.get('/SearchProfile', search_controller.get_search_profile);
 app.get('/SearchReservation', search_controller.get_search_reservation);
 
 // User profile settings
-app.get('/Profile', profile_controller.get_profile);
+app.get('/Profile', validation.security_code_validation, profile_controller.get_profile);
 
 // Admin profile settings
-app.get('/ProfileAdmin', profile_controller.get_profile_admin);
+app.get('/ProfileAdmin', validation.security_code_validation, profile_controller.get_profile_admin);
 
-app.get('/Logout', profile_controller.get_logout);
+app.get('/Logout', validation.security_code_validation, profile_controller.get_logout);
 
 // Profile settings
-app.get('/Settings', controller.get_settings);
+app.get('/Settings', validation.security_code_validation, controller.get_settings);
 //app.post('/ChangePublicInfo', profile_controller.post_change_public_info);
-app.post('/ChangePublicInfo', upload.single("dp"), profile_controller.post_change_public_info);
-app.post('/ChangePrivateInfo', profile_controller.post_change_private_info);
-app.post('/ChangePassword', profile_controller.post_change_password);
-app.post('/DeleteAccount', profile_controller.post_delete_account); //Ano ito
-app.post('/ChangeCode', profile_controller.post_change_code);
+app.post('/ChangePublicInfo', validation.security_code_validation, upload.single("dp"), profile_controller.post_change_public_info);
+app.post('/ChangePrivateInfo', validation.security_code_validation, profile_controller.post_change_private_info);
+app.post('/ChangePassword', validation.security_code_validation, profile_controller.post_change_password);
+app.post('/DeleteAccount', validation.security_code_validation, profile_controller.post_delete_account); //Ano ito
+app.post('/ChangeCode', validation.security_code_validation, profile_controller.post_change_code);
 
 // Schedule
-app.get('/Schedule', controller.get_schedule);
-app.get('/Schedule/:date/:location/:time', schedule_controller.get_reservations);
+app.get('/Schedule', validation.security_code_validation, controller.get_schedule);
+app.get('/Schedule/:date/:location/:time', validation.security_code_validation, schedule_controller.get_reservations);
 
 // Reservation
-app.get('/Reservation', rsrv_controller.get_reservations);
-app.post('/Reservation', rsrv_controller.post_reservations);
+app.get('/Reservation', validation.security_code_validation, rsrv_controller.get_reservations);
+app.post('/Reservation', validation.security_code_validation, rsrv_controller.post_reservations);
 //Reservation Update and DeleteAccount
-app.post('/ReservationUpdate', rsrv_controller.post_update_reservations);
-app.post('/ReservationDelete', rsrv_controller.post_delete);
+app.post('/ReservationUpdate', validation.security_code_validation, rsrv_controller.post_update_reservations);
+app.post('/ReservationDelete', validation.security_code_validation, rsrv_controller.post_delete);
 
 // Admin Reservation
-app.get('/ReservationAdmin', rsrv_controller.get_reservation_admin);
+app.get('/ReservationAdmin', validation.security_code_validation, rsrv_controller.get_reservation_admin);
 app.get('/SearchUser', rsrv_controller.get_search_user)
 app.post('/SearchUser', rsrv_controller.post_search_user);
 // Admin Reservation Update and Delete
