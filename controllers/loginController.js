@@ -9,7 +9,7 @@ const Driver = require('../models/driverdb.js');
 const loginController = {
 
     get_login: async function (req, res) {
-        
+
         if ( req.session.id_number ){
 
             const query = { id_number: req.session.id_number };
@@ -39,6 +39,8 @@ const loginController = {
         console.log("REQ: " + req.body.user_id_number);
         const id_number = req.body.user_id_number;
         const password = req.body.user_password;
+
+        console.log("REQ" + req.body.id_number);
 
         try {
             const query = { id_number: id_number };

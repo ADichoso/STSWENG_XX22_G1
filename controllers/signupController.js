@@ -35,7 +35,7 @@ const signupController = {
                 first_name: req.body.user_first_name,
                 last_name: req.body.user_last_name,
                 email: req.body.user_email,
-                id_number: req.body.user_id_number,
+                id_number: req.body.id_number,
                 password: await bcrypt.hash(req.body.user_password, saltRounds),
                 security_code: await bcrypt.hash(req.body.user_security_code, saltRounds),
                 designation: req.body.user_designation,

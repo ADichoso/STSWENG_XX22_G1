@@ -81,6 +81,9 @@ app.get('/Profile', validation.security_code_validation, profile_controller.get_
 // Admin profile settings
 app.get('/ProfileAdmin', validation.security_code_validation, profile_controller.get_profile_admin);
 
+// Driver profile settings
+app.get('/ProfileDriver', validation.security_code_validation, profile_controller.get_profile_driver);
+
 app.get('/Logout', validation.security_code_validation, profile_controller.get_logout);
 
 // Profile settings

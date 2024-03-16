@@ -1,6 +1,7 @@
 const db = require('./models/db.js');
 const Admin = require('./models/admindb.js');
 const User = require('./models/userdb.js');
+const Driver = require('./models/driverdb.js')
 const Reservation = require('./models/reservationdb.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
