@@ -25,7 +25,7 @@ async function addAdminUser(){
     firstName: 'Admin',
     lastName: 'Admin',
     email: 'admin@gmail.com',
-    idNumber: '99999999',
+    id_number: '99999999',
     password: password,
     securityCode: securityCode,
     designation: 'Faculty',
@@ -40,7 +40,7 @@ async function addAdminUser(){
     firstName: 'Maui',
     lastName: 'Lopez',
     email: 'maui@gmail.com',
-    idNumber: '12177539',
+    id_number: '12177539',
     password: password,
     securityCode: securityCode,
     designation: 'Faculty',
@@ -55,7 +55,7 @@ async function addAdminUser(){
     firstName: 'Benmar',
     lastName: 'Ramirez',
     email: 'benmar@gmail.com',
-    idNumber: '12116866',
+    id_number: '12116866',
     password: password,
     securityCode: securityCode,
     designation: 'Faculty',
@@ -70,7 +70,7 @@ var user = {
   firstName: 'Nathan',
   lastName: 'Asnan',
   email: 'asnan@gmail.com',
-  idNumber: '12043338',
+  id_number: '12043338',
   password: password,
   securityCode: securityCode,
   designation: 'Faculty',
@@ -85,7 +85,7 @@ var user = {
     firstName: 'IT',
     lastName: 'IT',
     email: 'it@gmail.com',
-    idNumber: '11111111',
+    id_number: '11111111',
     password: password,
     securityCode: securityCode,
     designation: 'Faculty',
@@ -104,7 +104,7 @@ var user = {
   firstName: 'Maui',
   lastName: 'Lopez',
   email: 'mauilopez@gmail.com',
-  idNumber: '12345678',
+  id_number: '12345678',
   password: password,
   securityCode: securityCode,
   designation: 'Student',
@@ -120,7 +120,7 @@ var user = {
   firstName: 'Haeleynah',
   lastName: 'Ramos',
   email: 'haeleynahramos@gmail.com',
-  idNumber: '12345671',
+  id_number: '12345671',
   password: password,
   securityCode: securityCode,
   designation: 'Student',
@@ -136,7 +136,7 @@ var user = {
   firstName: 'Charles',
   lastName: 'De Guzman',
   email: 'charlesdeguzman@gmail.com',
-  idNumber: '12345672',
+  id_number: '12345672',
   password: password,
   securityCode: securityCode,
   designation: 'Student',
@@ -152,7 +152,7 @@ var user = {
   firstName: 'Noah',
   lastName: 'Arreola',
   email: 'noaharreola@gmail.com',
-  idNumber: '12345673',
+  id_number: '12345673',
   password: password,
   securityCode: securityCode,
   designation: 'Student',
@@ -168,7 +168,7 @@ var user = {
   firstName: 'Alex',
   lastName: 'Natividad',
   email: 'alexnatividad@gmail.com',
-  idNumber: '12345674',
+  id_number: '12345674',
   password: password,
   securityCode: securityCode,
   designation: 'Student',
@@ -190,7 +190,7 @@ var rsv = {
   entryTime: '06:00 AM',
   exitLoc: 'DLSU LC -> DLSU Manila',
   exitTime: '03:00 PM',
-  idNumber: '12345678'
+  id_number: '12345678'
 };
 var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
@@ -202,7 +202,7 @@ var rsv = {
   entryTime: '08:00 AM',
   exitLoc: 'DLSU LC -> Carmona',
   exitTime: '04:45 PM',
-  idNumber: '12345671'
+  id_number: '12345671'
 };
 var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
@@ -214,7 +214,7 @@ var rsv = {
   entryTime: '06:30 AM',
   exitLoc: 'DLSU LC -> Walter Mart',
   exitTime: '04:45 PM',
-  idNumber: '12345672'
+  id_number: '12345672'
 };
 var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
@@ -226,7 +226,7 @@ var rsv = {
   entryTime: '06:30 AM',
   exitLoc: 'DLSU LC -> Walter Mart',
   exitTime: '04:45 PM',
-  idNumber: '12345673'
+  id_number: '12345673'
 };
 var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
@@ -238,7 +238,7 @@ var rsv = {
   entryTime: '06:30 AM',
   exitLoc: 'DLSU LC -> Walter Mart',
   exitTime: '04:45 PM',
-  idNumber: '12345674'
+  id_number: '12345674'
 };
 var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');

@@ -59,9 +59,9 @@ app.use(function (req, res) {
         if a user is logged-in,
         display the profile tab and logout tab in the nav bar.
     */ 
-    if(req.session.idNumber) {
+    if(req.session.id_number) {
         details.flag = true;
-        details.idNumber = req.session.idNumber;
+        details.id_number = req.session.id_number;
     }
 
     /*

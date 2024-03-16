@@ -89,7 +89,7 @@ const reservationController = {
 
 		}
 		else{
-			var idNum = req.body.hiddenIdNumber;
+			var idNum = req.body.hiddenid_number;
 		}
 			
         var rsv = {
@@ -138,7 +138,7 @@ const reservationController = {
 			entryTime: req.body.eCurrEntryTime,
 			exitLoc: req.body.eCurrExitLoc,
 			exitTime: req.body.eCurrExitTime,
-			id_number: req.body.eCurrIdNumber
+			id_number: req.body.eCurrid_number
 		}
 
 		var upd = {
@@ -148,11 +148,11 @@ const reservationController = {
 			entryTime: req.body.ehiddenEntryTime,
 			exitLoc: req.body.ehiddenExitLoc,
 			exitTime: req.body.ehiddenExitTime,
-			id_number: req.body.ehiddenIdNumber
+			id_number: req.body.ehiddenid_number
 		}
 		
 		if ( upd.entryLoc == "Entry Location" || upd.entryTime == "Entry Time" || upd.exitLoc == "Exit Location" || upd.exitTime == "Exit Time" ){
-			res.redirect('/Reservation?id_number=' + req.body.ehiddenIdNumber + '&isUpdateSuccess=false');
+			res.redirect('/Reservation?id_number=' + req.body.ehiddenid_number + '&isUpdateSuccess=false');
 			console.log('Reservation failed to add');
 		}
 		else{
@@ -166,7 +166,7 @@ const reservationController = {
 			if(found){
 				await Reservation.updateOne(curr, upd);
 				console.log('succesfully updated');
-				res.redirect('/Reservation?id_number=' + req.body.ehiddenIdNumber + '&isUpdateSuccess=true');
+				res.redirect('/Reservation?id_number=' + req.body.ehiddenid_number + '&isUpdateSuccess=true');
 			}
 			else{
 				console.log("Code monkeys did an oopsie daisy");
@@ -185,7 +185,7 @@ const reservationController = {
 			entryTime: req.body.dCurrEntryTime,
 			exitLoc: req.body.dCurrExitLoc,
 			exitTime: req.body.dCurrExitTime,
-			id_number: req.body.dCurrIdNumber
+			id_number: req.body.dCurrid_number
 		};
 
 		console.log('to delete');
@@ -193,7 +193,7 @@ const reservationController = {
 		var deleted = await Reservation.deleteOne(rsv);
 		if(deleted){
 			console.log('succesfully deleted');
-			res.redirect('/Reservation?id_number=' + req.body.dCurrIdNumber + '&isDeleteSuccess=true');
+			res.redirect('/Reservation?id_number=' + req.body.dCurrid_number + '&isDeleteSuccess=true');
 		}
 		else{
 			console.log("Code monkeys did an oopsie daisy");
@@ -246,7 +246,7 @@ const reservationController = {
 			entryTime: req.body.eCurrEntryTime,
 			exitLoc: req.body.eCurrExitLoc,
 			exitTime: req.body.eCurrExitTime,
-			id_number: req.body.eCurrIdNumber
+			id_number: req.body.eCurrid_number
 		}
 
 		var upd = {
@@ -256,7 +256,7 @@ const reservationController = {
 			entryTime: req.body.ehiddenEntryTime,
 			exitLoc: req.body.ehiddenExitLoc,
 			exitTime: req.body.ehiddenExitTime,
-			id_number: req.body.ehiddenIdNumber
+			id_number: req.body.ehiddenid_number
 		}
 
 		console.log("current reservation:");
@@ -309,7 +309,7 @@ const reservationController = {
 			entryTime: req.body.dCurrEntryTime,
 			exitLoc: req.body.dCurrExitLoc,
 			exitTime: req.body.dCurrExitTime,
-			id_number: req.body.dCurrIdNumber
+			id_number: req.body.dCurrid_number
 		};
 
 		console.log('to delete');

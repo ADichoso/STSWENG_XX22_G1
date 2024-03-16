@@ -19,11 +19,11 @@ const searchController = {
                 { lastName: { $regex: new RegExp('^' + payload + '.*', 'i') } },
                 { $expr: { $regexMatch: { input: { $concat: ['$firstName', ' ', '$lastName'] }, regex: new RegExp('^' + payload + '.*', 'i') } } },
                 { passengerType: { $regex: new RegExp('^' + payload + '.*', 'i') } },
-                { idNumber: parseInt(payload) || 0 },
+                { id_number: parseInt(payload) || 0 },
                 { profilePictre: { $regex: new RegExp('^' + payload + '.*', 'i') } }
               ]
             },
-            'firstName lastName "$expr" passengerType idNumber profilePicture'
+            'firstName lastName "$expr" passengerType id_number profilePicture'
           ).exec();
 
         search = search.slice(0, 10);
@@ -31,16 +31,16 @@ const searchController = {
     },
 
     get_search_profile : async function (req, res) {
-      const query = {idNumber: req.query.idNumber};
+      const query = {id_number: req.query.id_number};
       
-        const projection = 'idNumber firstName lastName designation passengerType profilePicture';
+        const projection = 'id_number firstName lastName designation passengerType profilePicture';
       
         const result = await db.find_one(User, query, projection);
       
         if (result != null) {
       
           const details = {
-            idNumber: result.idNumber,
+            id_number: result.id_number,
             firstName: result.firstName,
             lastName: result.lastName,
             designation: result.designation,
@@ -67,11 +67,11 @@ const searchController = {
 
     get_search_reservation : async function (req, res) {
 
-        var userID = req.query.idNumber;
+        var userID = req.query.id_number;
 
-		    const result = await db.find_many(Reservation, {idNumber: userID}, {_id:0, __v:0});
+		    const result = await db.find_many(Reservation, {id_number: userID}, {_id:0, __v:0});
 
-        res.render('SearchReservation', {result: result, idNumber: userID});
+        res.render('SearchReservation', {result: result, id_number: userID});
 
     }
 

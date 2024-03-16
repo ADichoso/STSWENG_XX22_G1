@@ -14,8 +14,8 @@ const forgotPassController = {
 
         var query = {email: req.body.user_email, securityCode: req.body.user_securityCode};
 
-        const resultUser = await db.find_one(User, query, 'idNumber email securityCode');
-        const resultAdmin = await db.find_one(Admin, query, 'idNumber email securityCode');
+        const resultUser = await db.find_one(User, query, 'id_number email securityCode');
+        const resultAdmin = await db.find_one(Admin, query, 'id_number email securityCode');
 
         var details = {};
 
@@ -23,7 +23,7 @@ const forgotPassController = {
             console.log('User email and security code match.');
 
             details = {
-                idNumber: resultUser.idNumber,
+                id_number: resultUser.id_number,
                 email: resultUser.email,
                 securityCode: resultUser.securityCode
             }
@@ -34,7 +34,7 @@ const forgotPassController = {
             console.log('Admin email and security code match.');
 
             details = {
-                idNumber: resultAdmin.idNumber,
+                id_number: resultAdmin.id_number,
                 email: resultAdmin.email,
                 securityCode: resultAdmin.securityCode
             }
@@ -53,8 +53,8 @@ const forgotPassController = {
 
         if ( newPassword0 == newPassword1 ){
 
-            var query = {idNumber: req.body.idNumber};
-            const projection = { idNumber: 1, password: 1};
+            var query = {id_number: req.body.id_number};
+            const projection = { id_number: 1, password: 1};
 
             const resultUser = await db.find_one(User, query, projection);
             const resultAdmin = await db.find_one(Admin, query, projection);
@@ -75,7 +75,7 @@ const forgotPassController = {
 
         }
         else{
-            res.render('ForgotPassword', { isMatch: false, idNumber: req.body.idNumber } );
+            res.render('ForgotPassword', { isMatch: false, id_number: req.body.id_number } );
         }
 
         
