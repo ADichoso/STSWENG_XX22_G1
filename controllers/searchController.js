@@ -19,11 +19,11 @@ const searchController = {
                 { lastName: { $regex: new RegExp('^' + payload + '.*', 'i') } },
                 { $expr: { $regexMatch: { input: { $concat: ['$firstName', ' ', '$lastName'] }, regex: new RegExp('^' + payload + '.*', 'i') } } },
                 { passengerType: { $regex: new RegExp('^' + payload + '.*', 'i') } },
-                { id_number: parseInt(payload) || 0 },
+                { user_id_number: parseInt(payload) || 0 },
                 { profilePictre: { $regex: new RegExp('^' + payload + '.*', 'i') } }
               ]
             },
-            'firstName lastName "$expr" passengerType id_number profilePicture'
+            'firstName lastName "$expr" passengerType user_id_number profilePicture'
           ).exec();
 
         search = search.slice(0, 10);
@@ -31,16 +31,16 @@ const searchController = {
     },
 
     get_search_profile : async function (req, res) {
-      const query = {id_number: req.query.id_number};
+      const query = {user_id_number: req.query.user_id_number};
       
-        const projection = 'id_number firstName lastName designation passengerType profilePicture';
+        const projection = 'user_id_number firstName lastName designation passengerType profilePicture';
       
         const result = await db.find_one(User, query, projection);
       
         if (result != null) {
       
           const details = {
-            id_number: result.id_number,
+            user_id_number: result.user_id_number,
             firstName: result.firstName,
             lastName: result.lastName,
             designation: result.designation,
@@ -67,11 +67,11 @@ const searchController = {
 
     get_search_reservation : async function (req, res) {
 
-        var userID = req.query.id_number;
+        var userID = req.query.user_id_number;
 
-		    const result = await db.find_many(Reservation, {id_number: userID}, {_id:0, __v:0});
+		    const result = await db.find_many(Reservation, {user_id_number: userID}, {_id:0, __v:0});
 
-        res.render('SearchReservation', {result: result, id_number: userID});
+        res.render('SearchReservation', {result: result, user_id_number: userID});
 
     }
 

@@ -22,11 +22,11 @@
                 ready_HTML({{display_UI}});
 				
 				{{#each result}}
-					hideScheduleForm(true, ["{{start_campus}}", "{{date}}", "{{entry_loc}}", "{{entry_time}}", "{{exit_loc}}", "{{exit_time}}", {{id_number}}], false);
+					hideScheduleForm(true, ["{{start_campus}}", "{{date}}", "{{entry_loc}}", "{{entry_time}}", "{{exit_loc}}", "{{exit_time}}", {{user_id_number}}], false);
 				{{/each}}
 
-                var adminLink = '/ProfileAdmin?id_number=' + {{id_number}};
-                var userLink = '/Profile?id_number=' + {{id_number}};
+                var adminLink = '/ProfileAdmin?user_id_number=' + {{user_id_number}};
+                var userLink = '/Profile?user_id_number=' + {{user_id_number}};
 
                 if ({{is_admin}} == true){
                     document.getElementById('backButton').setAttribute('href', adminLink);
@@ -218,16 +218,16 @@
                                 <button type="button" class="switch" id="manila_btn" onclick="right_click();"> Manila </button> 
                             </div>
                             
-                            <label for="user_id_number"></label>
+                            <label for="user_user_id_number"></label>
 							<input type="hidden" id="hiddenStartCampus" required name="hiddenStartCampus" value="">
-							<input type="hidden" id="hiddenid_number"  name="hiddenid_number" value="">
+							<input type="hidden" id="hiddenuser_id_number"  name="hiddenuser_id_number" value="">
 							<input type="hidden" id="hiddenEntryLoc" name="hiddenEntryLoc" value="">
 							<input type="hidden" id="hiddenEntryTime" name="hiddenEntryTime" value="">
 							<input type="hidden" id="hiddenExitLoc" name="hiddenExitLoc" value="">
 							<input type="hidden" id="hiddenExitTime" name="hiddenExitTime" value="">
 							<input type="hidden" id="adminId" name="adminId" value="">
 							
-                            <input type="text" required placeholder="ID Number" class="fillup" name="user_id_number" id="user_id_number" style="position: relative; top: -25px; display: block;" value="" pattern="[0-9]+" minlength="8" maxlength="8">
+                            <input type="text" required placeholder="ID Number" class="fillup" name="user_user_id_number" id="user_user_id_number" style="position: relative; top: -25px; display: block;" value="" pattern="[0-9]+" minlength="8" maxlength="8">
                             
 							<input type="date" class="fillup" required name="user_date" id="user_date" >
     
@@ -310,14 +310,14 @@
                             </div>
 							
 							<input type="hidden" id="ehiddenStartCampus" required name="ehiddenStartCampus" value="">
-							<input type="hidden" id="ehiddenid_number" required name="ehiddenid_number" value="">
+							<input type="hidden" id="ehiddenuser_id_number" required name="ehiddenuser_id_number" value="">
 							<input type="hidden" id="ehiddenEntryLoc" name="ehiddenEntryLoc" value="">
 							<input type="hidden" id="ehiddenEntryTime" name="ehiddenEntryTime" value="">
 							<input type="hidden" id="ehiddenExitLoc" name="ehiddenExitLoc" value="">
 							<input type="hidden" id="ehiddenExitTime" name="ehiddenExitTime" value="">
 							
 							<input type="hidden" id="eCurrStartCampus" name ="eCurrStartCampus" value="">
-							<input type="hidden" id="eCurrid_number" name = "eCurrid_number" value="">
+							<input type="hidden" id="eCurruser_id_number" name = "eCurruser_id_number" value="">
 							<input type="hidden" id="eCurrDate" name="eCurrDate" value="">
 							<input type="hidden" id="eCurrEntryLoc" name="eCurrEntryLoc" value="">
 							<input type="hidden" id="eCurrEntryTime" name="eCurrEntryTime" value="">
@@ -415,7 +415,7 @@
                     <div class="input">
                         <form action="/ReservationDelete" method="post">
 							<input type="hidden" id="dCurrStartCampus" required name="dCurrStartCampus" value="">
-							<input type="hidden" id="dCurrid_number" required name="dCurrid_number" value="">
+							<input type="hidden" id="dCurruser_id_number" required name="dCurruser_id_number" value="">
 							<input type="hidden" id="dCurrDate" name="dCurrDate" value="">
 							<input type="hidden" id="dCurrEntryLoc" name="dCurrEntryLoc" value="">
 							<input type="hidden" id="dCurrEntryTime" name="dCurrEntryTime" value="">

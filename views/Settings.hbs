@@ -77,8 +77,8 @@
 					}, 3000);
 				}
 
-				var adminLink = '/ProfileAdmin?id_number=' + {{details.id_number}};
-                var userLink = '/Profile?id_number=' + {{details.id_number}};
+				var adminLink = '/ProfileAdmin?user_id_number=' + {{details.user_id_number}};
+                var userLink = '/Profile?user_id_number=' + {{details.user_id_number}};
 
                 if ( {{details.is_admin}} == true ){
                     document.getElementById('backButton').setAttribute('href', adminLink);
@@ -177,7 +177,7 @@
 						<h1>Public info</h1>
 						<hr>
 						<form id="public_change" action="/ChangePublicInfo" method="post" enctype="multipart/form-data">
-							<input type="hidden" name="id_number" value="{{details.id_number}}">
+							<input type="hidden" name="user_id_number" value="{{details.user_id_number}}">
 							<div style="display: flex;">
 								<div style="margin-right: 20px;">
 									<label for="current_first_name"><h2>Current First Name:</h2></label>
@@ -213,7 +213,7 @@
 						<h1>Private info</h1>
 						<hr>
 						<form id="private_change", action="/ChangePrivateInfo" method="post">
-							<input type="hidden" name="id_number" value="{{details.id_number}}">
+							<input type="hidden" name="user_id_number" value="{{details.user_id_number}}">
 							<div style="display: flex;">
 								<div style="margin-right: 20px;">
 									<label for="old_designation"><h2>Current Designation: </h2></label>
@@ -251,7 +251,7 @@
 						<h1>Password Change</h1>
 						<hr>
 						<form id="pass_change" action="/ChangePassword" method="post">
-							<input type="hidden" name="id_number" value="{{details.id_number}}">
+							<input type="hidden" name="user_id_number" value="{{details.user_id_number}}">
 							<div>
 								<label for="current_password"><h2>Current Password: <br> <h2></label>
 								<input type="password" placeholder="Current Password" id="current_password" name="current_password">
@@ -269,7 +269,7 @@
 						<h1>Two Authentication</h1>
 						<hr>
 						<form id="code_change" action="/ChangeCode" method="post">
-							<input type="hidden" name="id_number" value="{{details.id_number}}">
+							<input type="hidden" name="user_id_number" value="{{details.user_id_number}}">
 							<div>
 								<label for="current_sec_code"><h2>Current Security Code: <br> <h2></label>
 								<input type="password" placeholder="4-Digit Security Code" id="current_sec_code" name="current_sec_code" pattern="[0-9]+" minlength="4" maxlength="4" >
@@ -294,7 +294,7 @@
 							<div>
 								<label for="password"><h2>Current Password: <br> <h2></label>
 								<input type="password" placeholder="Password" id="password" name="Password">
-								<input type="hidden" name="id_number" value="{{details.id_number}}">
+								<input type="hidden" name="user_id_number" value="{{details.user_id_number}}">
 							</div>
 							
 							<button type="submit" class="submitButton" style="width: auto; ">Delete Account</button>

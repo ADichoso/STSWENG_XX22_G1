@@ -5,7 +5,7 @@ $(document).ready(function () {
         var user_first_name = validator.trim($('#user_first_name').val());
         var user_last_name = validator.trim($('#user_last_name').val());
         var user_email = validator.trim($('#user_email').val());
-        var id_number = validator.trim($('#id_number').val());
+        var user_id_number = validator.trim($('#user_id_number').val());
         var user_password = validator.trim($('#user_password').val());
         var user_security_code = validator.trim($('#user_security_code').val());
         var user_designation = $('#user_designation').val() || ''; 
@@ -17,7 +17,7 @@ $(document).ready(function () {
         var fNameEmpty = validator.isEmpty(user_first_name);;
         var lNameEmpty = validator.isEmpty(user_last_name);
         var emailEmpty = validator.isEmpty(user_email);
-        var idNumEmpty = validator.isEmpty(id_number);
+        var idNumEmpty = validator.isEmpty(user_id_number);
         var passwordEmpty = validator.isEmpty(user_password);
         var securityCodeEmpty = validator.isEmpty(user_security_code);
         var designationEmpty = validator.isEmpty(user_designation);
@@ -28,7 +28,7 @@ $(document).ready(function () {
 
     async function is_valid_ID(field, callback) {
 
-        var idNum = validator.trim($('#id_number').val());
+        var idNum = validator.trim($('#user_id_number').val());
 
         var onlyNumbers = /^[0-9]*$/;
         if (!onlyNumbers.test(idNum)) {
@@ -42,13 +42,13 @@ $(document).ready(function () {
 
             if(is_valid_length) {
                 
-                const result = await $.get('/getCheckID', {id_number: idNum} ) 
+                const result = await $.get('/getCheckID', {user_id_number: idNum} ) 
                 
                 if ( result != null ) {
 
-                    if( result.id_number != idNum ) {
+                    if( result.user_id_number != idNum ) {
 
-                        if(field.is($('#id_number'))){
+                        if(field.is($('#user_id_number'))){
                             $('#error_message').text('');
                         }
                                 
@@ -56,7 +56,7 @@ $(document).ready(function () {
                     }
                     else {
 
-                        if(field.is($('#id_number'))){
+                        if(field.is($('#user_id_number'))){
                             $('#error_box').css('display', 'block');
                             $('#error_message').text('ID number already registered.');
                         }
@@ -76,7 +76,7 @@ $(document).ready(function () {
             }
             else if ( !is_valid_length ){
 
-                if(field.is($('#id_number'))){
+                if(field.is($('#user_id_number'))){
                     $('#error_box').css('display', 'block');
                     $('#error_message').text('ID number should contain exactly 8 digits.');
                 }
@@ -192,8 +192,8 @@ $(document).ready(function () {
         validate_field($('#user_email'), 'Email', $('#error_message'));
     });
 
-    $('#id_number').keyup(function () {
-        validate_field($('#id_number'), 'ID Number', $('#error_message'));
+    $('#user_id_number').keyup(function () {
+        validate_field($('#user_id_number'), 'ID Number', $('#error_message'));
     });
 
     $('#user_security_code').keyup(function () {

@@ -77,7 +77,7 @@
                     <a href="/Search">
                         <img src="../images/SearchIcon.png" id="searchIcon" style="position: relative; width: 40px; height: 40px; left: 100%; top: 2px; filter:grayscale(); cursor:pointer;">
                     </a>
-                    <p class = "sub_text" style="top: -36px; font-size: 25px; color: white; font-style: italic; font-weight: bold;"> {{details.id_number}} </p>
+                    <p class = "sub_text" style="top: -36px; font-size: 25px; color: white; font-style: italic; font-weight: bold;"> {{details.user_id_number}} </p>
                 </div>
                 <img src="{{details.profile_picture}}" id = "profile_picture">
                 <p class = "title_text" style="top: 50px; font-size: 40px; color: white;"> {{details.first_name}} {{details.last_name}} </p>
@@ -86,7 +86,7 @@
             
             <div class="right"> 
 
-                <a href="/Reservation?id_number={{details.id_number}}">
+                <a href="/Reservation?user_id_number={{details.user_id_number}}">
                     <div class="box">
                         <img src = "../images/Van_Logo.png" id = "van_logo">
                         <p class = "title_text"> Reserve Now </p>
@@ -102,7 +102,7 @@
                     </div>
                 </a>
                 
-                <a href="/Settings?id_number={{details.id_number}}">
+                <a href="/Settings?user_id_number={{details.user_id_number}}">
                     <div class="box">
                         <img src = "../images/ProfileSettings_Logo.png" id = "logout_logo">
                         <p class = "title_text" style="top: 50px;" > Settings </p>

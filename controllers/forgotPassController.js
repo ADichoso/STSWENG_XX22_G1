@@ -12,29 +12,29 @@ const forgotPassController = {
 
     post_forgot_password: async function (req, res){
 
-        var query = {email: req.body.user_email, securityCode: req.body.user_securityCode};
+        var query = {email: req.body.user_email, securityCode: req.body.user_security_code};
 
-        const resultUser = await db.find_one(User, query, 'id_number email securityCode');
-        const resultAdmin = await db.find_one(Admin, query, 'id_number email securityCode');
+        const resultUser = await db.find_one(User, query, 'user_id_number email securityCode');
+        const resultAdmin = await db.find_one(Admin, query, 'user_id_number email securityCode');
 
         var details = {};
 
-        if ( resultUser != null && (resultUser.email == req.body.user_email && resultUser.securityCode == req.body.user_securityCode) ) {
+        if ( resultUser != null && (resultUser.email == req.body.user_email && resultUser.securityCode == req.body.user_security_code) ) {
             console.log('User email and security code match.');
 
             details = {
-                id_number: resultUser.id_number,
+                user_id_number: resultUser.user_id_number,
                 email: resultUser.email,
                 securityCode: resultUser.securityCode
             }
 
             res.render('ForgotPassword', details);
         }
-        else if ( resultAdmin != null && (resultAdmin.email == req.body.user_email && resultAdmin.securityCode == req.body.user_securityCode) ) {
+        else if ( resultAdmin != null && (resultAdmin.email == req.body.user_email && resultAdmin.securityCode == req.body.user_security_code) ) {
             console.log('Admin email and security code match.');
 
             details = {
-                id_number: resultAdmin.id_number,
+                user_id_number: resultAdmin.user_id_number,
                 email: resultAdmin.email,
                 securityCode: resultAdmin.securityCode
             }
@@ -53,8 +53,8 @@ const forgotPassController = {
 
         if ( newPassword0 == newPassword1 ){
 
-            var query = {id_number: req.body.id_number};
-            const projection = { id_number: 1, password: 1};
+            var query = {user_id_number: req.body.user_id_number};
+            const projection = { user_id_number: 1, password: 1};
 
             const resultUser = await db.find_one(User, query, projection);
             const resultAdmin = await db.find_one(Admin, query, projection);
@@ -75,7 +75,7 @@ const forgotPassController = {
 
         }
         else{
-            res.render('ForgotPassword', { isMatch: false, id_number: req.body.id_number } );
+            res.render('ForgotPassword', { isMatch: false, user_id_number: req.body.user_id_number } );
         }
 
         

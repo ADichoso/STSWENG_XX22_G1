@@ -8,7 +8,7 @@ function createTextInfoAdmin(main_div, resultArr = [], isSearch){
     text_info.className = 'text_reserved_schedule';
     main_div.appendChild(text_info);
 
-    var idValue = document.getElementById('user_id_number');
+    var idValue = document.getElementById('user_user_id_number');
     var dateValue = document.getElementById('user_date');
     var entryValue = document.getElementById('user_entry');
     var entryTimeValue = document.getElementById('user_entryTime');
@@ -116,7 +116,7 @@ function createTextInfoAdmin(main_div, resultArr = [], isSearch){
 
 function showSearchForm(){
     var formBox = document.getElementsByClassName('form_box')[0];
-    document.getElementById('user_id_number').value = '';
+    document.getElementById('user_user_id_number').value = '';
     formBox.style.display = 'block';
     formBox.style.height = '245px';
 }

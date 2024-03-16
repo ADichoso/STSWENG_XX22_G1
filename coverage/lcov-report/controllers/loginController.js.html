@@ -229,20 +229,20 @@ const loginController = {
 &nbsp;
     get_login: async function (req, res) {
 &nbsp;
-        if ( req.session.id_number ){
+        if ( req.session.user_id_number ){
 &nbsp;
-            const query = { id_number: req.session.id_number };
-            const projection = { id_number: 1 };
+            const query = { user_id_number: req.session.user_id_number };
+            const projection = { user_id_number: 1 };
             const user_result = await db.find_one(User, query, projection);
             const admin_result = await db.find_one(Admin, query, projection);
             const driver_result = await db.find_one(Driver, query, projection);
 &nbsp;
             if (user_result) {
-                res.status(200).redirect('/Profile?id_number=' + req.session.id_number);     
+                res.status(200).redirect('/Profile?user_id_number=' + req.session.user_id_number);     
             } else if (admin_result) {
-                res.status(200).redirect('/ProfileAdmin?id_number=' + req.session.id_number);  
+                res.status(200).redirect('/ProfileAdmin?user_id_number=' + req.session.user_id_number);  
             } else if (driver_result) {
-                res.status(200).redirect('/ProfileDriver?id_number=' + req.session.id_number);  
+                res.status(200).redirect('/ProfileDriver?user_id_number=' + req.session.user_id_number);  
             } else {
                 res.render('Login', { is_valid: false })
             }
@@ -255,32 +255,32 @@ const loginController = {
     },
     
     post_login: async function (req, res, next) {
-        const id_number = req.body.id_number;
+        const user_id_number = req.body.user_id_number;
         const password = req.body.user_password;
 &nbsp;
         try {
-            const query = { id_number: id_number };
-            const projection = { id_number: 1, password: 1};
+            const query = { user_id_number: user_id_number };
+            const projection = { user_id_number: 1, password: 1};
             const user_result = await db.find_one(User, query, projection);
             const admin_result = await db.find_one(Admin, query, projection);
             const driver_result = await db.find_one(Driver, query, projection);
           
             if (user_result &amp;&amp; await bcrypt.compare(password, user_result.password)) {
 &nbsp;
-                req.session.id_number = user_result.id_number;
+                req.session.user_id_number = user_result.user_id_number;
 &nbsp;
-                res.redirect('/SecurityCheck?id_number=' + id_number);      
+                res.redirect('/SecurityCheck?user_id_number=' + user_id_number);      
             } else if (admin_result &amp;&amp; await bcrypt.compare(password, admin_result.password)) {
             
-                req.session.id_number = admin_result.id_number;
+                req.session.user_id_number = admin_result.user_id_number;
 &nbsp;
-                res.redirect('/SecurityCheck?id_number=' + id_number);
+                res.redirect('/SecurityCheck?user_id_number=' + user_id_number);
 &nbsp;
             } else if (driver_result &amp;&amp; await bcrypt.compare(password, driver_result.password)) {
             
-                req.session.id_number = driver_result.id_number;
+                req.session.user_id_number = driver_result.user_id_number;
 &nbsp;
-                res.redirect('/SecurityCheck?id_number=' + id_number);
+                res.redirect('/SecurityCheck?user_id_number=' + user_id_number);
 &nbsp;
             } else {
                 res.render('Login', { is_valid: false })

@@ -65,7 +65,7 @@ function show_schedule_form() {
     var entryTimeBox = doc.getElementById('user_entryTime');
     var exitBox = doc.getElementById('user_exit');
     var exitTimeBox = doc.getElementById('user_exitTime');
-    var idBox = doc.getElementById('user_id_number');
+    var idBox = doc.getElementById('user_user_id_number');
 
     if ( admin_function_call == 0 ){
         idBox.style.display = 'none';
@@ -142,11 +142,11 @@ function fill_hidden_field(_box, _hiddenBox){
 function populate_fields(){
 	var startCampusBox = document.getElementById('hiddenStartCampus');
 	
-	var id_numberBox = document.getElementById('user_id_number');
-	var hiddenid_numberBox = document.getElementById('hiddenid_number');
+	var user_id_numberBox = document.getElementById('user_user_id_number');
+	var hiddenuser_id_numberBox = document.getElementById('hiddenuser_id_number');
 	var adminIdBox = document.getElementById('adminId');
 	
-	adminIdBox.value = getid_number();
+	adminIdBox.value = getuser_id_number();
 	
 	var startVal;
 	if(!getStartCampus())
@@ -156,11 +156,11 @@ function populate_fields(){
 	
 	startCampusBox.value = startVal;
 	
-	if(id_numberBox.value != ""){
-		hiddenid_numberBox.value = id_numberBox.value;
+	if(user_id_numberBox.value != ""){
+		hiddenuser_id_numberBox.value = user_id_numberBox.value;
 	}
 	else
-		hiddenid_numberBox.value = getid_number();
+		hiddenuser_id_numberBox.value = getuser_id_number();
 	
 	fill_hidden_field('user_entry', 'hiddenEntryLoc');
 	fill_hidden_field('user_entryTime', 'hiddenEntryTime');
@@ -168,8 +168,8 @@ function populate_fields(){
 	fill_hidden_field('user_exitTime', 'hiddenExitTime');
 }
 
-function getid_number(){
-	return new URLSearchParams(window.location.search).get('id_number');
+function getuser_id_number(){
+	return new URLSearchParams(window.location.search).get('user_id_number');
 }
 function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
 
@@ -187,8 +187,8 @@ function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
 	} 
 	div.setAttribute('id', count );
 	if(resultArr.length != 0) var userID = resultArr[6];
-	else var userID = getid_number();
-	div.setAttribute('linkedid_number', userID); 
+	else var userID = getuser_id_number();
+	div.setAttribute('linkeduser_id_number', userID); 
 	
     scheduleContainer.appendChild(div);
 	
@@ -268,7 +268,7 @@ function hideEditForm(i){
 	var editForm = document.getElementById('edit_box');
 	
 	var startCampusBox = document.getElementById('ehiddenStartCampus');
-	var id_numberBox = document.getElementById('ehiddenid_number');
+	var user_id_numberBox = document.getElementById('ehiddenuser_id_number');
 	
 	var startVal;
 	if(!egetStartCampus())
@@ -278,7 +278,7 @@ function hideEditForm(i){
 	
 	startCampusBox.value = startVal;
 	
-	id_numberBox.value = document.getElementById(i).getAttribute('linkedid_number'); //Get the number linked to the reservation instead
+	user_id_numberBox.value = document.getElementById(i).getAttribute('linkeduser_id_number'); //Get the number linked to the reservation instead
 	
 	fill_hidden_field('editUser_entry', 'ehiddenEntryLoc');
 	fill_hidden_field('editUser_entryTime', 'ehiddenEntryTime');
@@ -288,7 +288,7 @@ function hideEditForm(i){
 	//^^^from edit form
 	//vvv get current data
 	var currCampus = document.getElementById('eCurrStartCampus');
-	var currID = document.getElementById('eCurrid_number');
+	var currID = document.getElementById('eCurruser_id_number');
 	var currDate = document.getElementById('eCurrDate');
 	var currEntryL = document.getElementById('eCurrEntryLoc');
 	var currEntryT = document.getElementById('eCurrEntryTime');
@@ -298,7 +298,7 @@ function hideEditForm(i){
 	var reserveText = document.getElementById(i).children[1];
 	//alert(reserveText);
 	currCampus.value = reserveText.children[0].innerHTML;
-	currID.value = document.getElementById(i).getAttribute('linkedid_number');
+	currID.value = document.getElementById(i).getAttribute('linkeduser_id_number');
 	currDate.value = reserveText.children[2].innerHTML;
 	currEntryL.value = reserveText.children[4].textContent;
 	currEntryT.value = reserveText.children[5].innerHTML;
@@ -328,7 +328,7 @@ function hideDeleteForm(i){
 	var deleteForm = document.getElementById('delete_box');
 		
 	var currCampus = document.getElementById('dCurrStartCampus');
-	var currID = document.getElementById('dCurrid_number');
+	var currID = document.getElementById('dCurruser_id_number');
 	var currDate = document.getElementById('dCurrDate');
 	var currEntryL = document.getElementById('dCurrEntryLoc');
 	var currEntryT = document.getElementById('dCurrEntryTime');
@@ -338,7 +338,7 @@ function hideDeleteForm(i){
 
 	var reserveText = document.getElementById(i).children[1];
 	currCampus.value = reserveText.children[0].innerHTML;
-	currID.value = document.getElementById(i).getAttribute('linkedid_number');
+	currID.value = document.getElementById(i).getAttribute('linkeduser_id_number');
 	currDate.value = reserveText.children[2].innerHTML;
 	currEntryL.value = reserveText.children[4].textContent;
 	currEntryT.value = reserveText.children[5].innerHTML;

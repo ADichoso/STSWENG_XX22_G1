@@ -15,9 +15,9 @@ const controller = {
 
         var details = {};
 
-        if ( req.session.id_number ) {
+        if ( req.session.user_id_number ) {
 
-            const query = { id_number: req.session.id_number };
+            const query = { user_id_number: req.session.user_id_number };
             const projection = "first_name";
             const result = await db.find_one(User, query, projection);
             const result2 = await db.find_one(Admin, query, projection);
@@ -66,12 +66,12 @@ const controller = {
 
     get_settings: async function (req, res){
 
-        if ( req.session.id_number != req.query.id_number) {
-            res.status(200).redirect('/Settings?id_number=' + req.session.id_number);     
+        if ( req.session.user_id_number != req.query.user_id_number) {
+            res.status(200).redirect('/Settings?user_id_number=' + req.session.user_id_number);     
         } else {
 
-            var query = {id_number: req.query.id_number};
-            const projection = 'id_number first_name last_name designation passenger_type';
+            var query = {user_id_number: req.query.user_id_number};
+            const projection = 'user_id_number first_name last_name designation passenger_type';
     
             const resultUser = await db.find_one(User, query, projection);
             const resultAdmin = await db.find_one(Admin, query, projection);
@@ -80,7 +80,7 @@ const controller = {
             
             if ( resultUser != null ) {
                 details = {
-                    id_number: resultUser.id_number,
+                    user_id_number: resultUser.user_id_number,
                     first_name: resultUser.first_name,
                     last_name: resultUser.last_name,
                     designation: resultUser.designation,
@@ -90,7 +90,7 @@ const controller = {
             }
             else if ( resultAdmin != null ) {
                 details = {
-                    id_number: resultAdmin.id_number,
+                    user_id_number: resultAdmin.user_id_number,
                     first_name: resultAdmin.first_name,
                     last_name: resultAdmin.last_name,
                     designation: resultAdmin.designation,
