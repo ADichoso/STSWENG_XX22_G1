@@ -6,13 +6,13 @@ var count = null;
 function left_click(){
     function_called = 0;
     btn.style.left = '0';
-    locationChangeFormHelper(0, false);
+    location_change_form_helper(0, false);
 }
 
 function right_click(){
     function_called = 1;
     btn.style.left = '160px';
-    locationChangeFormHelper(1, false);
+    location_change_form_helper(1, false);
 }
 
 function get_start_campus(){
@@ -22,13 +22,13 @@ function get_start_campus(){
 function e_left_click(){
     edit_function_called = 0;
     ebtn.style.left = '0';
-    locationChangeFormHelper(0, true);
+    location_change_form_helper(0, true);
 }
 
 function e_right_click(){
     edit_function_called = 1;
     ebtn.style.left = '160px';
-    locationChangeFormHelper(1, true);
+    location_change_form_helper(1, true);
 }
 
 function e_get_start_campus(){
@@ -65,7 +65,7 @@ function show_schedule_form() {
     var entryTimeBox = doc.getElementById('user_entryTime');
     var exitBox = doc.getElementById('user_exit');
     var exitTimeBox = doc.getElementById('user_exitTime');
-    var idBox = doc.getElementById('user_idNumber');
+    var idBox = doc.getElementById('user_id_number');
 
     if ( admin_function_call == 0 ){
         idBox.style.display = 'none';
@@ -140,16 +140,16 @@ function fill_hidden_field(_box, _hiddenBox){
 	hiddenBox.value = box.options[box.selectedIndex].text;
 }
 function populate_fields(){
-	var startCampusBox = document.getElementById('hiddenStartCampus');
+	var startCampusBox = document.getElementById('hidden_start_campus');
 	
-	var idNumberBox = document.getElementById('user_idNumber');
-	var hiddenIdNumberBox = document.getElementById('hiddenIdNumber');
+	var idNumberBox = document.getElementById('user_id_number');
+	var hidden_ID_numberBox = document.getElementById('hidden_ID_number');
 	var adminIdBox = document.getElementById('adminId');
 	
-	adminIdBox.value = getIdNumber();
+	adminIdBox.value = get_ID_number();
 	
 	var startVal;
-	if(!getStartCampus())
+	if(!get_start_campus())
 		startVal = 'Laguna';
 	else
 		startVal = 'Manila';
@@ -157,21 +157,21 @@ function populate_fields(){
 	startCampusBox.value = startVal;
 	
 	if(idNumberBox.value != ""){
-		hiddenIdNumberBox.value = idNumberBox.value;
+		hidden_ID_numberBox.value = idNumberBox.value;
 	}
 	else
-		hiddenIdNumberBox.value = getIdNumber();
+		hidden_ID_numberBox.value = get_ID_number();
 	
-	fill_hidden_field('user_entry', 'hiddenEntryLoc');
-	fill_hidden_field('user_entryTime', 'hiddenEntryTime');
-	fill_hidden_field('user_exit', 'hiddenExitLoc');
-	fill_hidden_field('user_exitTime', 'hiddenExitTime');
+	fill_hidden_field('user_entry', 'hidden_entry_loc');
+	fill_hidden_field('user_entryTime', 'hidden_entry_time');
+	fill_hidden_field('user_exit', 'hidden_exit_loc');
+	fill_hidden_field('user_exitTime', 'hidden_exit_time');
 }
 
-function getIdNumber(){
+function get_ID_number(){
 	return new URLSearchParams(window.location.search).get('id_number');
 }
-function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
+function hide_schedule_form(fromLoad = 0, resultArr = [], isSearch){
 
     var scheduleContainer = document.getElementsByClassName('schedule_container')[0];
     var scheduleForm = document.getElementsByClassName('form_box')[0];
@@ -187,7 +187,7 @@ function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
 	} 
 	div.setAttribute('id', count );
 	if(resultArr.length != 0) var userID = resultArr[6];
-	else var userID = getIdNumber();
+	else var userID = get_ID_number();
 	div.setAttribute('linkedidnumber', userID); 
 	
     scheduleContainer.appendChild(div);
@@ -203,14 +203,14 @@ function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
         edit_btn.className = 'edit_btn';
         edit_btn.setAttribute('type', 'button');
         edit_btn.setAttribute('id', 'e_btn' + count);
-        edit_btn.setAttribute('onclick','showEditForm(' + count + ')');
+        edit_btn.setAttribute('onclick','show_edit_form(' + count + ')');
         edit_btn.innerHTML = 'EDIT';
 
         var delete_btn = document.createElement('button');
         delete_btn.className = 'delete_btn';
         delete_btn.setAttribute('type', 'button');
         delete_btn.setAttribute('id', 'd_btn' + count);
-        delete_btn.setAttribute('onclick','showDeleteForm(' + count + ')');
+        delete_btn.setAttribute('onclick','show_delete_form(' + count + ')');
         delete_btn.innerHTML = 'DELETE';
 
         divBtn.appendChild(edit_btn);
@@ -218,13 +218,13 @@ function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
     }
     
 	if( fromLoad ){ //is being called to populate the list from after loading screen
-		createTextInfo(div, resultArr);
+		create_text_info(div, resultArr);
 	}
 
 
 }
 
-function showEditForm(i) {
+function show_edit_form(i) {
 	var doc = document;
     var editForm = document.getElementById('edit_box');
 	var date_box = document.getElementById('user_date');
@@ -232,12 +232,12 @@ function showEditForm(i) {
 	var entryTimeBox = doc.getElementById('editUser_entryTime');
 	var exitBox = doc.getElementById('editUser_exit');
 	var exitTimeBox = doc.getElementById('editUser_exitTime');
-	
-	date_box.value="";
-	entry_box.value="";
-	entryTimeBox.value="";
-	exitBox.value="";
-	exitTimeBox.value="";
+
+	date_box.value = "";
+	entry_box.value = "";
+	entryTimeBox.value = "";
+	exitBox.value = "";
+	exitTimeBox.value ="";
 	
 	var newOption = doc.createElement('option');
 	var optionText = doc.createTextNode('Time Slot');
@@ -258,42 +258,19 @@ function showEditForm(i) {
 	exitTimeBox.appendChild(newOption);
 	
 	var subBtn = document.getElementById('edit_btn');
-	subBtn.setAttribute('onclick', 'hideEditForm(' + i + ')');
-	
-    editForm.style.display = 'block';
-	
-}
 
-function hideEditForm(i){
-	var editForm = document.getElementById('edit_box');
-	
-	var startCampusBox = document.getElementById('ehiddenStartCampus');
-	var idNumberBox = document.getElementById('ehiddenIdNumber');
-	
-	var startVal;
-	if(!egetStartCampus())
-		startVal = 'Laguna';
-	else
-		startVal = 'Manila';
-	
-	startCampusBox.value = startVal;
-	
-	idNumberBox.value = document.getElementById(i).getAttribute('linkedidnumber'); //Get the number linked to the reservation instead
-	
-	fill_hidden_field('editUser_entry', 'ehiddenEntryLoc');
-	fill_hidden_field('editUser_entryTime', 'ehiddenEntryTime');
-	fill_hidden_field('editUser_exit', 'ehiddenExitLoc');
-	fill_hidden_field('editUser_exitTime', 'ehiddenExitTime');
-	
-	//^^^from edit form
+    var idNumberBox = document.getElementById('e_hidden_id_number');
+    idNumberBox.value = document.getElementById(i).getAttribute('linkedidnumber'); //Get the number linked to the reservation instead
+
+    //^^^from edit form
 	//vvv get current data
-	var currCampus = document.getElementById('eCurrStartCampus');
-	var currID = document.getElementById('eCurrIdNumber');
-	var currDate = document.getElementById('eCurrDate');
-	var currEntryL = document.getElementById('eCurrEntryLoc');
-	var currEntryT = document.getElementById('eCurrEntryTime');
-	var currExitL = document.getElementById('eCurrExitLoc');
-	var currExitT = document.getElementById('eCurrExitTime');
+	var currCampus = document.getElementById('e_curr_start_campus');
+	var currID = document.getElementById('e_curr_id_number');
+	var currDate = document.getElementById('e_curr_date');
+	var currEntryL = document.getElementById('e_curr_entry_loc');
+	var currEntryT = document.getElementById('e_curr_entry_time');
+	var currExitL = document.getElementById('e_curr_exit_loc');
+	var currExitT = document.getElementById('e_curr_exit_time');
 	
 	var reserveText = document.getElementById(i).children[1];
 	//alert(reserveText);
@@ -304,36 +281,52 @@ function hideEditForm(i){
 	currEntryT.value = reserveText.children[5].innerHTML;
 	currExitL.value = reserveText.children[7].textContent;
 	currExitT.value = reserveText.children[8].innerHTML;
+
+
+	subBtn.setAttribute('onclick', 'hide_edit_form(' + i + ')');
+	
+    editForm.style.display = 'block';
+	
+}
+
+function hide_edit_form(){
+	var editForm = document.getElementById('edit_box');
+	
+	var startCampusBox = document.getElementById('e_hidden_start_campus');
+	
+	var startVal;
+	if(!e_get_start_campus())
+		startVal = 'Laguna';
+	else
+		startVal = 'Manila';
+	
+	startCampusBox.value = startVal;
+
+	fill_hidden_field('editUser_entry', 'e_hidden_entry_loc');
+	fill_hidden_field('editUser_entryTime', 'e_hidden_entry_time');
+	fill_hidden_field('editUser_exit', 'e_hidden_exit_loc');
+	fill_hidden_field('editUser_exitTime', 'e_hidden_exit_time');
 		
 	editForm.style.display="none";
 }
 
-function cancelEditForm(){
+function cancel_edit_form(){
     var editForm = document.getElementById('edit_box');
 	
 	editForm.style.display="none";
 }
 
-function showDeleteForm(i) {
-	var doc = document;
+function show_delete_form(i) {
     var deleteForm = document.getElementById('delete_box');	
-	var deleteButton = doc.getElementById('delete_btn');
-	
-    deleteForm.style.display = 'block';
-
-	deleteButton.setAttribute('onclick', 'hideDeleteForm(' + i + ')');
-}
-
-function hideDeleteForm(i){
-	var deleteForm = document.getElementById('delete_box');
-		
-	var currCampus = document.getElementById('dCurrStartCampus');
-	var currID = document.getElementById('dCurrIdNumber');
-	var currDate = document.getElementById('dCurrDate');
-	var currEntryL = document.getElementById('dCurrEntryLoc');
-	var currEntryT = document.getElementById('dCurrEntryTime');
-	var currExitL = document.getElementById('dCurrExitLoc');
-	var currExitT = document.getElementById('dCurrExitTime');
+	var deleteButton = document.getElementById('delete_btn');
+    		
+	var currCampus = document.getElementById('d_curr_start_campus');
+	var currID = document.getElementById('d_curr_id_number');
+	var currDate = document.getElementById('d_curr_date');
+	var currEntryL = document.getElementById('d_curr_entry_loc');
+	var currEntryT = document.getElementById('d_curr_entry_time');
+	var currExitL = document.getElementById('d_curr_exit_loc');
+	var currExitT = document.getElementById('d_curr_exit_time');
 	
 
 	var reserveText = document.getElementById(i).children[1];
@@ -344,17 +337,45 @@ function hideDeleteForm(i){
 	currEntryT.value = reserveText.children[5].innerHTML;
 	currExitL.value = reserveText.children[7].textContent;
 	currExitT.value = reserveText.children[8].innerHTML;
+
+
+    deleteForm.style.display = 'block';
+    
+	deleteButton.setAttribute('onclick', 'hide_delete_form()');
+}
+
+function hide_delete_form(){
+	var deleteForm = document.getElementById('delete_box');
 	
 	deleteForm.style.display = "none";
 }
 
-function cancelDeleteForm(){
+function cancel_delete_form(){
+    var deleteButton = document.getElementById('delete_btn');
 	var deleteForm = document.getElementById('delete_box');
 	
+    var currCampus = document.getElementById('d_curr_start_campus');
+	var currID = document.getElementById('d_curr_id_number');
+	var currDate = document.getElementById('d_curr_date');
+	var currEntryL = document.getElementById('d_curr_entry_loc');
+	var currEntryT = document.getElementById('d_curr_entry_time');
+	var currExitL = document.getElementById('d_curr_exit_loc');
+	var currExitT = document.getElementById('d_curr_exit_time');
+	
+
+	currCampus.value = "";
+	currID.value = "";
+	currDate.value = "";
+	currEntryL.value = "";
+	currEntryT.value = "";
+	currExitL.value = "";
+	currExitT.value = "";
+
+    deleteButton.setAttribute('onclick', '')
 	deleteForm.style.display="none";
 }
 
-function createTextInfo(main_div, resultArr = []){
+function create_text_info(main_div, resultArr = []){
     var hasResults = resultArr.length;
     var text_info = document.createElement('div');
     text_info.className = 'text_reserved_schedule';
@@ -606,7 +627,7 @@ function change_time_helper( time_id, storage_time ){
     }
 }
 
-function locationChangeFormHelper(location, isEditButton){
+function location_change_form_helper(location, isEditButton){
     //Location 0 - Laguna || 1 - Manila
 
         

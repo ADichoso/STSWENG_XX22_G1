@@ -1,28 +1,32 @@
 const Reservation = require('../models/reservationdb.js');
+const db = require('../models/db.js');
 
 const scheduleController = {
     get_reservations: async (req, res) => {
       try {
         const { date, location, time } = req.params;
-        const { buttonClicked } = req.query;
-        if(buttonClicked=== 'entry') {
+        const { button_clicked } = req.query;
+        if(button_clicked=== 'entry') {
+            const query = {
+                date: date,
+                entry_loc: location,
+                entry_time: time,
+              };
+            const reservations = await db.find_many(Reservation, query);
+            console.log(reservations)
 
-            const reservations = await Reservation.find({
-                date,
-                entryLoc: location,
-                entryTime: time,
-              });
             return res.status(200).json(reservations);
         }
-
-        else if (buttonClicked === 'exit') {
-
-            const { date, location, time } = req.params;
-            const reservations = await Reservation.find ({
-                date, 
-                exitLoc: location,
-                exitTime: time,
-            });
+        else if (button_clicked === 'exit') 
+        {
+            const query = {
+                date: date,
+                exit_loc: location,
+                exit_time: time,
+              };
+            const reservations = await db.find_many(Reservation, query);
+            
+            console.log(reservations)
             return res.status(200).json(reservations);
         }
 

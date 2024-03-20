@@ -1,0 +1,18 @@
+<div class="reserved_schedule" id="{{@index}}" linkedidnumber="{{id_number}}">
+    <div class="reserved_schedule_btn">
+        <button class="edit_btn" type="button" id="e_btn{{@index}}" onclick="show_edit_form({{@index}})">EDIT</button>
+        <button class="delete_btn" type="button" id="d_btn{{@index}}" onclick="show_delete_form({{@index}})">DELETE</button>
+    </div>
+    <div class="text_reserved_schedule">
+        <p>{{start_campus}}</p>
+        <hr>
+        <p id="date_text">{{date}}</p>
+        <hr>
+        <p>{{entry_loc}}</p>
+        <p>{{entry_time}}</p>
+        <hr>
+        <p>{{exit_loc}}</p>
+        <p>{{exit_time}}</p>
+        <hr>
+    </div>
+</div>

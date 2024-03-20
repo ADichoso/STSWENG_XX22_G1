@@ -176,7 +176,7 @@
                     <div style="background-color: white; border-radius: 25px; width:auto; padding: 25px;">  
 						<h1>Public info</h1>
 						<hr>
-						<form id="public_change" action="/ChangePublicInfo" method="post" enctype="multipart/form-data">
+						<form id="public_change" action="/ChangePublicInfo" method="post">
 							<input type="hidden" name="id_number" value="{{details.id_number}}">
 							<div style="display: flex;">
 								<div style="margin-right: 20px;">
@@ -198,8 +198,18 @@
 									<input type="text" placeholder="Enter Last Name" id="new_last_name" name="new_last_name">
 								</div>
 							</div>
+							
+							<button type="submit" class="submitButton">Save Changes</button>
+						</form>
+					</div>
+
+                    <div style="background-color: white; border-radius: 25px; width:auto; padding: 25px;">  
+						<h1>Display Photo</h1>
+						<hr>
+						<form id="public_change" action="/ChangeDisplayPicture" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="id_number" value="{{details.id_number}}">
 							<div>
-								<label for="dp"><h2>Display Photo: <br> <h2></label>
+								<label for="dp"><h2>Upload Photo: <br> <h2></label>
 								<input type="file" id="dp" name="dp" style="margin-top: 10px;" accept="image/png">
 							</div>
 							

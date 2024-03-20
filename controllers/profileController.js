@@ -193,38 +193,33 @@ const profileController = {
         try
         {
             //Update profile picture of User
-            if (req.file != null)
+            if ((user_result != null || admin_result != null || driver_result != null)  && req.file != null)
             {
-                if (user_result != null)
+                if (user_result)
                 {
                     await db.update_one(User, query, {profile_picture: "images/profilepictures/" + req.body.id_number + ".png"})
-                    res.status(200);    
-                    res.redirect('/Profile?id_number=' + req.body.id_number + '&info_change_success=true');
+                    res.status(200).redirect('/Profile?id_number=' + req.body.id_number + '&info_change_success=true');
                 }
-                else if (admin_result != null)
+                else if (admin_result)
                 {
                     await db.update_one(Admin, query, {profile_picture: "images/profilepictures/" + req.body.id_number + ".png"})
-                    res.status(200);
-                    res.redirect('/ProfileAdmin?id_number=' + req.body.id_number + '&info_change_success=true');
+                    res.status(200).redirect('/ProfileAdmin?id_number=' + req.body.id_number + '&info_change_success=true');
                 }
-                else if (driver_result != null)
+                else if (driver_result)
                 {
                     await db.update_one(Driver, query, {profile_picture: "images/profilepictures/" + req.body.id_number + ".png"})
-                    res.status(200);
-                    res.redirect('/ProfileDriver?id_number=' + req.body.id_number + '&info_change_success=true');
+                    res.status(200).redirect('/ProfileDriver?id_number=' + req.body.id_number + '&info_change_success=true');
                 }
                 else 
                 {
                     console.log("User/Admin/Driver public info change unsuccessful");
-                    res.status(500);
-                    res.redirect('/Settings?id_number=' + req.body.id_number + '&info_change_success=false');
+                    res.status(500).redirect('/Settings?id_number=' + req.body.id_number + '&info_change_success=false');
                 } 
             } 
             else 
             {
                 console.log("User/Admin/Driver public info change unsuccessful");
-                res.status(500);
-                res.redirect('Settings?id_number=' + req.body.id_number + '&info_change_success=false');
+                res.status(500).redirect('/Settings?id_number=' + req.body.id_number + '&info_change_success=false');
             }
         }
         catch(err)
