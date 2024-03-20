@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1710894041557" clover="3.2.0">
-  <project timestamp="1710894041557" name="All files">
+<coverage generated="1710896695635" clover="3.2.0">
+  <project timestamp="1710896695635" name="All files">
     <metrics statements="335" coveredstatements="316" conditionals="145" coveredconditionals="133" methods="27" coveredmethods="23" elements="507" coveredelements="472" complexity="0" loc="335" ncloc="335" packages="2" files="8" classes="8"/>
     <package name="controllers">
       <metrics statements="308" coveredstatements="289" conditionals="145" coveredconditionals="133" methods="18" coveredmethods="14"/>
@@ -352,7 +352,7 @@
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
-        <line num="18" count="3" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
       </file>
       <file name="reservationdb.js" path="C:\Users\Aaron\Desktop\Github Projects\STSWENG_XX22_G1\models\reservationdb.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

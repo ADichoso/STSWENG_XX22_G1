@@ -109,6 +109,8 @@ app.post('/ReservationDelete', validation.security_code_validation, rsrv_control
 
 //Edit Driver
 app.get('/EditDriver', validation.security_code_validation, edit_controller.get_drivers);
+app.post('/DriverDelete', validation.security_code_validation, edit_controller.delete_driver);
+app.post('/DriverInsert', validation.security_code_validation, edit_controller.insert_driver);
 
 
 // Admin Reservation
