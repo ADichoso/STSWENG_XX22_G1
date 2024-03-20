@@ -31,7 +31,7 @@ const entryTimeSlots = {
   5: ["N/A"],
 };
 
-const entryLocations = 
+const entry_locations = 
   //LAGUNA ENTRY
   ["Paseo -> DLSU LC", 
   "Carmona -> DLSU LC", 
@@ -49,7 +49,7 @@ const exitLocations =
   "DLSU LC -> Walter Mart",
   "N/A"];
 
-function leftClick() {
+function left_click() {
   btn.style.left = '0';
   var user_location = document.getElementById('user_location');
   user_location.innerHTML = '';
@@ -77,7 +77,7 @@ function leftClick() {
   user_location.style.width = '189px';
 }
 
-function rightClick() {
+function right_click() {
   btn.style.left = '160px';
   var user_location = document.getElementById('user_location');
   user_location.innerHTML = '';
@@ -102,24 +102,24 @@ function rightClick() {
   }
 }
 
-function showScheduleForm() {
+function show_schedule_form() {
   var scheduleForm = document.getElementsByClassName('form_box')[0];
   scheduleForm.style.display = 'block';
 }
 
-function hideScheduleForm() {
+function hide_schedule_form() {
   var scheduleForm = document.querySelector('.form_box');
   scheduleForm.style.display = 'none';
 }
 
-function cancelScheduleForm() {
+function cancel_schedule_form() {
   var scheduleForm = document.getElementsByClassName('form_box')[0];
   scheduleForm.style.display = '';
 }
 
-function changeTimeSlots() {
+function change_time_slots() {
   var user_location = document.getElementById('user_location').value;
-  var buttonClicked = document.getElementById('btn').style.left === '0px' ? 'entry' : 'exit';
+  var button_clicked = document.getElementById('btn').style.left === '0px' ? 'entry' : 'exit';
 
   var container = document.getElementById('user_location');
   container.style.width = '188px';
@@ -127,7 +127,7 @@ function changeTimeSlots() {
   var timeSlots = document.getElementById('user_entryTime');
   timeSlots.innerHTML = '<option value="" disabled selected hidden s> Time Slot </option>';
 
-  var selectedTimeSlots = buttonClicked === 'entry' ? entryTimeSlots[user_location] : exitTimeSlots[user_location];
+  var selectedTimeSlots = button_clicked === 'entry' ? entryTimeSlots[user_location] : exitTimeSlots[user_location];
 
   for (var i = 0; i < selectedTimeSlots.length; i++) {
     var option = document.createElement('option');
@@ -137,17 +137,18 @@ function changeTimeSlots() {
   }
 }
 
-function findMatchingSeats(event) {
+function find_matching_seats(event) {
   event.preventDefault();
 
   var user_location = document.getElementById('user_location').value;
-  var pickUpTime = document.getElementById('user_entryTime').value;
+  var pickup_time = document.getElementById('user_entryTime').value;
   var dateTime = document.getElementById('user_date').value;
 
   var pickUpTimeObject = document.getElementById('user_entryTime');
   var user_locationObject = document.getElementById('user_location');
 
-  if ( pickUpTime == '' || user_location == ''  ) {
+  if ( pickup_time == '' || user_location == ''  ) 
+  {
     document.getElementById('user_date').value = "";
     $('#user_location').prop('selectedIndex', 0);
     $('#user_entryTime').prop('selectedIndex', 0);
@@ -159,7 +160,9 @@ function findMatchingSeats(event) {
       $('#error_box').css('display', 'none');
     }, 3000);
 
-  } else if (  pickUpTimeObject.options[pickUpTimeObject.selectedIndex].text == 'N/A' || user_locationObject.options[user_locationObject.selectedIndex].text == 'N/A' ){
+  } 
+  else if (  pickUpTimeObject.options[pickUpTimeObject.selectedIndex].text == 'N/A' || user_locationObject.options[user_locationObject.selectedIndex].text == 'N/A' )
+  {
 
     document.getElementById('user_date').value = "";
     $('#user_location').prop('selectedIndex', 0);
@@ -172,23 +175,26 @@ function findMatchingSeats(event) {
       $('#error_box').css('display', 'none');
     }, 3000);
 
-  }else{
+  }
+  else
+  {
 
-    var buttonClicked = document.getElementById('btn').style.left === '0px' ? 'entry' : 'exit';
+    var button_clicked = document.getElementById('btn').style.left === '0px' ? 'entry' : 'exit';
 
-    if (buttonClicked === 'entry') {
+    if (button_clicked === 'entry') 
+    {
       var location = entryTimeSlots[user_location];
-      var numberOfSeatsTaken = 0;
-      var actualPickUpTime = location[pickUpTime];
+      var number_of_seats_taken = 0;
+      var actual_pick_up_time = location[pickup_time];
 
-      document.getElementById("schedule_label").innerHTML = entryLocations[user_location] + ' ' + actualPickUpTime + ' ' + dateTime;
+      document.getElementById("schedule_label").innerHTML = entry_locations[user_location] + ' ' + actual_pick_up_time + ' ' + dateTime;
 
-      fetch(`/schedule/${dateTime}/${entryLocations[user_location]}/${actualPickUpTime}?buttonClicked=${buttonClicked}`)
+      fetch(`/Schedule/${dateTime}/${entry_locations[user_location]}/${actual_pick_up_time}?button_clicked=${button_clicked}`)
       .then((response) => response.json())
       .then((data) => {
       
-        numberOfSeatsTaken = data.length;
-        generateSeats(numberOfSeatsTaken);
+        number_of_seats_taken = data.length;
+        generate_seats(number_of_seats_taken);
 
       })
       .catch((error) => {
@@ -197,19 +203,20 @@ function findMatchingSeats(event) {
       });
     }
 
-    if (buttonClicked=== 'exit') {
+    if (button_clicked=== 'exit') 
+    {
       var location = exitTimeSlots[user_location];
-      var numberOfSeatsTaken = 0;
-      var actualPickUpTime = location[pickUpTime];
+      var number_of_seats_taken = 0;
+      var actual_pick_up_time = location[pickup_time];
 
-      document.getElementById("schedule_label").innerHTML = exitLocations[user_location] + ' ' + actualPickUpTime + ' ' + dateTime;
+      document.getElementById("schedule_label").innerHTML = exitLocations[user_location] + ' ' + actual_pick_up_time + ' ' + dateTime;
 
-      fetch(`/schedule/${dateTime}/${exitLocations[user_location]}/${actualPickUpTime}?buttonClicked=${buttonClicked}`)
+      fetch(`/Schedule/${dateTime}/${exitLocations[user_location]}/${actual_pick_up_time}?button_clicked=${button_clicked}`)
       .then((response) => response.json())
       .then((data) => {
         
-        numberOfSeatsTaken = data.length;
-        generateSeats(numberOfSeatsTaken);
+        number_of_seats_taken = data.length;
+        generate_seats(number_of_seats_taken);
 
       })
       .catch((error) => {
@@ -223,7 +230,7 @@ function findMatchingSeats(event) {
   
 }
 
-function generateSeats(numberOfSeatsTaken) {
+function generate_seats(number_of_seats_taken) {
   var seatContainer = document.getElementById('seat_container');
   seatContainer.innerHTML = '';
 
@@ -234,7 +241,7 @@ function generateSeats(numberOfSeatsTaken) {
     seatSquare.classList.add('seat');
     seatSquare.textContent = 'Seat ' + (i + 1);
     seatContainer.appendChild(seatSquare);
-    if(i<numberOfSeatsTaken) {
+    if(i < number_of_seats_taken) {
       seatSquare.style.backgroundColor = "red";
     }
   }

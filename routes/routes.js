@@ -32,7 +32,7 @@ const multer = require('multer');
 const storage = multer.diskStorage({
 
   destination: (req, file, cb) => {
-    cb(null, "./public/profilepictures")
+    cb(null, "./public/images/profilepictures")
   },
 
   filename: (req, file, cb) => {
@@ -88,7 +88,8 @@ app.get('/Logout', validation.security_code_validation, profile_controller.get_l
 // Profile settings
 app.get('/Settings', validation.security_code_validation, controller.get_settings);
 //app.post('/ChangePublicInfo', profile_controller.post_change_public_info);
-app.post('/ChangePublicInfo', validation.security_code_validation, upload.single("dp"), profile_controller.post_change_public_info);
+app.post('/ChangePublicInfo', validation.security_code_validation, profile_controller.post_change_public_info);
+app.post('/ChangeDisplayPicture', validation.security_code_validation, upload.single("dp"), profile_controller.post_change_profile_picture);
 app.post('/ChangePrivateInfo', validation.security_code_validation, profile_controller.post_change_private_info);
 app.post('/ChangePassword', validation.security_code_validation, profile_controller.post_change_password);
 app.post('/DeleteAccount', validation.security_code_validation, profile_controller.post_delete_account); //Ano ito

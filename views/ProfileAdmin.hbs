@@ -82,16 +82,16 @@
                     <a href="/Search">
                         <img src="../images/SearchIcon.png" id="searchIcon" style="position: relative; width: 40px; height: 40px; left: 100%; top: 2px; filter:grayscale(); cursor:pointer;">
                     </a>
-                    <p class = "sub_text" style="top: -36px; font-size: 25px; color: white; font-style: italic; font-weight: bold;"> {{id_number}} </p>
+                    <p class = "sub_text" style="top: -36px; font-size: 25px; color: white; font-style: italic; font-weight: bold;"> {{details.id_number}} </p>
                 </div>
-                <img src = "{{profilePicture}}" id = "profile_picture" >
-                <p class = "title_text" style="top: 50px; font-size: 40px; color: white;"> {{firstName}} {{lastName}} </p>
-                <p class = "sub_text" style="top: 80px; font-size: 20px; color: white;"> {{passengerType}} </p>
+                <img src = "{{details.profile_picture}}" id = "profile_picture" >
+                <p class = "title_text" style="top: 50px; font-size: 40px; color: white;"> {{details.first_name}} {{details.last_name}} </p>
+                <p class = "sub_text" style="top: 80px; font-size: 20px; color: white;"> {{details.passenger_tye}} </p>
             </div>
             
             <div class="right"> 
 
-                <a href="/Reservation?id_number={{id_number}}">
+                <a href="/Reservation?id_number={{details.id_number}}">
                     <div class="box">
                         <img src = "../images/Van_Logo.png" id = "van_logo">
                         <p class = "title_text"> Reserve Now </p>
@@ -107,7 +107,7 @@
                     </div>
                 </a>
                 
-                <a href="/Settings?id_number={{id_number}}">
+                <a href="/Settings?id_number={{details.id_number}}">
                     <div class="box">
                         <img src = "../images/ProfileSettings_Logo.png" id = "settings_logo">
                         <p class = "title_text" style="top: 50px;" > Settings </p>
@@ -115,7 +115,7 @@
                     </div>
                 </a>
 
-                <a href="/EditDriver?id_number={{id_number}}">
+                <a href="/EditDriver?id_number={{details.id_number}}">
                     <div class="box">
                         <img src = "../images/ProfileSettings_Logo.png" id = "settings_logo">
                         <p class = "title_text" style="top: 50px;" > Drivers </p>
@@ -123,7 +123,7 @@
                     </div>
                 </a>
 
-                <a href="/ReservationAdmin?id_number={{id_number}}">
+                <a href="/ReservationAdmin?id_number={{details.id_number}}">
                     <div class="box">
                         <img src = "../images/UserEdit_Logo.png" id = "user_reserve_logo">
                         <p class = "title_text" style="top: 50px;" > Edit User Reservation </p>
