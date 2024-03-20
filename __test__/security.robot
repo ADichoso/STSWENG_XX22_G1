@@ -6,9 +6,6 @@ Documentation     A test suite for valid security code input.
 ...               directly from SeleniumLibrary.
 Library           SeleniumLibrary
 
-*** Variables ***
-${OUTPUT DIR}    ../automated_testing/output
-
 *** Test Cases ***
 Valid Access
     Open Browser    http://localhost:3000/login    Chrome
