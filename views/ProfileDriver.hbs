@@ -6,12 +6,11 @@
         <title> Arrow Express - Profile </title> 
         <link rel="icon" type="image/png" href="../images/DLSU_Logo.png">
         <link rel="stylesheet" type="text/css" href="../css/ProfileStyle.css">
-        <script src="../js/User.js"> </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="../js/User.js"> </script>
     </head>
 
     <body>
-
         <script type="text/javascript">
             
             window.onload = function() {
@@ -55,6 +54,8 @@
         
         </script>
 
+
+
         <div class="navbar">
             <a href="/"> <img src= "../images/DLSU_Logo.png" class = "website_logo" style="cursor: pointer;"> </a>
 
@@ -62,13 +63,15 @@
                 img:hover{
                     cursor: default;
                 }
-            </style>   
+            </style>    
 
             <div id="success_box">
                 <p id="success_message"> Success! </p>
             </div>
-            
+
         </div>
+
+        
         <div class="content">
 
             <div id="info_box">
@@ -78,7 +81,7 @@
                     </a>
                     <p class = "sub_text" style="top: -36px; font-size: 25px; color: white; font-style: italic; font-weight: bold;"> {{details.id_number}} </p>
                 </div>
-                <img src="{{details.profile_picture}}" id = "profile_picture">
+                <img src = "{{details.profile_picture}}" id = "profile_picture" >
                 <p class = "title_text" style="top: 50px; font-size: 40px; color: white;"> {{details.first_name}} {{details.last_name}} </p>
                 <p class = "sub_text" style="top: 80px; font-size: 20px; color: white;"> {{details.passenger_type}} </p>
             </div>
@@ -89,7 +92,7 @@
                     <div class="box">
                         <img src = "../images/Van_Logo.png" id = "van_logo">
                         <p class = "title_text"> Reserve Now </p>
-                        <p class = "sub_text"> Start reserving your seat now! </p>
+                        <p class = "sub_text"> Reserve Seats for Passengers Here! </p>
                     </div>
                 </a>
         
@@ -97,23 +100,31 @@
                     <div class="box">
                         <img src = "../images/Schedule_Logo.png" id = "schedule_logo">
                         <p class = "title_text" style="top: 50px;"> Schedule </p>
-                        <p class = "sub_text" style="top: 50px; "> View seats availability of schedules </p>
+                        <p class = "sub_text" style="top: 50px;"> View seats availability of schedules </p>
                     </div>
                 </a>
                 
                 <a href="/Settings?id_number={{details.id_number}}">
                     <div class="box">
-                        <img src = "../images/ProfileSettings_Logo.png" id = "logout_logo">
+                        <img src = "../images/ProfileSettings_Logo.png" id = "settings_logo">
                         <p class = "title_text" style="top: 50px;" > Settings </p>
                         <p class = "sub_text" style="top: 50px;"> View Profile Settings </p>
                     </div>
                 </a>
-        
-                <a href="/Logout" onclick="logout_account()">
+
+                <a href="/ReservationDriver?id_number={{details.id_number}}">
+                    <div class="box">
+                        <img src = "../images/UserEdit_Logo.png" id = "user_reserve_logo">
+                        <p class = "title_text" style="top: 50px;" > Edit User Reservation </p>
+                        <p class = "sub_text" style="top: 50px;"> Edit reserved schedule of passengers </p>
+                    </div>
+                </a>
+
+                <a href="/Logout" onclick="logout_account();">
                     <div class="logout_box">
                         <img src = "../images/Logout_Logo.png" id = "logout_logo">
-                        <p class = "title_text" style="top: 50px;" > Logout </p>
-                        <p class = "sub_text" style="top: 50px;"> Exit Arrow Express </p>
+                        <p class = "title_text" style="top: 40px;" > Logout </p>
+                        <p class = "sub_text" style="top: 40px;"> Exit Arrow Express </p>
                     </div>
                 </a>
 
@@ -129,9 +140,29 @@
             text-decoration: none;
         }
 
-        #van_logo{
-            width: 200px;
+        .content .right{
+            top: 10px;
+            left: 15px;
+            position: relative;
+            width: 800px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content .right .box{
+            width: 300px;
             height: 200px;
+        }
+
+        .content .right .logout_box{
+            width: 300px;
+            height: 200px;
+        }
+
+        #van_logo{
+            width: 150px;
+            height: 150px;
             margin: auto;
             display: block;
         }
@@ -139,8 +170,26 @@
         #schedule_logo{
             position: relative;
             top: 30px;
-            width: 150px;
-            height: 150px;
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            display: block;
+        }
+
+        #settings_logo{
+            position: relative;
+            top: 30px;
+            width: 90px;
+            height: 90px;
+            margin: auto;
+            display: block;
+        }
+
+        #user_reserve_logo{
+            position: relative;
+            top: 30px;
+            width: 100px;
+            height: 100px;
             margin: auto;
             display: block;
         }
@@ -148,16 +197,17 @@
         #logout_logo{
             position: relative;
             top: 30px;
-            width: 160px;
-            height: 160px;
+            width: 110px;
+            height: 110px;
             margin: auto;
             display: block;
         }
 
         .title_text{
             position: relative;
+            bottom: 10px;
             text-align: center;
-            font-size: 30px;
+            font-size: 20px;
             font-weight: bold;
             text-decoration: none;
             color: black;
@@ -166,23 +216,22 @@
         .sub_text{
             position: relative;
             text-align: center;
+            bottom: 10px;
+            font-size: 10px;
             font-style: italic;
             text-decoration: none;
             color: black;
         }
 
-         #success_box{
+        #success_box{
             width: 380px;
-			height: 20px;
-			top: 10%;
-			left: 50%;
-			margin: auto;
-			background: rgb(78, 255, 54);
-			padding: 5px;
-			position: absolute;
-			border-radius: 20px;
-			display: none;
-			transform: translate(-50%,-50%);
+            height: 20px;
+            top: 0%;
+            margin: auto;
+            background: rgb(97, 255, 77);
+            padding: 5px;
+            border-radius: 20px;
+            display: none;
         }
 
         #success_box p{

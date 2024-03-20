@@ -3,6 +3,8 @@ const express = require('express');
 
 const controller = require('../controllers/controller.js')
 
+const edit_controller = require('../controllers/editDriverController.js');
+
 const login_controller = require('../controllers/loginController.js');
 
 const profile_controller = require('../controllers/profileController.js');
@@ -102,6 +104,11 @@ app.post('/Reservation', validation.security_code_validation, rsrv_controller.po
 //Reservation Update and DeleteAccount
 app.post('/ReservationUpdate', validation.security_code_validation, rsrv_controller.post_update_reservations);
 app.post('/ReservationDelete', validation.security_code_validation, rsrv_controller.post_delete);
+
+
+//Edit Driver
+app.get('/EditDriver', validation.security_code_validation, edit_controller.get_drivers);
+
 
 // Admin Reservation
 app.get('/ReservationAdmin', validation.security_code_validation, rsrv_controller.get_reservation_admin);

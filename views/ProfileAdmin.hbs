@@ -26,7 +26,8 @@
                         document.getElementById("success_box").style.display = "block";
                         $("#success_message").text("Information changed successfully!");
                         
-                        setTimeout(function(){
+                        setTimeout(function()
+                        {
                             document.getElementById("success_box").style.display = "none";
                         }, 5000);
                     }
@@ -35,7 +36,8 @@
                         document.getElementById("success_box").style.display = "block";
                         $("#success_message").text("Password changed successfully!");
                         
-                        setTimeout(function(){
+                        setTimeout(function()
+                        {
                             document.getElementById("success_box").style.display = "none";
                         }, 5000);
                     }
@@ -44,7 +46,8 @@
                         document.getElementById("success_box").style.display = "block";
                         $("#success_message").text("Security code changed successfully!");
                         
-                        setTimeout(function(){
+                        setTimeout(function()
+                        {
                             document.getElementById("success_box").style.display = "none";
                         }, 5000);
                     }
@@ -112,6 +115,14 @@
                     </div>
                 </a>
 
+                <a href="/EditDriver?id_number={{id_number}}">
+                    <div class="box">
+                        <img src = "../images/ProfileSettings_Logo.png" id = "settings_logo">
+                        <p class = "title_text" style="top: 50px;" > Drivers </p>
+                        <p class = "sub_text" style="top: 50px;"> Add or Remove Drivers </p>
+                    </div>
+                </a>
+
                 <a href="/ReservationAdmin?id_number={{id_number}}">
                     <div class="box">
                         <img src = "../images/UserEdit_Logo.png" id = "user_reserve_logo">
@@ -120,7 +131,7 @@
                     </div>
                 </a>
 
-                <a href="/Logout" onclick="logoutAccount();">
+                <a href="/Logout" onclick="logout_account();">
                     <div class="logout_box">
                         <img src = "../images/Logout_Logo.png" id = "logout_logo">
                         <p class = "title_text" style="top: 40px;" > Logout </p>
