@@ -1,507 +1,589 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.0 (Python 3.11.2 on win32)" generated="2024-03-07T21:02:07.665674" rpa="false" schemaversion="5">
-<suite id="s1" name="Test" source="C:\Users\josha\OneDrive\Documents\SCHOOL\College\STSWENG_XX22_G1_2\__test__">
-<suite id="s1-s1" name="Login Test Suite" source="C:\Users\josha\OneDrive\Documents\SCHOOL\College\STSWENG_XX22_G1_2\__test__\login.robot">
-<test id="s1-s1-t1" name="Login - Valid Username and Password" line="12">
+<robot generator="Robot 7.0 (Python 3.12.2 on win32)" generated="2024-03-20T21:53:17.272527" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="E:\YEAR 3 TERM 2\STSWENG\STSWENG_XX22_G1\__test__">
+<suite id="s1-s1" name="Login Test Suite" source="E:\YEAR 3 TERM 2\STSWENG\STSWENG_XX22_G1\__test__\login.robot">
+<test id="s1-s1-t1" name="Login - Valid Username and Password" line="10">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:07.991633" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-03-20T21:53:17.478334" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-03-20T21:53:19.137564" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
 <arg>http://localhost:3000/login</arg>
 <arg>Chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2024-03-07T21:02:07.991633" elapsed="1.822314"/>
+<status status="PASS" start="2024-03-20T21:53:17.477831" elapsed="3.439422"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2024-03-07T21:02:09.815961" elapsed="0.131573"/>
+<status status="PASS" start="2024-03-20T21:53:20.917253" elapsed="0.112651"/>
 </kw>
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>0</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2024-03-07T21:02:09.950525" elapsed="0.000996"/>
+<status status="PASS" start="2024-03-20T21:53:21.030406" elapsed="0.000000"/>
 </kw>
 <kw name="Page Should Contain Element" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:09.969397" level="INFO">Current page contains element 'id=user_id_number'.</msg>
+<msg time="2024-03-20T21:53:21.042749" level="INFO">Current page contains element 'id=user_id_number'.</msg>
 <arg>id=user_id_number</arg>
 <doc>Verifies that element ``locator`` is found on the current page.</doc>
-<status status="PASS" start="2024-03-07T21:02:09.951521" elapsed="0.018874"/>
+<status status="PASS" start="2024-03-20T21:53:21.030406" elapsed="0.013344"/>
 </kw>
 <kw name="Page Should Contain Element" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:09.986434" level="INFO">Current page contains element 'id=user_password'.</msg>
+<msg time="2024-03-20T21:53:21.053694" level="INFO">Current page contains element 'id=user_password'.</msg>
 <arg>id=user_password</arg>
 <doc>Verifies that element ``locator`` is found on the current page.</doc>
-<status status="PASS" start="2024-03-07T21:02:09.970395" elapsed="0.016039"/>
+<status status="PASS" start="2024-03-20T21:53:21.043877" elapsed="0.009817"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:09.987431" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
+<msg time="2024-03-20T21:53:21.053694" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
 <arg>id=user_id_number</arg>
 <arg>12170585</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:09.987431" elapsed="0.135802"/>
+<status status="PASS" start="2024-03-20T21:53:21.053694" elapsed="0.090989"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:10.124265" level="INFO">Typing text '111111' into text field 'id=user_password'.</msg>
+<msg time="2024-03-20T21:53:21.145700" level="INFO">Typing text '111111' into text field 'id=user_password'.</msg>
 <arg>id=user_password</arg>
 <arg>111111</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:10.123233" elapsed="0.096025"/>
+<status status="PASS" start="2024-03-20T21:53:21.145700" elapsed="0.062083"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:10.219258" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<msg time="2024-03-20T21:53:21.207783" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
 <arg>xpath=//button[@type='submit']</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:10.219258" elapsed="0.445188"/>
+<status status="PASS" start="2024-03-20T21:53:21.207783" elapsed="0.723838"/>
 </kw>
 <kw name="Get Location" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:10.670706" level="INFO">${url} = http://localhost:3000/SecurityCheck?id_number=12170585</msg>
+<msg time="2024-03-20T21:53:21.936565" level="INFO">${url} = http://localhost:3000/SecurityCheck?id_number=12170585</msg>
 <var>${url}</var>
 <doc>Returns the current browser window URL.</doc>
-<status status="PASS" start="2024-03-07T21:02:10.665721" elapsed="0.004985"/>
+<status status="PASS" start="2024-03-20T21:53:21.931621" elapsed="0.004944"/>
 </kw>
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${url}</arg>
 <arg>http://localhost:3000/SecurityCheck?id_number=12170585</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2024-03-07T21:02:10.671704" elapsed="0.000000"/>
+<status status="PASS" start="2024-03-20T21:53:21.936565" elapsed="0.000000"/>
 </kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2024-03-07T21:02:10.671704" elapsed="2.127971"/>
+<status status="PASS" start="2024-03-20T21:53:21.936565" elapsed="2.101172"/>
 </kw>
-<status status="PASS" start="2024-03-07T21:02:07.989639" elapsed="4.811033"/>
+<status status="PASS" start="2024-03-20T21:53:17.476831" elapsed="6.560906"/>
 </test>
-<test id="s1-s1-t2" name="Login - Invalid Details" line="24">
+<test id="s1-s1-t2" name="Login - Invalid Details: Password" line="22">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:12.801671" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-03-20T21:53:24.038957" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-03-20T21:53:24.543403" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
 <arg>http://localhost:3000/login</arg>
 <arg>Chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2024-03-07T21:02:12.801671" elapsed="1.598648"/>
+<status status="PASS" start="2024-03-20T21:53:24.038957" elapsed="1.949833"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2024-03-07T21:02:14.401316" elapsed="0.116014"/>
+<status status="PASS" start="2024-03-20T21:53:25.989790" elapsed="0.112212"/>
 </kw>
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>0</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2024-03-07T21:02:14.517330" elapsed="0.000999"/>
+<status status="PASS" start="2024-03-20T21:53:26.102002" elapsed="0.000000"/>
 </kw>
 <kw name="Page Should Contain Element" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:14.536133" level="INFO">Current page contains element 'id=user_id_number'.</msg>
+<msg time="2024-03-20T21:53:26.112868" level="INFO">Current page contains element 'id=user_id_number'.</msg>
 <arg>id=user_id_number</arg>
 <doc>Verifies that element ``locator`` is found on the current page.</doc>
-<status status="PASS" start="2024-03-07T21:02:14.519326" elapsed="0.016807"/>
+<status status="PASS" start="2024-03-20T21:53:26.103005" elapsed="0.009863"/>
 </kw>
 <kw name="Page Should Contain Element" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:14.549699" level="INFO">Current page contains element 'id=user_password'.</msg>
+<msg time="2024-03-20T21:53:26.123556" level="INFO">Current page contains element 'id=user_password'.</msg>
 <arg>id=user_password</arg>
 <doc>Verifies that element ``locator`` is found on the current page.</doc>
-<status status="PASS" start="2024-03-07T21:02:14.537130" elapsed="0.013567"/>
+<status status="PASS" start="2024-03-20T21:53:26.112868" elapsed="0.010688"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:14.550697" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
+<msg time="2024-03-20T21:53:26.124557" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
 <arg>id=user_id_number</arg>
 <arg>12170585</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:14.550697" elapsed="0.123872"/>
+<status status="PASS" start="2024-03-20T21:53:26.124557" elapsed="0.084219"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:14.675951" level="INFO">Typing text 'password' into text field 'id=user_password'.</msg>
+<msg time="2024-03-20T21:53:26.208776" level="INFO">Typing text 'password' into text field 'id=user_password'.</msg>
 <arg>id=user_password</arg>
 <arg>password</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:14.674569" elapsed="0.096065"/>
+<status status="PASS" start="2024-03-20T21:53:26.208776" elapsed="0.066926"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:14.771631" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<msg time="2024-03-20T21:53:26.276708" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
 <arg>xpath=//button[@type='submit']</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:14.771631" elapsed="0.320216"/>
+<status status="PASS" start="2024-03-20T21:53:26.276708" elapsed="0.277462"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=error_box</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2024-03-07T21:02:15.091847" elapsed="0.036638"/>
+<status status="PASS" start="2024-03-20T21:53:26.555167" elapsed="0.066995"/>
 </kw>
 <kw name="Page Should Contain" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:15.143506" level="INFO">Current page contains text 'Invalid User/Password. Check your input'.</msg>
+<msg time="2024-03-20T21:53:26.631547" level="INFO">Current page contains text 'Invalid User/Password. Check your input'.</msg>
 <arg>Invalid User/Password. Check your input</arg>
 <doc>Verifies that current page contains ``text``.</doc>
-<status status="PASS" start="2024-03-07T21:02:15.129483" elapsed="0.015056"/>
+<status status="PASS" start="2024-03-20T21:53:26.623168" elapsed="0.009618"/>
 </kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2024-03-07T21:02:15.144539" elapsed="2.132073"/>
+<status status="PASS" start="2024-03-20T21:53:26.632786" elapsed="2.088329"/>
 </kw>
-<status status="PASS" start="2024-03-07T21:02:12.801671" elapsed="4.474941"/>
+<status status="PASS" start="2024-03-20T21:53:24.038957" elapsed="4.682158"/>
+</test>
+<test id="s1-s1-t3" name="Login - Invalid Details: Username" line="34">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-03-20T21:53:28.722344" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-03-20T21:53:29.240954" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
+<arg>http://localhost:3000/login</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-03-20T21:53:28.722344" elapsed="2.004742"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2024-03-20T21:53:30.728155" elapsed="0.122334"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>0</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" start="2024-03-20T21:53:30.851499" elapsed="0.000000"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-03-20T21:53:30.861380" level="INFO">Current page contains element 'id=user_id_number'.</msg>
+<arg>id=user_id_number</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-03-20T21:53:30.851499" elapsed="0.009881"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2024-03-20T21:53:30.870103" level="INFO">Current page contains element 'id=user_password'.</msg>
+<arg>id=user_password</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2024-03-20T21:53:30.862395" elapsed="0.009211"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-03-20T21:53:30.871606" level="INFO">Typing text '12170586' into text field 'id=user_id_number'.</msg>
+<arg>id=user_id_number</arg>
+<arg>12170586</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-03-20T21:53:30.871606" elapsed="0.096411"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-03-20T21:53:30.968017" level="INFO">Typing text '111111' into text field 'id=user_password'.</msg>
+<arg>id=user_password</arg>
+<arg>111111</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-03-20T21:53:30.968017" elapsed="0.068433"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-03-20T21:53:31.037478" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-03-20T21:53:31.037478" elapsed="0.189738"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=error_box</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-03-20T21:53:31.228555" elapsed="0.065261"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-03-20T21:53:31.306116" level="INFO">Current page contains text 'Invalid User/Password. Check your input'.</msg>
+<arg>Invalid User/Password. Check your input</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-03-20T21:53:31.294831" elapsed="0.011285"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2024-03-20T21:53:31.306116" elapsed="2.095318"/>
+</kw>
+<status status="PASS" start="2024-03-20T21:53:28.722344" elapsed="4.679090"/>
 </test>
 <doc>A test suite for valid login.
 
 This test has a workflow that is created using keywords
 directly from SeleniumLibrary.</doc>
-<status status="PASS" start="2024-03-07T21:02:07.700454" elapsed="9.577156"/>
+<status status="PASS" start="2024-03-20T21:53:17.293284" elapsed="16.109306"/>
 </suite>
-<suite id="s1-s2" name="SecurityCode Test Suite" source="C:\Users\josha\OneDrive\Documents\SCHOOL\College\STSWENG_XX22_G1_2\__test__\security.robot">
+<suite id="s1-s2" name="SecurityCode Test Suite" source="E:\YEAR 3 TERM 2\STSWENG\STSWENG_XX22_G1\__test__\security.robot">
 <test id="s1-s2-t1" name="Valid Access" line="13">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:17.282596" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-03-20T21:53:33.406130" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-03-20T21:53:33.872422" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
 <arg>http://localhost:3000/login</arg>
 <arg>Chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2024-03-07T21:02:17.282596" elapsed="1.639662"/>
+<status status="PASS" start="2024-03-20T21:53:33.406130" elapsed="2.059261"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2024-03-07T21:02:18.923256" elapsed="0.124230"/>
+<status status="PASS" start="2024-03-20T21:53:35.466895" elapsed="0.117205"/>
 </kw>
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>0</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2024-03-07T21:02:19.049481" elapsed="0.000000"/>
+<status status="PASS" start="2024-03-20T21:53:35.584100" elapsed="0.001248"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:19.052474" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
+<msg time="2024-03-20T21:53:35.585348" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
 <arg>id=user_id_number</arg>
 <arg>12170585</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:19.051476" elapsed="0.131630"/>
+<status status="PASS" start="2024-03-20T21:53:35.585348" elapsed="0.098687"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:19.185130" level="INFO">Typing text '111111' into text field 'id=user_password'.</msg>
+<msg time="2024-03-20T21:53:35.685455" level="INFO">Typing text '111111' into text field 'id=user_password'.</msg>
 <arg>id=user_password</arg>
 <arg>111111</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:19.184133" elapsed="0.087150"/>
+<status status="PASS" start="2024-03-20T21:53:35.684035" elapsed="0.067868"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:19.272280" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<msg time="2024-03-20T21:53:35.751903" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
 <arg>xpath=//button[@type='submit']</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:19.272280" elapsed="0.526689"/>
+<status status="PASS" start="2024-03-20T21:53:35.751903" elapsed="0.697422"/>
 </kw>
 <kw name="Get Location" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:19.835631" level="INFO">${url} = http://localhost:3000/SecurityCheck?id_number=12170585</msg>
+<msg time="2024-03-20T21:53:36.455665" level="INFO">${url} = http://localhost:3000/SecurityCheck?id_number=12170585</msg>
 <var>${url}</var>
 <doc>Returns the current browser window URL.</doc>
-<status status="PASS" start="2024-03-07T21:02:19.799967" elapsed="0.035664"/>
+<status status="PASS" start="2024-03-20T21:53:36.449325" elapsed="0.006340"/>
 </kw>
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${url}</arg>
 <arg>http://localhost:3000/SecurityCheck?id_number=12170585</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2024-03-07T21:02:19.836632" elapsed="0.000000"/>
+<status status="PASS" start="2024-03-20T21:53:36.456672" elapsed="0.000000"/>
 </kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2024-03-07T21:02:19.837630" elapsed="2.113062"/>
+<status status="PASS" start="2024-03-20T21:53:36.457673" elapsed="2.094857"/>
 </kw>
-<status status="PASS" start="2024-03-07T21:02:17.282596" elapsed="4.669093"/>
+<status status="PASS" start="2024-03-20T21:53:33.404996" elapsed="5.147534"/>
 </test>
 <test id="s1-s2-t2" name="Invalid Access (Through URL WITHOUT id_number)" line="24">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:21.953197" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/SecurityCheck'.</msg>
+<msg time="2024-03-20T21:53:38.553765" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/SecurityCheck'.</msg>
+<msg time="2024-03-20T21:53:39.046917" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
 <arg>http://localhost:3000/SecurityCheck</arg>
 <arg>Chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2024-03-07T21:02:21.951689" elapsed="1.676962"/>
+<status status="PASS" start="2024-03-20T21:53:38.553765" elapsed="1.710696"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2024-03-07T21:02:23.629648" elapsed="0.165835"/>
+<status status="PASS" start="2024-03-20T21:53:40.264461" elapsed="0.146822"/>
 </kw>
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>0</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2024-03-07T21:02:23.796481" elapsed="0.000000"/>
+<status status="PASS" start="2024-03-20T21:53:40.412320" elapsed="0.000000"/>
 </kw>
 <kw name="Get Location" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:23.802465" level="INFO">${url} = http://localhost:3000/SecurityCheck</msg>
+<msg time="2024-03-20T21:53:40.417371" level="INFO">${url} = http://localhost:3000/SecurityCheck</msg>
 <var>${url}</var>
 <doc>Returns the current browser window URL.</doc>
-<status status="PASS" start="2024-03-07T21:02:23.796481" elapsed="0.005984"/>
+<status status="PASS" start="2024-03-20T21:53:40.412320" elapsed="0.005051"/>
 </kw>
 <kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2024-03-07T21:02:23.802465" level="FAIL">http://localhost:3000/SecurityCheck == http://localhost:3000/SecurityCheck</msg>
+<msg time="2024-03-20T21:53:40.417371" level="FAIL">http://localhost:3000/SecurityCheck == http://localhost:3000/SecurityCheck</msg>
 <arg>${url}</arg>
 <arg>http://localhost:3000/SecurityCheck</arg>
 <doc>Fails if the given objects are equal.</doc>
-<status status="FAIL" start="2024-03-07T21:02:23.802465" elapsed="0.000996">http://localhost:3000/SecurityCheck == http://localhost:3000/SecurityCheck</status>
+<status status="FAIL" start="2024-03-20T21:53:40.417371" elapsed="0.001214">http://localhost:3000/SecurityCheck == http://localhost:3000/SecurityCheck</status>
 </kw>
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${url}</arg>
 <arg>http://localhost:3000/login</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2024-03-07T21:02:23.803461" elapsed="0.000000"/>
+<status status="NOT RUN" start="2024-03-20T21:53:40.418585" elapsed="0.000000"/>
 </kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="NOT RUN" start="2024-03-07T21:02:23.803461" elapsed="0.000000"/>
+<status status="NOT RUN" start="2024-03-20T21:53:40.418585" elapsed="0.000000"/>
 </kw>
-<status status="FAIL" start="2024-03-07T21:02:21.951689" elapsed="1.853002">http://localhost:3000/SecurityCheck == http://localhost:3000/SecurityCheck</status>
+<status status="FAIL" start="2024-03-20T21:53:38.553765" elapsed="1.864820">http://localhost:3000/SecurityCheck == http://localhost:3000/SecurityCheck</status>
 </test>
 <test id="s1-s2-t3" name="Invalid Access (Through URL WITH id_number)" line="34">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:23.807006" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/SecurityCheck?id_number=12170585'.</msg>
+<msg time="2024-03-20T21:53:40.419816" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/SecurityCheck?id_number=12170585'.</msg>
+<msg time="2024-03-20T21:53:40.910493" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
 <arg>http://localhost:3000/SecurityCheck?id_number=12170585</arg>
 <arg>Chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2024-03-07T21:02:23.806008" elapsed="1.819141"/>
+<status status="PASS" start="2024-03-20T21:53:40.419816" elapsed="1.783643"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2024-03-07T21:02:25.626147" elapsed="0.200495"/>
+<status status="PASS" start="2024-03-20T21:53:42.203459" elapsed="0.118493"/>
 </kw>
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>0</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2024-03-07T21:02:25.827640" elapsed="0.000000"/>
+<status status="PASS" start="2024-03-20T21:53:42.321952" elapsed="0.000000"/>
 </kw>
 <kw name="Get Location" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:25.843645" level="INFO">${url} = http://localhost:3000/SecurityCheck?id_number=12170585</msg>
+<msg time="2024-03-20T21:53:42.326798" level="INFO">${url} = http://localhost:3000/SecurityCheck?id_number=12170585</msg>
 <var>${url}</var>
 <doc>Returns the current browser window URL.</doc>
-<status status="PASS" start="2024-03-07T21:02:25.835157" elapsed="0.008488"/>
+<status status="PASS" start="2024-03-20T21:53:42.321952" elapsed="0.004846"/>
 </kw>
 <kw name="Should Not Be Equal" owner="BuiltIn">
-<msg time="2024-03-07T21:02:25.844646" level="FAIL">http://localhost:3000/SecurityCheck?id_number=12170585 == http://localhost:3000/SecurityCheck?id_number=12170585</msg>
+<msg time="2024-03-20T21:53:42.326798" level="FAIL">http://localhost:3000/SecurityCheck?id_number=12170585 == http://localhost:3000/SecurityCheck?id_number=12170585</msg>
 <arg>${url}</arg>
 <arg>http://localhost:3000/SecurityCheck?id_number=12170585</arg>
 <doc>Fails if the given objects are equal.</doc>
-<status status="FAIL" start="2024-03-07T21:02:25.844646" elapsed="0.000000">http://localhost:3000/SecurityCheck?id_number=12170585 == http://localhost:3000/SecurityCheck?id_number=12170585</status>
+<status status="FAIL" start="2024-03-20T21:53:42.326798" elapsed="0.000000">http://localhost:3000/SecurityCheck?id_number=12170585 == http://localhost:3000/SecurityCheck?id_number=12170585</status>
 </kw>
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${url}</arg>
 <arg>http://localhost:3000/login</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2024-03-07T21:02:25.844646" elapsed="0.000000"/>
+<status status="NOT RUN" start="2024-03-20T21:53:42.326798" elapsed="0.000000"/>
 </kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="NOT RUN" start="2024-03-07T21:02:25.845647" elapsed="0.000000"/>
+<status status="NOT RUN" start="2024-03-20T21:53:42.326798" elapsed="0.000000"/>
 </kw>
-<status status="FAIL" start="2024-03-07T21:02:23.804691" elapsed="2.040956">http://localhost:3000/SecurityCheck?id_number=12170585 == http://localhost:3000/SecurityCheck?id_number=12170585</status>
+<status status="FAIL" start="2024-03-20T21:53:40.419816" elapsed="1.908307">http://localhost:3000/SecurityCheck?id_number=12170585 == http://localhost:3000/SecurityCheck?id_number=12170585</status>
 </test>
 <test id="s1-s2-t4" name="Valid Security Code" line="44">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:25.846644" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-03-20T21:53:42.329136" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-03-20T21:53:42.845686" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
 <arg>http://localhost:3000/login</arg>
 <arg>Chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2024-03-07T21:02:25.846644" elapsed="1.649930"/>
+<status status="PASS" start="2024-03-20T21:53:42.329136" elapsed="2.079411"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2024-03-07T21:02:27.498567" elapsed="0.129225"/>
+<status status="PASS" start="2024-03-20T21:53:44.408547" elapsed="0.126105"/>
 </kw>
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>0</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2024-03-07T21:02:27.628788" elapsed="0.000000"/>
+<status status="PASS" start="2024-03-20T21:53:44.535655" elapsed="0.000000"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:27.630783" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
+<msg time="2024-03-20T21:53:44.535655" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
 <arg>id=user_id_number</arg>
 <arg>12170585</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:27.629786" elapsed="0.128604"/>
+<status status="PASS" start="2024-03-20T21:53:44.535655" elapsed="0.142061"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:27.759388" level="INFO">Typing text '111111' into text field 'id=user_password'.</msg>
+<msg time="2024-03-20T21:53:44.677716" level="INFO">Typing text '111111' into text field 'id=user_password'.</msg>
 <arg>id=user_password</arg>
 <arg>111111</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:27.759388" elapsed="0.083894"/>
+<status status="PASS" start="2024-03-20T21:53:44.677716" elapsed="0.094209"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:27.844282" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<msg time="2024-03-20T21:53:44.771925" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
 <arg>xpath=//button[@type='submit']</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:27.843282" elapsed="0.531496"/>
+<status status="PASS" start="2024-03-20T21:53:44.771925" elapsed="0.557977"/>
 </kw>
 <kw name="Get Location" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:28.442532" level="INFO">${url} = http://localhost:3000/SecurityCheck?id_number=12170585</msg>
+<msg time="2024-03-20T21:53:45.336189" level="INFO">${url} = http://localhost:3000/SecurityCheck?id_number=12170585</msg>
 <var>${url}</var>
 <doc>Returns the current browser window URL.</doc>
-<status status="PASS" start="2024-03-07T21:02:28.374778" elapsed="0.067754"/>
+<status status="PASS" start="2024-03-20T21:53:45.331406" elapsed="0.004783"/>
 </kw>
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${url}</arg>
 <arg>http://localhost:3000/SecurityCheck?id_number=12170585</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2024-03-07T21:02:28.443528" elapsed="0.000506"/>
+<status status="PASS" start="2024-03-20T21:53:45.337289" elapsed="0.000000"/>
 </kw>
 <kw name="Page Should Contain Element" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:28.461847" level="INFO">Current page contains element 'id=user_security_code'.</msg>
+<msg time="2024-03-20T21:53:45.348372" level="INFO">Current page contains element 'id=user_security_code'.</msg>
 <arg>id=user_security_code</arg>
 <doc>Verifies that element ``locator`` is found on the current page.</doc>
-<status status="PASS" start="2024-03-07T21:02:28.444034" elapsed="0.017813"/>
+<status status="PASS" start="2024-03-20T21:53:45.338293" elapsed="0.010079"/>
 </kw>
 <kw name="Page Should Contain Button" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:28.498340" level="INFO">Current page contains button 'xpath=//button[@type='submit']'.</msg>
+<msg time="2024-03-20T21:53:45.373237" level="INFO">Current page contains button 'xpath=//button[@type='submit']'.</msg>
 <arg>xpath=//button[@type='submit']</arg>
 <doc>Verifies button ``locator`` is found from current page.</doc>
-<status status="PASS" start="2024-03-07T21:02:28.461847" elapsed="0.037491"/>
+<status status="PASS" start="2024-03-20T21:53:45.348372" elapsed="0.024865"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:28.499338" level="INFO">Typing text '1111' into text field 'id=user_security_code'.</msg>
+<msg time="2024-03-20T21:53:45.374309" level="INFO">Typing text '1111' into text field 'id=user_security_code'.</msg>
 <arg>id=user_security_code</arg>
 <arg>1111</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:28.499338" elapsed="0.090281"/>
+<status status="PASS" start="2024-03-20T21:53:45.374309" elapsed="0.079961"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:28.590617" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<msg time="2024-03-20T21:53:45.455294" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
 <arg>xpath=//button[@type='submit']</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:28.589619" elapsed="0.564895"/>
+<status status="PASS" start="2024-03-20T21:53:45.455294" elapsed="0.337913"/>
 </kw>
 <kw name="Get Location" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:29.160503" level="INFO">${url} = http://localhost:3000/Profile?id_number=12170585</msg>
+<msg time="2024-03-20T21:53:46.154236" level="INFO">${url} = http://localhost:3000/Profile?id_number=12170585</msg>
 <var>${url}</var>
 <doc>Returns the current browser window URL.</doc>
-<status status="PASS" start="2024-03-07T21:02:29.154514" elapsed="0.005989"/>
+<status status="PASS" start="2024-03-20T21:53:45.793207" elapsed="0.362444"/>
 </kw>
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${url}</arg>
 <arg>http://localhost:3000/Profile?id_number=12170585</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2024-03-07T21:02:29.161501" elapsed="0.000000"/>
+<status status="PASS" start="2024-03-20T21:53:46.155651" elapsed="0.000503"/>
 </kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2024-03-07T21:02:29.161501" elapsed="2.116353"/>
+<status status="PASS" start="2024-03-20T21:53:46.156154" elapsed="2.111243"/>
 </kw>
-<status status="PASS" start="2024-03-07T21:02:25.846644" elapsed="5.432207"/>
+<status status="PASS" start="2024-03-20T21:53:42.328123" elapsed="5.939274"/>
 </test>
 <test id="s1-s2-t5" name="Invalid Security Code" line="60">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:31.279848" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-03-20T21:53:48.268544" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-03-20T21:53:48.740213" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
 <arg>http://localhost:3000/login</arg>
 <arg>Chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2024-03-07T21:02:31.279848" elapsed="1.745745"/>
+<status status="PASS" start="2024-03-20T21:53:48.268544" elapsed="1.931535"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2024-03-07T21:02:33.026592" elapsed="0.128078"/>
+<status status="PASS" start="2024-03-20T21:53:50.200079" elapsed="0.118779"/>
 </kw>
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>0</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2024-03-07T21:02:33.155673" elapsed="0.000999"/>
+<status status="PASS" start="2024-03-20T21:53:50.319861" elapsed="0.000000"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:33.157668" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
+<msg time="2024-03-20T21:53:50.320365" level="INFO">Typing text '12170585' into text field 'id=user_id_number'.</msg>
 <arg>id=user_id_number</arg>
 <arg>12170585</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:33.156672" elapsed="0.137586"/>
+<status status="PASS" start="2024-03-20T21:53:50.320365" elapsed="0.102510"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:33.295334" level="INFO">Typing text '111111' into text field 'id=user_password'.</msg>
+<msg time="2024-03-20T21:53:50.422875" level="INFO">Typing text '111111' into text field 'id=user_password'.</msg>
 <arg>id=user_password</arg>
 <arg>111111</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:33.295334" elapsed="0.119743"/>
+<status status="PASS" start="2024-03-20T21:53:50.422875" elapsed="0.057933"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:33.415077" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<msg time="2024-03-20T21:53:50.481810" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
 <arg>xpath=//button[@type='submit']</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:33.415077" elapsed="0.420586"/>
+<status status="PASS" start="2024-03-20T21:53:50.481810" elapsed="0.480859"/>
 </kw>
 <kw name="Get Location" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:33.947223" level="INFO">${url} = http://localhost:3000/SecurityCheck?id_number=12170585</msg>
+<msg time="2024-03-20T21:53:50.967526" level="INFO">${url} = http://localhost:3000/SecurityCheck?id_number=12170585</msg>
 <var>${url}</var>
 <doc>Returns the current browser window URL.</doc>
-<status status="PASS" start="2024-03-07T21:02:33.836665" elapsed="0.110558"/>
+<status status="PASS" start="2024-03-20T21:53:50.962669" elapsed="0.004857"/>
 </kw>
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${url}</arg>
 <arg>http://localhost:3000/SecurityCheck?id_number=12170585</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2024-03-07T21:02:33.948222" elapsed="0.000000"/>
+<status status="PASS" start="2024-03-20T21:53:50.967526" elapsed="0.000000"/>
 </kw>
 <kw name="Page Should Contain Element" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:34.027855" level="INFO">Current page contains element 'id=user_security_code'.</msg>
+<msg time="2024-03-20T21:53:50.976065" level="INFO">Current page contains element 'id=user_security_code'.</msg>
 <arg>id=user_security_code</arg>
 <doc>Verifies that element ``locator`` is found on the current page.</doc>
-<status status="PASS" start="2024-03-07T21:02:33.949218" elapsed="0.078637"/>
+<status status="PASS" start="2024-03-20T21:53:50.968526" elapsed="0.007539"/>
 </kw>
 <kw name="Page Should Contain Button" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:34.075653" level="INFO">Current page contains button 'xpath=//button[@type='submit']'.</msg>
+<msg time="2024-03-20T21:53:50.997670" level="INFO">Current page contains button 'xpath=//button[@type='submit']'.</msg>
 <arg>xpath=//button[@type='submit']</arg>
 <doc>Verifies button ``locator`` is found from current page.</doc>
-<status status="PASS" start="2024-03-07T21:02:34.028852" elapsed="0.046801"/>
+<status status="PASS" start="2024-03-20T21:53:50.977077" elapsed="0.020593"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:34.079642" level="INFO">Typing text '1234' into text field 'id=user_security_code'.</msg>
+<msg time="2024-03-20T21:53:50.998679" level="INFO">Typing text '1234' into text field 'id=user_security_code'.</msg>
 <arg>id=user_security_code</arg>
 <arg>1234</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:34.078645" elapsed="0.108786"/>
+<status status="PASS" start="2024-03-20T21:53:50.998679" elapsed="0.050193"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:34.188428" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<msg time="2024-03-20T21:53:51.048872" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
 <arg>xpath=//button[@type='submit']</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2024-03-07T21:02:34.188428" elapsed="0.291583"/>
+<status status="PASS" start="2024-03-20T21:53:51.048872" elapsed="0.287572"/>
 </kw>
 <kw name="Get Location" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:34.625596" level="INFO">${url} = http://localhost:3000/SecurityCheck</msg>
+<msg time="2024-03-20T21:53:51.491142" level="INFO">${url} = http://localhost:3000/SecurityCheck</msg>
 <var>${url}</var>
 <doc>Returns the current browser window URL.</doc>
-<status status="PASS" start="2024-03-07T21:02:34.481009" elapsed="0.144587"/>
+<status status="PASS" start="2024-03-20T21:53:51.337445" elapsed="0.153697"/>
 </kw>
 <kw name="Should Not Be Equal" owner="BuiltIn">
 <arg>${url}</arg>
 <arg>http://localhost:3000/Profile?id_number=12170585</arg>
 <doc>Fails if the given objects are equal.</doc>
-<status status="PASS" start="2024-03-07T21:02:34.625596" elapsed="0.001002"/>
+<status status="PASS" start="2024-03-20T21:53:51.491142" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal" owner="BuiltIn">
 <arg>${url}</arg>
 <arg>http://localhost:3000/SecurityCheck</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2024-03-07T21:02:34.626598" elapsed="0.000998"/>
+<status status="PASS" start="2024-03-20T21:53:51.492571" elapsed="0.000000"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=error_box</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2024-03-07T21:02:34.627596" elapsed="0.029371"/>
+<status status="PASS" start="2024-03-20T21:53:51.494076" elapsed="0.044063"/>
 </kw>
 <kw name="Page Should Contain" owner="SeleniumLibrary">
-<msg time="2024-03-07T21:02:34.670735" level="INFO">Current page contains text 'Security code is incorrect. Please try again.'.</msg>
+<msg time="2024-03-20T21:53:51.550809" level="INFO">Current page contains text 'Security code is incorrect. Please try again.'.</msg>
 <arg>Security code is incorrect. Please try again.</arg>
 <doc>Verifies that current page contains ``text``.</doc>
-<status status="PASS" start="2024-03-07T21:02:34.656967" elapsed="0.013768"/>
+<status status="PASS" start="2024-03-20T21:53:51.538139" elapsed="0.012670"/>
 </kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2024-03-07T21:02:34.670735" elapsed="2.105729"/>
+<status status="PASS" start="2024-03-20T21:53:51.550809" elapsed="2.090678"/>
 </kw>
-<status status="PASS" start="2024-03-07T21:02:31.278851" elapsed="5.497613"/>
+<status status="PASS" start="2024-03-20T21:53:48.267397" elapsed="5.374090"/>
 </test>
 <doc>A test suite for valid security code input.
 
 This test has a workflow that is created using keywords
 directly from SeleniumLibrary.</doc>
-<status status="FAIL" start="2024-03-07T21:02:17.278608" elapsed="19.499850"/>
+<status status="FAIL" start="2024-03-20T21:53:33.403093" elapsed="20.239397"/>
 </suite>
-<status status="FAIL" start="2024-03-07T21:02:07.667670" elapsed="29.111787"/>
+<status status="FAIL" start="2024-03-20T21:53:17.274445" elapsed="36.369045"/>
 </suite>
 <statistics>
 <total>
-<stat pass="5" fail="2" skip="0">All Tests</stat>
+<stat pass="6" fail="2" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="5" fail="2" skip="0" id="s1" name="Test">Test</stat>
-<stat pass="2" fail="0" skip="0" id="s1-s1" name="Login Test Suite">Test.Login Test Suite</stat>
+<stat pass="6" fail="2" skip="0" id="s1" name="Test">Test</stat>
+<stat pass="3" fail="0" skip="0" id="s1-s1" name="Login Test Suite">Test.Login Test Suite</stat>
 <stat pass="3" fail="2" skip="0" id="s1-s2" name="SecurityCode Test Suite">Test.SecurityCode Test Suite</stat>
 </suite>
 </statistics>
 <errors>
+<msg time="2024-03-20T21:53:19.137564" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2024-03-20T21:53:24.543403" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2024-03-20T21:53:29.240954" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2024-03-20T21:53:33.872422" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2024-03-20T21:53:39.046917" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2024-03-20T21:53:40.910493" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2024-03-20T21:53:42.845686" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
+<msg time="2024-03-20T21:53:48.740213" level="WARN">The chromedriver version (122.0.6261.94) detected in PATH at C:\Users\Luis\AppData\Roaming\npm\chromedriver.cmd might not be compatible with the detected chrome version (123.0.6312.58); currently, chromedriver 123.0.6312.58 is recommended for chrome 123.*, so it is advised to delete the driver in PATH and retry</msg>
 </errors>
 </robot>
