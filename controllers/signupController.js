@@ -20,7 +20,7 @@ const signupController = {
 
         var errors = validationResult(req);
 
-        if ( !errors.isEmpty()){
+        if (!errors.isEmpty()){
             errors = errors.errors;
 
             var details = {};
