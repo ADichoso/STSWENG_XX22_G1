@@ -19,7 +19,7 @@
                 document.getElementById("success_box").style.display = "none";
                 document.getElementById("error_box").style.display = "none";
 				
-				console.log("Admin ID: " + "{{id_number}}")
+				console.log({{admin_ID}});
 				function admin_ID_check(admin_ID = null){
 					if (admin_ID == null){
 						var ID_num = new URLSearchParams(window.location.search).get('id_number');
@@ -32,7 +32,7 @@
 						document.getElementById('d_admin_ID').value = admin_ID;
 					}
 				}
-				admin_ID_check({{id_number}});
+				admin_ID_check({{admin_ID}});
 
                 var search_user_status = new URLSearchParams(window.location.search).get('is_search_user_valid');
                 var search_user_resv_list_status = new URLSearchParams(window.location.search).get('reservation_list');
@@ -90,7 +90,7 @@
         <div class = "banner"> 
 
             <div class="navbar">
-				<a href="/ProfileAdmin?id_number={{id_number}}" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
+				<a href="/ProfileAdmin?id_number={{admin_ID}}" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
 
                 <div id="success_box">
                     <p id="success_message"> Success! </p>
@@ -111,10 +111,9 @@
             
             <div class="content">
 
-                <h1 style="position: relative; color: white; left: 50px; top: 40px;"> User Remove Reservation {{#if selected_name}}| Passenger:  {{selected_name}}{{/if}} </h1>
+                <h1 style="position: relative; color: white; left: 50px; top: 40px;"> User Remove Reservation </h1>
                 <p style="position: relative; color: white; left: 50px; margin-top: 40px; font-style: italic;"> Delete/Edit a user reservation </p>
                 <button id="search_user_btn" onclick="show_search_form();" style="margin-left: 50px;"> Search User  </button> 
-                
                 <style> 
                     #search_user_btn{
                         position: absolute; 

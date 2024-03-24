@@ -1,8 +1,8 @@
 const db = require('../models/db.js');
 
 const User = require('../models/userdb.js');
-
 const Admin = require('../models/admindb.js');
+const Driver = require('../models/driverdb.js');
 
 const Reservation = require('../models/reservationdb.js');
 
@@ -17,12 +17,12 @@ const reservationController = {
 			const projection = "id_number";
 			
 			const is_admin = await db.find_one(Admin, query, projection);
-	
+            const is_driver = await db.find_one(Driver, query, projection);
 			const result = await db.find_many(Reservation, query);
             
             console.log(query)
             console.log(result)
-			if ( is_admin != null ) {
+			if ( is_admin != null || is_driver != null) {
 				res.render('Reservation', {display_UI: 1, result: result, id_number: req.query.id_number, is_admin: true});
 			} else {
 				res.render('Reservation', {display_UI: 0, result: result, id_number: req.query.id_number, is_admin: false});
@@ -40,20 +40,22 @@ const reservationController = {
 			const projection = "id_number";
 
 			const is_admin = await db.find_one(Admin, query, projection);
+            const is_driver = await db.find_one(Driver, query, projection);
 
-			if ( is_admin != null ){
-				res.redirect('/ReservationAdmin?id_number=' + req.session.id_number );
-			}else{
+			if ( is_admin != null || is_driver != null){
+				res.redirect('/ReservationAdmin?id_number=' + req.session.id_number);
+			} else {
 				res.render('Error');
 			}
 			
 		}
-        else
+        else    
         {
 			const details = {
-				id_number: req.session.id_number,
+				id_number: req.query.id_number
 			}
-	
+            
+            console.log(details)
 			res.render('ReservationAdmin', details);
 		}
 
@@ -216,8 +218,9 @@ const reservationController = {
 		var id_number = req.body.user_id_number;
 		var admin_id = req.body.admin_id;
 
-		const isFoundUser = await db.find_one(User, {id_number: id_number}, {id_number: 1});
-		const isFoundAdmin = await db.find_one(Admin, {id_number: id_number}, {id_number: 1});
+        var projection = "id_number first_name last_name"
+		const isFoundUser = await db.find_one(User, {id_number: id_number}, projection);
+		const isFoundAdmin = await db.find_one(Admin, {id_number: id_number}, projection);
 
 		if ( isFoundUser == null && isFoundAdmin == null ){
 			res.redirect('/ReservationAdmin?id_number=' + admin_id + '&is_search_user_valid=false');
@@ -227,8 +230,15 @@ const reservationController = {
 			console.log('test');
 			const result = await db.find_many(Reservation, {id_number: id_number}, "");
 
-			if ( result.length !== 0 ){
-				res.render('ReservationAdmin', {result: result, admin_id: admin_id});
+            //Get name of user
+            var selected_name = null
+            if(isFoundUser)
+                selected_name =  isFoundUser.first_name + " " + isFoundUser.last_name
+			else if(isFoundAdmin)
+                selected_name =  isFoundAdmin.first_name + " " + isFoundAdmin.last_name
+            
+            if ( result.length !== 0 ){
+				res.render('ReservationAdmin', {result: result, admin_id: admin_id, selected_name: selected_name});
 			} 
 			else {
 				res.redirect('/ReservationAdmin?id_number=' + admin_id + '&reservation_list=false');

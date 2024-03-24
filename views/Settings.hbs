@@ -146,7 +146,7 @@
 		
         <div class="navbar">
             <a href="" id="backButton"><img src="../images/Leftarrow.png" class="back_img"></a>
-            <img src= "../images/DLSU_Logo.png" class = "website_logo">
+            <a href="/"> <img src= "../images/DLSU_Logo.png" class = "website_logo"></a>
 
             <style>
                 img:hover{
@@ -218,42 +218,42 @@
 					</div>
 
 					<script>/*This shows Profile tab automatically at page load*/show_panel(0);</script>
-					
-					<div style="background-color: white; border-radius: 25px; width:auto; padding: 25px; margin-top: 15px">
-						<h1>Private info</h1>
-						<hr>
-						<form id="private_change", action="/ChangePrivateInfo" method="post">
-							<input type="hidden" name="id_number" value="{{details.id_number}}">
-							<div style="display: flex;">
-								<div style="margin-right: 20px;">
-									<label for="old_designation"><h2>Current Designation: </h2></label>
-									<input type="text" placeholder="{{details.designation}}" id="old_designation" name="old_designation" readonly disabled>
-								</div>
-								<div>
-									<label for="new_designation"><h2>New Designation: <br> <h2></label>
-									<select id="new_designation" name="new_designation" style="height: 50px; margin-top: 10px; font-size: 24px; border-radius: 5px; width: 300px">
-										<option value="Guest">Guest</option>
-										<option value="Student">Student</option>
-										<option value="Faculty">Faculty</option>
-										<option value="ASP">ASP</option>
-										<option value="APSP">APSP</option>
-										<option value="CAF">CAF</option>
-										<option value="ESP">ESP</option>
-									</select>
-								</div>
-							</div>
-							
-							<div style="display:flex;" id="change_passenger_type">
-								<div style="margin-right: 20px;">
-									<label for="old_passenger_type"><h2>Current Passenger Type: </h2></label>
-									<input type="text" placeholder="{{details.passenger_type}}" id="old_passenger_type" name="old_passenger_type" readonly disabled>
-								</div>
-							</div>
-							
-							<button onclick="submit_form('private_change')", class="submitButton">Save Changes</button>
-						</form>
-					</div>
-					
+					{{#if not_driver}}
+                        <div style="background-color: white; border-radius: 25px; width:auto; padding: 25px; margin-top: 15px">
+                            <h1>Private info</h1>
+                            <hr>
+                            <form id="private_change", action="/ChangePrivateInfo" method="post">
+                                <input type="hidden" name="id_number" value="{{details.id_number}}">
+                                <div style="display: flex;">
+                                    <div style="margin-right: 20px;">
+                                        <label for="old_designation"><h2>Current Designation: </h2></label>
+                                        <input type="text" placeholder="{{details.designation}}" id="old_designation" name="old_designation" readonly disabled>
+                                    </div>
+                                    <div>
+                                        <label for="new_designation"><h2>New Designation: <br> <h2></label>
+                                        <select id="new_designation" name="new_designation" style="height: 50px; margin-top: 10px; font-size: 24px; border-radius: 5px; width: 300px">
+                                            <option value="Guest">Guest</option>
+                                            <option value="Student">Student</option>
+                                            <option value="Faculty">Faculty</option>
+                                            <option value="ASP">ASP</option>
+                                            <option value="APSP">APSP</option>
+                                            <option value="CAF">CAF</option>
+                                            <option value="ESP">ESP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div style="display:flex;" id="change_passenger_type">
+                                    <div style="margin-right: 20px;">
+                                        <label for="old_passenger_type"><h2>Current Passenger Type: </h2></label>
+                                        <input type="text" placeholder="{{details.passenger_type}}" id="old_passenger_type" name="old_passenger_type" readonly disabled>
+                                    </div>
+                                </div>
+                                
+                                <button onclick="submit_form('private_change')", class="submitButton">Save Changes</button>
+                            </form>
+                        </div>
+                    {{/if}}
                 </div>
 
                 <div class="panel" id="password_tab">

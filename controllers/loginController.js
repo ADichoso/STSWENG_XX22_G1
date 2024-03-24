@@ -35,7 +35,7 @@ const loginController = {
         
     },
     
-    post_login: async function (req, res, next) {
+    post_login: async function (req, res) {
         console.log("REQ: " + req.body.user_id_number);
         const id_number = req.body.user_id_number;
         const password = req.body.user_password;
@@ -47,21 +47,18 @@ const loginController = {
             const admin_result = await db.find_one(Admin, query, projection);
             const driver_result = await db.find_one(Driver, query, projection);
           
-            if (user_result && await bcrypt.compare(password, user_result.password)) {
-
+            if (user_result && await bcrypt.compare(password, user_result.password))
+            {
                 req.session.id_number = user_result.id_number;
-
                 res.redirect('/SecurityCheck?id_number=' + id_number);      
-            } else if (admin_result && await bcrypt.compare(password, admin_result.password)) {
-            
+            } else if (admin_result && await bcrypt.compare(password, admin_result.password))
+            {
                 req.session.id_number = admin_result.id_number;
-
                 res.redirect('/SecurityCheck?id_number=' + id_number);
 
-            } else if (driver_result && await bcrypt.compare(password, driver_result.password)) {
-            
+            } else if (driver_result && await bcrypt.compare(password, driver_result.password))
+            {
                 req.session.id_number = driver_result.id_number;
-
                 res.redirect('/SecurityCheck?id_number=' + id_number);
 
             } else {

@@ -58,7 +58,8 @@ const editDriverController = {
 			email: req.body.curr_email,
 			id_number: req.body.curr_id_number,
             password: await bcrypt.hash("111111", saltRounds),
-            security_code: await bcrypt.hash("1234", saltRounds)
+            security_code: await bcrypt.hash("1234", saltRounds),
+            profile_picture: "images/profilepictures/Default.png"
 		}
 
         await db.insert_one(Driver, curr);

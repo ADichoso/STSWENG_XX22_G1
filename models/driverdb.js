@@ -24,6 +24,10 @@ var driver_schema = new mongoose.Schema({
     security_code: {
         type: String,
         required: true
+    },
+    profile_picture: {
+        type: String,
+        required: false,
     }
 });
 
