@@ -4,8 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --color --coverage",
-    "run": "node index.js",
-    "robot": ".\\automated_testing.bat"
+    "run": "npx supervisor index.js"
   },
   "author": "",
   "license": "ISC",
