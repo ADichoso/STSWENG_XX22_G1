@@ -7,6 +7,10 @@ Documentation     A test suite for valid user/admin/driver signup
 Library           SeleniumLibrary
 Library    XML
 
+*** Variables ***
+${URL}    https://sweng-testing-ci.onrender.com/SignUp
+${BROWSER}    Chrome
+
 *** Test Cases ***
 1-1 Valid Access
     Open Browser    http://localhost:3000/SignUp    Chrome
@@ -51,7 +55,7 @@ Library    XML
     Close Browser
 
 1-2 Missing First Name
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
@@ -91,7 +95,7 @@ Library    XML
     Close Browser
 
 1-3 Missing Last Name
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
@@ -132,7 +136,7 @@ Library    XML
     Close Browser
 
 1-4 Missing Email
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
@@ -172,7 +176,7 @@ Library    XML
     Close Browser
 
 1-5 Email Already Registered
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
@@ -209,7 +213,7 @@ Library    XML
     Close Browser
 
 1-6 Incorrect Email Format
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
@@ -246,7 +250,7 @@ Library    XML
     Close Browser
     
 1-7 Missing ID Number    
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
@@ -286,7 +290,7 @@ Library    XML
     Close Browser
 
 1-8 Incorrect ID Number Format
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
@@ -336,7 +340,7 @@ Library    XML
     Close Browser
 
 1-9 Missing Password
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
@@ -375,7 +379,7 @@ Library    XML
     Close Browser
     
 1-10 Missing Destination
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
@@ -403,9 +407,9 @@ Library    XML
 
     #click signup
     Click Button    id=submit
-    ${url} =    Get Location
+    ${new_url} =    Get Location
     Sleep    2s
-    Should Be Equal    ${url}    http://localhost:3000/SignUp
+    Should Be Equal    ${new_url}    ${URL}
 
 1-11 Missing Passenger Type
     Open Browser    http://localhost:3000/SignUp    Chrome
@@ -437,29 +441,29 @@ Library    XML
 
     #click signup
     Click Button    id=submit
-    ${url} =    Get Location
+    ${new_url} =    Get Location
     Sleep    2s
-    Should Be Equal    ${url}    http://localhost:3000/SignUp
+    Should Be Equal    ${new_url}    ${URL}
 
 1-12 Navigation to Home "/"
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
     #click home
     Click Image    locator=//img[@src='../images/Leftarrow.png']
-    ${url} =    Get Location
-    Should Be Equal    ${url}    http://localhost:3000/
+    ${new_url} =    Get Location
+    Should Be Equal    ${new_url}    https://sweng-testing-ci.onrender.com/
     Close Browser
 
 1-13 Navigation to Login
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
     #click login
     Click Link    Login
-    ${url} =    Get Location
-    Should Be Equal    ${url}    http://localhost:3000/Login
+    ${new_url} =    Get Location
+    Should Be Equal    ${new_url}    https://sweng-testing-ci.onrender.com/Login
     Close All Browsers
 

@@ -8,7 +8,7 @@ Library           SeleniumLibrary
 
 *** Variables ***
 ${BROWSER}    Chrome
-${URL}    http://localhost:3000/
+${URL}    https://sweng-testing-ci.onrender.com/
 ${account_id}    34433443
 ${account_pass}    3443
 ${account_security_check}   3443

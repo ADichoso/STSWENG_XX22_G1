@@ -9,7 +9,7 @@ Library    XML
 
 *** Variables ***
 ${BROWSER}    Chrome
-${URL}    http://localhost:3000/
+${URL}    https://sweng-testing-ci.onrender.com/
 
 #user role account
 ${account_id}    34433443

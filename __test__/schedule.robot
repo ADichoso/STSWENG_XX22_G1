@@ -10,7 +10,7 @@ Library    DateTime
 
 *** Variables ***
 ${BROWSER}    Chrome
-${URL}    http://localhost:3000/
+${URL}    https://sweng-testing-ci.onrender.com/
 ${account_id}    34433443
 ${account_pass}    3443
 ${account_security_check}   3443
@@ -39,13 +39,15 @@ Open a Schedule
 
 *** Test Cases ***
 4-1 Checking the Schedule of a given date
-    Open Browser    http://localhost:3000/login    chrome
+    Open Browser    ${URL}login    chrome
     Maximize Browser Window
     Set Selenium Speed    0
     
     Login to Profile
     Open a Schedule
     
+
+    Sleep    5s
     ${schedule_label}=    Get Text    id=schedule_label
     Should Be Equal    ${schedule_label}    PASEO -> DLSU LC 07:00 AM 2024-03-31
 
@@ -55,7 +57,7 @@ Open a Schedule
     Close All Browsers
 
 4-2 Cancelling the Schedule Input
-    Open Browser    http://localhost:3000/login    chrome
+    Open Browser    ${URL}login    chrome
     Maximize Browser Window
     Set Selenium Speed    0
     
@@ -86,7 +88,7 @@ Open a Schedule
     Close All Browsers
 
 4-3 Missing Date
-    Open Browser    http://localhost:3000/login    chrome
+    Open Browser    ${URL}login    chrome
     Maximize Browser Window
     Set Selenium Speed    0
     
@@ -109,7 +111,7 @@ Open a Schedule
 
 
 4-4 Missing Location
-    Open Browser    http://localhost:3000/login    chrome
+    Open Browser    ${URL}login    chrome
     Maximize Browser Window
     Set Selenium Speed    0
     
@@ -129,7 +131,7 @@ Open a Schedule
     Close All Browsers
 
 4-5 Missing Time Slot
-    Open Browser    http://localhost:3000/login    chrome
+    Open Browser    ${URL}login    chrome
     Maximize Browser Window
     Set Selenium Speed    0
     
