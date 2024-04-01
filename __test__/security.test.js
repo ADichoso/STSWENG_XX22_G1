@@ -22,139 +22,139 @@ jest.mock('../models/driverdb.js');
 
 describe('SecurityController - get_security', () => {
     test('get_security should render if the id is an Admin id', async () => {      
-        req = {query: {user_id_number: 99999999}};
+        req = {query: {id_number: 99999999}};
         res = {render: jest.fn()};
 
-        // User: null, Admin: {user_id_number: 99999999}, Driver: null
-        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce({user_id_number: 99999999}).mockResolvedValueOnce(null);
+        // User: null, Admin: {id_number: 99999999}, Driver: null
+        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce({id_number: 99999999}).mockResolvedValueOnce(null);
 
         await securityController.get_security(req, res);
 
-        expect(find_one_mock).toHaveBeenCalledWith(User, {user_id_number: 99999999}, 'user_id_number');
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {user_id_number: 99999999}, 'user_id_number');
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {user_id_number: 99999999}, 'user_id_number');
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: 99999999}, 'id_number');
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: 99999999}, 'id_number');
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: 99999999}, 'id_number');
 
-        expect(res.render).toHaveBeenCalledWith('Security', {user_id_number: 99999999});
+        expect(res.render).toHaveBeenCalledWith('Security', {id_number: 99999999});
     });
 
     test('get_security should render if the id is a User id', async () => {
-        req = {query: {user_id_number: 12345678}};
+        req = {query: {id_number: 12345678}};
         res = {render: jest.fn()};
 
-        // User: {user_id_number: 12345678}, Admin: null, Driver: null
-        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({user_id_number: 12345678}).mockResolvedValueOnce(null).mockResolvedValueOnce(null);
+        // User: {id_number: 12345678}, Admin: null, Driver: null
+        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({id_number: 12345678}).mockResolvedValueOnce(null).mockResolvedValueOnce(null);
 
         await securityController.get_security(req, res);
 
-        expect(find_one_mock).toHaveBeenCalledWith(User, {user_id_number: 12345678}, 'user_id_number');
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {user_id_number: 12345678}, 'user_id_number');
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {user_id_number: 12345678}, 'user_id_number');
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: 12345678}, 'id_number');
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: 12345678}, 'id_number');
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: 12345678}, 'id_number');
 
-        expect(res.render).toHaveBeenCalledWith('Security', {user_id_number: 12345678});
+        expect(res.render).toHaveBeenCalledWith('Security', {id_number: 12345678});
     });
 
     test('get_security should render if the id is a Driver id', async () => {
-        req = {query: {user_id_number: 12345678}};
+        req = {query: {id_number: 12345678}};
         res = {render: jest.fn()};
 
-        // User: null, Admin: null, Driver: {user_id_number: 12345678}
-        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce({user_id_number: 12345678});
+        // User: null, Admin: null, Driver: {id_number: 12345678}
+        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce({id_number: 12345678});
 
         await securityController.get_security(req, res);
 
-        expect(find_one_mock).toHaveBeenCalledWith(User, {user_id_number: 12345678}, 'user_id_number');
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {user_id_number: 12345678}, 'user_id_number');
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {user_id_number: 12345678}, 'user_id_number');
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: 12345678}, 'id_number');
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: 12345678}, 'id_number');
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: 12345678}, 'id_number');
 
-        expect(res.render).toHaveBeenCalledWith('Security', {user_id_number: 12345678});
+        expect(res.render).toHaveBeenCalledWith('Security', {id_number: 12345678});
     });
 });
 
 describe('SecurityController - post_security', () => {
     test('post_security should redirect to /ProfileAdmin if the id is an Admin id and the Security Code is correct', async () => {
-        req = {body: {user_id_number: '99999999', user_security_code: '1234'}, session: {is_sec_code_valid: false}};
+        req = {body: {id_number: '99999999', user_security_code: '1234'}, session: {is_sec_code_valid: false}};
         res = {status: jest.fn().mockReturnThis(), redirect: jest.fn()};
 
-        // User: null, Admin: {user_id_number: 99999999, security_code: 1234}, Driver: null
-        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce({user_id_number: '99999999', security_code: '1234'}).mockResolvedValueOnce(null);
+        // User: null, Admin: {id_number: 99999999, security_code: 1234}, Driver: null
+        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce({id_number: '99999999', security_code: '1234'}).mockResolvedValueOnce(null);
         // Mock bcrypt.compare to return true, since the security code is correct
         bcrypt.compare.mockResolvedValueOnce(true);
 
         await securityController.post_security(req, res);
         
-        expect(find_one_mock).toHaveBeenCalledWith(User, {user_id_number: '99999999'}, "user_id_number security_code");
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {user_id_number: '99999999'}, "user_id_number security_code");
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {user_id_number: '99999999'}, "user_id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '99999999'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '99999999'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '99999999'}, "id_number security_code");
 
         expect(bcrypt.compare).toHaveBeenCalledWith('1234', '1234');
         expect(req.session.is_sec_code_valid).toBe(true);
         expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.redirect).toHaveBeenCalledWith('/ProfileAdmin?user_id_number=99999999');
+        expect(res.redirect).toHaveBeenCalledWith('/ProfileAdmin?id_number=99999999');
     });
 
     test('post_security should redirect to /Profile if the id is a User id and the Security Code is correct', async () => {
-        req = {body: {user_id_number: '12345678', user_security_code: '1234'}, session: {is_sec_code_valid: false}};
+        req = {body: {id_number: '12345678', user_security_code: '1234'}, session: {is_sec_code_valid: false}};
         res = {status: jest.fn().mockReturnThis(), redirect: jest.fn()};
 
-        // User: {user_id_number: 12345678, security_code: 1234}, Admin: null, Driver: null
-        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({user_id_number: '12345678', security_code: '1234'}).mockResolvedValueOnce(null).mockResolvedValueOnce(null);
+        // User: {id_number: 12345678, security_code: 1234}, Admin: null, Driver: null
+        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({id_number: '12345678', security_code: '1234'}).mockResolvedValueOnce(null).mockResolvedValueOnce(null);
         // Mock bcrypt.compare to return true, since the security code is correct
         bcrypt.compare.mockResolvedValueOnce(true);
 
         await securityController.post_security(req, res);
         
-        expect(find_one_mock).toHaveBeenCalledWith(User, {user_id_number: '12345678'}, "user_id_number security_code");
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {user_id_number: '12345678'}, "user_id_number security_code");
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {user_id_number: '12345678'}, "user_id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, "id_number security_code");
 
         expect(bcrypt.compare).toHaveBeenCalledWith('1234', '1234');
         expect(req.session.is_sec_code_valid).toBe(true);
         expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.redirect).toHaveBeenCalledWith('/Profile?user_id_number=12345678');
+        expect(res.redirect).toHaveBeenCalledWith('/Profile?id_number=12345678');
     });
 
     test('post_security should redirect to /ProfileDriver if the id is a Driver id and the Security Code is correct', async () => {
-        req = {body: {user_id_number: '12345678', user_security_code: '1234'}, session: {is_sec_code_valid: false}};
+        req = {body: {id_number: '12345678', user_security_code: '1234'}, session: {is_sec_code_valid: false}};
         res = {status: jest.fn().mockReturnThis(), redirect: jest.fn()};
 
-        // User: null, Admin: null, Driver: {user_id_number: 12345678, security_code: 1234}
-        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce({user_id_number: '12345678', security_code: '1234'});
+        // User: null, Admin: null, Driver: {id_number: 12345678, security_code: 1234}
+        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null).mockResolvedValueOnce({id_number: '12345678', security_code: '1234'});
         // Mock bcrypt.compare to return true, since the security code is correct
         bcrypt.compare.mockResolvedValueOnce(true);
 
         await securityController.post_security(req, res);
 
-        expect(find_one_mock).toHaveBeenCalledWith(User, {user_id_number: '12345678'}, "user_id_number security_code");
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {user_id_number: '12345678'}, "user_id_number security_code");
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {user_id_number: '12345678'}, "user_id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, "id_number security_code");
         
         expect(bcrypt.compare).toHaveBeenCalledWith('1234', '1234');
         expect(req.session.is_sec_code_valid).toBe(true);
         expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.redirect).toHaveBeenCalledWith('/ProfileDriver?user_id_number=12345678');
+        expect(res.redirect).toHaveBeenCalledWith('/ProfileDriver?id_number=12345678');
     });
 
     test('post_security should render Login if the Security Code is incorrect', async () => {
-        req = {body: {user_id_number: '12345678', user_security_code: '1234'}};
+        req = {body: {id_number: '12345678', user_security_code: '1234'}};
         res = {render: jest.fn()};
 
-        // User: {user_id_number: 12345678, security_code: 12345}, Admin: null, Driver: null
-        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({user_id_number: '12345678', security_code: '12345'}).mockResolvedValueOnce(null).mockResolvedValueOnce(null);
+        // User: {id_number: 12345678, security_code: 12345}, Admin: null, Driver: null
+        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({id_number: '12345678', security_code: '12345'}).mockResolvedValueOnce(null).mockResolvedValueOnce(null);
         // Mock bcrypt.compare to return false, since the security code is incorrect
         bcrypt.compare.mockResolvedValueOnce(false);
 
         await securityController.post_security(req, res);
         
-        expect(find_one_mock).toHaveBeenCalledWith(User, {user_id_number: '12345678'}, "user_id_number security_code");
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {user_id_number: '12345678'}, "user_id_number security_code");
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {user_id_number: '12345678'}, "user_id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, "id_number security_code");
 
         expect(bcrypt.compare).toHaveBeenCalled();
         expect(res.render).toHaveBeenCalledWith('Login', {is_code_correct: false});
     });
 
     test('post_security should render Login if the id is not found', async () => {
-        req = {body: {user_id_number: '12345678', user_security_code: '1234'}};
+        req = {body: {id_number: '12345678', user_security_code: '1234'}};
         res = {render: jest.fn()};
 
         // User: null, Admin: null, Driver: null
@@ -162,9 +162,9 @@ describe('SecurityController - post_security', () => {
 
         await securityController.post_security(req, res);
         
-        expect(find_one_mock).toHaveBeenCalledWith(User, {user_id_number: '12345678'}, "user_id_number security_code");
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {user_id_number: '12345678'}, "user_id_number security_code")
-        expect(find_one_mock).toHaveBeenCalledWith(Driver, {user_id_number: '12345678'}, "user_id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: '12345678'}, "id_number security_code");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: '12345678'}, "id_number security_code")
+        expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: '12345678'}, "id_number security_code");
         expect(res.render).toHaveBeenCalledWith('Login', {is_code_correct: false});
     });
 });

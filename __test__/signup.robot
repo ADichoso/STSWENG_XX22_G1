@@ -31,7 +31,7 @@ ${BROWSER}    Chrome
     Input Text    id=user_first_name    ${first_name}
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 
@@ -71,7 +71,7 @@ ${BROWSER}    Chrome
     #Input fields
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 
@@ -111,7 +111,7 @@ ${BROWSER}    Chrome
     #Input fields
     Input Text    id=user_first_name    Test
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
         
@@ -152,7 +152,7 @@ ${BROWSER}    Chrome
     #Input fields
     Input Text    id=user_first_name    Test
     Input Text    id=user_last_name    ${last_name}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 
@@ -193,7 +193,7 @@ ${BROWSER}    Chrome
     Input Text    id=user_first_name    Test
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 
@@ -230,7 +230,7 @@ ${BROWSER}    Chrome
     Input Text    id=user_first_name    Test
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 
@@ -278,8 +278,8 @@ ${BROWSER}    Chrome
     Click Element    id=user_passenger_type
     Click Element    xpath=//option[@value='Employee']
     
-    Click Element    id=user_id_number
-    Press Keys    id=user_id_number    \DELETE
+    Click Element    id=id_number
+    Press Keys    id=id_number    \DELETE
     Wait Until Element Is Visible    id=error_box
     Sleep    2s
 
@@ -320,16 +320,16 @@ ${BROWSER}    Chrome
     Click Element    xpath=//option[@value='Employee']
     Click Element    id=user_first_name
         
-    Click Element    id=user_id_number
-    Input Text    id=user_id_number    1234
+    Click Element    id=id_number
+    Input Text    id=id_number    1234
 
 
     #Check the error message
     ${error_message} =    Get Text    id=error_box
     Should Be Equal    ${error_message}    ID number should contain exactly 8 digits.
 
-    Clear Element Text    id=user_id_number
-    Input Text    id=user_id_number    test
+    Clear Element Text    id=id_number
+    Input Text    id=id_number    test
     Click Element    id=user_first_name
     Sleep    1s
 
@@ -357,7 +357,7 @@ ${BROWSER}    Chrome
     Input Text    id=user_first_name    Test
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_security_code    ${security_code}
 
     #select Designation
@@ -396,7 +396,7 @@ ${BROWSER}    Chrome
     Input Text    id=user_first_name    ${first_name}
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
         
@@ -429,7 +429,7 @@ ${BROWSER}    Chrome
     Input Text    id=user_first_name    ${first_name}
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 

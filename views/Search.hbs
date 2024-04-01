@@ -84,7 +84,7 @@
 
 									name_element.textContent = item.firstName + " " + item.lastName;
 									designation_element.textContent = item.passengerType;
-									html_attribute.setAttribute("href", "/SearchProfile?user_id_number=" + item.user_id_number);
+									html_attribute.setAttribute("href", "/SearchProfile?id_number=" + item.id_number);
 
 									if (item.profilePicture == null)
 										img_element.setAttribute("src", "images/Default.png");

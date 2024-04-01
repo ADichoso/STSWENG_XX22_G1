@@ -28,7 +28,7 @@ Login With account
     Open Browser    ${URL}login    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
-    Input Text    id=user_id_number    ${id}
+    Input Text    id=id_number    ${id}
     Input Text    id=user_password    ${password}
     Click Button    xpath=//button[@type='submit']
     ${new_url}   Get Location

@@ -190,7 +190,7 @@ describe('ReservationController - post_reservations', () => {
             jest.resetAllMocks();
          });
         test('account is a user', async() => {
-            let req = {body: {user_id_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
+            let req = {body: {id_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
             let res = {redirect: jest.fn()};
 
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({id_number: 9999999}).mockResolvedValueOnce(null);
@@ -206,7 +206,7 @@ describe('ReservationController - post_reservations', () => {
         });
 
         test('account is an admin', async() => {
-            let req = {body: {user_id_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
+            let req = {body: {id_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
             let res = {redirect: jest.fn()};
 
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce({id_number: 9999999});
@@ -221,7 +221,7 @@ describe('ReservationController - post_reservations', () => {
             expect(res.redirect).toHaveBeenCalledWith('/Reservation?id_number=9999999&reserve_user_success=true');
         });
         test('account does not exist', async() => {
-            let req = {body: {user_id_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
+            let req = {body: {id_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
             let res = {redirect: jest.fn()};
 
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null);
@@ -233,8 +233,8 @@ describe('ReservationController - post_reservations', () => {
 
             expect(res.redirect).toHaveBeenCalledWith('/Reservation?id_number=9999999&reserve_user_fail=true');
         });
-        test('form has no user_id_number', async() => {
-            let req = {body: {user_id_number: "", hidden_ID_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
+        test('form has no id_number', async() => {
+            let req = {body: {id_number: "", hidden_ID_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
             let res = {redirect: jest.fn()};
 
             const insert_one_mock = jest.spyOn(db, 'insert_one').mockResolvedValueOnce(true);
@@ -246,7 +246,7 @@ describe('ReservationController - post_reservations', () => {
         });
 
         test('form has default entry_loc', async() => {
-            let req = {body: {user_id_number: "", hidden_ID_number:9999999, hidden_entry_loc: "Entry Location", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
+            let req = {body: {id_number: "", hidden_ID_number:9999999, hidden_entry_loc: "Entry Location", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
             let res = {redirect: jest.fn()};
 
 
@@ -256,7 +256,7 @@ describe('ReservationController - post_reservations', () => {
         });
 
         test('form has default exit_loc', async() => {
-            let req = {body: {user_id_number: "", hidden_ID_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "Exit Location", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
+            let req = {body: {id_number: "", hidden_ID_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "Exit Location", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
             let res = {redirect: jest.fn()};
 
             await controller.post_reservations(req,res);
@@ -265,7 +265,7 @@ describe('ReservationController - post_reservations', () => {
         });
 
         test('form has default entry_time', async() => {
-            let req = {body: {user_id_number: "", hidden_ID_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "Entry Time", hidden_start_campus: "test", hidden_exit_time: "test"}};
+            let req = {body: {id_number: "", hidden_ID_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "Entry Time", hidden_start_campus: "test", hidden_exit_time: "test"}};
             let res = {redirect: jest.fn()};
 
             await controller.post_reservations(req,res);
@@ -274,7 +274,7 @@ describe('ReservationController - post_reservations', () => {
         });
 
         test('form has default exit_time', async() => {
-            let req = {body: {user_id_number: "", hidden_ID_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "Exit Time"}};
+            let req = {body: {id_number: "", hidden_ID_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "Exit Time"}};
             let res = {redirect: jest.fn()};
 
             await controller.post_reservations(req,res);
@@ -283,7 +283,7 @@ describe('ReservationController - post_reservations', () => {
         });
 
         test('there is an error with the insert operation', async() => {
-            let req = {body: {user_id_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
+            let req = {body: {id_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
             let res = {redirect: jest.fn()};
 
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({id_number: 9999999}).mockResolvedValueOnce(null);
@@ -455,64 +455,64 @@ describe('ReservationController - post_search_user', () => {
         jest.resetAllMocks();
     });
 
-    test('user_id_number does not exist', async () => {
-        let req = {body: {user_id_number: "user_id_number", admin_id: "admin_id"}};
+    test('id_number does not exist', async () => {
+        let req = {body: {id_number: "id_number", admin_id: "admin_id"}};
         let res = {redirect: jest.fn()};
 
         const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce(null);
 
         await controller.post_search_user(req,res);
 
-        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: "user_id_number"}, "id_number first_name last_name");
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: "user_id_number"}, "id_number first_name last_name");
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: "id_number"}, "id_number first_name last_name");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: "id_number"}, "id_number first_name last_name");
 
         expect(res.redirect).toHaveBeenCalledWith('/ReservationAdmin?id_number=admin_id&is_search_user_valid=false');
     });
 
-    test('user_id_number is a user', async () => {
-        let req = {body: {user_id_number: "user_id_number", admin_id: "admin_id"}};
+    test('id_number is a user', async () => {
+        let req = {body: {id_number: "id_number", admin_id: "admin_id"}};
         let res = {render: jest.fn()};
 
-        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({id_number: "user_id_number", first_name: "luis", last_name: "razon"}).mockResolvedValueOnce(null);
+        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({id_number: "id_number", first_name: "luis", last_name: "razon"}).mockResolvedValueOnce(null);
         const find_many_mock = jest.spyOn(db, 'find_many').mockResolvedValueOnce([{result: "result"}]); //we dont care what this returns, we just need to trigger the function
 
         await controller.post_search_user(req,res);
 
-        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: "user_id_number"}, "id_number first_name last_name");
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: "user_id_number"}, "id_number first_name last_name");
-        expect(find_many_mock).toHaveBeenCalledWith(Reservation, {id_number: "user_id_number"}, "");
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: "id_number"}, "id_number first_name last_name");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: "id_number"}, "id_number first_name last_name");
+        expect(find_many_mock).toHaveBeenCalledWith(Reservation, {id_number: "id_number"}, "");
 
         expect(res.render).toHaveBeenCalledWith('ReservationAdmin', {result: [{result: "result"}], admin_id: "admin_id", selected_name: "luis razon"});
     });
 
-    test('user_id_number is an admin', async () => {
-        let req = {body: {user_id_number: "user_id_number", admin_id: "admin_id"}};
+    test('id_number is an admin', async () => {
+        let req = {body: {id_number: "id_number", admin_id: "admin_id"}};
         let res = {render: jest.fn()};
 
-        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce({id_number: "user_id_number", first_name: "luis", last_name: "razon"});
+        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null).mockResolvedValueOnce({id_number: "id_number", first_name: "luis", last_name: "razon"});
         const find_many_mock = jest.spyOn(db, 'find_many').mockResolvedValueOnce([{result: "result"}]); //we dont care what this returns, we just need to trigger the function
 
         await controller.post_search_user(req,res);
 
-        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: "user_id_number"}, "id_number first_name last_name");
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: "user_id_number"}, "id_number first_name last_name");
-        expect(find_many_mock).toHaveBeenCalledWith(Reservation, {id_number: "user_id_number"}, "");
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: "id_number"}, "id_number first_name last_name");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: "id_number"}, "id_number first_name last_name");
+        expect(find_many_mock).toHaveBeenCalledWith(Reservation, {id_number: "id_number"}, "");
 
         expect(res.render).toHaveBeenCalledWith('ReservationAdmin', {result: [{result: "result"}], admin_id: "admin_id", selected_name: "luis razon"});
     });
 
     test('there are no reservations for an id number', async () => {
-        let req = {body: {user_id_number: "user_id_number", admin_id: "admin_id"}};
+        let req = {body: {id_number: "id_number", admin_id: "admin_id"}};
         let res = {redirect: jest.fn()};
 
-        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({id_number: "user_id_number", first_name: "luis", last_name: "razon"}).mockResolvedValueOnce(null);
+        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce({id_number: "id_number", first_name: "luis", last_name: "razon"}).mockResolvedValueOnce(null);
         const find_many_mock = jest.spyOn(db, 'find_many').mockResolvedValueOnce([]); //we dont care what this returns, we just need to trigger the function
 
         await controller.post_search_user(req,res);
 
-        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: "user_id_number"}, "id_number first_name last_name");
-        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: "user_id_number"}, "id_number first_name last_name");
-        expect(find_many_mock).toHaveBeenCalledWith(Reservation, {id_number: "user_id_number"}, "");
+        expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: "id_number"}, "id_number first_name last_name");
+        expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: "id_number"}, "id_number first_name last_name");
+        expect(find_many_mock).toHaveBeenCalledWith(Reservation, {id_number: "id_number"}, "");
 
         expect(res.redirect).toHaveBeenCalledWith('/ReservationAdmin?id_number=admin_id&reservation_list=false');
     });

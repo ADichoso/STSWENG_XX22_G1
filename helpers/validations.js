@@ -28,8 +28,8 @@ const validation = {
 
             check('user_email', 'Email should not be empty.').notEmpty(),
 
-            check('user_id_number', 'ID number should not be empty.').notEmpty(),
-            check('user_id_number', 'ID number should contain 8 digits.').isLength({min: 8, max: 8}),
+            check('id_number', 'ID number should not be empty.').notEmpty(),
+            check('id_number', 'ID number should contain 8 digits.').isLength({min: 8, max: 8}),
 
             check('user_password', 'Password should not be empty.').notEmpty(),
 
@@ -43,7 +43,7 @@ const validation = {
 
     security_code_validation: function(req, res, next) 
     {
-        if(req.session.user_id_number)
+        if(req.session.id_number)
         {
             if(req.session.is_sec_code_valid)
                 next();

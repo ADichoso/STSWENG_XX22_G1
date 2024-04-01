@@ -13,7 +13,7 @@ var user_schema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    user_id_number: {
+    id_number: {
         type: Number,
         required: true,
     },

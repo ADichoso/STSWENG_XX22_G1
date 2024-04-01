@@ -35,7 +35,7 @@ const signupController = {
                 first_name: req.body.user_first_name,
                 last_name: req.body.user_last_name,
                 email: req.body.user_email,
-                user_id_number: req.body.user_id_number,
+                id_number: req.body.id_number,
                 password: await bcrypt.hash(req.body.user_password, saltRounds),
                 security_code: await bcrypt.hash(req.body.user_security_code, saltRounds),
                 designation: req.body.user_designation,
@@ -59,10 +59,10 @@ const signupController = {
     },
 
     get_check_ID: async function (req, res) {
-        var user_id_number = req.query.user_id_number;
-        const user_result = await db.find_one(User, {user_id_number: user_id_number});
-        const admin_result = await db.find_one(Admin, {user_id_number: user_id_number});
-        const driver_result = await db.find_one(Driver, {user_id_number: user_id_number});
+        var id_number = req.query.id_number;
+        const user_result = await db.find_one(User, {id_number: id_number});
+        const admin_result = await db.find_one(Admin, {id_number: id_number});
+        const driver_result = await db.find_one(Driver, {id_number: id_number});
         
         if (user_result)
             res.send(user_result);
