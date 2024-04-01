@@ -21,12 +21,12 @@
 
                 ready_HTML({{display_UI}});
 				
-				{{#each result}}
-					hideScheduleForm(true, ["{{start_campus}}", "{{date}}", "{{entry_loc}}", "{{entry_time}}", "{{exit_loc}}", "{{exit_time}}", {{user_id_number}}], false);
-				{{/each}}
+				{{!-- {{#each result}}
+					hideScheduleForm(true, ["{{start_campus}}", "{{date}}", "{{entry_loc}}", "{{entry_time}}", "{{exit_loc}}", "{{exit_time}}", {{id_number}}], false);
+				{{/each}} --}}
 
-                var adminLink = '/ProfileAdmin?user_id_number=' + {{user_id_number}};
-                var userLink = '/Profile?user_id_number=' + {{user_id_number}};
+                var adminLink = '/ProfileAdmin?id_number=' + {{id_number}};
+                var userLink = '/Profile?id_number=' + {{id_number}};
 
                 if ({{is_admin}} == true){
                     document.getElementById('backButton').setAttribute('href', adminLink);
@@ -35,9 +35,9 @@
                     document.getElementById('backButton').setAttribute('href', userLink);
                 }
 
-                var reserveUserStatus = new URLSearchParams(window.location.search).get('reserveUserSuccess');
-                var reserveUpdateStatus = new URLSearchParams(window.location.search).get('isUpdateSuccess');
-                var reserveDeleteSatus = new URLSearchParams(window.location.search).get('isDeleteSuccess');
+                var reserveUserStatus = new URLSearchParams(window.location.search).get('reserve_user_success');
+                var reserveUpdateStatus = new URLSearchParams(window.location.search).get('is_update_success');
+                var reserveDeleteSatus = new URLSearchParams(window.location.search).get('is_delete_success');
 
                 if ( reserveUserStatus != null && reserveUserStatus == "true"){
                     document.getElementById("success_box").style.display = "block";
@@ -99,7 +99,7 @@
                     <p id="error_message"> Invalid User/Password. Check your input </p>
                 </div>
 
-                <img src= "../images/DLSU_Logo.png" class = "website_logo">
+                <a href="/"> <img src= "../images/DLSU_Logo.png" class = "website_logo"> </a> 
 
                 <style>
                     img:hover{
@@ -201,7 +201,9 @@
 
                 <div class = "schedule_container">
                     <!-- This where the funny reservations appear -->
-					
+					{{#each result}}
+					    {{> reserved_sched this}}
+				    {{/each}}
 
                 </div>
                                 
@@ -218,16 +220,16 @@
                                 <button type="button" class="switch" id="manila_btn" onclick="right_click();"> Manila </button> 
                             </div>
                             
-                            <label for="user_user_id_number"></label>
-							<input type="hidden" id="hiddenStartCampus" required name="hiddenStartCampus" value="">
-							<input type="hidden" id="hiddenuser_id_number"  name="hiddenuser_id_number" value="">
-							<input type="hidden" id="hiddenEntryLoc" name="hiddenEntryLoc" value="">
-							<input type="hidden" id="hiddenEntryTime" name="hiddenEntryTime" value="">
-							<input type="hidden" id="hiddenExitLoc" name="hiddenExitLoc" value="">
-							<input type="hidden" id="hiddenExitTime" name="hiddenExitTime" value="">
+                            <label for="id_number"></label>
+							<input type="hidden" id="hidden_start_campus" required name="hidden_start_campus" value="">
+							<input type="hidden" id="hidden_ID_number"  name="hidden_ID_number" value="">
+							<input type="hidden" id="hidden_entry_loc" name="hidden_entry_loc" value="">
+							<input type="hidden" id="hidden_entry_time" name="hidden_entry_time" value="">
+							<input type="hidden" id="hidden_exit_loc" name="hidden_exit_loc" value="">
+							<input type="hidden" id="hidden_exit_time" name="hidden_exit_time" value="">
 							<input type="hidden" id="adminId" name="adminId" value="">
 							
-                            <input type="text" required placeholder="ID Number" class="fillup" name="user_user_id_number" id="user_user_id_number" style="position: relative; top: -25px; display: block;" value="" pattern="[0-9]+" minlength="8" maxlength="8">
+                            <input type="text" required placeholder="ID Number" class="fillup" name="id_number" id="id_number" style="position: relative; top: -25px; display: block;" value="" pattern="[0-9]+" minlength="8" maxlength="8">
                             
 							<input type="date" class="fillup" required name="user_date" id="user_date" >
     
@@ -309,20 +311,20 @@
                                 <button type="button" class="switch" id="manila_btn" onclick="e_right_click();"> Manila </button> 
                             </div>
 							
-							<input type="hidden" id="ehiddenStartCampus" required name="ehiddenStartCampus" value="">
-							<input type="hidden" id="ehiddenuser_id_number" required name="ehiddenuser_id_number" value="">
-							<input type="hidden" id="ehiddenEntryLoc" name="ehiddenEntryLoc" value="">
-							<input type="hidden" id="ehiddenEntryTime" name="ehiddenEntryTime" value="">
-							<input type="hidden" id="ehiddenExitLoc" name="ehiddenExitLoc" value="">
-							<input type="hidden" id="ehiddenExitTime" name="ehiddenExitTime" value="">
+							<input type="hidden" id="e_hidden_start_campus" required name="e_hidden_start_campus" value="">
+							<input type="hidden" id="e_hidden_id_number" required name="e_hidden_id_number" value="">
+							<input type="hidden" id="e_hidden_entry_loc" name="e_hidden_entry_loc" value="">
+							<input type="hidden" id="e_hidden_entry_time" name="e_hidden_entry_time" value="">
+							<input type="hidden" id="e_hidden_exit_loc" name="e_hidden_exit_loc" value="">
+							<input type="hidden" id="e_hidden_exit_time" name="e_hidden_exit_time" value="">
 							
-							<input type="hidden" id="eCurrStartCampus" name ="eCurrStartCampus" value="">
-							<input type="hidden" id="eCurruser_id_number" name = "eCurruser_id_number" value="">
-							<input type="hidden" id="eCurrDate" name="eCurrDate" value="">
-							<input type="hidden" id="eCurrEntryLoc" name="eCurrEntryLoc" value="">
-							<input type="hidden" id="eCurrEntryTime" name="eCurrEntryTime" value="">
-							<input type="hidden" id="eCurrExitLoc" name="eCurrExitLoc" value="">
-							<input type="hidden" id="eCurrExitTime" name="eCurrExitTime" value="">
+							<input type="hidden" id="e_curr_start_campus" name ="e_curr_start_campus" value="">
+							<input type="hidden" id="e_curr_id_number" name = "e_curr_id_number" value="">
+							<input type="hidden" id="e_curr_date" name="e_curr_date" value="">
+							<input type="hidden" id="e_curr_entry_loc" name="e_curr_entry_loc" value="">
+							<input type="hidden" id="e_curr_entry_time" name="e_curr_entry_time" value="">
+							<input type="hidden" id="e_curr_exit_loc" name="e_curr_exit_loc" value="">
+							<input type="hidden" id="e_curr_exit_time" name="e_curr_exit_time" value="">
 							
                             <input type="date" placeholder="Date" class="fillup" required name="user_date" id="user_date" >
     
@@ -414,13 +416,13 @@
                     <hr>
                     <div class="input">
                         <form action="/ReservationDelete" method="post">
-							<input type="hidden" id="dCurrStartCampus" required name="dCurrStartCampus" value="">
-							<input type="hidden" id="dCurruser_id_number" required name="dCurruser_id_number" value="">
-							<input type="hidden" id="dCurrDate" name="dCurrDate" value="">
-							<input type="hidden" id="dCurrEntryLoc" name="dCurrEntryLoc" value="">
-							<input type="hidden" id="dCurrEntryTime" name="dCurrEntryTime" value="">
-							<input type="hidden" id="dCurrExitLoc" name="dCurrExitLoc" value="">
-							<input type="hidden" id="dCurrExitTime" name="dCurrExitTime" value="">
+							<input type="hidden" id="d_curr_start_campus" required name="d_curr_start_campus" value="">
+							<input type="hidden" id="d_curr_id_number" required name="d_curr_id_number" value="">
+							<input type="hidden" id="d_curr_date" name="d_curr_date" value="">
+							<input type="hidden" id="d_curr_entry_loc" name="d_curr_entry_loc" value="">
+							<input type="hidden" id="d_curr_entry_time" name="d_curr_entry_time" value="">
+							<input type="hidden" id="d_curr_exit_loc" name="d_curr_exit_loc" value="">
+							<input type="hidden" id="d_curr_exit_time" name="d_curr_exit_time" value="">
                             <button type="submit" class="toggle_btn" id="delete_btn" onclick="hide_delete_form();"> Delete <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
 						</form>
                             <button type="submit" class="toggle_btn" id="cancel_btn" onclick="cancel_delete_form();"> Cancel</button>

@@ -6,13 +6,13 @@ var count = null;
 function left_click(){
     function_called = 0;
     btn.style.left = '0';
-    locationChangeFormHelper(0, false);
+    location_change_form_helper(0, false);
 }
 
 function right_click(){
     function_called = 1;
     btn.style.left = '160px';
-    locationChangeFormHelper(1, false);
+    location_change_form_helper(1, false);
 }
 
 function get_start_campus(){
@@ -22,13 +22,13 @@ function get_start_campus(){
 function e_left_click(){
     edit_function_called = 0;
     ebtn.style.left = '0';
-    locationChangeFormHelper(0, true);
+    location_change_form_helper(0, true);
 }
 
 function e_right_click(){
     edit_function_called = 1;
     ebtn.style.left = '160px';
-    locationChangeFormHelper(1, true);
+    location_change_form_helper(1, true);
 }
 
 function e_get_start_campus(){
@@ -65,7 +65,7 @@ function show_schedule_form() {
     var entryTimeBox = doc.getElementById('user_entryTime');
     var exitBox = doc.getElementById('user_exit');
     var exitTimeBox = doc.getElementById('user_exitTime');
-    var idBox = doc.getElementById('user_user_id_number');
+    var idBox = doc.getElementById('id_number');
 
     if ( admin_function_call == 0 ){
         idBox.style.display = 'none';
@@ -140,38 +140,38 @@ function fill_hidden_field(_box, _hiddenBox){
 	hiddenBox.value = box.options[box.selectedIndex].text;
 }
 function populate_fields(){
-	var startCampusBox = document.getElementById('hiddenStartCampus');
+	var startCampusBox = document.getElementById('hidden_start_campus');
 	
-	var user_id_numberBox = document.getElementById('user_user_id_number');
-	var hiddenuser_id_numberBox = document.getElementById('hiddenuser_id_number');
-	var adminIdBox = document.getElementById('adminId');
+	var id_number_box = document.getElementById('id_number');
+	var hidden_id_number_box = document.getElementById('hiddenid_number');
+	var admin_id_box = document.getElementById('adminId');
 	
-	adminIdBox.value = getuser_id_number();
+	admin_id_box.value = getid_number();
 	
-	var startVal;
-	if(!getStartCampus())
-		startVal = 'Laguna';
+	var start_val;
+	if(!get_start_campus())
+		start_val = 'Laguna';
 	else
-		startVal = 'Manila';
+		start_val = 'Manila';
 	
-	startCampusBox.value = startVal;
+	startCampusBox.value = start_val;
 	
-	if(user_id_numberBox.value != ""){
-		hiddenuser_id_numberBox.value = user_id_numberBox.value;
+	if(id_number_box.value != ""){
+		hidden_id_number_box.value = id_number_box.value;
 	}
 	else
-		hiddenuser_id_numberBox.value = getuser_id_number();
+    hidden_id_number_box.value = get_ID_number();
 	
-	fill_hidden_field('user_entry', 'hiddenEntryLoc');
-	fill_hidden_field('user_entryTime', 'hiddenEntryTime');
-	fill_hidden_field('user_exit', 'hiddenExitLoc');
-	fill_hidden_field('user_exitTime', 'hiddenExitTime');
+	fill_hidden_field('user_entry', 'hidden_entry_loc');
+	fill_hidden_field('user_entryTime', 'hidden_entry_time');
+	fill_hidden_field('user_exit', 'hidden_exit_loc');
+	fill_hidden_field('user_exitTime', 'hidden_exit_time');
 }
 
-function getuser_id_number(){
-	return new URLSearchParams(window.location.search).get('user_id_number');
+function get_ID_number(){
+	return new URLSearchParams(window.location.search).get('id_number');
 }
-function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
+function hide_schedule_form(fromLoad = 0, resultArr = [], isSearch){
 
     var scheduleContainer = document.getElementsByClassName('schedule_container')[0];
     var scheduleForm = document.getElementsByClassName('form_box')[0];
@@ -186,9 +186,9 @@ function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
 		
 	} 
 	div.setAttribute('id', count );
-	if(resultArr.length != 0) var userID = resultArr[6];
-	else var userID = getuser_id_number();
-	div.setAttribute('linkeduser_id_number', userID); 
+	if(resultArr.length != 0) var user_id = resultArr[6];
+	else var user_id = get_ID_number();
+	div.setAttribute('linkedidnumber', user_id); 
 	
     scheduleContainer.appendChild(div);
 	
@@ -203,14 +203,14 @@ function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
         edit_btn.className = 'edit_btn';
         edit_btn.setAttribute('type', 'button');
         edit_btn.setAttribute('id', 'e_btn' + count);
-        edit_btn.setAttribute('onclick','showEditForm(' + count + ')');
+        edit_btn.setAttribute('onclick','show_edit_form(' + count + ')');
         edit_btn.innerHTML = 'EDIT';
 
         var delete_btn = document.createElement('button');
         delete_btn.className = 'delete_btn';
         delete_btn.setAttribute('type', 'button');
         delete_btn.setAttribute('id', 'd_btn' + count);
-        delete_btn.setAttribute('onclick','showDeleteForm(' + count + ')');
+        delete_btn.setAttribute('onclick','show_delete_form(' + count + ')');
         delete_btn.innerHTML = 'DELETE';
 
         divBtn.appendChild(edit_btn);
@@ -218,13 +218,13 @@ function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
     }
     
 	if( fromLoad ){ //is being called to populate the list from after loading screen
-		createTextInfo(div, resultArr);
+		create_text_info(div, resultArr);
 	}
 
 
 }
 
-function showEditForm(i) {
+function show_edit_form(i) {
 	var doc = document;
     var editForm = document.getElementById('edit_box');
 	var date_box = document.getElementById('user_date');
@@ -232,12 +232,12 @@ function showEditForm(i) {
 	var entryTimeBox = doc.getElementById('editUser_entryTime');
 	var exitBox = doc.getElementById('editUser_exit');
 	var exitTimeBox = doc.getElementById('editUser_exitTime');
-	
-	date_box.value="";
-	entry_box.value="";
-	entryTimeBox.value="";
-	exitBox.value="";
-	exitTimeBox.value="";
+
+	date_box.value = "";
+	entry_box.value = "";
+	entryTimeBox.value = "";
+	exitBox.value = "";
+	exitTimeBox.value ="";
 	
 	var newOption = doc.createElement('option');
 	var optionText = doc.createTextNode('Time Slot');
@@ -258,103 +258,124 @@ function showEditForm(i) {
 	exitTimeBox.appendChild(newOption);
 	
 	var subBtn = document.getElementById('edit_btn');
-	subBtn.setAttribute('onclick', 'hideEditForm(' + i + ')');
+
+    var id_numberBox = document.getElementById('e_hidden_id_number');
+    id_numberBox.value = document.getElementById(i).getAttribute('linkedidnumber'); //Get the number linked to the reservation instead
+
+    //^^^from edit form
+	//vvv get current data
+	var currCampus = document.getElementById('e_curr_start_campus');
+	var currID = document.getElementById('e_curr_id_number');
+	var currDate = document.getElementById('e_curr_date');
+	var currEntryL = document.getElementById('e_curr_entry_loc');
+	var currEntryT = document.getElementById('e_curr_entry_time');
+	var currExitL = document.getElementById('e_curr_exit_loc');
+	var currExitT = document.getElementById('e_curr_exit_time');
+	
+	var reserveText = document.getElementById(i).children[1];
+	//alert(reserveText);
+	currCampus.value = reserveText.children[0].innerHTML;
+	currID.value = document.getElementById(i).getAttribute('linkedid_number');
+	currDate.value = reserveText.children[2].innerHTML;
+	currEntryL.value = reserveText.children[4].textContent;
+	currEntryT.value = reserveText.children[5].innerHTML;
+	currExitL.value = reserveText.children[7].textContent;
+	currExitT.value = reserveText.children[8].innerHTML;
+
+
+	subBtn.setAttribute('onclick', 'hide_edit_form(' + i + ')');
 	
     editForm.style.display = 'block';
 	
 }
 
-function hideEditForm(i){
+function hide_edit_form(){
 	var editForm = document.getElementById('edit_box');
 	
-	var startCampusBox = document.getElementById('ehiddenStartCampus');
-	var user_id_numberBox = document.getElementById('ehiddenuser_id_number');
+	var startCampusBox = document.getElementById('e_hidden_start_campus');
 	
 	var startVal;
-	if(!egetStartCampus())
+	if(!e_get_start_campus())
 		startVal = 'Laguna';
 	else
 		startVal = 'Manila';
 	
 	startCampusBox.value = startVal;
-	
-	user_id_numberBox.value = document.getElementById(i).getAttribute('linkeduser_id_number'); //Get the number linked to the reservation instead
-	
-	fill_hidden_field('editUser_entry', 'ehiddenEntryLoc');
-	fill_hidden_field('editUser_entryTime', 'ehiddenEntryTime');
-	fill_hidden_field('editUser_exit', 'ehiddenExitLoc');
-	fill_hidden_field('editUser_exitTime', 'ehiddenExitTime');
-	
-	//^^^from edit form
-	//vvv get current data
-	var currCampus = document.getElementById('eCurrStartCampus');
-	var currID = document.getElementById('eCurruser_id_number');
-	var currDate = document.getElementById('eCurrDate');
-	var currEntryL = document.getElementById('eCurrEntryLoc');
-	var currEntryT = document.getElementById('eCurrEntryTime');
-	var currExitL = document.getElementById('eCurrExitLoc');
-	var currExitT = document.getElementById('eCurrExitTime');
-	
-	var reserveText = document.getElementById(i).children[1];
-	//alert(reserveText);
-	currCampus.value = reserveText.children[0].innerHTML;
-	currID.value = document.getElementById(i).getAttribute('linkeduser_id_number');
-	currDate.value = reserveText.children[2].innerHTML;
-	currEntryL.value = reserveText.children[4].textContent;
-	currEntryT.value = reserveText.children[5].innerHTML;
-	currExitL.value = reserveText.children[7].textContent;
-	currExitT.value = reserveText.children[8].innerHTML;
+
+	fill_hidden_field('editUser_entry', 'e_hidden_entry_loc');
+	fill_hidden_field('editUser_entryTime', 'e_hidden_entry_time');
+	fill_hidden_field('editUser_exit', 'e_hidden_exit_loc');
+	fill_hidden_field('editUser_exitTime', 'e_hidden_exit_time');
 		
 	editForm.style.display="none";
 }
 
-function cancelEditForm(){
+function cancel_edit_form(){
     var editForm = document.getElementById('edit_box');
 	
 	editForm.style.display="none";
 }
 
-function showDeleteForm(i) {
-	var doc = document;
+function show_delete_form(i) {
     var deleteForm = document.getElementById('delete_box');	
-	var deleteButton = doc.getElementById('delete_btn');
-	
-    deleteForm.style.display = 'block';
-
-	deleteButton.setAttribute('onclick', 'hideDeleteForm(' + i + ')');
-}
-
-function hideDeleteForm(i){
-	var deleteForm = document.getElementById('delete_box');
-		
-	var currCampus = document.getElementById('dCurrStartCampus');
-	var currID = document.getElementById('dCurruser_id_number');
-	var currDate = document.getElementById('dCurrDate');
-	var currEntryL = document.getElementById('dCurrEntryLoc');
-	var currEntryT = document.getElementById('dCurrEntryTime');
-	var currExitL = document.getElementById('dCurrExitLoc');
-	var currExitT = document.getElementById('dCurrExitTime');
+	var deleteButton = document.getElementById('delete_btn');
+    		
+	var currCampus = document.getElementById('d_curr_start_campus');
+	var currID = document.getElementById('d_curr_id_number');
+	var currDate = document.getElementById('d_curr_date');
+	var currEntryL = document.getElementById('d_curr_entry_loc');
+	var currEntryT = document.getElementById('d_curr_entry_time');
+	var currExitL = document.getElementById('d_curr_exit_loc');
+	var currExitT = document.getElementById('d_curr_exit_time');
 	
 
 	var reserveText = document.getElementById(i).children[1];
 	currCampus.value = reserveText.children[0].innerHTML;
-	currID.value = document.getElementById(i).getAttribute('linkeduser_id_number');
+	currID.value = document.getElementById(i).getAttribute('linkedid_number');
 	currDate.value = reserveText.children[2].innerHTML;
 	currEntryL.value = reserveText.children[4].textContent;
 	currEntryT.value = reserveText.children[5].innerHTML;
 	currExitL.value = reserveText.children[7].textContent;
 	currExitT.value = reserveText.children[8].innerHTML;
+
+
+    deleteForm.style.display = 'block';
+    
+	deleteButton.setAttribute('onclick', 'hide_delete_form()');
+}
+
+function hide_delete_form(){
+	var deleteForm = document.getElementById('delete_box');
 	
 	deleteForm.style.display = "none";
 }
 
-function cancelDeleteForm(){
+function cancel_delete_form(){
+    var deleteButton = document.getElementById('delete_btn');
 	var deleteForm = document.getElementById('delete_box');
 	
+    var currCampus = document.getElementById('d_curr_start_campus');
+	var currID = document.getElementById('d_curr_id_number');
+	var currDate = document.getElementById('d_curr_date');
+	var currEntryL = document.getElementById('d_curr_entry_loc');
+	var currEntryT = document.getElementById('d_curr_entry_time');
+	var currExitL = document.getElementById('d_curr_exit_loc');
+	var currExitT = document.getElementById('d_curr_exit_time');
+	
+
+	currCampus.value = "";
+	currID.value = "";
+	currDate.value = "";
+	currEntryL.value = "";
+	currEntryT.value = "";
+	currExitL.value = "";
+	currExitT.value = "";
+
+    deleteButton.setAttribute('onclick', '')
 	deleteForm.style.display="none";
 }
 
-function createTextInfo(main_div, resultArr = []){
+function create_text_info(main_div, resultArr = []){
     var hasResults = resultArr.length;
     var text_info = document.createElement('div');
     text_info.className = 'text_reserved_schedule';
@@ -606,7 +627,7 @@ function change_time_helper( time_id, storage_time ){
     }
 }
 
-function locationChangeFormHelper(location, isEditButton){
+function location_change_form_helper(location, isEditButton){
     //Location 0 - Laguna || 1 - Manila
 
         

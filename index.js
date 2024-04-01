@@ -34,6 +34,7 @@ app.use(session({
 
 // set `hbs` as view engine
 app.set('view engine', 'hbs');
+hbs.registerPartials(`${__dirname}/views/partials`);
 
 app.use(express.json());
 

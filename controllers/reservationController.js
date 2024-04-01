@@ -1,8 +1,8 @@
 const db = require('../models/db.js');
 
 const User = require('../models/userdb.js');
-
 const Admin = require('../models/admindb.js');
+const Driver = require('../models/driverdb.js');
 
 const Reservation = require('../models/reservationdb.js');
 
@@ -10,22 +10,22 @@ const reservationController = {
 
     get_reservations: async function (req, res) {
 		
-		if ( req.session.user_id_number != req.query.user_id_number ) {
-			res.redirect('/Reservation?user_id_number=' + req.session.user_id_number );
+		if ( req.session.id_number != req.query.id_number ) {
+			res.redirect('/Reservation?id_number=' + req.session.id_number );
 		}else{
-			const query = { user_id_number: req.query.user_id_number };
-			const projection = "user_id_number";
+			const query = { id_number: req.query.id_number };
+			const projection = "id_number";
 			
 			const is_admin = await db.find_one(Admin, query, projection);
-	
+            const is_driver = await db.find_one(Driver, query, projection);
 			const result = await db.find_many(Reservation, query);
             
             console.log(query)
             console.log(result)
-			if ( is_admin != null ) {
-				res.render('Reservation', {display_UI: 1, result: result, user_id_number: req.query.user_id_number, is_admin: true});
+			if ( is_admin != null || is_driver != null) {
+				res.render('Reservation', {display_UI: 1, result: result, id_number: req.query.id_number, is_admin: true});
 			} else {
-				res.render('Reservation', {display_UI: 0, result: result, user_id_number: req.query.user_id_number, is_admin: false});
+				res.render('Reservation', {display_UI: 0, result: result, id_number: req.query.id_number, is_admin: false});
 			}
 		}
 
@@ -34,27 +34,28 @@ const reservationController = {
 
     get_reservation_admin: async function (req, res) {
 
-		if ( req.session.user_id_number != req.query.user_id_number ){
+		if ( req.session.id_number != req.query.id_number )
+        {
+			const query = { id_number: req.session.id_number };
+			const projection = "id_number";
 
-			var userID = req.session.user_id_number;
-			const query = { user_id_number: userID };
-			const projection = "user_id_number";
+			const is_admin = await db.find_one(Admin, query, projection);
+            const is_driver = await db.find_one(Driver, query, projection);
 
-			const isAdmin = await db.find_one(Admin, query, projection);
-
-			if ( isAdmin != null ){
-				res.redirect('/ReservationAdmin?user_id_number=' + req.session.user_id_number );
-			}else{
+			if ( is_admin != null || is_driver != null){
+				res.redirect('/ReservationAdmin?id_number=' + req.session.id_number);
+			} else {
 				res.render('Error');
 			}
 			
-		}else{
-			var userID = req.query.user_id_number;
-
+		}
+        else    
+        {
 			const details = {
-				user_id_number: userID,
+				id_number: req.query.id_number
 			}
-	
+            
+            console.log(details)
 			res.render('ReservationAdmin', details);
 		}
 
@@ -69,47 +70,47 @@ const reservationController = {
             Example: the value entered in <input type="text" name="fName">
             can be retrieved using `req.body.fName`
         */		
-		if (req.body.user_user_id_number != ""){
+		if (req.body.user_id_number != ""){
 
-			const user_id_number = req.body.user_user_id_number;
+			const id_number = req.body.user_id_number;
 
-			const query = { user_id_number: user_id_number};
-			const projection = "user_id_number";
+			const query = { id_number: id_number};
+			const projection = "id_number";
 			const result = await db.find_one(User, query, projection);
 			const result2 = await db.find_one(Admin, query, projection);
 			
 			if (result) {
-				var idNum = req.body.user_user_id_number;
+				var id_num = req.body.user_id_number;
 			} else if (result2) {
-				var idNum = req.body.user_user_id_number;
+				var id_num = req.body.user_id_number;
 			} else {
-				var idNum = 0;
+				var id_num = 0;
 				console.log('User does not exist');
 			}
 
 		}
 		else{
-			var idNum = req.body.hiddenuser_id_number;
+			var id_num = req.body.hidden_ID_number;
 		}
 			
         var rsv = {
-			startCampus: req.body.hiddenStartCampus,
+			start_campus: req.body.hidden_start_campus,
 			date: req.body.user_date,
-			entryLoc: req.body.hiddenEntryLoc,
-			entryTime: req.body.hiddenEntryTime,
-			exitLoc: req.body.hiddenExitLoc,
-			exitTime: req.body.hiddenExitTime,
+			entry_loc: req.body.hidden_entry_loc,
+			entry_time: req.body.hidden_entry_time,
+			exit_loc: req.body.hidden_exit_loc,
+			exit_time: req.body.hidden_exit_time,
 		  };
 
-		if ( rsv.entryLoc == "Entry Location" || rsv.entryTime == "Entry Time" || rsv.exitLoc == "Exit Location" || rsv.exitTime == "Exit Time" ){
-			res.redirect('/Reservation?user_id_number=' + req.body.adminId + '&reserveUserSuccess=false');
+		if ( rsv.entry_loc == "Entry Location" || rsv.entry_time == "Entry Time" || rsv.exit_loc == "Exit Location" || rsv.exit_time == "Exit Time" ){
+			res.redirect('/Reservation?id_number=' + req.body.admin_id + '&reserve_user_success=false');
 			console.log('Reservation failed to add');
 		}
 		else{
 
 			var result;
-			if (idNum !== 0) {
-				rsv.user_id_number = idNum;
+			if (id_num !== 0) {
+				rsv.id_number = id_num;
 				result = await db.insert_one(Reservation, rsv);
 			}
 			/*
@@ -120,10 +121,10 @@ const reservationController = {
 			
 			if ( result ){
 				console.log('Reservation successfully added');
-				res.redirect('/Reservation?user_id_number=' + req.body.adminId + '&reserveUserSuccess=true');
+				res.redirect('/Reservation?id_number=' + req.body.admin_id + '&reserve_user_success=true');
 			}
 			else{
-				res.redirect('/Reservation?user_id_number=' + req.body.adminId + '&reserveUserSuccess=false');
+				res.redirect('/Reservation?id_number=' + req.body.admin_id + '&reserve_user_success=false');
 				console.log('Reservation failed to add');
 			}
 		}
@@ -132,43 +133,47 @@ const reservationController = {
 
 	post_update_reservations: async function (req, res){
 		var curr ={
-			startCampus: req.body.eCurrStartCampus,
-			date: req.body.eCurrDate,
-			entryLoc: req.body.eCurrEntryLoc,
-			entryTime: req.body.eCurrEntryTime,
-			exitLoc: req.body.eCurrExitLoc,
-			exitTime: req.body.eCurrExitTime,
-			user_id_number: req.body.eCurruser_id_number
+			start_campus: req.body.e_curr_start_campus,
+			date: req.body.e_curr_date,
+			entry_loc: req.body.e_curr_entry_loc,
+			entry_time: req.body.e_curr_entry_time,
+			exit_loc: req.body.e_curr_exit_loc,
+			exit_time: req.body.e_curr_exit_time,
+			id_number: req.body.e_curr_id_number
 		}
 
 		var upd = {
-			startCampus: req.body.ehiddenStartCampus,
+			start_campus: req.body.e_hidden_start_campus,
 			date: req.body.user_date,
-			entryLoc: req.body.ehiddenEntryLoc,
-			entryTime: req.body.ehiddenEntryTime,
-			exitLoc: req.body.ehiddenExitLoc,
-			exitTime: req.body.ehiddenExitTime,
-			user_id_number: req.body.ehiddenuser_id_number
+			entry_loc: req.body.e_hidden_entry_loc,
+			entry_time: req.body.e_hidden_entry_time,
+			exit_loc: req.body.e_hidden_exit_loc,
+			exit_time: req.body.e_hidden_exit_time,
+			id_number: req.body.e_hidden_id_number
 		}
 		
-		if ( upd.entryLoc == "Entry Location" || upd.entryTime == "Entry Time" || upd.exitLoc == "Exit Location" || upd.exitTime == "Exit Time" ){
-			res.redirect('/Reservation?user_id_number=' + req.body.ehiddenuser_id_number + '&isUpdateSuccess=false');
+		if ( upd.entry_loc == "Entry Location" || upd.entry_time == "Entry Time" || upd.exit_loc == "Exit Location" || upd.exit_time == "Exit Time" ){
+			res.redirect('/Reservation?id_number=' + req.body.e_hidden_id_number + '&is_update_success=false');
 			console.log('Reservation failed to add');
 		}
-		else{
-			
-			console.log(upd.entryLoc);
-			console.log(upd.entryTime);
-			console.log(upd.exitLoc);
-			console.log(upd.exitTime);
+		else
+        {
+            console.log("OG Information:");
+            console.log(curr)
+            console.log("NEW Information:");
+            console.log(upd)
+			var found = await db.find_one(Reservation, curr); //Reservation not found here
 
-			var found = await db.find_one(Reservation, curr);
-			if(found){
-				await Reservation.updateOne(curr, upd);
+
+
+			if(found)
+            {
+				await db.update_one(Reservation, curr, upd);
 				console.log('succesfully updated');
-				res.redirect('/Reservation?user_id_number=' + req.body.ehiddenuser_id_number + '&isUpdateSuccess=true');
+				res.redirect('/Reservation?id_number=' + req.body.e_hidden_id_number + '&is_update_success=true');
 			}
-			else{
+			else
+            {
 				console.log("Code monkeys did an oopsie daisy");
 				console.log('error somewhere');
 			}
@@ -179,21 +184,21 @@ const reservationController = {
 
 	post_delete: async function (req, res){
 		var rsv = {
-			startCampus: req.body.dCurrStartCampus,
-			date: req.body.dCurrDate,
-			entryLoc: req.body.dCurrEntryLoc,
-			entryTime: req.body.dCurrEntryTime,
-			exitLoc: req.body.dCurrExitLoc,
-			exitTime: req.body.dCurrExitTime,
-			user_id_number: req.body.dCurruser_id_number
+			start_campus: req.body.d_curr_start_campus,
+			date: req.body.d_curr_date,
+			entry_loc: req.body.d_curr_entry_loc,
+			entry_time: req.body.d_curr_entry_time,
+			exit_loc: req.body.d_curr_exit_loc,
+			exit_time: req.body.d_curr_exit_time,
+			id_number: req.body.d_curr_id_number
 		};
 
 		console.log('to delete');
 		console.log(rsv);
-		var deleted = await Reservation.deleteOne(rsv);
+		var deleted = await db.delete_one(Reservation, rsv);
 		if(deleted){
 			console.log('succesfully deleted');
-			res.redirect('/Reservation?user_id_number=' + req.body.dCurruser_id_number + '&isDeleteSuccess=true');
+			res.redirect('/Reservation?id_number=' + req.body.d_curr_id_number + '&is_delete_success=true');
 		}
 		else{
 			console.log("Code monkeys did an oopsie daisy");
@@ -204,59 +209,63 @@ const reservationController = {
 
 	get_search_user: async function (req, res){
 
-		res.redirect('/ReservationAdmin?user_id_number=' + req.query.user_id_number);
+		res.redirect('/ReservationAdmin?id_number=' + req.query.id_number);
 
 	},
 
 	post_search_user: async function (req, res){
 
-		var user_id_number = req.body.user_user_id_number;
-		var adminId = req.body.adminId;
+		var id_number = req.body.user_id_number;
+		var admin_id = req.body.admin_id;
 
-		const isFoundUser = await db.find_one(User, {user_id_number: user_id_number}, {user_id_number: 1});
-		const isFoundAdmin = await db.find_one(Admin, {user_id_number: user_id_number}, {user_id_number: 1});
+        var projection = "id_number first_name last_name"
+		const isFoundUser = await db.find_one(User, {id_number: id_number}, projection);
+		const isFoundAdmin = await db.find_one(Admin, {id_number: id_number}, projection);
 
 		if ( isFoundUser == null && isFoundAdmin == null ){
-			res.redirect('/ReservationAdmin?user_id_number=' + adminId + '&isSearchUserValid=false');
+			res.redirect('/ReservationAdmin?id_number=' + admin_id + '&is_search_user_valid=false');
 		}
 		else{
 
 			console.log('test');
+			const result = await db.find_many(Reservation, {id_number: id_number}, "");
 
-			const result = await db.find_many(Reservation, {user_id_number: user_id_number}, "");
-
-			if ( result.length !== 0 ){
-				res.render('ReservationAdmin', {result: result, adminId: adminId});
+            //Get name of user
+            var selected_name = null
+            if(isFoundUser)
+                selected_name =  isFoundUser.first_name + " " + isFoundUser.last_name
+			else if(isFoundAdmin)
+                selected_name =  isFoundAdmin.first_name + " " + isFoundAdmin.last_name
+            
+            if ( result.length !== 0 ){
+				res.render('ReservationAdmin', {result: result, admin_id: admin_id, selected_name: selected_name});
 			} 
 			else {
-				res.redirect('/ReservationAdmin?user_id_number=' + adminId + '&reservationList=false');
+				res.redirect('/ReservationAdmin?id_number=' + admin_id + '&reservation_list=false');
 			}
 
 		}
-		
-		
-
 	},
 
 	post_search_user_update: async function (req, res){
 		var curr ={
-			startCampus: req.body.eCurrStartCampus,
-			date: req.body.eCurrDate,
-			entryLoc: req.body.eCurrEntryLoc,
-			entryTime: req.body.eCurrEntryTime,
-			exitLoc: req.body.eCurrExitLoc,
-			exitTime: req.body.eCurrExitTime,
-			user_id_number: req.body.eCurruser_id_number
+			start_campus: req.body.e_curr_start_campus,
+			date: req.body.e_curr_date,
+			entry_loc: req.body.e_curr_entry_loc,
+			entry_time: req.body.e_curr_entry_time,
+			exit_loc: req.body.e_curr_exit_loc,
+			exit_time: req.body.e_curr_exit_time,
+			id_number: req.body.e_curr_id_number
 		}
 
 		var upd = {
-			startCampus: req.body.ehiddenStartCampus,
+			start_campus: req.body.e_hidden_start_campus,
 			date: req.body.user_date,
-			entryLoc: req.body.ehiddenEntryLoc,
-			entryTime: req.body.ehiddenEntryTime,
-			exitLoc: req.body.ehiddenExitLoc,
-			exitTime: req.body.ehiddenExitTime,
-			user_id_number: req.body.ehiddenuser_id_number
+			entry_loc: req.body.e_hidden_entry_loc,
+			entry_time: req.body.e_hidden_entry_time,
+			exit_loc: req.body.e_hidden_exit_loc,
+			exit_time: req.body.e_hidden_exit_time,
+			id_number: req.body.e_hidden_id_number
 		}
 
 		console.log("current reservation:");
@@ -264,33 +273,32 @@ const reservationController = {
 		console.log("To be updated with: ");
 		console.log(upd);
 
-		if ( upd.entryLoc == "Entry Location" || upd.entryTime == "Entry Time" || upd.exitLoc == "Exit Location" || upd.exitTime == "Exit Time" ){
+		if (upd.entry_loc == "Entry Location" || upd.entry_time == "Entry Time" || upd.exit_loc == "Exit Location" || upd.exit_time == "Exit Time" ){
 
-			var adminId = req.body.eAdminId;
-			if (adminId == null){
+			var admin_id = req.body.e_admin_id;
+			if (admin_id == null){
 				console.log("OH NO THE CODE MONKEYS DID AN OOPSIE WOOPSIE");
-				adminId = 1111111;
+				admin_id = 1111111;
 			}
-			const result = await db.find_many(Reservation, {user_id_number: upd.user_id_number}, {_id:0, __v:0});
+			const result = await db.find_many(Reservation, {id_number: upd.id_number}, {_id:0, __v:0});
 
-			res.render('ReservationAdmin', {result, result, adminId: adminId, isUpdateSuccess: false});
+			res.render('ReservationAdmin', {result, result, admin_id: admin_id, is_update_success: false});
 			console.log('Reservation failed to add');
 
 		}
 		else{
-			
 			var found = await db.find_one(Reservation, curr);
 			if(found){
-				await Reservation.updateOne(curr, upd);
+				await db.update_one(Reservation, curr, upd);
 				console.log('Succesfully updated');
 				
-				var adminId = req.body.eAdminId;
-				if (adminId == null){
+				var admin_id = req.body.e_admin_id;
+				if (admin_id == null){
 					console.log("OH NO THE CODE MONKEYS DID AN OOPSIE WOOPSIE");
-					adminId = 1111111;
+					admin_id = 1111111;
 				}
-				const result = await db.find_many(Reservation, {user_id_number: upd.user_id_number}, {_id:0, __v:0});
-				res.render('ReservationAdmin', {result: result, adminId: adminId, isUpdateSuccess: true});
+				const result = await db.find_many(Reservation, {id_number: upd.id_number}, {_id:0, __v:0});
+				res.render('ReservationAdmin', {result: result, admin_id: admin_id, is_update_success: true});
 			}
 			else{
 				console.log("Code monkeys did an oopsie daisy");
@@ -303,28 +311,28 @@ const reservationController = {
 
 	post_search_user_delete: async function (req, res){
 		var rsv = {
-			startCampus: req.body.dCurrStartCampus,
-			date: req.body.dCurrDate,
-			entryLoc: req.body.dCurrEntryLoc,
-			entryTime: req.body.dCurrEntryTime,
-			exitLoc: req.body.dCurrExitLoc,
-			exitTime: req.body.dCurrExitTime,
-			user_id_number: req.body.dCurruser_id_number
+			start_campus: req.body.d_curr_start_campus,
+			date: req.body.d_curr_date,
+			entry_loc: req.body.d_curr_entry_loc,
+			entry_time: req.body.d_curr_entry_time,
+			exit_loc: req.body.d_curr_exit_loc,
+			exit_time: req.body.d_curr_exit_time,
+			id_number: req.body.d_curr_id_number
 		};
 
 		console.log('to delete');
 		console.log(rsv);
-		var deleted = await Reservation.deleteOne(rsv);
+		var deleted = await db.delete_one(Reservation, rsv);
 		if(deleted){
 			console.log('succesfully deleted');
 			
-			var adminId = req.body.dAdminId;
-			if (adminId == null){
+			var admin_id = req.body.d_admin_id;
+			if (admin_id == null){
 				console.log("OH NO THE CODE MONKEYS DID AN OOPSIE WOOPSIE");
-				adminId = 1111111;
+				admin_id = 1111111;
 			}
-			const result = await db.find_many(Reservation, {user_id_number: rsv.user_id_number}, {_id:0, __v:0});
-			res.render('ReservationAdmin', {result: result, adminId: adminId, isDeleteSuccess: true});
+			const result = await db.find_many(Reservation, {id_number: rsv.id_number}, {_id:0, __v:0});
+			res.render('ReservationAdmin', {result: result, admin_id: admin_id, is_delete_success: true});
 		}
 		else{
 			console.log("Code monkeys did an oopsie daisy");

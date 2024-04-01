@@ -3,6 +3,8 @@ const express = require('express');
 
 const controller = require('../controllers/controller.js')
 
+const edit_controller = require('../controllers/editDriverController.js');
+
 const login_controller = require('../controllers/loginController.js');
 
 const profile_controller = require('../controllers/profileController.js');
@@ -30,11 +32,11 @@ const multer = require('multer');
 const storage = multer.diskStorage({
 
   destination: (req, file, cb) => {
-    cb(null, "./public/profilepictures")
+    cb(null, "./public/images/profilepictures")
   },
 
   filename: (req, file, cb) => {
-    cb(null, req.body.user_id_number + '.png')
+    cb(null, req.body.id_number + '.png')
   }
 
 })
@@ -89,7 +91,8 @@ app.get('/Logout', validation.security_code_validation, profile_controller.get_l
 // Profile settings
 app.get('/Settings', validation.security_code_validation, controller.get_settings);
 //app.post('/ChangePublicInfo', profile_controller.post_change_public_info);
-app.post('/ChangePublicInfo', validation.security_code_validation, upload.single("dp"), profile_controller.post_change_public_info);
+app.post('/ChangePublicInfo', validation.security_code_validation, profile_controller.post_change_public_info);
+app.post('/ChangeDisplayPicture', validation.security_code_validation, upload.single("dp"), profile_controller.post_change_profile_picture);
 app.post('/ChangePrivateInfo', validation.security_code_validation, profile_controller.post_change_private_info);
 app.post('/ChangePassword', validation.security_code_validation, profile_controller.post_change_password);
 app.post('/DeleteAccount', validation.security_code_validation, profile_controller.post_delete_account); //Ano ito
@@ -105,6 +108,13 @@ app.post('/Reservation', validation.security_code_validation, rsrv_controller.po
 //Reservation Update and DeleteAccount
 app.post('/ReservationUpdate', validation.security_code_validation, rsrv_controller.post_update_reservations);
 app.post('/ReservationDelete', validation.security_code_validation, rsrv_controller.post_delete);
+
+
+//Edit Driver
+app.get('/EditDriver', validation.security_code_validation, edit_controller.get_drivers);
+app.post('/DriverDelete', validation.security_code_validation, edit_controller.delete_driver);
+app.post('/DriverInsert', validation.security_code_validation, edit_controller.insert_driver);
+
 
 // Admin Reservation
 app.get('/ReservationAdmin', validation.security_code_validation, rsrv_controller.get_reservation_admin);

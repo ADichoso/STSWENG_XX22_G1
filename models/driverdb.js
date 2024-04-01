@@ -7,11 +7,15 @@ var driver_schema = new mongoose.Schema({
     },
     last_name: {
         type: String,
+        require: true
+    },
+    email: {
+        type: String,
         required: true
     },
-    user_id_number: {
+    id_number: {
         type: Number,
-        required: true,
+        required: true
     },
     email: {
         type: String,
@@ -19,11 +23,15 @@ var driver_schema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: true
     },
     security_code: {
         type: String,
-        required: true,
+        required: true
+    },
+    profile_picture: {
+        type: String,
+        required: false,
     }
 });
 

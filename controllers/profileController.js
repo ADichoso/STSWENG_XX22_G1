@@ -13,29 +13,29 @@ const saltRounds = 10;
 const profileController = {
 
     get_profile: async function (req, res) {
-        if ( req.session.user_id_number != req.query.user_id_number ) {
+        if ( req.session.id_number != req.query.id_number ) {
 
-            const query = { user_id_number: req.session.user_id_number };
-            const projection = "user_id_number";
+            const query = { id_number: req.session.id_number };
+            const projection = "id_number";
             const user_result = await db.find_one(User, query, projection);
             const admin_result = await db.find_one(Admin, query, projection);
             const driver_result = await db.find_one(Driver, query, projection);
 
             if (user_result != null) 
-                res.status(200).redirect('/Profile?user_id_number=' + req.session.user_id_number);
+                res.status(200).redirect('/Profile?id_number=' + req.session.id_number);
             else if (admin_result != null)
-                res.status(200).redirect('/ProfileAdmin?user_id_number=' + req.session.user_id_number); 
+                res.status(200).redirect('/ProfileAdmin?id_number=' + req.session.id_number); 
             else if (driver_result != null) 
-                res.status(200).redirect('/ProfileDriver?user_id_number=' + req.session.user_id_number);
+                res.status(200).redirect('/ProfileDriver?id_number=' + req.session.id_number);
         } else {
-            const query = {user_id_number: req.query.user_id_number};
-            const projection = 'user_id_number first_name last_name designation passenger_type profile_picture';
+            const query = {id_number: req.query.id_number};
+            const projection = 'id_number first_name last_name designation passenger_type profile_picture';
             const result = await db.find_one(User, query, projection);
         
             if (result != null) {
         
                 const details = {
-                    user_id_number: result.user_id_number,
+                    id_number: result.id_number,
                     first_name: result.first_name,
                     last_name: result.last_name,
                     designation: result.designation,
@@ -55,22 +55,22 @@ const profileController = {
 
     get_profile_admin: async function (req, res) {
 
-        if ( req.session.user_id_number != req.query.user_id_number ) {
-            const query = { user_id_number: req.session.user_id_number };
-            const projection = "user_id_number";
+        if ( req.session.id_number != req.query.id_number ) {
+            const query = { id_number: req.session.id_number };
+            const projection = "id_number";
             
             const user_result = await db.find_one(User, query, projection);
             const admin_result = await db.find_one(Admin, query, projection);
             const driver_result = await db.find_one(Driver, query, projection);
             if (user_result) 
-                res.status(200).redirect('/Profile?user_id_number=' + req.session.user_id_number);
+                res.status(200).redirect('/Profile?id_number=' + req.session.id_number);
             else if (admin_result)
-                res.status(200).redirect('/ProfileAdmin?user_id_number=' + req.session.user_id_number);  
+                res.status(200).redirect('/ProfileAdmin?id_number=' + req.session.id_number);  
             else if (driver_result) 
-                res.status(200).redirect('/ProfileDriver?user_id_number=' + req.session.user_id_number);              
+                res.status(200).redirect('/ProfileDriver?id_number=' + req.session.id_number);              
         } else {
-            var query = {user_id_number: req.query.user_id_number};
-            var projection = 'user_id_number first_name last_name designation passenger_type profile_picture';
+            var query = {id_number: req.query.id_number};
+            var projection = 'id_number first_name last_name designation passenger_type profile_picture';
 
             const result = await db.find_one(Admin, query, projection);
             
@@ -78,7 +78,7 @@ const profileController = {
 
                 const details = 
                 {
-                    user_id_number: result.user_id_number,
+                    id_number: result.id_number,
                     first_name: result.first_name,
                     last_name: result.last_name,
                     designation: result.designation,
@@ -99,23 +99,23 @@ const profileController = {
 
     get_profile_driver: async function (req, res) {
 
-        if ( req.session.user_id_number != req.query.user_id_number ) {
-            const query = { user_id_number: req.session.user_id_number };
-            const projection = "user_id_number";
+        if ( req.session.id_number != req.query.id_number ) {
+            const query = { id_number: req.session.id_number };
+            const projection = "id_number";
 
             const user_result = await db.find_one(User, query, projection);
             const admin_result = await db.find_one(Admin, query, projection);
             const driver_result = await db.find_one(Driver, query, projection);
             if (user_result) 
-                res.status(200).redirect('/Profile?user_id_number=' + req.session.user_id_number);
+                res.status(200).redirect('/Profile?id_number=' + req.session.id_number);
             else if (admin_result)
-                res.status(200).redirect('/ProfileAdmin?user_id_number=' + req.session.user_id_number);  
+                res.status(200).redirect('/ProfileAdmin?id_number=' + req.session.id_number);  
             else if (driver_result) 
-                res.status(200).redirect('/ProfileDriver?user_id_number=' + req.session.user_id_number);  
+                res.status(200).redirect('/ProfileDriver?id_number=' + req.session.id_number);  
             
         } else {
-            var query = {user_id_number: req.query.user_id_number};
-            var projection = 'user_id_number first_name last_name designation passenger_type profile_picture';
+            var query = {id_number: req.query.id_number};
+            var projection = 'id_number first_name last_name designation passenger_type profile_picture';
 
             const result = await db.find_one(Driver, query, projection);
             
@@ -123,7 +123,7 @@ const profileController = {
 
                 const details = 
                 {
-                    user_id_number: result.user_id_number,
+                    id_number: result.id_number,
                     first_name: result.first_name,
                     last_name: result.last_name,
                     designation: result.designation,
@@ -145,8 +145,8 @@ const profileController = {
 
         try
         {
-            var query = {user_id_number: req.body.user_id_number };
-            const projection = "user_id_number first_name last_name designation passenger_type profile_picture";
+            var query = {id_number: req.body.id_number };
+            const projection = "id_number first_name last_name designation passenger_type profile_picture";
 
             const user_result = await db.find_one(User, query, projection);
             const admin_result = await db.find_one(Admin, query, projection);
@@ -157,23 +157,23 @@ const profileController = {
             if (user_result != null && req.body.new_first_name != "" && req.body.new_last_name != "") 
             { 
                 await db.update_one(User, query, {first_name: req.body.new_first_name, last_name: req.body.new_last_name});
-                res.status(200).redirect('/Profile?user_id_number=' + req.body.user_id_number + '&info_change_success=true');
+                res.status(200).redirect('/Profile?id_number=' + req.body.id_number + '&info_change_success=true');
             }
             else if(admin_result != null && req.body.new_first_name != "" && req.body.new_last_name != "")
             {
                 await db.update_one(Admin, query, {first_name: req.body.new_first_name, last_name: req.body.new_last_name});
-                res.status(200).redirect('/ProfileAdmin?user_id_number=' + req.body.user_id_number + '&info_change_success=true');
+                res.status(200).redirect('/ProfileAdmin?id_number=' + req.body.id_number + '&info_change_success=true');
             } 
             else if(driver_result != null && req.body.new_first_name != "" && req.body.new_last_name != "")
             {
                 await db.update_one(Driver, query, {first_name: req.body.new_first_name, last_name: req.body.new_last_name})
                 console.log("Driver user public info change successful");
-                res.status(200).redirect('/ProfileDriver?user_id_number=' + req.body.user_id_number + '&info_change_success=true');
+                res.status(200).redirect('/ProfileDriver?id_number=' + req.body.id_number + '&info_change_success=true');
             }
             else 
             {
                 console.log("User/Admin/Driver public info change unsuccessful");
-                res.redirect('/Settings?user_id_number=' + req.body.user_id_number + '&info_change_success=false');
+                res.redirect('/Settings?id_number=' + req.body.id_number + '&info_change_success=false');
         }
         }   
         catch (err)
@@ -183,8 +183,8 @@ const profileController = {
     },
 
     post_change_profile_picture: async function (req, res) {
-        var query = {user_id_number: req.body.user_id_number };
-        const projection = "user_id_number profile_picture";
+        var query = {id_number: req.body.id_number };
+        const projection = "id_number profile_picture";
 
         const user_result = await db.find_one(User, query, projection);
         const admin_result = await db.find_one(Admin, query, projection);
@@ -193,38 +193,33 @@ const profileController = {
         try
         {
             //Update profile picture of User
-            if (req.file != null)
+            if ((user_result != null || admin_result != null || driver_result != null)  && req.file != null)
             {
-                if (user_result != null)
+                if (user_result)
                 {
-                    await db.update_one(User, query, {profile_picture: "images/profilepictures/" + req.body.user_id_number + ".png"})
-                    res.status(200);    
-                    res.redirect('/Profile?user_id_number=' + req.body.user_id_number + '&info_change_success=true');
+                    await db.update_one(User, query, {profile_picture: "images/profilepictures/" + req.body.id_number + ".png"})
+                    res.status(200).redirect('/Profile?id_number=' + req.body.id_number + '&info_change_success=true');
                 }
-                else if (admin_result != null)
+                else if (admin_result)
                 {
-                    await db.update_one(Admin, query, {profile_picture: "images/profilepictures/" + req.body.user_id_number + ".png"})
-                    res.status(200);
-                    res.redirect('/ProfileAdmin?user_id_number=' + req.body.user_id_number + '&info_change_success=true');
+                    await db.update_one(Admin, query, {profile_picture: "images/profilepictures/" + req.body.id_number + ".png"})
+                    res.status(200).redirect('/ProfileAdmin?id_number=' + req.body.id_number + '&info_change_success=true');
                 }
-                else if (driver_result != null)
+                else if (driver_result)
                 {
-                    await db.update_one(Driver, query, {profile_picture: "images/profilepictures/" + req.body.user_id_number + ".png"})
-                    res.status(200);
-                    res.redirect('/ProfileDriver?user_id_number=' + req.body.user_id_number + '&info_change_success=true');
+                    await db.update_one(Driver, query, {profile_picture: "images/profilepictures/" + req.body.id_number + ".png"})
+                    res.status(200).redirect('/ProfileDriver?id_number=' + req.body.id_number + '&info_change_success=true');
                 }
                 else 
                 {
                     console.log("User/Admin/Driver public info change unsuccessful");
-                    res.status(500);
-                    res.redirect('/Settings?user_id_number=' + req.body.user_id_number + '&info_change_success=false');
+                    res.status(500).redirect('/Settings?id_number=' + req.body.id_number + '&info_change_success=false');
                 } 
             } 
             else 
             {
                 console.log("User/Admin/Driver public info change unsuccessful");
-                res.status(500);
-                res.redirect('Settings?user_id_number=' + req.body.user_id_number + '&info_change_success=false');
+                res.status(500).redirect('/Settings?id_number=' + req.body.id_number + '&info_change_success=false');
             }
         }
         catch(err)
@@ -236,8 +231,8 @@ const profileController = {
     },
 
     post_change_private_info: async function (req, res) {
-        var query = {user_id_number: req.body.user_id_number };
-        const projection = "user_id_number designation";
+        var query = {id_number: req.body.id_number };
+        const projection = "id_number designation";
 
         const user_result = await db.find_one(User, query, projection);
         const admin_result = await db.find_one(Admin, query, projection);
@@ -247,24 +242,24 @@ const profileController = {
         {
             await db.update_one(User, query, {designation: req.body.newDesignation})
             console.log("User private info change successful");
-            res.status(200).redirect('/Profile?user_id_number=' + req.body.user_id_number + '&info_change_success=true');
+            res.status(200).redirect('/Profile?id_number=' + req.body.id_number + '&info_change_success=true');
         }
         else if (admin_result != null ) 
         {
             await db.update_one(Admin, query, {designation: req.body.newDesignation})
             console.log("Admin user private info change successful");
-            res.status(200).redirect('/ProfileAdmin?user_id_number=' + req.body.user_id_number + '&info_change_success=true');
+            res.status(200).redirect('/ProfileAdmin?id_number=' + req.body.id_number + '&info_change_success=true');
         }
         else if (driver_result != null ) 
         {
             await db.update_one(Driver, query, {designation: req.body.newDesignation})
             console.log("Driver user private info change successful");
-            res.status(200).redirect('/ProfileDriver?user_id_number=' + req.body.user_id_number + '&info_change_success=true');
+            res.status(200).redirect('/ProfileDriver?id_number=' + req.body.id_number + '&info_change_success=true');
         }
         else 
         {
             console.log("User/Admin/Driver private info change unsuccessful");
-            res.status(500).redirect('/Settings?user_id_number=' + req.body.user_id_number + '&info_change_success=false');
+            res.status(500).redirect('/Settings?id_number=' + req.body.id_number + '&info_change_success=false');
         }
 
     },
@@ -273,8 +268,8 @@ const profileController = {
 
         try
         {
-            var query = {user_id_number: req.body.user_id_number};
-            const projection = "user_id_number password";
+            var query = {id_number: req.body.id_number};
+            const projection = "id_number password";
 
             const user_result = await db.find_one(User, query, projection);
             const admin_result = await db.find_one(Admin, query, projection);
@@ -284,24 +279,24 @@ const profileController = {
             {
                 await db.update_one(User, query, {password: await bcrypt.hash(req.body.new_password, saltRounds)})
                 console.log("User password change successful");
-                res.status(200).redirect('/Profile?user_id_number=' + req.body.user_id_number + '&pw_change_success=true');
+                res.status(200).redirect('/Profile?id_number=' + req.body.id_number + '&pw_change_success=true');
             }
             else if (admin_result != null && await bcrypt.compare(req.body.current_password, admin_result.password)) 
             {
                 await db.update_one(Admin, query, {password: await bcrypt.hash(req.body.new_password, saltRounds)} )
                 console.log("Admin user password change successful");
-                res.status(200).redirect('/ProfileAdmin?user_id_number=' + req.body.user_id_number + '&pw_change_success=true');
+                res.status(200).redirect('/ProfileAdmin?id_number=' + req.body.id_number + '&pw_change_success=true');
             }
             else if (driver_result != null && await bcrypt.compare(req.body.current_password, driver_result.password)) 
             {
                 await db.update_one(Driver, query, {password: await bcrypt.hash(req.body.new_password, saltRounds)} )
                 console.log("Driver user password change successful");
-                res.status(200).redirect('/ProfileDriver?user_id_number=' + req.body.user_id_number + '&pw_change_success=true');
+                res.status(200).redirect('/ProfileDriver?id_number=' + req.body.id_number + '&pw_change_success=true');
             }
             else 
             {
                 console.log("User/Admin/Driver password change unsuccessful");
-                res.status(500).redirect('/Settings?user_id_number=' + req.body.user_id_number + '&pw_change_success=false');
+                res.status(500).redirect('/Settings?id_number=' + req.body.id_number + '&pw_change_success=false');
             }
         }
         catch(err)
@@ -315,8 +310,8 @@ const profileController = {
     post_change_code: async function (req, res) {
         try
         {
-            var query = {user_id_number: req.body.user_id_number};
-            const projection = "user_id_number security_code";
+            var query = {id_number: req.body.id_number};
+            const projection = "id_number security_code";
             
             const user_result = await db.find_one(User, query, projection);
             const admin_result = await db.find_one(Admin, query, projection);
@@ -326,19 +321,19 @@ const profileController = {
             {
                 await db.update_one(User, query, {security_code: await bcrypt.hash(req.body.new_sec_code, saltRounds)});
                 console.log("User code change successful");
-                res.status(200).redirect('/Profile?user_id_number=' + req.body.user_id_number + '&code_change_success=true');
+                res.status(200).redirect('/Profile?id_number=' + req.body.id_number + '&code_change_success=true');
             }
             else if (admin_result != null && await bcrypt.compare(req.body.current_sec_code, admin_result.security_code)) 
             {
                 await db.update_one(Admin, query, {security_code: await bcrypt.hash(req.body.new_sec_code, saltRounds)});
                 console.log("User code change successful");
-                res.status(200).redirect('/ProfileAdmin?user_id_number=' + req.body.user_id_number + '&code_change_success=true');
+                res.status(200).redirect('/ProfileAdmin?id_number=' + req.body.id_number + '&code_change_success=true');
             }
             else if (driver_result != null && await bcrypt.compare(req.body.current_sec_code, driver_result.security_code)) 
             {
                 await db.update_one(Driver, query, {security_code: await bcrypt.hash(req.body.new_sec_code, saltRounds)});
                 console.log("User code change successful");
-                res.status(200).redirect('/ProfileDriver?user_id_number=' + req.body.user_id_number + '&code_change_success=true');
+                res.status(200).redirect('/ProfileDriver?id_number=' + req.body.id_number + '&code_change_success=true');
             }
             else 
             {
@@ -346,7 +341,7 @@ const profileController = {
                 console.log(req.body.new_sec_code);
                 
                 console.log("User/Admin/Driver security code change unsuccessful");
-                res.status(500).redirect('/Settings?user_id_number=' + req.body.user_id_number + '&code_change_success=false');
+                res.status(500).redirect('/Settings?id_number=' + req.body.id_number + '&code_change_success=false');
             }
         }
         catch(err)
@@ -360,8 +355,8 @@ const profileController = {
     post_delete_account: async function (req, res) {
         try
         {
-            var query = {user_id_number: req.body.user_id_number};
-            const projection = "user_id_number password";
+            var query = {id_number: req.body.id_number};
+            const projection = "id_number password";
             
             const user_result = await db.find_one(User, query, projection);
             const admin_result = await db.find_one(Admin, query, projection);
@@ -436,7 +431,7 @@ const profileController = {
             else 
             {
                 console.log("User/Admin not deleted");
-                res.status(500).redirect('/Settings?user_id_number=' + req.body.user_id_number + '&delete_success=false');
+                res.status(500).redirect('/Settings?id_number=' + req.body.id_number + '&delete_success=false');
             }
         }
         catch(err)

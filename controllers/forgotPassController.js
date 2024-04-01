@@ -1,8 +1,8 @@
 const db = require('../models/db.js');
 
 const User = require('../models/userdb.js');
-
 const Admin = require('../models/admindb.js');
+const Driver = require('../models/driverdb.js');
 
 const forgotPassController = {
 
@@ -12,62 +12,80 @@ const forgotPassController = {
 
     post_forgot_password: async function (req, res){
 
-        var query = {email: req.body.user_email, securityCode: req.body.user_security_code};
-
-        const resultUser = await db.find_one(User, query, 'user_id_number email securityCode');
-        const resultAdmin = await db.find_one(Admin, query, 'user_id_number email securityCode');
+        var query = {email: req.body.user_email, security_code: req.body.user_security_code};
+        var projection = 'id_number email security_code'
+        const user_result = await db.find_one(User, query, projection);
+        const admin_result = await db.find_one(Admin, query, projection);
+        const driver_result = await db.find_one(Driver, query, projection);
 
         var details = {};
 
-        if ( resultUser != null && (resultUser.email == req.body.user_email && resultUser.securityCode == req.body.user_security_code) ) {
+        if ( user_result != null && (user_result.email == req.body.user_email && user_result.security_code == req.body.user_security_code) ) {
             console.log('User email and security code match.');
 
             details = {
-                user_id_number: resultUser.user_id_number,
-                email: resultUser.email,
-                securityCode: resultUser.securityCode
+                id_number: user_result.id_number,
+                email: user_result.email,
+                security_code: user_result.security_code
             }
 
             res.render('ForgotPassword', details);
         }
-        else if ( resultAdmin != null && (resultAdmin.email == req.body.user_email && resultAdmin.securityCode == req.body.user_security_code) ) {
+        else if ( admin_result != null && (admin_result.email == req.body.user_email && admin_result.security_code == req.body.user_security_code) ) {
             console.log('Admin email and security code match.');
 
             details = {
-                user_id_number: resultAdmin.user_id_number,
-                email: resultAdmin.email,
-                securityCode: resultAdmin.securityCode
+                id_number: admin_result.id_number,
+                email: admin_result.email,
+                security_code: admin_result.security_code
             }
             res.render('ForgotPassword', details);
         }
-        else{
-            res.render('ForgotPassword', { isInvalid: true });
+        else if ( driver_result != null && (driver_result.email == req.body.user_email && driver_result.security_code == req.body.user_security_code) ) {
+            console.log('Driver email and security code match.');
+
+            details = {
+                id_number: driver_result.id_number,
+                email: driver_result.email,
+                security_code: driver_result.security_code
+            }
+            res.render('ForgotPassword', details);
+        }
+        else
+        {
+            res.render('ForgotPassword', { is_invalid: true });
         }
 
     },
 
     post_change_F_password: async function (req, res){
 
-        var newPassword0 = req.body.user_newPassword0;
-        var newPassword1 = req.body.user_newPassword1;
+        var new_password = req.body.user_new_password;
+        var retype_password = req.body.user_retype_password;
 
-        if ( newPassword0 == newPassword1 ){
+        if ( new_password == retype_password ){
 
-            var query = {user_id_number: req.body.user_id_number};
-            const projection = { user_id_number: 1, password: 1};
+            var query = {id_number: req.body.id_number};
+            const projection = { id_number: 1, password: 1};
 
-            const resultUser = await db.find_one(User, query, projection);
-            const resultAdmin = await db.find_one(Admin, query, projection);
+            const user_result = await db.find_one(User, query, projection);
+            const admin_result = await db.find_one(Admin, query, projection);
+            const driver_result = await db.find_one(Driver, query, projection);
 
-            if ( resultUser != null ) {
-                await User.updateOne(query, {password: req.body.user_newPassword1})
+            if ( user_result != null ) {
+                await db.updateOne(User, query, {password: req.body.user_retype_password})
                 console.log("Change password successful");
-                res.render('Login', { codeChange: true } );
+                res.render('Login', { code_change: true } );
             }
-            else if ( resultAdmin != null ) {
-                await Admin.updateOne(query, {password: req.body.user_newPassword1})
+            else if ( admin_result != null ) {
+                await db.updateOne(Admin, query, {password: req.body.user_retype_password})
                 console.log("Change password successful");
-                res.render('Login', { codeChange: true } );
+                res.render('Login', { code_change: true } );
+            }
+            else if ( driver_result != null ) {
+                await db.updateOne(Driver, query, {password: req.body.user_retype_password})
+                console.log("Change password successful");
+                res.render('Login', { code_change: true } );
             } else {
                 console.log("User/Admin password change unsuccessful. No user/admin found.");
                 res.render('ForgotPassword', res);
@@ -75,7 +93,7 @@ const forgotPassController = {
 
         }
         else{
-            res.render('ForgotPassword', { isMatch: false, user_id_number: req.body.user_id_number } );
+            res.render('ForgotPassword', { isMatch: false, id_number: req.body.id_number } );
         }
 
         

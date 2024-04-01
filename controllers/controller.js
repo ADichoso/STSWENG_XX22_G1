@@ -2,8 +2,9 @@
 const db = require('../models/db.js');
 
 const User = require('../models/userdb.js');
-
 const Admin = require('../models/admindb.js');
+const Driver = require('../models/driverdb.js');
+
 
 /*
     defines an object which contains functions executed as callback
@@ -15,9 +16,9 @@ const controller = {
 
         var details = {};
 
-        if ( req.session.user_id_number ) {
+        if ( req.session.id_number ) {
 
-            const query = { user_id_number: req.session.user_id_number };
+            const query = { id_number: req.session.id_number };
             const projection = "first_name";
             const result = await db.find_one(User, query, projection);
             const result2 = await db.find_one(Admin, query, projection);
@@ -66,36 +67,50 @@ const controller = {
 
     get_settings: async function (req, res){
 
-        if ( req.session.user_id_number != req.query.user_id_number) {
-            res.status(200).redirect('/Settings?user_id_number=' + req.session.user_id_number);     
+        if ( req.session.id_number != req.query.id_number) {
+            res.status(200).redirect('/Settings?id_number=' + req.session.id_number);     
         } else {
 
-            var query = {user_id_number: req.query.user_id_number};
-            const projection = 'user_id_number first_name last_name designation passenger_type';
+            var query = {id_number: req.query.id_number};
+            const projection = 'id_number first_name last_name designation passenger_type';
     
-            const resultUser = await db.find_one(User, query, projection);
-            const resultAdmin = await db.find_one(Admin, query, projection);
+            const user_result = await db.find_one(User, query, projection);
+            const admin_result = await db.find_one(Admin, query, projection);
+            const driver_result = await db.find_one(Driver, query, projection);
     
             var details = {};
             
-            if ( resultUser != null ) {
+            if ( user_result != null ) {
                 details = {
-                    user_id_number: resultUser.user_id_number,
-                    first_name: resultUser.first_name,
-                    last_name: resultUser.last_name,
-                    designation: resultUser.designation,
-                    passenger_type: resultUser.passenger_type,
+                    id_number: user_result.id_number,
+                    first_name: user_result.first_name,
+                    last_name: user_result.last_name,
+                    designation: user_result.designation,
+                    passenger_type: user_result.passenger_type,
                     is_admin: false,
+                    not_driver: true
                 };
             }
-            else if ( resultAdmin != null ) {
+            else if ( admin_result != null ) {
                 details = {
-                    user_id_number: resultAdmin.user_id_number,
-                    first_name: resultAdmin.first_name,
-                    last_name: resultAdmin.last_name,
-                    designation: resultAdmin.designation,
-                    passenger_type: resultAdmin.passenger_type,
+                    id_number: admin_result.id_number,
+                    first_name: admin_result.first_name,
+                    last_name: admin_result.last_name,
+                    designation: admin_result.designation,
+                    passenger_type: admin_result.passenger_type,
                     is_admin: true,
+                    not_driver: true
+                };
+            }
+            else if ( driver_result != null ) {
+                details = {
+                    id_number: driver_result.id_number,
+                    first_name: driver_result.first_name,
+                    last_name: driver_result.last_name,
+                    designation: driver_result.designation,
+                    passenger_type: driver_result.passenger_type,
+                    is_admin: false,
+                    not_driver: false
                 };
             }
             

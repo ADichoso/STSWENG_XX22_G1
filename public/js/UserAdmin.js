@@ -1,6 +1,6 @@
 var count = null;
 
-function createTextInfoAdmin(main_div, resultArr = [], isSearch){
+function create_text_info_admin(main_div, resultArr = [], isSearch){
 
     console.log(resultArr);
 
@@ -8,7 +8,7 @@ function createTextInfoAdmin(main_div, resultArr = [], isSearch){
     text_info.className = 'text_reserved_schedule';
     main_div.appendChild(text_info);
 
-    var idValue = document.getElementById('user_user_id_number');
+    var idValue = document.getElementById('id_number');
     var dateValue = document.getElementById('user_date');
     var entryValue = document.getElementById('user_entry');
     var entryTimeValue = document.getElementById('user_entryTime');
@@ -114,14 +114,14 @@ function createTextInfoAdmin(main_div, resultArr = [], isSearch){
 
 }
 
-function showSearchForm(){
+function show_search_form(){
     var formBox = document.getElementsByClassName('form_box')[0];
-    document.getElementById('user_user_id_number').value = '';
+    document.getElementById('id_number').value = '';
     formBox.style.display = 'block';
     formBox.style.height = '245px';
 }
 
-function displayUserSchedule(isSearch, resultArr = []){
+function display_user_schedule(isSearch, resultArr = []){
     
     var scheduleContainer = document.getElementsByClassName('schedule_container')[0];
     var formBox = document.getElementsByClassName('form_box')[0];
@@ -166,10 +166,10 @@ function displayUserSchedule(isSearch, resultArr = []){
 
     if ( isSearch == true ){
         console.log('test');
-        createTextInfoAdmin(div, resultArr, true); //Show searched users
+        create_text_info_admin(div, resultArr, true); //Show searched users
     }
     else{
-        createTextInfoAdmin(div, resultArr, false); //Show admin resserved users
+        create_text_info_admin(div, resultArr, false); //Show admin resserved users
     }
 
     formBox.style.display = 'none';

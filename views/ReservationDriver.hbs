@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title> Arrows Express - Reserve (Admin) </title>
+        <title> Arrow Express - Reserve (Admin) </title>
         <link rel="icon" type="image/png" href="../images/DLSU_Logo.png">
         <link rel="stylesheet" href="../css/FormStyle.css">  <!-- Kailangan to if may separate CSS file -->
         <link rel="stylesheet" href="../css/ReservationStyle.css">
@@ -18,12 +18,8 @@
 
                 document.getElementById("success_box").style.display = "none";
                 document.getElementById("error_box").style.display = "none";
-
-                {{!-- {{#each result}}
-					hideScheduleForm(true, ["{{start_campus}}", "{{date}}", "{{entry_loc}}", "{{entry_time}}", "{{exit_loc}}", "{{exit_time}}", {{id_number}}], false);
-				{{/each}} --}}
 				
-				console.log("Admin ID: " + "{{id_number}}")
+				console.log({{admin_ID}});
 				function admin_ID_check(admin_ID = null){
 					if (admin_ID == null){
 						var ID_num = new URLSearchParams(window.location.search).get('id_number');
@@ -36,7 +32,7 @@
 						document.getElementById('d_admin_ID').value = admin_ID;
 					}
 				}
-				admin_ID_check({{id_number}});
+				admin_ID_check({{admin_ID}});
 
                 var search_user_status = new URLSearchParams(window.location.search).get('is_search_user_valid');
                 var search_user_resv_list_status = new URLSearchParams(window.location.search).get('reservation_list');
@@ -94,7 +90,7 @@
         <div class = "banner"> 
 
             <div class="navbar">
-				<a href="/ProfileAdmin?id_number={{id_number}}" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
+				<a href="/ProfileAdmin?id_number={{admin_ID}}" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
 
                 <div id="success_box">
                     <p id="success_message"> Success! </p>
@@ -115,10 +111,9 @@
             
             <div class="content">
 
-                <h1 style="position: relative; color: white; left: 50px; top: 40px;"> User Remove Reservation {{#if selected_name}}| Passenger:  {{selected_name}}{{/if}} </h1>
+                <h1 style="position: relative; color: white; left: 50px; top: 40px;"> User Remove Reservation </h1>
                 <p style="position: relative; color: white; left: 50px; margin-top: 40px; font-style: italic;"> Delete/Edit a user reservation </p>
                 <button id="search_user_btn" onclick="show_search_form();" style="margin-left: 50px;"> Search User  </button> 
-                
                 <style> 
                     #search_user_btn{
                         position: absolute; 
@@ -156,9 +151,9 @@
                     <hr>
                     <div class="input">
                         <form action="/SearchUser" method="post">
-                            <label for="id_number"></label>
+                            <label for="user_id_number"></label>
 							<input type="hidden" id="admin_ID" name="admin_ID" value="">
-                            <input type="text" placeholder="ID Number" class="fillup" name="id_number" id="id_number" required style="position: relative; margin-top: 40px;" pattern="[0-9]+" minlength="8" maxlength="8">
+                            <input type="text" placeholder="ID Number" class="fillup" name="user_id_number" id="user_id_number" required style="position: relative; margin-top: 40px;" pattern="[0-9]+" minlength="8" maxlength="8">
                             <button type="submit" class="toggle_btn" id="reserve_btn" style="position: relative; font-size: large; font-weight: bold; margin-top: 60px;"> Search </button>
                         
                         </form>

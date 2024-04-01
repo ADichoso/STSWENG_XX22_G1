@@ -244,15 +244,27 @@
         </style>
     </head>
     <body>
-        <div class="navbar">
-            <div class="navbar_top">
-                <img src="../images/DLSU_Logo.png">
-                <h2>De La Salle University</h2>
-                <button id="navbar_button"><div class="arrow"></div></button>
-                <div class="navbar_desktop">
-                    <a href="/">HOME</a>
-                    <a href="/Search">SEARCH</a>
-                    <a href="/Login">LOGIN</a>
+        <div class = "banner" id="top"> 
+            <div class="navbar">
+                <a href="#top"> <img src= "../images/DLSU_Logo.png" class = "website_logo"> </a>
+                <p style="position: absolute; color:white; left: 165px; font-weight: bolder; font-size: 25px;"> De La Salle University </p>
+                <ul>
+                    <li><a href="/Login"> Reserve Now </a></li>
+                    <li><a href="#schedules"> Schedules </a></li>
+                    <li><a href="#staff"> Staff </a></li>
+                    <li><a href="/Search"> Search </a></li>
+                    <li><a href="/Login"> {{#if first_name}}{{first_name}}{{else}}Login{{/if}} </a></li>
+                </ul>
+            </div>
+
+            <div class = "content" id = "content" style="background-color: rgba(0, 0, 0, 0.63); border-radius:30px; left: 50%; transform: translate(-50%, -50%); padding-top: 20px; padding-bottom: 20px; width: 75%; z-index: 0;">
+                <h3> Welcome to </h3>
+                <h1> Arrow Express </h1>
+                <p> Simplify your shuttle booking and secure your seat effortlessly with our user-friendly platform. <br> 
+                    Experience the convenience of booking shuttles with just a few clicks and enjoy a stress-free journey to your destination. </p>
+                <div>
+                    <button type="button" onclick="window.location.href='/SignUp'"> <span></span> Get Started </button>
+                    <a href="#about"> <button type="button"> <span></span> About Us </button> </a>  <!-- onclick is to open a new html file within the window -->
                 </div>
             </div>
             <div class="navbar_content">

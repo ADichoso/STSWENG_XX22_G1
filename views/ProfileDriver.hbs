@@ -3,7 +3,7 @@
 <html>
 
     <head>
-        <title> Arrows Express - Profile </title> 
+        <title> Arrow Express - Profile </title> 
         <link rel="icon" type="image/png" href="../images/DLSU_Logo.png">
         <link rel="stylesheet" type="text/css" href="../css/ProfileStyle.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -26,8 +26,7 @@
                         document.getElementById("success_box").style.display = "block";
                         $("#success_message").text("Information changed successfully!");
                         
-                        setTimeout(function()
-                        {
+                        setTimeout(function(){
                             document.getElementById("success_box").style.display = "none";
                         }, 5000);
                     }
@@ -36,8 +35,7 @@
                         document.getElementById("success_box").style.display = "block";
                         $("#success_message").text("Password changed successfully!");
                         
-                        setTimeout(function()
-                        {
+                        setTimeout(function(){
                             document.getElementById("success_box").style.display = "none";
                         }, 5000);
                     }
@@ -46,8 +44,7 @@
                         document.getElementById("success_box").style.display = "block";
                         $("#success_message").text("Security code changed successfully!");
                         
-                        setTimeout(function()
-                        {
+                        setTimeout(function(){
                             document.getElementById("success_box").style.display = "none";
                         }, 5000);
                     }
@@ -86,7 +83,7 @@
                 </div>
                 <img src = "{{details.profile_picture}}" id = "profile_picture" >
                 <p class = "title_text" style="top: 50px; font-size: 40px; color: white;"> {{details.first_name}} {{details.last_name}} </p>
-                <p class = "sub_text" style="top: 80px; font-size: 20px; color: white;"> {{details.passenger_tye}} </p>
+                <p class = "sub_text" style="top: 80px; font-size: 20px; color: white;"> {{details.passenger_type}} </p>
             </div>
             
             <div class="right"> 
@@ -95,7 +92,7 @@
                     <div class="box">
                         <img src = "../images/Van_Logo.png" id = "van_logo">
                         <p class = "title_text"> Reserve Now </p>
-                        <p class = "sub_text"> Start reserving your seat now! </p>
+                        <p class = "sub_text"> Reserve Seats for Passengers Here! </p>
                     </div>
                 </a>
         
@@ -115,19 +112,11 @@
                     </div>
                 </a>
 
-                <a href="/EditDriver?id_number={{details.id_number}}">
-                    <div class="box">
-                        <img src = "../images/ProfileSettings_Logo.png" id = "settings_logo">
-                        <p class = "title_text" style="top: 50px;" > Drivers </p>
-                        <p class = "sub_text" style="top: 50px;"> Add or Remove Drivers </p>
-                    </div>
-                </a>
-
                 <a href="/ReservationAdmin?id_number={{details.id_number}}">
                     <div class="box">
                         <img src = "../images/UserEdit_Logo.png" id = "user_reserve_logo">
                         <p class = "title_text" style="top: 50px;" > Edit User Reservation </p>
-                        <p class = "sub_text" style="top: 50px;"> Edit reserved schedule of a user </p>
+                        <p class = "sub_text" style="top: 50px;"> Edit reserved schedule of passengers </p>
                     </div>
                 </a>
 
