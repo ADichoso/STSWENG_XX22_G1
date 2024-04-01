@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.11.2 on win32)" generated="2024-04-01T19:25:15.479498" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="C:\Users\josha\OneDrive\Documents\SCHOOL\College\STSWENG_XX22_G1_2\__test__">
+<suite id="s1-s1" name="Login Test Suite" source="C:\Users\josha\OneDrive\Documents\SCHOOL\College\STSWENG_XX22_G1_2\__test__\login.robot">
+<test id="s1-s1-t1" name="2-1 Valid Username and Password" line="10">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-04-01T19:25:15.766479" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-04-01T19:25:23.098471" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-3.png"&gt;&lt;img src="selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2024-04-01T19:25:23.098471" level="FAIL">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=123.0.6312.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF6DFD470C2+63090]
+	(No symbol) [0x00007FF6DFCB2D12]
+	(No symbol) [0x00007FF6DFB4EC65]
+	(No symbol) [0x00007FF6DFB4AC1A]
+	(No symbol) [0x00007FF6DFB3D514]
+	(No symbol) [0x00007FF6DFB3E8F8]
+	(No symbol) [0x00007FF6DFB3D7FF]
+	(No symbol) [0x00007FF6DFB3D104]
+	(No symbol) [0x00007FF6DFB3D021]
+	(No symbol) [0x00007FF6DFB3B0A8]
+	(No symbol) [0x00007FF6DFB3B8BC]
+	(No symbol) [0x00007FF6DFB514AD]
+	(No symbol) [0x00007FF6DFBD3D67]
+	(No symbol) [0x00007FF6DFBB6FDA]
+	(No symbol) [0x00007FF6DFBD3412]
+	(No symbol) [0x00007FF6DFBB6D83]
+	(No symbol) [0x00007FF6DFB883A8]
+	(No symbol) [0x00007FF6DFB89441]
+	GetHandleVerifier [0x00007FF6E014262D+4238301]
+	GetHandleVerifier [0x00007FF6E017F78D+4488509]
+	GetHandleVerifier [0x00007FF6E0177A6F+4456479]
+	GetHandleVerifier [0x00007FF6DFE20606+953270]
+	(No symbol) [0x00007FF6DFCBE5DF]
+	(No symbol) [0x00007FF6DFCB92B4]
+	(No symbol) [0x00007FF6DFCB93EB]
+	(No symbol) [0x00007FF6DFCA9C24]
+	BaseThreadInitThunk [0x00007FFAA8F3257D+29]
+	RtlUserThreadStart [0x00007FFAAA28AA58+40]
+</msg>
+<arg>http://localhost:3000/login</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="FAIL" start="2024-04-01T19:25:15.765481" elapsed="7.393589">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=123.0.6312.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF6DFD470C2+63090]
+	(No symbol) [0x00007FF6DFCB2D12]
+	(No symbol) [0x00007FF6DFB4EC65]
+	(No symbol) [0x00007FF6DFB4AC1A]
+	(No symbol) [0x00007FF6DFB3D514]
+	(No symbol) [0x00007FF6DFB3E8F8]
+	(No symbol) [0x00007FF6DFB3D7FF]
+	(No symbol) [0x00007FF6DFB3D104]
+	(No symbol) [0x00007FF6DFB3D021]
+	(No symbol) [0x00007FF6DFB3B0A8]
+	(No symbol) [0x00007FF6DFB3B8BC]
+	(No symbol) [0x00007FF6DFB514AD]
+	(No symbol) [0x00007FF6DFBD3D67]
+	(No symbol) [0x00007FF6DFBB6FDA]
+	(No symbol) [0x00007FF6DFBD3412]
+	(No symbol) [0x00007FF6DFBB6D83]
+	(No symbol) [0x00007FF6DFB883A8]
+	(No symbol) [0x00007FF6DFB89441]
+	GetHandleVerifier [0x00007FF6E014262D+4238301]
+	GetHandleVerifier [0x00007FF6E017F78D+4488509]
+	GetHandleVerifier [0x00007FF6E0177A6F+4456479]
+	GetHandleVerifier [0x00007FF6DFE20606+953270]
+	(No symbol) [0x00007FF6DFCBE5DF]
+	(No symbol) [0x00007FF6DFCB92B4]
+	(No symbol) [0x00007FF6DFCB93EB]
+	(No symbol) [0x00007FF6DFCA9C24]
+	BaseThreadInitThunk [0x00007FFAA8F3257D+29]
+	RtlUserThreadStart [0x00007FFAAA28AA58+40]
+</status>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:23.159070" elapsed="0.000000"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>0</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:23.160070" elapsed="0.000000"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<arg>id=user_id_number</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:23.160070" elapsed="0.000000"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<arg>id=user_password</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:23.160070" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=user_id_number</arg>
+<arg>34433443</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:23.160070" elapsed="0.000997"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=user_password</arg>
+<arg>3443</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:23.161067" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:23.161067" elapsed="0.000000"/>
+</kw>
+<kw name="Get Location" owner="SeleniumLibrary">
+<var>${url}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:23.161067" elapsed="0.000998"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${url}</arg>
+<arg>http://localhost:3000/SecurityCheck?id_number=34433443</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:23.162065" elapsed="0.000000"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:23.162065" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2024-04-01T19:25:15.765481" elapsed="7.397582">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=123.0.6312.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF6DFD470C2+63090]
+	(No symbol) [0x00007FF6DFCB2D12]
+	(No symbol) [0x00007FF6DFB4EC65]
+	(No symbol) [0x00007FF6DFB4AC1A]
+	(No symbol) [0x00007FF6DFB3D514]
+	(No symbol) [0x00007FF6DFB3E8F8]
+	(No symbol) [0x00007FF6DFB3D7FF]
+	(No symbol) [0x00007FF6DFB3D104]
+	(No symbol) [0x00007FF6DFB3D021]
+	(No symbol) [0x00007FF6DFB3B0A8]
+	(No symbol) [0x00007FF6DFB3B8BC]
+	(No symbol) [0x00007FF6DFB514AD]
+	(No symbol) [0x00007FF6DFBD3D67]
+	(No symbol) [0x00007FF6DFBB6FDA]
+	(No symbol) [0x00007FF6DFBD3412]
+	(No symbol) [0x00007FF6DFBB6D83]
+	(No symbol) [0x00007FF6DFB883A8]
+	(No symbol) [0x00007FF6DFB89441]
+	GetHandleVerifier [0x00007FF6E014262D+4238301]
+	GetHandleVerifier [0x00007FF6E017F78D+4488509]
+	GetHandleVerifier [0x00007FF6E0177A6F+4456479]
+	GetHandleVerifier [0x00007FF6DFE20606+953270]
+	(No symbol) [0x00007FF6DFCBE5DF]
+	(No symbol) [0x00007FF6DFCB92B4]
+	(No symbol) [0x00007FF6DFCB93EB]
+	(No symbol) [0x00007FF6DFCA9C24]
+	BaseThreadInitThunk [0x00007FFAA8F3257D+29]
+	RtlUserThreadStart [0x00007FFAAA28AA58+40]
+</status>
+</test>
+<test id="s1-s1-t2" name="2-2 Unsuccessful Login due to Incorrect Username" line="23">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-04-01T19:25:23.166563" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-04-01T19:25:29.461730" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-4.png"&gt;&lt;img src="selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2024-04-01T19:25:29.462727" level="FAIL">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=123.0.6312.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF6DFD470C2+63090]
+	(No symbol) [0x00007FF6DFCB2D12]
+	(No symbol) [0x00007FF6DFB4EC65]
+	(No symbol) [0x00007FF6DFB4AC1A]
+	(No symbol) [0x00007FF6DFB3D514]
+	(No symbol) [0x00007FF6DFB3E8F8]
+	(No symbol) [0x00007FF6DFB3D7FF]
+	(No symbol) [0x00007FF6DFB3D104]
+	(No symbol) [0x00007FF6DFB3D021]
+	(No symbol) [0x00007FF6DFB3B0A8]
+	(No symbol) [0x00007FF6DFB3B8BC]
+	(No symbol) [0x00007FF6DFB514AD]
+	(No symbol) [0x00007FF6DFBD3D67]
+	(No symbol) [0x00007FF6DFBB6FDA]
+	(No symbol) [0x00007FF6DFBD3412]
+	(No symbol) [0x00007FF6DFBB6D83]
+	(No symbol) [0x00007FF6DFB883A8]
+	(No symbol) [0x00007FF6DFB89441]
+	GetHandleVerifier [0x00007FF6E014262D+4238301]
+	GetHandleVerifier [0x00007FF6E017F78D+4488509]
+	GetHandleVerifier [0x00007FF6E0177A6F+4456479]
+	GetHandleVerifier [0x00007FF6DFE20606+953270]
+	(No symbol) [0x00007FF6DFCBE5DF]
+	(No symbol) [0x00007FF6DFCB92B4]
+	(No symbol) [0x00007FF6DFCB93EB]
+	(No symbol) [0x00007FF6DFCA9C24]
+	BaseThreadInitThunk [0x00007FFAA8F3257D+29]
+	RtlUserThreadStart [0x00007FFAAA28AA58+40]
+</msg>
+<arg>http://localhost:3000/login</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="FAIL" start="2024-04-01T19:25:23.166563" elapsed="6.296164">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=123.0.6312.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF6DFD470C2+63090]
+	(No symbol) [0x00007FF6DFCB2D12]
+	(No symbol) [0x00007FF6DFB4EC65]
+	(No symbol) [0x00007FF6DFB4AC1A]
+	(No symbol) [0x00007FF6DFB3D514]
+	(No symbol) [0x00007FF6DFB3E8F8]
+	(No symbol) [0x00007FF6DFB3D7FF]
+	(No symbol) [0x00007FF6DFB3D104]
+	(No symbol) [0x00007FF6DFB3D021]
+	(No symbol) [0x00007FF6DFB3B0A8]
+	(No symbol) [0x00007FF6DFB3B8BC]
+	(No symbol) [0x00007FF6DFB514AD]
+	(No symbol) [0x00007FF6DFBD3D67]
+	(No symbol) [0x00007FF6DFBB6FDA]
+	(No symbol) [0x00007FF6DFBD3412]
+	(No symbol) [0x00007FF6DFBB6D83]
+	(No symbol) [0x00007FF6DFB883A8]
+	(No symbol) [0x00007FF6DFB89441]
+	GetHandleVerifier [0x00007FF6E014262D+4238301]
+	GetHandleVerifier [0x00007FF6E017F78D+4488509]
+	GetHandleVerifier [0x00007FF6E0177A6F+4456479]
+	GetHandleVerifier [0x00007FF6DFE20606+953270]
+	(No symbol) [0x00007FF6DFCBE5DF]
+	(No symbol) [0x00007FF6DFCB92B4]
+	(No symbol) [0x00007FF6DFCB93EB]
+	(No symbol) [0x00007FF6DFCA9C24]
+	BaseThreadInitThunk [0x00007FFAA8F3257D+29]
+	RtlUserThreadStart [0x00007FFAAA28AA58+40]
+</status>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:29.463725" elapsed="0.000000"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>0</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:29.463725" elapsed="0.000000"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<arg>id=user_id_number</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:29.463725" elapsed="0.000000"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<arg>id=user_password</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:29.464722" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=user_id_number</arg>
+<arg>12170586</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:29.464722" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=user_password</arg>
+<arg>111111</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:29.464722" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:29.464722" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=error_box</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:29.464722" elapsed="0.000000"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<arg>Invalid User/Password. Check your input</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:29.464722" elapsed="0.000000"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:29.466229" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2024-04-01T19:25:23.165056" elapsed="6.301173">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=123.0.6312.86)
+Stacktrace:
+	GetHandleVerifier [0x00007FF6DFD470C2+63090]
+	(No symbol) [0x00007FF6DFCB2D12]
+	(No symbol) [0x00007FF6DFB4EC65]
+	(No symbol) [0x00007FF6DFB4AC1A]
+	(No symbol) [0x00007FF6DFB3D514]
+	(No symbol) [0x00007FF6DFB3E8F8]
+	(No symbol) [0x00007FF6DFB3D7FF]
+	(No symbol) [0x00007FF6DFB3D104]
+	(No symbol) [0x00007FF6DFB3D021]
+	(No symbol) [0x00007FF6DFB3B0A8]
+	(No symbol) [0x00007FF6DFB3B8BC]
+	(No symbol) [0x00007FF6DFB514AD]
+	(No symbol) [0x00007FF6DFBD3D67]
+	(No symbol) [0x00007FF6DFBB6FDA]
+	(No symbol) [0x00007FF6DFBD3412]
+	(No symbol) [0x00007FF6DFBB6D83]
+	(No symbol) [0x00007FF6DFB883A8]
+	(No symbol) [0x00007FF6DFB89441]
+	GetHandleVerifier [0x00007FF6E014262D+4238301]
+	GetHandleVerifier [0x00007FF6E017F78D+4488509]
+	GetHandleVerifier [0x00007FF6E0177A6F+4456479]
+	GetHandleVerifier [0x00007FF6DFE20606+953270]
+	(No symbol) [0x00007FF6DFCBE5DF]
+	(No symbol) [0x00007FF6DFCB92B4]
+	(No symbol) [0x00007FF6DFCB93EB]
+	(No symbol) [0x00007FF6DFCA9C24]
+	BaseThreadInitThunk [0x00007FFAA8F3257D+29]
+	RtlUserThreadStart [0x00007FFAAA28AA58+40]
+</status>
+</test>
+<test id="s1-s1-t3" name="2-3 Unseccessful Login due to Incorrect Password" line="36">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-04-01T19:25:29.470385" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/login'.</msg>
+<msg time="2024-04-01T19:25:34.972744" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000023DB8207550&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/8e9cef2c0731aa5bac7f685930cdd1ab/screenshot</msg>
+<msg time="2024-04-01T19:25:39.045148" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000023DB7CF35D0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/8e9cef2c0731aa5bac7f685930cdd1ab/screenshot</msg>
+<msg time="2024-04-01T19:25:43.111445" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000023DB820E650&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/8e9cef2c0731aa5bac7f685930cdd1ab/screenshot</msg>
+<msg time="2024-04-01T19:25:47.168430" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: HTTPConnectionPool(host='localhost', port=52851): Max retries exceeded with url: /session/8e9cef2c0731aa5bac7f685930cdd1ab/screenshot (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000023DB820EE50&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</msg>
+<arg>http://localhost:3000/login</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="FAIL" start="2024-04-01T19:25:29.470385" elapsed="17.699040">Execution terminated by signal</status>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:47.169425" elapsed="0.000000"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>0</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:47.170422" elapsed="0.000000"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<arg>id=user_id_number</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:47.170422" elapsed="0.000000"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<arg>id=user_password</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:47.170422" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=user_id_number</arg>
+<arg>12170585</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:47.170422" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=user_password</arg>
+<arg>password</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:47.171420" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:47.171420" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=error_box</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:47.171420" elapsed="0.000000"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<arg>Invalid User/Password. Check your input</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:47.171420" elapsed="0.000000"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="NOT RUN" start="2024-04-01T19:25:47.171420" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2024-04-01T19:25:29.470385" elapsed="17.702034">Execution terminated by signal</status>
+</test>
+<test id="s1-s1-t4" name="2-4 Invalid Access to Login Page When there is a session of a User Account" line="49">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:47.172419" elapsed="0.000995">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s1-t5" name="2-5 Invalid Access to Login Page When there is a session of an Admin Account" line="71">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:47.173414" elapsed="0.000997">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s1-t6" name="2-6 Invalid Access to Login Page When there is a session of a Driver Account" line="93">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:47.175409" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<doc>A test suite for valid login.
+
+This test has a workflow that is created using keywords
+directly from SeleniumLibrary.</doc>
+<status status="FAIL" start="2024-04-01T19:25:15.507226" elapsed="31.669181"/>
+</suite>
+<suite id="s1-s2" name="Profile Test Suite" source="C:\Users\josha\OneDrive\Documents\SCHOOL\College\STSWENG_XX22_G1_2\__test__\profile.robot">
+<test id="s1-s2-t1" name="5-1 Logging out" line="28">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:47.178767" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s2-t2" name="5-2 Checking the Displayed Profile" line="42">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:47.179764" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<doc>A test suite for testing the profile page of the application.
+This test has a workflow that is created using keywords
+directly from SeleniumLibrary.</doc>
+<status status="FAIL" start="2024-04-01T19:25:47.177613" elapsed="0.003149"/>
+</suite>
+<suite id="s1-s3" name="Reservation Test Suite" source="C:\Users\josha\OneDrive\Documents\SCHOOL\College\STSWENG_XX22_G1_2\__test__\reservation.robot">
+<test id="s1-s3-t1" name="6-1 Creating a Reservation to Laguna Campus" line="52">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.254002" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s3-t2" name="6-2 Creating a Reservation to Manila Campus" line="92">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.255000" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s3-t3" name="6-3 Reserving Past Cutoff Period" line="133">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.256506" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s3-t4" name="6-4 Invalid Source and Destination" line="167">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.256506" elapsed="0.001015">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s3-t5" name="6-5 Editing Reservation" line="200">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.258518" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s3-t6" name="6-6 Editing With Invalid Details" line="252">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.259519" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s3-t7" name="6-7 Deleting/Cancelling Reservation" line="301">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.260516" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s3-t8" name="6-8 Admin Reserves for a User" line="346">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.265503" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s3-t9" name="6-9 Driver Reserves for a User" line="390">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.267005" elapsed="0.001209">Test execution stopped due to a fatal error.</status>
+</test>
+<doc>A test suite for validation of Reservation features.
+
+This test has a workflow that is created using keywords
+directly from SeleniumLibrary.</doc>
+<status status="FAIL" start="2024-04-01T19:25:47.181762" elapsed="4.086452"/>
+</suite>
+<suite id="s1-s4" name="Schedule Reservation Test Suite" source="C:\Users\josha\OneDrive\Documents\SCHOOL\College\STSWENG_XX22_G1_2\__test__\schedule.robot">
+<test id="s1-s4-t1" name="4-1 Checking the Schedule of a given date" line="41">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.270209" elapsed="0.000998">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s4-t2" name="4-2 Cancelling the Schedule Input" line="57">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.272204" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s4-t3" name="4-3 Missing Date" line="88">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.273201" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s4-t4" name="4-4 Missing Location" line="111">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.274201" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s4-t5" name="4-5 Missing Time Slot" line="131">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.275195" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<doc>A test suite for scheduling reservations
+
+This test has a workflow that is created using keywords
+directly from SeleniumLibrary.</doc>
+<status status="FAIL" start="2024-04-01T19:25:51.269212" elapsed="0.006981"/>
+</suite>
+<suite id="s1-s5" name="SecurityCode Test Suite" source="C:\Users\josha\OneDrive\Documents\SCHOOL\College\STSWENG_XX22_G1_2\__test__\security.robot">
+<test id="s1-s5-t1" name="3-1 Valid Security Code" line="9">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.278375" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s5-t2" name="3-2 Invalid Security Code" line="60">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.279378" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<doc>A test suite for valid security code input. Needs the accounts from test_accounts.js to run.
+This test has a workflow that is created using keywords
+directly from SeleniumLibrary.</doc>
+<status status="FAIL" start="2024-04-01T19:25:51.277230" elapsed="0.003145"/>
+</suite>
+<suite id="s1-s6" name="SignUp Test Suite" source="C:\Users\josha\OneDrive\Documents\SCHOOL\College\STSWENG_XX22_G1_2\__test__\signup.robot">
+<test id="s1-s6-t1" name="1-1 Valid Access" line="11">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.282368" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t2" name="1-2 Missing First Name" line="53">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.283365" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t3" name="1-3 Missing Last Name" line="93">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.284362" elapsed="0.000999">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t4" name="1-4 Missing Email" line="134">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.286863" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t5" name="1-5 Email Already Registered" line="174">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.287864" elapsed="0.001001">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t6" name="1-6 Incorrect Email Format" line="211">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.288865" elapsed="0.000997">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t7" name="1-7 Missing ID Number" line="248">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.290859" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t8" name="1-8 Incorrect ID Number Format" line="288">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.291856" elapsed="0.000999">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t9" name="1-9 Missing Password" line="338">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.293853" elapsed="0.000996">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t10" name="1-10 Missing Destination" line="377">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.294849" elapsed="0.001511">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t11" name="1-11 Missing Passenger Type" line="410">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.296360" elapsed="0.001018">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t12" name="1-12 Navigation to Home &quot;/&quot;" line="444">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.298375" elapsed="0.000000">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-s6-t13" name="1-13 Navigation to Login" line="455">
+<tag>robot:exit</tag>
+<status status="FAIL" start="2024-04-01T19:25:51.299376" elapsed="0.000997">Test execution stopped due to a fatal error.</status>
+</test>
+<doc>A test suite for valid user/admin/driver signup
+
+This test has a workflow that is created using keywords
+directly from SeleniumLibrary.</doc>
+<status status="FAIL" start="2024-04-01T19:25:51.281371" elapsed="0.020997"/>
+</suite>
+<status status="FAIL" start="2024-04-01T19:25:15.480496" elapsed="35.823867"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="37" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="3" skip="0" info="combined" combined="NOT robot:exit">NOT robot:exit</stat>
+</tag>
+<suite>
+<stat pass="0" fail="37" skip="0" id="s1" name="Test">Test</stat>
+<stat pass="0" fail="6" skip="0" id="s1-s1" name="Login Test Suite">Test.Login Test Suite</stat>
+<stat pass="0" fail="2" skip="0" id="s1-s2" name="Profile Test Suite">Test.Profile Test Suite</stat>
+<stat pass="0" fail="9" skip="0" id="s1-s3" name="Reservation Test Suite">Test.Reservation Test Suite</stat>
+<stat pass="0" fail="5" skip="0" id="s1-s4" name="Schedule Reservation Test Suite">Test.Schedule Reservation Test Suite</stat>
+<stat pass="0" fail="2" skip="0" id="s1-s5" name="SecurityCode Test Suite">Test.SecurityCode Test Suite</stat>
+<stat pass="0" fail="13" skip="0" id="s1-s6" name="SignUp Test Suite">Test.SignUp Test Suite</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2024-04-01T19:25:34.972744" level="WARN">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000023DB8207550&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/8e9cef2c0731aa5bac7f685930cdd1ab/screenshot</msg>
+<msg time="2024-04-01T19:25:39.045148" level="WARN">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000023DB7CF35D0&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/8e9cef2c0731aa5bac7f685930cdd1ab/screenshot</msg>
+<msg time="2024-04-01T19:25:43.111445" level="WARN">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000023DB820E650&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')': /session/8e9cef2c0731aa5bac7f685930cdd1ab/screenshot</msg>
+<msg time="2024-04-01T19:25:47.168430" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: HTTPConnectionPool(host='localhost', port=52851): Max retries exceeded with url: /session/8e9cef2c0731aa5bac7f685930cdd1ab/screenshot (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x0000023DB820EE50&gt;: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))</msg>
+</errors>
+</robot>
