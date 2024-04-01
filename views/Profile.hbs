@@ -1,18 +1,175 @@
 <!DOCTYPE html>
+<!-- Turn into HBS -->
 
 <html>
-
     <head>
-        <title> Arrow Express - Profile </title> 
+        <title> Arrows Express - Profile  </title> 
         <link rel="icon" type="image/png" href="../images/DLSU_Logo.png">
-        <link rel="stylesheet" type="text/css" href="../css/ProfileStyle.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="../js/User.js"> </script>
+        <link rel="stylesheet" href="../css/mobile.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+        <style> 
+            .member_card {
+                background-image: linear-gradient(15deg, rgba(0, 119, 30, .39) 50%, rgba(0, 119, 30, 0) 50.1%);
+                width: 25rem;
+                height: 35rem;
+                border-radius: 2rem;
+                scale: 1.5;
+                position: relative;
+                top: 20rem;
+            }
+
+            .member_card > .triangle {
+                position:relative;
+
+                background-color: rgba(0, 119, 30, 1);
+                width: 22rem;
+                height: 17rem;
+
+                top: -6rem;
+                left: 3rem;
+                
+                clip-path: polygon(100% 42%, 0 81%, 76% 100%);
+
+            }
+
+            .member_card > img{
+                position: relative;
+                top: 3rem;
+                left: 2.5rem;
+                border-radius: 1rem;
+                width: 20rem;
+                height: 20rem;
+                background-size: cover;
+            }
+
+            .member_card > div {
+                position: relative;
+                left: -3rem;
+                top: -12rem;
+
+                text-align: end;
+                line-height: 0;
+                
+            }
+            
+            .member_card > div > h4 {
+                font-size: 1.5rem;
+                font-weight: 300;
+                letter-spacing: .3rem;
+            }
+
+            .member_card > h6 {
+                font-size: 1.5rem;
+                font-weight: 100;
+                letter-spacing: 0.2rem;
+                position: relative;
+                top: -10rem;
+                text-align: center;
+            }
+
+            .profile_box {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                margin: 0;
+            }
+
+            .landing {
+                height: 100%;
+                margin: 0;
+            }
+
+            .nav_card{
+                display: flex;
+                flex-direction: column;
+                color: white;
+                background: none;
+                gap: 0.1rem;
+                border-radius: 3rem 3rem 0 0;
+                height: auto;
+                z-index: 100;
+                margin-top: auto;
+
+                overflow: hidden;
+            }
+
+            .nav_card_row > a {
+                display: flex;
+                color: white;
+                width: 50% !important;
+                text-decoration: none;
+                border-radius: 1rem;
+                gap:2rem;
+                justify-content: center;
+                padding: 1rem;
+                background-image: linear-gradient(to bottom, rgba(37, 37, 37, 0.6), rgba(15, 16, 16, 0.6));
+                background-size: 100% 200%;
+                background-position-y: 100%;
+                
+                transition: 150ms background-position-y;
+            }
+
+            .nav_card_row > a:hover {
+                background-position-y: 0%;
+            }
+
+            .nav_card_row > a:hover > img {
+                scale: 1.05;
+            }
+
+
+            .nav_card_row > a > img {
+                width: 8rem;
+                align-self: center;
+                transition: 150ms scale;
+            }
+
+            .nav_card_row > a > div {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                vertical-align: middle;
+                margin-top: auto;
+                margin-bottom: auto;
+            }
+
+            .nav_card_row {
+                display: flex;
+                gap: 0.1rem;
+                height: 20rem;
+            }
+
+            @media (min-aspect-ratio: 4/3) {
+                .profile_box {
+                    flex-direction: row;
+                    gap: 20rem;
+                }
+
+                .member_card {
+                    top: 0;
+                    left: 0;
+                }
+
+                .nav_card {
+                    margin-top: 5rem;
+                    border-radius: 3rem;
+                }
+
+                .nav_card_row {
+                    height: 25rem;
+                }
+
+                .nav_card_row > a {
+                    padding: 5rem;
+                }
+            }
+
+        </style>
     </head>
-
     <body>
-
         <script type="text/javascript">
             
             window.onload = function() {
@@ -55,7 +212,7 @@
 
         
         </script>
-
+        
         <div class="navbar">
             <a href="/"> <img src= "../images/DLSU_Logo.png" class = "website_logo" style="cursor: pointer;"> </a>
 
@@ -118,83 +275,70 @@
                     </div>
                 </a>
 
-            </div>  
+        <div class="landing_background"></div>
+        <div class="landing">
+            <div class="profile_box">
 
+                    <div class="member_card" id="info_box">
+                        <img src="{{profilePicture}}" id = "profile_picture">
+                        <div class="triangle"></div>
+                        <div>
+                            <h3>{{firstName}} {{lastName}}</h3>
+                            <h4>{{passengerType}}</h4> 
+                        </div>
+                        <h6>{{user_id_number}}</h6>
+                    </div>
+                    
+                   <div class="nav_card"> 
+
+                        <div class="nav_card_row">
+                            <a href="/Reservation?user_id_number={{user_id_number}}">
+                                <img src = "../images/Van_Logo.png" id = "van_logo">
+                                <div>
+                                    <h2> Reserve Now </h2>
+                                    <p> Start reserving your seat now! </p>
+                                </div>
+                            </a>
+                    
+                            <a href="/Schedule">
+                                <img src = "../images/Schedule_Logo.png" id = "schedule_logo">
+                                <div>
+                                    <h2> Schedule </h2>
+                                    <p> View seat availability</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="nav_card_row">
+                            <a href="/Settings?user_id_number={{user_id_number}}">
+                                <img src = "../images/ProfileSettings_Logo.png" id = "logout_logo">
+                                <div>
+                                    <h2> Settings </h2>
+                                    <p> View Profile Settings </p>
+                                </div>
+                            </a>
+                    
+                            <a href="/Logout" onclick="logoutAccount()">
+                                <img src = "../images/Logout_Logo.png" id = "logout_logo">
+
+                                <div>
+                                    <h2> Logout </h2>
+                                    <p> Exit Arrow Express </p>
+                                </div> 
+                            </a>
+                        </div>
+
+                    </div>  
+
+            </div>
         </div>
 
+        <script>
+            $(".navbar_top").on("click", function(){
+                $(".arrow").toggleClass("arrow_pressed");
+                $(".navbar_content").toggleClass("navbar_open");
+            })
+
+        </script>
     </body>
-
-    <style>
-
-        a{
-            text-decoration: none;
-        }
-
-        #van_logo{
-            width: 200px;
-            height: 200px;
-            margin: auto;
-            display: block;
-        }
-
-        #schedule_logo{
-            position: relative;
-            top: 30px;
-            width: 150px;
-            height: 150px;
-            margin: auto;
-            display: block;
-        }
-
-        #logout_logo{
-            position: relative;
-            top: 30px;
-            width: 160px;
-            height: 160px;
-            margin: auto;
-            display: block;
-        }
-
-        .title_text{
-            position: relative;
-            text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-            text-decoration: none;
-            color: black;
-        }
-
-        .sub_text{
-            position: relative;
-            text-align: center;
-            font-style: italic;
-            text-decoration: none;
-            color: black;
-        }
-
-         #success_box{
-            width: 380px;
-			height: 20px;
-			top: 10%;
-			left: 50%;
-			margin: auto;
-			background: rgb(78, 255, 54);
-			padding: 5px;
-			position: absolute;
-			border-radius: 20px;
-			display: none;
-			transform: translate(-50%,-50%);
-        }
-
-        #success_box p{
-            text-align: center;
-            font-family: sans-serif;
-            font-size: 13px;
-            position: relative;
-            top: 3px;
-        }
-
-        
-    </style>
-
 </html>

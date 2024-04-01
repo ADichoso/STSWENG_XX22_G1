@@ -72,6 +72,8 @@ ul{
     flex-direction: row;
     align-items: center;
     gap: 1rem;
+
+    cursor: pointer;
 }
 
 .navbar_top > img{
@@ -306,6 +308,10 @@ button{
     .navbar_desktop {
         display: flex;
         
+    }
+
+    .navbar_top{
+        cursor:default;
     }
 
     #navbar_button{
