@@ -70,9 +70,9 @@ const reservationController = {
             Example: the value entered in <input type="text" name="fName">
             can be retrieved using `req.body.fName`
         */		
-		if (req.body.user_id_number != ""){
+		if (req.body.id_number != ""){
 
-			const id_number = req.body.user_id_number;
+			const id_number = req.body.id_number;
 
 			const query = { id_number: id_number};
 			const projection = "id_number";
@@ -80,9 +80,9 @@ const reservationController = {
 			const result2 = await db.find_one(Admin, query, projection);
 			
 			if (result) {
-				var id_num = req.body.user_id_number;
+				var id_num = req.body.id_number;
 			} else if (result2) {
-				var id_num = req.body.user_id_number;
+				var id_num = req.body.id_number;
 			} else {
 				var id_num = 0;
 				console.log('User does not exist');
@@ -215,7 +215,7 @@ const reservationController = {
 
 	post_search_user: async function (req, res){
 
-		var id_number = req.body.user_id_number;
+		var id_number = req.body.id_number;
 		var admin_id = req.body.admin_id;
 
         var projection = "id_number first_name last_name"
@@ -229,7 +229,7 @@ const reservationController = {
 
 			console.log('test');
 			const result = await db.find_many(Reservation, {id_number: id_number}, "");
-
+			console.log(result);
             //Get name of user
             var selected_name = null
             if(isFoundUser)
