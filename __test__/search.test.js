@@ -59,7 +59,7 @@ describe('SearchController Functions Test', () => {
             jest.resetAllMocks();
             const req = {
                 query: {
-                    idNumber: 123
+                    id_number: 123
                 }
             }
 
@@ -102,7 +102,7 @@ describe('SearchController Functions Test', () => {
             jest.resetAllMocks();
             const req = {
                 query: {
-                    idNumber: 123
+                    id_number: 123
                 }
             }
 
@@ -124,7 +124,7 @@ describe('SearchController Functions Test', () => {
             jest.resetAllMocks();
             const req = {
                 query: {
-                    idNumber: 123
+                    id_number: 123
                 }
             }
 
@@ -160,7 +160,7 @@ describe('SearchController Functions Test', () => {
             jest.resetAllMocks();
             const req = {
                 query: {
-                    idNumber: 123
+                    id_number: 123
                 }
             }
 
@@ -197,7 +197,7 @@ describe('SearchController Functions Test', () => {
             jest.resetAllMocks();
             const req = {
                 query: {
-                    idNumber: 123
+                    id_number: 123
                 }
             }
 

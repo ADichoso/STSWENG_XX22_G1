@@ -214,66 +214,22 @@
         </script>
         
         <div class="navbar">
-            <a href="/"> <img src= "../images/DLSU_Logo.png" class = "website_logo" style="cursor: pointer;"> </a>
-
-            <style>
-                img:hover{
-                    cursor: default;
-                }
-            </style>   
-
-            <div id="success_box">
-                <p id="success_message"> Success! </p>
-            </div>
-            
-        </div>
-        <div class="content">
-
-            <div id="info_box">
-                <div style="position: relative; background: rgba(0, 0, 0, 0.26); border-radius: 20px; width: 50%; height: 6%; margin: auto; top: 45px;">
-                    <a href="/Search">
-                        <img src="../images/SearchIcon.png" id="searchIcon" style="position: relative; width: 40px; height: 40px; left: 100%; top: 2px; filter:grayscale(); cursor:pointer;">
-                    </a>
-                    <p class = "sub_text" style="top: -36px; font-size: 25px; color: white; font-style: italic; font-weight: bold;"> {{details.id_number}} </p>
+            <div class="navbar_top">
+                <img src="../images/DLSU_Logo.png">
+                <h2>De La Salle University</h2>
+                <button id="navbar_button"><div class="arrow"></div></button>
+                <div class="navbar_desktop">
+                    <a href="/">HOME</a>
+                    <a href="/Search">SEARCH</a>
+                    <a href="/Profile">LOGIN</a>
                 </div>
-                <img src="{{details.profile_picture}}" id = "profile_picture">
-                <p class = "title_text" style="top: 50px; font-size: 40px; color: white;"> {{details.first_name}} {{details.last_name}} </p>
-                <p class = "sub_text" style="top: 80px; font-size: 20px; color: white;"> {{details.passenger_type}} </p>
             </div>
-            
-            <div class="right"> 
-
-                <a href="/Reservation?id_number={{details.id_number}}">
-                    <div class="box">
-                        <img src = "../images/Van_Logo.png" id = "van_logo">
-                        <p class = "title_text"> Reserve Now </p>
-                        <p class = "sub_text"> Start reserving your seat now! </p>
-                    </div>
-                </a>
-        
-                <a href="/Schedule">
-                    <div class="box">
-                        <img src = "../images/Schedule_Logo.png" id = "schedule_logo">
-                        <p class = "title_text" style="top: 50px;"> Schedule </p>
-                        <p class = "sub_text" style="top: 50px; "> View seats availability of schedules </p>
-                    </div>
-                </a>
-                
-                <a href="/Settings?id_number={{details.id_number}}">
-                    <div class="box">
-                        <img src = "../images/ProfileSettings_Logo.png" id = "logout_logo">
-                        <p class = "title_text" style="top: 50px;" > Settings </p>
-                        <p class = "sub_text" style="top: 50px;"> View Profile Settings </p>
-                    </div>
-                </a>
-        
-                <a href="/Logout" onclick="logout_account()">
-                    <div class="logout_box">
-                        <img src = "../images/Logout_Logo.png" id = "logout_logo">
-                        <p class = "title_text" style="top: 50px;" > Logout </p>
-                        <p class = "sub_text" style="top: 50px;"> Exit Arrow Express </p>
-                    </div>
-                </a>
+            <div class="navbar_content">
+                <a href="/">HOME</a>
+                <a href="/Search">SEARCH</a>
+                <a href="/Login">Profile</a>
+            </div>
+        </div>
 
         <div class="landing_background"></div>
         <div class="landing">

@@ -89,26 +89,28 @@
                     <a href="/Login">LOGIN</a>
                 </div>
             </div>
-            
-            <div class="form_box">
-                <h2> Security Check </h2>
-                <h4> 4-Digit Security Code </h4>
-                <hr>
-                <div class="input">
-                    <form action="/SecurityCheck" id="loginForm" method="post">
-                        <input type="hidden" name="id_number" value="{{id_number}}">
-                        <label for="user_security_code"></label>
-                        <input type="password" placeholder="Enter 4-Digit Security Code" class="fillup" name="user_security_code" id="user_security_code" required pattern="[0-9]+" minlength="4" maxlength="4" >
-                        <button type="submit" class="toggle_btn" > Submit <style> .toggle_btn{ font-size: large; font-weight: bold;} </style> </button>
-                    </form>
+            <div class="navbar_content">
+                <a href="/">HOME</a>
+                <a href="/Search">SEARCH</a>
+                <a href="/Login">LOGIN</a>
+            </div>
+        </div>
+        
+
+        <div class="landing_background"></div>
+        <div class="landing">
+            <div class="landing_box">
+                <div style="display: flex; flex-direction: column; gap: 0rem;">
+                    <h1>Security Check</h1>
+                    <h6>4-Digit Security Code</h6>
                 </div>
 
                 <form action="/SecurityCheck" id="loginForm" method="post">
                     <input type="hidden" name="id_number" value="{{id_number}}">
                     
                     <div class="form_item">
-                        <label for="user_securityCode"></label>
-                        <input type="password" class="fillup" name="user_securityCode" id="user_securityCode" required pattern="[0-9]+" minlength="4" maxlength="4" >
+                        <label for="user_security_code"></label>
+                        <input type="password" class="fillup" name="user_security_code" id="user_security_code" required pattern="[0-9]+" minlength="4" maxlength="4" >
                     </div>
 
                     <button type="submit" class="primary_button"> Submit </button>
@@ -120,7 +122,6 @@
                 </div>
             </div>
         </div>
-
         
         
 

@@ -188,7 +188,7 @@ function hide_schedule_form(fromLoad = 0, resultArr = [], isSearch){
 	div.setAttribute('id', count );
 	if(resultArr.length != 0) var user_id = resultArr[6];
 	else var user_id = get_ID_number();
-	div.setAttribute('linkedidnumber', user_id); 
+	div.setAttribute('linked_id_number', user_id); 
 	
     scheduleContainer.appendChild(div);
 	
@@ -260,7 +260,7 @@ function show_edit_form(i) {
 	var subBtn = document.getElementById('edit_btn');
 
     var id_numberBox = document.getElementById('e_hidden_id_number');
-    id_numberBox.value = document.getElementById(i).getAttribute('linkedidnumber'); //Get the number linked to the reservation instead
+    id_numberBox.value = document.getElementById(i).getAttribute('linked_id_number'); //Get the number linked to the reservation instead
 
     //^^^from edit form
 	//vvv get current data
@@ -275,7 +275,7 @@ function show_edit_form(i) {
 	var reserveText = document.getElementById(i).children[1];
 	//alert(reserveText);
 	currCampus.value = reserveText.children[0].innerHTML;
-	currID.value = document.getElementById(i).getAttribute('linkedid_number');
+	currID.value = document.getElementById(i).getAttribute('linked_id_number');
 	currDate.value = reserveText.children[2].innerHTML;
 	currEntryL.value = reserveText.children[4].textContent;
 	currEntryT.value = reserveText.children[5].innerHTML;
@@ -331,7 +331,7 @@ function show_delete_form(i) {
 
 	var reserveText = document.getElementById(i).children[1];
 	currCampus.value = reserveText.children[0].innerHTML;
-	currID.value = document.getElementById(i).getAttribute('linkedid_number');
+	currID.value = document.getElementById(i).getAttribute('linked_id_number');
 	currDate.value = reserveText.children[2].innerHTML;
 	currEntryL.value = reserveText.children[4].textContent;
 	currEntryT.value = reserveText.children[5].innerHTML;
