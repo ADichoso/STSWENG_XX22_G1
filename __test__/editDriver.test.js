@@ -68,7 +68,7 @@ describe('EditDriverController - delete_driver', () => {
             jest.resetAllMocks();
          })
         test('delete driver', async () => {
-            let req = {body: {d_admin_ID: 9999999, d_curr_first_name: "luis", d_curr_last_name: "luis", d_curr_email: "luis", d_curr_id_number: 9999999}};
+            let req = {body: {d_admin_id: 9999999, d_curr_first_name: "luis", d_curr_last_name: "luis", d_curr_email: "luis", d_curr_id_number: 9999999}};
             let res = {redirect: jest.fn()};
     
             const delete_one_mock = jest.spyOn(db, 'delete_one').mockResolvedValueOnce();
@@ -87,7 +87,7 @@ describe('EditDriverController - insert_driver', () => {
             jest.resetAllMocks();
          })
         test('insert driver', async () => {
-            let req = {body: {admin_ID: 9999999, curr_first_name: "luis", curr_last_name: "luis", curr_email: "luis", curr_id_number: 9999999}};
+            let req = {body: {admin_id: 9999999, curr_first_name: "luis", curr_last_name: "luis", curr_email: "luis", curr_id_number: 9999999}};
             let res = {redirect: jest.fn()};
     
             const insert_one_mock = jest.spyOn(db, 'insert_one').mockResolvedValueOnce();

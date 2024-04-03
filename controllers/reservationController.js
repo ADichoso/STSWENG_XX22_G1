@@ -218,6 +218,9 @@ const reservationController = {
 		var id_number = req.body.id_number;
 		var admin_id = req.body.admin_id;
 
+		console.log(id_number);
+		console.log(admin_id);
+
         var projection = "id_number first_name last_name"
 		const isFoundUser = await db.find_one(User, {id_number: id_number}, projection);
 		const isFoundAdmin = await db.find_one(Admin, {id_number: id_number}, projection);

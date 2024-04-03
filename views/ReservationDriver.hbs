@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="../css/FormStyle.css">  <!-- Kailangan to if may separate CSS file -->
         <link rel="stylesheet" href="../css/ReservationStyle.css">
         <script src="../js/User.js"> </script>
+        <script src="../js/Schedule.js"> </script>
         <script src="../js/Reservation.js" defer> </script>
         <script src="../js/UserAdmin.js" defer> </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -19,20 +20,20 @@
                 document.getElementById("success_box").style.display = "none";
                 document.getElementById("error_box").style.display = "none";
 				
-				console.log({{admin_ID}});
-				function admin_ID_check(admin_ID = null){
-					if (admin_ID == null){
+				console.log({{admin_id}});
+				function admin_id_check(admin_id = null){
+					if (admin_id == null){
 						var ID_num = new URLSearchParams(window.location.search).get('id_number');
 						document.getElementById('backButton').setAttribute('href', '/ProfileAdmin?id_number='+ ID_num);
-						document.getElementById('admin_ID').value = ID_num;
+						document.getElementById('admin_id').value = ID_num;
 					}
 					else{
-						document.getElementById('admin_ID').value = admin_ID;
-						document.getElementById('e_admin_ID').value = admin_ID;
-						document.getElementById('d_admin_ID').value = admin_ID;
+						document.getElementById('admin_id').value = admin_id;
+						document.getElementById('e_admin_id').value = admin_id;
+						document.getElementById('d_admin_id').value = admin_id;
 					}
 				}
-				admin_ID_check({{admin_ID}});
+				admin_id_check({{admin_id}});
 
                 var search_user_status = new URLSearchParams(window.location.search).get('is_search_user_valid');
                 var search_user_resv_list_status = new URLSearchParams(window.location.search).get('reservation_list');
@@ -90,7 +91,7 @@
         <div class = "banner"> 
 
             <div class="navbar">
-				<a href="/ProfileAdmin?id_number={{admin_ID}}" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
+				<a href="/ProfileAdmin?id_number={{admin_id}}" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
 
                 <div id="success_box">
                     <p id="success_message"> Success! </p>
@@ -152,7 +153,7 @@
                     <div class="input">
                         <form action="/SearchUser" method="post">
                             <label for="id_number"></label>
-							<input type="hidden" id="admin_ID" name="admin_ID" value="">
+							<input type="hidden" id="admin_id" name="admin_id" value="">
                             <input type="text" placeholder="ID Number" class="fillup" name="id_number" id="id_number" required style="position: relative; margin-top: 40px;" pattern="[0-9]+" minlength="8" maxlength="8">
                             <button type="submit" class="toggle_btn" id="reserve_btn" style="position: relative; font-size: large; font-weight: bold; margin-top: 60px;"> Search </button>
                         
@@ -166,45 +167,55 @@
     
                 </div>
 				
-				<div class="form_box2" id="edit_box" style="display: none; height: 370px"> <!-- EDIT BOX -->
+                <div class="form_box2" id="edit_box"> <!-- EDIT BOX -->
                     <div id="blur_box"> </div>
                     <h2> Edit Reservation</h2>
                     <hr>
                     <div class="input">
                         <form action="/SearchUserUpdate" method="post">
-                            <div class="button_box">
-                                <div id="ebtn"></div>
-                                <button type="button" class="switch" id="laguna_btn" onclick="e_left_click();"> Laguna </button>
-                                <button type="button" class="switch" id="manila_btn" onclick="e_right_click();"> Manila </button> 
+
+                            <br>
+
+                            <div>
+                                <select required name="editUser_entry" id="editUser_entry" class="fillup" onchange="ready_change_time('editUser_entry','editUser_entryTime');" style="position: relative; top: -25px; display: block;">
+                                    <option value="" disabled selected hidden s> Select Trip </option>
+                                    <option value="MNL"> Line 1: DLSU Manila to DLSU-LAG </option>
+                                    <option value="Paseo"> Line 2: Paseo to DLSU-LAG </option>
+                                    <option value="Carmona"> Line 3: Carmona to DLSU-LAG </option>
+                                    <option value="Pavilion"> Line 4: Pavilion Mall to DLSU-LAG </option>
+                                    <option value="Walter"> Line 5: Walter Mart to DLSU-LAG </option>
+                                </select>
                             </div>
-							<input type="hidden" id="e_admin_ID" name="e_admin_ID" value="">
-							<input type="hidden" id="e_hidden_start_campus" required name="e_hidden_start_campus" value="">
-							<input type="hidden" id="e_hidden_id_number" required name="e_hidden_id_number" value="">
-							<input type="hidden" id="e_hidden_entry_loc" name="e_hidden_entry_loc" value="">
-							<input type="hidden" id="e_hidden_entry_time" name="e_hidden_entry_time" value="">
-							<input type="hidden" id="e_hidden_exit_loc" name="e_hidden_exit_loc" value="">
-							<input type="hidden" id="e_hidden_exit_time" name="e_hidden_exit_time" value="">
-							
-							<input type="hidden" id="e_curr_start_campus" name ="e_curr_start_campus" value="">
-							<input type="hidden" id="e_curr_id_number" name = "e_curr_id_number" value="">
-							<input type="hidden" id="e_curr_date" name="e_curr_date" value="">
-							<input type="hidden" id="e_curr_entry_loc" name="e_curr_entry_loc" value="">
-							<input type="hidden" id="e_curr_entry_time" name="e_curr_entry_time" value="">
-							<input type="hidden" id="e_curr_exit_loc" name="e_curr_exit_loc" value="">
-							<input type="hidden" id="e_curr_exit_time" name="e_curr_exit_time" value="">
-							
+                            
+                            <input type="hidden" id="e_admin_id" name="e_admin_id" value="">
+                            <input type="hidden" id="e_hidden_start_campus" required name="e_hidden_start_campus" value="">
+                            <input type="hidden" id="e_hidden_id_number" required name="e_hidden_id_number" value="">
+                            <input type="hidden" id="e_hidden_entry_loc" name="e_hidden_entry_loc" value="">
+                            <input type="hidden" id="e_hidden_entry_time" name="e_hidden_entry_time" value="">
+                            <input type="hidden" id="e_hidden_exit_loc" name="e_hidden_exit_loc" value="">
+                            <input type="hidden" id="e_hidden_exit_time" name="e_hidden_exit_time" value="">
+                            
+                            <input type="hidden" id="e_curr_start_campus" name ="e_curr_start_campus" value="">
+                            <input type="hidden" id="e_curr_id_number" name = "e_curr_id_number" value="">
+                            <input type="hidden" id="e_curr_date" name="e_curr_date" value="">
+                            <input type="hidden" id="e_curr_entry_loc" name="e_curr_entry_loc" value="">
+                            <input type="hidden" id="e_curr_entry_time" name="e_curr_entry_time" value="">
+                            <input type="hidden" id="e_curr_exit_loc" name="e_curr_exit_loc" value="">
+                            <input type="hidden" id="e_curr_exit_time" name="e_curr_exit_time" value="">
+                            
                             <input type="date" placeholder="Date" class="fillup" required name="user_date" id="user_date" >
-    
+
                             <div class="entry">
                                 <img src="../images/Help.png" style="width: 25px; height: 25px; position: relative; filter:invert(1); top: 15px; left:10px; cursor: help;" title="From home, location going to be picked up.">
-                                <select name="editUser_entry" id="editUser_entry" class="fillup" onchange="readyChangeTime('editUser_entry','editUser_entryTime');" style="width: 185px; margin: 10px; position: relative; left: 5px; ">
+                                {{!-- <select name="editUser_entry" id="editUser_entry" class="fillup" onchange="ready_change_time('editUser_entry','editUser_entryTime');" style="width: 185px; margin: 10px; position: relative; left: 5px; ">
                                     <option value="" disabled selected hidden s> Entry Location </option>
                                     <option value="0"> Paseo -> DLSU LC </option>
                                     <option value="1"> Carmona -> DLSU LC  </option>
                                     <option value="2"> Pavilion Mall -> DLSU LC </option>
                                     <option value="3"> Walter Mart -> DLSU LC </option>
                                     <option value="4"> N/A </option>
-                                </select>
+                                </select> --}}
+                                <h5 id="edit_help_entry_text">  </h5>
                                 <select name="editUser_entryTime" id="editUser_entryTime" class="fillup" style="width: 120px; ">
                                     <option value="" disabled selected hidden s> Time Slot </option>
                                     <option value="0"> 06:00 AM </option>
@@ -221,10 +232,10 @@
                                     <option value="11"> N/A </option>
                                 </select>
                             </div>
-    
+
                             <div class="exit"> </style>
                                 <img src="../images/Help.png" style="width: 25px; height: 25px; position: relative; filter:invert(1); top: 15px; left:10px; cursor: help;" title="From De La Salle University, location going to be dropped-off.">
-                                <select name="editUser_exit" id="editUser_exit" class="fillup" onchange="readyChangeTime('editUser_exit','editUser_exitTime');" style="width: 185px; margin: 10px; position: relative; left: 5px;">
+                                {{!-- <select name="editUser_exit" id="editUser_exit" class="fillup" onchange="ready_change_time('editUser_exit','editUser_exitTime');" style="width: 185px; margin: 10px; position: relative; left: 5px;">
                                     <option value="" disabled selected hidden s> Exit Location </option>
                                     <option value="0"> DLSU LC -> DLSU Manila </option>
                                     <option value="1"> DLSU LC -> Paseo </option>
@@ -232,7 +243,8 @@
                                     <option value="3"> DLSU LC -> Pavilion Mall </option>
                                     <option value="4"> DLSU LC -> Walter Mart </option>
                                     <option value="5"> N/A </option>
-                                </select>
+                                </select> --}}
+                                <h5 id="edit_help_exit_text">  </h5>
                                 <select name="editUser_exitTime" id="editUser_exitTime" class="fillup" style="width: 120px;">
                                     <option value="" disabled selected hidden s> Time Slot </option>
                                     <option value="0"> 06:00 AM </option>
@@ -249,16 +261,16 @@
                                     <option value="11"> N/A </option>
                                 </select>
                             </div>
-    
+
                             <button type="submit" class="toggle_btn" id="edit_btn" onclick="hide_edit_form();"> Confirm <style> .toggle_btn{ font-size: large; font-weight: bold; margin-top: 15px;}</style></button>
                         </form>
                         
                     </div>
-    
+
                     <div class="subtext">
                         <a onclick="cancel_edit_form();" style="cursor:pointer;">Cancel </a>
                     </div>
-    
+
                 </div>
 
                 <style>
@@ -282,7 +294,7 @@
                     <hr>
                     <div class="input">
                         <form action="/SearchUserDelete" method="post">
-							<input type="hidden" id="d_admin_ID" name="d_admin_ID" value="">
+							<input type="hidden" id="d_admin_id" name="d_admin_id" value="">
 							<input type="hidden" id="d_curr_start_campus" required name="d_curr_start_campus" value="">
 							<input type="hidden" id="d_curr_id_number" required name="d_curr_id_number" value="">
 							<input type="hidden" id="d_curr_date" name="d_curr_date" value="">

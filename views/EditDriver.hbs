@@ -20,19 +20,19 @@
                 document.getElementById("error_box").style.display = "none";
 				
 				console.log({{id_number}});
-				function admin_ID_check(admin_ID = null)
+				function admin_id_check(admin_id = null)
                 {
-					if (admin_ID == null){
+					if (admin_id == null){
 						var ID_num = new URLSearchParams(window.location.search).get('id_number');
 						document.getElementById('backButton').setAttribute('href', '/ProfileAdmin?id_number='+ ID_num);
-						document.getElementById('admin_ID').value = ID_num;
+						document.getElementById('admin_id').value = ID_num;
 					}
 					else{
-						document.getElementById('admin_ID').value = admin_ID;
-						document.getElementById('d_admin_ID').value = admin_ID;
+						document.getElementById('admin_id').value = admin_id;
+						document.getElementById('d_admin_id').value = admin_id;
 					}
 				}
-				admin_ID_check({{id_number}});
+				admin_id_check({{id_number}});
 
                 var search_user_status = new URLSearchParams(window.location.search).get('is_search_user_valid');
                 var search_user_resv_list_status = new URLSearchParams(window.location.search).get('reservation_list');
@@ -89,7 +89,7 @@
 		
         <div class = "banner"> 
             <div class="navbar">
-				<a href="/ProfileAdmin?id_number={{admin_ID}}" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
+				<a href="/ProfileAdmin?id_number={{admin_id}}" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
 
                 <div id="success_box">
                     <p id="success_message"> Success! </p>
@@ -164,7 +164,7 @@
                     <div class="input">
                         <form action="/DriverInsert" method="post">
                             
-							<input type="hidden" id="admin_ID" name="admin_ID" value="">
+							<input type="hidden" id="admin_id" name="admin_id" value="">
                             <label for="curr_first_name">First Name</label>
 							<input type="text" id="curr_first_name" required name="curr_first_name" value="">
                             <br>
@@ -190,7 +190,7 @@
                     <hr>
                     <div class="input">
                         <form action="/DriverDelete" method="post">
-							<input type="hidden" id="d_admin_ID" name="d_admin_ID" value="">
+							<input type="hidden" id="d_admin_id" name="d_admin_id" value="">
 							<input type="hidden" id="d_curr_first_name" required name="d_curr_first_name" value="">
 							<input type="hidden" id="d_curr_last_name" required name="d_curr_last_name" value="">
                             <input type="hidden" id="d_curr_email" name="d_curr_email" value="">

@@ -34,7 +34,7 @@ const editDriverController = {
 
     delete_driver: async function(req, res)
     {
-        var admin_ID = req.body.d_admin_ID;
+        var admin_id = req.body.d_admin_id;
 
         var curr ={
 			first_name: req.body.d_curr_first_name,
@@ -45,12 +45,12 @@ const editDriverController = {
 
         await db.delete_one(Driver, curr);
 
-        res.redirect('/EditDriver?id_number=' + admin_ID);
+        res.redirect('/EditDriver?id_number=' + admin_id);
     },
 
     insert_driver: async function(req, res)
     {
-        var admin_ID = req.body.admin_ID;
+        var admin_id = req.body.admin_id;
 
         var curr ={
 			first_name: req.body.curr_first_name,
@@ -64,7 +64,7 @@ const editDriverController = {
 
         await db.insert_one(Driver, curr);
 
-        res.redirect('/EditDriver?id_number=' + admin_ID);
+        res.redirect('/EditDriver?id_number=' + admin_id);
     }
 }
 
