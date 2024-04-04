@@ -4,6 +4,9 @@ const User = require('../models/userdb.js');
 const Admin = require('../models/admindb.js');
 const Driver = require('../models/driverdb.js');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 const forgotPassController = {
 
     get_forgot_password: function (req, res) {
@@ -66,24 +69,24 @@ const forgotPassController = {
         if ( new_password == retype_password ){
 
             var query = {id_number: req.body.id_number};
-            const projection = { id_number: 1, password: 1};
+            const projection = 'id_number password';
 
             const user_result = await db.find_one(User, query, projection);
             const admin_result = await db.find_one(Admin, query, projection);
             const driver_result = await db.find_one(Driver, query, projection);
 
             if ( user_result != null ) {
-                await db.updateOne(User, query, {password: req.body.user_retype_password})
+                await db.update_one(User, query, {password: await bcrypt.hash(req.body.user_retype_password, saltRounds)})
                 console.log("Change password successful");
                 res.render('Login', { code_change: true } );
             }
             else if ( admin_result != null ) {
-                await db.updateOne(Admin, query, {password: req.body.user_retype_password})
+                await db.update_one(Admin, query, {password: await bcrypt.hash(req.body.user_retype_password, saltRounds)})
                 console.log("Change password successful");
                 res.render('Login', { code_change: true } );
             }
             else if ( driver_result != null ) {
-                await db.updateOne(Driver, query, {password: req.body.user_retype_password})
+                await db.update_one(Driver, query, {password: await bcrypt.hash(req.body.user_retype_password, saltRounds)})
                 console.log("Change password successful");
                 res.render('Login', { code_change: true } );
             } else {

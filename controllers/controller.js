@@ -20,18 +20,16 @@ const controller = {
 
             const query = { id_number: req.session.id_number };
             const projection = "first_name";
-            const result = await db.find_one(User, query, projection);
-            const result2 = await db.find_one(Admin, query, projection);
+            const user_result = await db.find_one(User, query, projection);
+            const admin_result = await db.find_one(Admin, query, projection);
+            const driver_result = await db.find_one(Driver, query, projection);
 
-            if (result) {
-                details = {
-                    first_name : result.first_name,
-                };
-            } else if (result2) {
-                details = {
-                    first_name : result2.first_name,
-                };
-            }
+            if (user_result) 
+                details.first_name = user_result.first_name;
+            else if (admin_result) 
+                details.first_name = admin_result.first_name;
+            else if (driver_result) 
+                details.first_name = driver_result.first_name;
 
             res.render('index', details);
 
@@ -43,26 +41,6 @@ const controller = {
             res.render('index', details);
         }
         
-    },
-
-    get_login: function (req, res) {
-        res.render('Login',res);
-    },
-
-    get_signup: function (req, res) {
-        res.render('SignUp',res);
-    },
-    
-    get_search: function (req, res) {
-        res.render('Search', res);
-    },
-
-    get_profile: function (req, res){
-        res.render('Profile', res);
-    },
-
-    get_profile_admin: function (req, res){
-        res.render('ProfileAdmin', res);
     },
 
     get_settings: async function (req, res){
@@ -124,14 +102,6 @@ const controller = {
 
     get_schedule: function (req, res){
         res.render('Schedule', res);
-    },
-
-    get_reservation: function (req, res){
-        res.render('Reservation', res);
-    },
-
-    get_reservation_admin: function (req, res){
-        res.render('ReservationAdmin', res);
     },
 
     get_error: function (req, res) {
