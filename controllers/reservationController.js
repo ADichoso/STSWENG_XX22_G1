@@ -42,28 +42,24 @@ const reservationController = {
 			const is_admin = await db.find_one(Admin, query, projection);
             const is_driver = await db.find_one(Driver, query, projection);
 
-			if ( is_admin != null || is_driver != null){
-				res.redirect('/ReservationAdmin?id_number=' + req.session.id_number);
-			} else {
-				res.render('Error');
-			}
+            if(is_admin == null && is_driver == null)
+                res.render('Error');
+            else
+                res.redirect('/ReservationAdmin?id_number=' + req.session.id_number);
 			
 		}
         else    
         {
-			const details = {
-				id_number: req.query.id_number
-			}
-            
+			const query = { id_number: req.session.id_number };
             const projection = "id_number";
-            const is_admin = await db.find_one(Admin, details, projection);
-            const is_driver = await db.find_one(Driver, details, projection);
 
-			if ( is_admin != null || is_driver != null){
-				res.render('ReservationAdmin', details);
-			} else {
-				res.render('Error');
-			}
+            const is_admin = await db.find_one(Admin, query, projection);
+            const is_driver = await db.find_one(Driver, query, projection);
+
+            if(is_admin == null && is_driver == null)
+                res.render('Error');
+            else
+                res.render('ReservationAdmin', query);
 		}
 
     },
