@@ -231,7 +231,7 @@ describe('ReservationController - post_reservations', () => {
             expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: 9999999}, 'id_number');
             expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: 9999999}, 'id_number');
 
-            expect(res.redirect).toHaveBeenCalledWith('/Reservation?id_number=9999999&reserve_user_fail=true');
+            expect(res.redirect).toHaveBeenCalledWith('/Reservation?reserve_user_success=false');
         });
         test('form has no id_number', async() => {
             let req = {body: {id_number: "", hidden_ID_number:9999999, hidden_entry_loc: "test", hidden_exit_loc: "test", user_date: "test", hidden_entry_time: "test", hidden_start_campus: "test", hidden_exit_time: "test"}};
@@ -665,39 +665,69 @@ describe('ReservationController - post_search_user_update', () => {
 			id_number: req.body.e_hidden_id_number
 		};
             
-            const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null); //we dont care what this returns we just need to trigger the found flag
-    
-            await controller.post_search_user_update(req,res);
-    
-            expect(find_one_mock).toHaveBeenCalledWith(Reservation, current);
-            expect(res.render).toHaveBeenCalledWith('ReservationAdmin', {admin_id: req.body.e_admin_id, is_update_success:false});
+        const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(null); //we dont care what this returns we just need to trigger the found flag
+
+        await controller.post_search_user_update(req, res);
+
+        expect(find_one_mock).toHaveBeenCalledWith(Reservation, current);
+        expect(res.render).toHaveBeenCalledWith('ReservationAdmin', {admin_id: req.body.e_admin_id, is_update_success:false});
     });
 });
 
 describe('ReservationController - post_search_user_delete', () => {
-    let req = {body: {d_curr_id_number: "test", d_admin_id: "admin_id"}}; //we dont care about the other contents, we just need to trigger the delete function
+    let req = {body: {
+        d_curr_start_campus: "replacement.start_campus",
+        d_curr_date: "replacement.date",
+        d_curr_entry_loc: "replacement.entry_loc",
+        d_curr_entry_time: "replacement.entry_time",
+        d_curr_exit_loc: "replacement.exit_loc",
+        d_curr_exit_time: "replacement.exit_time",
+        d_curr_id_number: "replacement.id_number",
+        d_hidden_start_campus: "test.start_campus",
+        user_date: "test.date",
+        d_admin_id: "admin_id"
+    }};
     let res = {render: jest.fn()};
     afterEach(() => {
         jest.resetAllMocks();
     });
 
     test('successful deletion', async () => {
+        let current =  {
+			start_campus: req.body.d_curr_start_campus,
+			date: req.body.d_curr_date,
+			entry_loc: req.body.d_curr_entry_loc,
+			entry_time: req.body.d_curr_entry_time,
+			exit_loc: req.body.d_curr_exit_loc,
+			exit_time: req.body.d_curr_exit_time,
+			id_number: req.body.d_curr_id_number
+		}
+
         const delete_one_mock = jest.spyOn(db, 'delete_one').mockResolvedValueOnce(true);
         const find_many_mock = jest.spyOn(db, 'find_many').mockResolvedValueOnce([{result: "result"}]); //we dont care what this returns, we just need to trigger the function
 
         await controller.post_search_user_delete(req,res);
 
-        expect(delete_one_mock).toHaveBeenCalledWith(Reservation, {id_number: "test"});
-        expect(find_many_mock).toHaveBeenCalledWith(Reservation, {id_number: "test"}, "-_id -__v");
+        expect(delete_one_mock).toHaveBeenCalledWith(Reservation, current);
+        expect(find_many_mock).toHaveBeenCalledWith(Reservation, {id_number: current.id_number}, "-_id -__v");
         expect(res.render).toHaveBeenCalledWith('ReservationAdmin', {result: [{result: "result"}], admin_id: "admin_id", is_delete_success:true});
     });
 
     test('unsuccessful deletion', async () => {
+        let current =  {
+			start_campus: req.body.d_curr_start_campus,
+			date: req.body.d_curr_date,
+			entry_loc: req.body.d_curr_entry_loc,
+			entry_time: req.body.d_curr_entry_time,
+			exit_loc: req.body.d_curr_exit_loc,
+			exit_time: req.body.d_curr_exit_time,
+			id_number: req.body.d_curr_id_number
+		}
         const delete_one_mock = jest.spyOn(db, 'delete_one').mockResolvedValueOnce(false);
 
         await controller.post_search_user_delete(req,res);
 
-        expect(delete_one_mock).toHaveBeenCalledWith(Reservation, {id_number: "test"});
+        expect(delete_one_mock).toHaveBeenCalledWith(Reservation, current);
         expect(res.render).toHaveBeenCalledWith('ReservationAdmin', {admin_id: "admin_id", is_delete_success:false});
     });
 });

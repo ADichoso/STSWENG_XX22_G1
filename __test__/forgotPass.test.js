@@ -182,7 +182,7 @@ describe('ForgotPassController - post_change_F_password', () => {
 
             expect(hash_mock).toHaveBeenCalledWith('password', 10);
             expect(update_one_mock).toHaveBeenCalledWith(Driver, {id_number: 9999999}, {password: 'hashed_password'});
-            expect(res.render).toHaveBeenCalledWith('Login', {is_invalid: false});
+            expect(res.render).toHaveBeenCalledWith('Login', {code_change: true});
         });
 
         test('account is not a user, admin or driver', async () => {
