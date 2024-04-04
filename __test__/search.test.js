@@ -37,7 +37,7 @@ describe('SearchController Functions Test', () => {
 
             const result = {
                 first_name: 'test',
-                last_bame: 'test',
+                last_name: 'test',
                 passenger_type: 'test',
                 id_number: 123,
                 profile_picture: 'test'
@@ -73,16 +73,9 @@ describe('SearchController Functions Test', () => {
                 last_name: 'test',
                 designation: 'test',
                 passenger_type: 'test',
-                profile_picture: 'test'
+                profile_picture: 'images/profilepictures/Default.png'
             }
-            const details = {
-                id_number: 123,
-                first_name: 'test',
-                last_name: 'test',
-                designation: 'test',
-                passenger_type: 'test',
-                profile_picture: "images/profilepictures/Default.png"
-            }
+
             const find_one_mock = jest.spyOn(db, 'find_one').mockResolvedValueOnce(result);
 
             await searchController.get_search_profile(req, res);
@@ -138,7 +131,7 @@ describe('SearchController Functions Test', () => {
                 last_name: 'test',
                 designation: 'test',
                 passenger_type: 'test',
-                profilePicture: 'test'
+                profile_picture: 'test'
             }
             const details = {
                 id_number: 123,
@@ -197,7 +190,7 @@ describe('SearchController Functions Test', () => {
             jest.resetAllMocks();
             const req = {
                 query: {
-                    idNumber: 123
+                    id_number: 123
                 }
             }
 
