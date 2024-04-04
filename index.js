@@ -11,7 +11,8 @@ const hbs = require('hbs');
 const jsPDF = require('jspdf');
 
 //Connect to MongoDB
-mongoose.connect('mongodb+srv://dbUser:H4RCbGxtzVbJIHde@shuttlereservation.nagtzpm.mongodb.net/');
+
+mongoose.connect('mongodb+srv://prodUser:gVbdsrAF44jSEG0w@proddlsushuttledb.tcpcawr.mongodb.net/');
 // mongoose.connect('mongodb+srv://dbUser:H4RCbGxtzVbJIHde@shuttlereservation.nagtzpm.mongodb.net/');
 
 // import module `routes` from `./routes/routes.js`
