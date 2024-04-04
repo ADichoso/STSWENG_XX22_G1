@@ -30,6 +30,10 @@ $(document).ready(function () {
 
         var idNum = validator.trim($('#id_number').val());
 
+        // if ($('#id_number').val()) {
+        //     return callback(false);
+        // }
+
         var onlyNumbers = /^[0-9]*$/;
         if (!onlyNumbers.test(idNum)) {
             $("#error_box").css('display', 'block');
@@ -137,7 +141,6 @@ $(document).ready(function () {
         var empty = validator.isEmpty(value);
     
         if(empty) {
-   
             field.prop('value', '');
             // display approriate error message in `error`
             $('#error_box').css('display', 'block');
