@@ -4,10 +4,10 @@ on:
     branches: [ "integration" ]
   pull_request:
     branches: [ "integration" ]
- 
+
 permissions:
   contents: read
- 
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -19,14 +19,24 @@ jobs:
         with:
           python-version: 3.12.1
    
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install robotframework
           pip install robotframework-seleniumlibrary
-   
+          pip install webdrivermanager
+
+      - name: Install ChromeDriver
+        run: |
+          webdrivermanager chrome --linkpath /usr/local/bin
+
       - name: Test with RobotFramework
-        run: robot ./__test__/. 
+        run: robot ./__test__/.
          
       - name: Test Report Generation
         uses: actions/upload-artifact@v4
