@@ -503,13 +503,23 @@ function change_entry_time_slots(location_id, time_id){
     console.log(storage_time_0);
     console.log(storage_time_1);
 
-
+    console.log(to_laguna_campus_tags[location]);
+    console.log(from_laguna_campus_tags[location]);
 
     $(`#help_entry_text`).empty();
-    $(`#edit_help_entry_text`).append(to_laguna_campus_tags[location]);
-
     $(`#help_exit_text`).empty();
-    $(`#edit_help_exit_text`).append(from_laguna_campus_tags[location]);
+    $(`#edit_help_entry_text`).empty();
+    $(`#edit_help_exit_text`).empty();
+
+    if (location_id == 'user_entry') {
+        $(`#help_entry_text`).append(to_laguna_campus_tags[location]);
+        $(`#help_exit_text`).append(from_laguna_campus_tags[location]);
+    } else {
+        $(`#edit_help_entry_text`).append(to_laguna_campus_tags[location]);
+        $(`#edit_help_exit_text`).append(from_laguna_campus_tags[location]);
+    }
+
+
 
     change_time_helper( 'user_entryTime', storage_time_0 );
     change_time_helper( 'editUser_entryTime', storage_time_0 );

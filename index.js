@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 // import module `hbs`
 const hbs = require('hbs');
-
+const jsPDF = require('jspdf');
 
 //Connect to MongoDB
 mongoose.connect('mongodb+srv://MauriesLopez:679914164@shuttlereservation.nagtzpm.mongodb.net/?retryWrites=true&w=majority');

@@ -100,7 +100,8 @@ app.post('/ChangeCode', validation.security_code_validation, profile_controller.
 
 // Schedule
 app.get('/Schedule', validation.security_code_validation, controller.get_schedule);
-app.get('/Schedule/:date/:location/:time', validation.security_code_validation, schedule_controller.get_reservations);
+app.get('/Schedule/:date/:location', validation.security_code_validation, schedule_controller.get_reservations);
+app.get('/SchedulePrint', validation.security_code_validation, schedule_controller.print_reservations);
 
 // Reservation
 app.get('/Reservation', validation.security_code_validation, rsrv_controller.get_reservations);
