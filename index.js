@@ -1,13 +1,18 @@
 // import module `express`
 const express = require('express');
-
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+
+//Mongo DB Modules
+const mongo_store = require('connect-mongo')(session);
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://prodUser:gVbdsrAF44jSEG0w@proddlsushuttledb.tcpcawr.mongodb.net/');
 
 // import module `hbs`
 const hbs = require('hbs');
+const jsPDF = require('jspdf');
+
+//Connect to MongoDB
+mongoose.connect('mongodb+srv://MauriesLopez:679914164@shuttlereservation.nagtzpm.mongodb.net/?retryWrites=true&w=majority');
+// mongoose.connect('mongodb+srv://dbUser:H4RCbGxtzVbJIHde@shuttlereservation.nagtzpm.mongodb.net/');
 
 // import module `routes` from `./routes/routes.js`
 const routes = require('./routes/routes.js');
@@ -23,12 +28,13 @@ app.use(session({
     secret: 'sessionID',
     cookie: {maxAge: 7*24*60*60*3000},
     saveUninitialized: false,
-    store: new MongoStore({mongooseConnection: db, autoRemove: 'disabled'}),
+    store: new mongo_store({mongooseConnection: db, autoRemove: 'disabled'}),
     resave: false
 }));
 
 // set `hbs` as view engine
 app.set('view engine', 'hbs');
+hbs.registerPartials(`${__dirname}/views/partials`);
 
 app.use(express.json());
 
@@ -54,9 +60,9 @@ app.use(function (req, res) {
         if a user is logged-in,
         display the profile tab and logout tab in the nav bar.
     */ 
-    if(req.session.idNumber) {
+    if(req.session.id_number) {
         details.flag = true;
-        details.idNumber = req.session.idNumber;
+        details.id_number = req.session.id_number;
     }
 
     /*
@@ -69,9 +75,6 @@ app.use(function (req, res) {
     // render `../views/error.hbs`
     res.render('Error', details);
 });
-
-// connects to the database
-//db.connect();
 
 // binds the server to a specific port
 app.listen(port, function () {

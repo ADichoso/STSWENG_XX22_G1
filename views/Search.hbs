@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title> Arrow Express - Search </title>
+        <title> Arrows Express - Search </title>
         <link rel="icon" type="image/png" href="../images/DLSU_Logo.png">
         <link rel="stylesheet" href="../css/FormStyle.css">  <!-- Kailangan to if may separate CSS file -->
         <link rel="stylesheet" href="../css/ReservationStyle.css">
@@ -53,45 +53,45 @@
 						}
 					</style>
 					<label for="search"></label>
-					<input type="text" placeholder="View a profile..." name="search" id="search" onkeyup="sendData(this);">
+					<input type="text" placeholder="View a profile..." name="search" id="search" onkeyup="send_data(this);">
                     <img src="../images/SearchIcon.png" id="searchIcon" >
 
 					<script>
 
 						window.onload = function() {
-							sendData(document.getElementById("search"));
+							send_data(document.getElementById("search"));
 						}
 
-						function sendData(e) {
-							const resultContainer = document.getElementsByClassName('results_container')[0];
-							const userCardTemplate = document.getElementsByTagName('template')[0].content;
+						function send_data(e) {
+							const result_container = document.getElementsByClassName('results_container')[0];
+							const user_care_template = document.getElementsByTagName('template')[0].content;
 							
-							fetch('UserSearch', {
+							fetch('/UserSearch', {
 								method: 'POST',
 								headers: { 'Content-Type': 'application/json' },
 								body: JSON.stringify({ payload: e.value })
 							}).then(res => res.json()).then(data => {
 								const payload = data.payload;
 								
-								resultContainer.innerHTML = "";
+								result_container.innerHTML = "";
 
 								payload.forEach(item => {
-									const copyUserCardTemplate = document.importNode(userCardTemplate, true);
-									const nameElement = copyUserCardTemplate.querySelector('.name');
-									const designationElement = copyUserCardTemplate.querySelector('.designation');
-									const htmlAttribute = copyUserCardTemplate.querySelector(".htmlLink");
-									const imgElement = copyUserCardTemplate.querySelector("img");
+									const copy_user_card_template = document.importNode(user_care_template, true);
+									const name_element = copy_user_card_template.querySelector('.name');
+									const designation_element = copy_user_card_template.querySelector('.designation');
+									const html_attribute = copy_user_card_template.querySelector(".htmlLink");
+									const img_element = copy_user_card_template.querySelector("img");
 
-									nameElement.textContent = item.firstName + " " + item.lastName;
-									designationElement.textContent = item.passengerType;
-									htmlAttribute.setAttribute("href", "/SearchProfile?idNumber=" + item.idNumber);
+									name_element.textContent = item.first_name + " " + item.last_name;
+									designation_element.textContent = item.passenger_type;
+									html_attribute.setAttribute("href", "/SearchProfile?id_number=" + item.id_number);
 
 									if (item.profilePicture == null)
-										imgElement.setAttribute("src", "images/Default.png");
+										img_element.setAttribute("src", "images/profilepictures/Default.png");
 									else
-										imgElement.setAttribute("src", item.profilePicture);
+										img_element.setAttribute("src", `images/profilepictures/` + item.profile_picture);
 									
-									resultContainer.appendChild(copyUserCardTemplate);
+									result_container.appendChild(copy_user_card_template);
 								});
 							}) .catch(error => {
 								console.error('Error:', error);

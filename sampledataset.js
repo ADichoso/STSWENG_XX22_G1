@@ -1,6 +1,7 @@
 const db = require('./models/db.js');
 const Admin = require('./models/admindb.js');
 const User = require('./models/userdb.js');
+const Driver = require('./models/driverdb.js')
 const Reservation = require('./models/reservationdb.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -25,14 +26,14 @@ async function addAdminUser(){
     firstName: 'Admin',
     lastName: 'Admin',
     email: 'admin@gmail.com',
-    idNumber: '99999999',
+    id_number: '99999999',
     password: password,
     securityCode: securityCode,
     designation: 'Faculty',
     passengerType: 'Employee',
     profilePicture: 'images/profilepictures/Default.png'
   };
-  var result = db.insertOne(Admin, user);
+  var result = db.insert_one(Admin, user);
   console.log('Admin User successfully added');
 
   var { password, securityCode } = await generateInfo('maui', '1234');
@@ -40,14 +41,14 @@ async function addAdminUser(){
     firstName: 'Maui',
     lastName: 'Lopez',
     email: 'maui@gmail.com',
-    idNumber: '12177539',
+    id_number: '12177539',
     password: password,
     securityCode: securityCode,
     designation: 'Faculty',
     passengerType: 'Employee',
     profilePicture: 'images/profilepictures/Default.png' 
   };
-  var result = db.insertOne(Admin, user);
+  var result = db.insert_one(Admin, user);
   console.log('Admin User successfully added');
 
   var { password, securityCode } = await generateInfo('benmar', '1234');
@@ -55,14 +56,14 @@ async function addAdminUser(){
     firstName: 'Benmar',
     lastName: 'Ramirez',
     email: 'benmar@gmail.com',
-    idNumber: '12116866',
+    id_number: '12116866',
     password: password,
     securityCode: securityCode,
     designation: 'Faculty',
     passengerType: 'Employee',
     profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(Admin, user);
+var result = db.insert_one(Admin, user);
 console.log('Admin User successfully added');
 
 var { password, securityCode } = await generateInfo('nathan', '1234');
@@ -70,14 +71,14 @@ var user = {
   firstName: 'Nathan',
   lastName: 'Asnan',
   email: 'asnan@gmail.com',
-  idNumber: '12043338',
+  id_number: '12043338',
   password: password,
   securityCode: securityCode,
   designation: 'Faculty',
   passengerType: 'Employee',
   profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(Admin, user);
+var result = db.insert_one(Admin, user);
 console.log('Admin User successfully added');
 
 var { password, securityCode } = await generateInfo('itadmin', '1234');
@@ -85,14 +86,14 @@ var user = {
     firstName: 'IT',
     lastName: 'IT',
     email: 'it@gmail.com',
-    idNumber: '11111111',
+    id_number: '11111111',
     password: password,
     securityCode: securityCode,
     designation: 'Faculty',
     passengerType: 'Employee',
     profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(Admin, user);
+var result = db.insert_one(Admin, user);
 console.log('User successfully added');
 
 }
@@ -104,14 +105,14 @@ var user = {
   firstName: 'Maui',
   lastName: 'Lopez',
   email: 'mauilopez@gmail.com',
-  idNumber: '12345678',
+  id_number: '12345678',
   password: password,
   securityCode: securityCode,
   designation: 'Student',
   passengerType: 'Student',
   profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(User, user);
+var result = db.insert_one(User, user);
 console.log('User successfully added');
   
 
@@ -120,14 +121,14 @@ var user = {
   firstName: 'Haeleynah',
   lastName: 'Ramos',
   email: 'haeleynahramos@gmail.com',
-  idNumber: '12345671',
+  id_number: '12345671',
   password: password,
   securityCode: securityCode,
   designation: 'Student',
   passengerType: 'Student',
   profilePicture: 'images/profilepictures/Default.png'    
 };
-var result = db.insertOne(User, user);
+var result = db.insert_one(User, user);
 console.log('User successfully added');
   
 
@@ -136,14 +137,14 @@ var user = {
   firstName: 'Charles',
   lastName: 'De Guzman',
   email: 'charlesdeguzman@gmail.com',
-  idNumber: '12345672',
+  id_number: '12345672',
   password: password,
   securityCode: securityCode,
   designation: 'Student',
   passengerType: 'Student',
   profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(User, user);
+var result = db.insert_one(User, user);
 console.log('User successfully added');
   
 
@@ -152,14 +153,14 @@ var user = {
   firstName: 'Noah',
   lastName: 'Arreola',
   email: 'noaharreola@gmail.com',
-  idNumber: '12345673',
+  id_number: '12345673',
   password: password,
   securityCode: securityCode,
   designation: 'Student',
   passengerType: 'Student',
   profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(User, user);
+var result = db.insert_one(User, user);
 console.log('User successfully added');
   
 
@@ -168,14 +169,14 @@ var user = {
   firstName: 'Alex',
   lastName: 'Natividad',
   email: 'alexnatividad@gmail.com',
-  idNumber: '12345674',
+  id_number: '12345674',
   password: password,
   securityCode: securityCode,
   designation: 'Student',
   passengerType: 'Student',
   profilePicture: 'images/profilepictures/Default.png'
 };
-var result = db.insertOne(User, user);
+var result = db.insert_one(User, user);
 console.log('User successfully added');
 
 }
@@ -190,9 +191,9 @@ var rsv = {
   entryTime: '06:00 AM',
   exitLoc: 'DLSU LC -> DLSU Manila',
   exitTime: '03:00 PM',
-  idNumber: '12345678'
+  id_number: '12345678'
 };
-var result = db.insertOne(Reservation, rsv);
+var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
 
 var rsv = {
@@ -202,9 +203,9 @@ var rsv = {
   entryTime: '08:00 AM',
   exitLoc: 'DLSU LC -> Carmona',
   exitTime: '04:45 PM',
-  idNumber: '12345671'
+  id_number: '12345671'
 };
-var result = db.insertOne(Reservation, rsv);
+var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
 
 var rsv = {
@@ -214,9 +215,9 @@ var rsv = {
   entryTime: '06:30 AM',
   exitLoc: 'DLSU LC -> Walter Mart',
   exitTime: '04:45 PM',
-  idNumber: '12345672'
+  id_number: '12345672'
 };
-var result = db.insertOne(Reservation, rsv);
+var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
 
 var rsv = {
@@ -226,9 +227,9 @@ var rsv = {
   entryTime: '06:30 AM',
   exitLoc: 'DLSU LC -> Walter Mart',
   exitTime: '04:45 PM',
-  idNumber: '12345673'
+  id_number: '12345673'
 };
-var result = db.insertOne(Reservation, rsv);
+var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');
 
 var rsv = {
@@ -238,7 +239,7 @@ var rsv = {
   entryTime: '06:30 AM',
   exitLoc: 'DLSU LC -> Walter Mart',
   exitTime: '04:45 PM',
-  idNumber: '12345674'
+  id_number: '12345674'
 };
-var result = db.insertOne(Reservation, rsv);
+var result = db.insert_one(Reservation, rsv);
 console.log('User reservation successfully added');

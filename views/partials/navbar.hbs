@@ -1,0 +1,28 @@
+<div class="navbar">
+    <div class="navbar_top">
+        <img src="../images/DLSU_Logo.png">
+        <h2>De La Salle University</h2>
+        <button id="navbar_button"><div class="arrow"></div></button>
+        <div class="navbar_desktop">
+            <a href="/">HOME</a>
+            <a onclick="$('.card_top')[0].scrollIntoView({behavior: 'smooth', block: 'start'});">SCHEDULES</a>
+            <a onclick="$('.card_bottom')[0].scrollIntoView({behavior: 'smooth', block: 'start'});">STAFF</a>
+            <a href="/Search">SEARCH</a>
+            <a href="/Login">LOGIN</a>
+        </div>
+    </div>
+    <div class="navbar_content">
+        <a href="/">HOME</a>
+        <a onclick="$('.card_top')[0].scrollIntoView({behavior: 'smooth', block: 'start'});">SCHEDULES</a>
+        <a onclick="$('.card_bottom')[0].scrollIntoView({behavior: 'smooth', block: 'start'});">STAFF</a>
+        <a href="/Search">SEARCH</a>
+        <a href="/Login">LOGIN</a>
+    </div>
+</div>
+
+<script>
+    $(".navbar_top").on("click", function(){
+        $(".arrow").toggleClass("arrow_pressed");
+        $(".navbar_content").toggleClass("navbar_open");
+    })
+</script>

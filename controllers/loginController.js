@@ -3,27 +3,30 @@ const db = require('../models/db.js');
 const bcrypt = require('bcrypt');
 
 const User = require('../models/userdb.js');
-
 const Admin = require('../models/admindb.js');
+const Driver = require('../models/driverdb.js');
 
 const loginController = {
 
-    getLogin: async function (req, res) {
+    get_login: async function (req, res) {
 
-        if ( req.session.idNumber ){
+        if ( req.session.id_number ){
 
-          const query = { idNumber: req.session.idNumber };
-          const projection = { idNumber: 1 };
-          const result = await db.findOne(User, query, projection);
-          const result2 = await db.findOne(Admin, query, projection);
+            const query = { id_number: req.session.id_number };
+            const projection = { id_number: 1 };
+            const user_result = await db.find_one(User, query, projection);
+            const admin_result = await db.find_one(Admin, query, projection);
+            const driver_result = await db.find_one(Driver, query, projection);
 
-          if (result) {
-            res.status(200).redirect('/Profile?idNumber=' + req.session.idNumber);     
-          } else if (result2) {
-            res.status(200).redirect('/ProfileAdmin?idNumber=' + req.session.idNumber);  
-          } else {
-            res.render('Login', { isValid: false })
-          }
+            if (user_result) {
+                res.status(200).redirect('/Profile?id_number=' + req.session.id_number);     
+            } else if (admin_result) {
+                res.status(200).redirect('/ProfileAdmin?id_number=' + req.session.id_number);  
+            } else if (driver_result) {
+                res.status(200).redirect('/ProfileDriver?id_number=' + req.session.id_number);  
+            } else {
+                res.render('Login', { is_valid: false })
+            }
 
         }
         else{
@@ -32,34 +35,41 @@ const loginController = {
         
     },
     
-    postLogin: async function (req, res) {
-        const idNumber = req.body.user_idNumber;
+    post_login: async function (req, res) {
+        console.log("REQ: " + req.body.id_number);
+        const id_number = req.body.id_number;
         const password = req.body.user_password;
 
+        console.log("REQ" + req.body.id_number);
+
         try {
-          const query = { idNumber: idNumber };
-          const projection = { idNumber: 1, password: 1};
-          const result = await db.findOne(User, query, projection);
-          const result2 = await db.findOne(Admin, query, projection);
+            const query = { id_number: id_number };
+            const projection = { id_number: 1, password: 1};
+            const user_result = await db.find_one(User, query, projection);
+            const admin_result = await db.find_one(Admin, query, projection);
+            const driver_result = await db.find_one(Driver, query, projection);
           
-          if (result && await bcrypt.compare(password, result.password)) {
+            if (user_result && await bcrypt.compare(password, user_result.password))
+            {
+                req.session.id_number = user_result.id_number;
+                res.redirect('/SecurityCheck?id_number=' + id_number);      
+            } else if (admin_result && await bcrypt.compare(password, admin_result.password))
+            {
+                req.session.id_number = admin_result.id_number;
+                res.redirect('/SecurityCheck?id_number=' + id_number);
 
-            req.session.idNumber = result.idNumber;
+            } else if (driver_result && await bcrypt.compare(password, driver_result.password))
+            {
+                req.session.id_number = driver_result.id_number;
+                res.redirect('/SecurityCheck?id_number=' + id_number);
 
-            res.redirect('/SecurityCheck?idNumber=' + idNumber);      
-          } else if (result2 && await bcrypt.compare(password, result2.password)) {
-          
-            req.session.idNumber = result2.idNumber;
-
-            res.redirect('/SecurityCheck?idNumber=' + idNumber);
-
-          } else {
-            res.render('Login', { isValid: false })
-          }
-              
-          } catch (err) {
-            res.status(500).send(err);
-          }
+            } else {
+                res.render('Login', { is_valid: false })
+            }
+                
+            } catch (err) {
+                res.status(500).send(err);
+            }
         },
 
 };

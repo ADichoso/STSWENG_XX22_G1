@@ -3,7 +3,7 @@
 <html>
 
     <head>
-        <title> Arrow Express - {{firstName}} {{lastName}} Profile </title> 
+        <title> Arrows Express - {{first_name}} {{last_name}} Profile </title> 
         <link rel="icon" type="image/png" href="../images/DLSU_Logo.png">
         <link rel="stylesheet" type="text/css" href="../css/ProfileStyle.css">
     </head>
@@ -15,15 +15,15 @@
         <div class="content">
 
             <div id="info_box">
-                <img src = "{{profilePicture}}" id = "profile_picture">
-                <p class = "title_text" style="top: 50px; text-align: center; font-size: 40px; color: white;"> {{firstName}} {{lastName}} </p>
-                <p class = "sub_text" style="top: 50px; text-align: center; font-size: 25px; color: white; font-style: normal;"> {{idNumber}} </p>
-                <p class = "sub_text" style="top: 80px; text-align: center; font-size: 20px; color: white;"> {{passengerType}} </p>
+                <img src = "{{profile_picture}}" id = "profile_picture">
+                <p class = "title_text" style="top: 50px; text-align: center; font-size: 40px; color: white;"> {{first_name}} {{last_name}} </p>
+                <p class = "sub_text" style="top: 50px; text-align: center; font-size: 25px; color: white; font-style: normal;"> {{id_number}} </p>
+                <p class = "sub_text" style="top: 80px; text-align: center; font-size: 20px; color: white;"> {{passenger_type}} </p>
             </div>
             
             <div class="right"> 
 
-                <a href="/SearchReservation?idNumber={{idNumber}}">
+                <a href="/SearchReservation?id_number={{id_number}}">
                     <div class="box">
                         <img src = "../images/ViewReservation.png" class = "logo">
                         <p class = "title_text" style="top: 50px; text-align: center;" > Reservations </p>

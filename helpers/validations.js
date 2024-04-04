@@ -11,7 +11,7 @@ const validation = {
         function which returns an array of validation middlewares
         called when the client sends an HTTP POST request for `/signup`
     */
-    signupValidation: function () {
+    signup_validation: function () {
 
         /*
             object `validation` is an array of validation middlewares.
@@ -22,30 +22,30 @@ const validation = {
         */
         var validation = [
 
-            check('user_firstName', 'First name should not be empty.').notEmpty(),
+            check('user_first_name', 'First name should not be empty.').notEmpty(),
             
-            check('user_lastName', 'Last name should not be empty.').notEmpty(),
+            check('user_last_name', 'Last name should not be empty.').notEmpty(),
 
             check('user_email', 'Email should not be empty.').notEmpty(),
 
-            check('user_idNumber', 'ID number should not be empty.').notEmpty(),
-            check('user_idNumber', 'ID number should contain 8 digits.').isLength({min: 8, max: 8}),
+            check('id_number', 'ID number should not be empty.').notEmpty(),
+            check('id_number', 'ID number should contain 8 digits.').isLength({min: 8, max: 8}),
 
             check('user_password', 'Password should not be empty.').notEmpty(),
 
-            check('user_securityCode', 'Security code should not be empty.').notEmpty(),
-            check('user_securityCode', 'Security code should contain 4 digits.').isLength({min: 4, max: 4}),
+            check('user_security_code', 'Security code should not be empty.').notEmpty(),
+            check('user_security_code', 'Security code should contain 4 digits.').isLength({min: 4, max: 4}),
         ];
 
         return validation;
 
     },
 
-    securityCodeValidation: function(req, res, next) 
+    security_code_validation: function(req, res, next) 
     {
-        if(req.session.idNumber)
+        if(req.session.id_number)
         {
-            if(req.session.isSecCodeValid)
+            if(req.session.is_sec_code_valid)
                 next();
             else
             {
@@ -58,7 +58,6 @@ const validation = {
             req.session.destroy();
             res.redirect(`/Login`);
         }
-       
     }
     
 }

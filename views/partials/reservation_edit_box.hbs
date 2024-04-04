@@ -1,0 +1,104 @@
+<div class="form_box2" id="edit_box"> <!-- EDIT BOX -->
+    <div id="blur_box"> </div>
+    <h2> Edit Reservation</h2>
+    <hr>
+    <div class="input">
+        <form action="/ReservationUpdate" method="post">
+
+            <br>
+
+            <div>
+                <select required name="editUser_entry" id="editUser_entry" class="fillup" onchange="ready_change_time('editUser_entry','editUser_entryTime');" style="position: relative; top: -25px; display: block;">
+                    <option value="" disabled selected hidden s> Select Trip </option>
+                    <option value="MNL"> Line 1: DLSU Manila to DLSU-LAG </option>
+                    <option value="Paseo"> Line 2: Paseo to DLSU-LAG </option>
+                    <option value="Carmona"> Line 3: Carmona to DLSU-LAG </option>
+                    <option value="Pavilion"> Line 4: Pavilion Mall to DLSU-LAG </option>
+                    <option value="Walter"> Line 5: Walter Mart to DLSU-LAG </option>
+                </select>
+            </div>
+            
+            <input type="hidden" id="e_hidden_start_campus" required name="e_hidden_start_campus" value="">
+            <input type="hidden" id="e_hidden_id_number" required name="e_hidden_id_number" value="">
+            <input type="hidden" id="e_hidden_entry_loc" name="e_hidden_entry_loc" value="">
+            <input type="hidden" id="e_hidden_entry_time" name="e_hidden_entry_time" value="">
+            <input type="hidden" id="e_hidden_exit_loc" name="e_hidden_exit_loc" value="">
+            <input type="hidden" id="e_hidden_exit_time" name="e_hidden_exit_time" value="">
+            
+            <input type="hidden" id="e_curr_start_campus" name ="e_curr_start_campus" value="">
+            <input type="hidden" id="e_curr_id_number" name = "e_curr_id_number" value="">
+            <input type="hidden" id="e_curr_date" name="e_curr_date" value="">
+            <input type="hidden" id="e_curr_entry_loc" name="e_curr_entry_loc" value="">
+            <input type="hidden" id="e_curr_entry_time" name="e_curr_entry_time" value="">
+            <input type="hidden" id="e_curr_exit_loc" name="e_curr_exit_loc" value="">
+            <input type="hidden" id="e_curr_exit_time" name="e_curr_exit_time" value="">
+            
+            <input type="date" placeholder="Date" class="fillup" required name="user_date" id="user_date" >
+
+            <div class="entry">
+                <img src="../images/Help.png" style="width: 25px; height: 25px; position: relative; filter:invert(1); top: 15px; left:10px; cursor: help;" title="From home, location going to be picked up.">
+                {{!-- <select name="editUser_entry" id="editUser_entry" class="fillup" onchange="ready_change_time('editUser_entry','editUser_entryTime');" style="width: 185px; margin: 10px; position: relative; left: 5px; ">
+                    <option value="" disabled selected hidden s> Entry Location </option>
+                    <option value="0"> Paseo -> DLSU LC </option>
+                    <option value="1"> Carmona -> DLSU LC  </option>
+                    <option value="2"> Pavilion Mall -> DLSU LC </option>
+                    <option value="3"> Walter Mart -> DLSU LC </option>
+                    <option value="4"> N/A </option>
+                </select> --}}
+                <h5 id="edit_help_entry_text">  </h5>
+                <select name="editUser_entryTime" id="editUser_entryTime" class="fillup" style="width: 120px; ">
+                    <option value="" disabled selected hidden s> Time Slot </option>
+                    <option value="0"> 06:00 AM </option>
+                    <option value="1"> 07:30 AM </option>
+                    <option value="2"> 09:30 AM </option>
+                    <option value="3"> 11:00 AM </option>
+                    <option value="4"> 01:00 PM </option>
+                    <option value="5"> 02:30 PM </option>
+                    <option value="6"> 03:30 PM </option>
+                    <option value="7"> 05:10 PM </option>
+                    <option value="8"> 06:15 PM </option>
+                    <option value="9"> 05:10 PM </option>
+                    <option value="10"> 07:45 PM </option>
+                    <option value="11"> N/A </option>
+                </select>
+            </div>
+
+            <div class="exit"> </style>
+                <img src="../images/Help.png" style="width: 25px; height: 25px; position: relative; filter:invert(1); top: 15px; left:10px; cursor: help;" title="From De La Salle University, location going to be dropped-off.">
+                {{!-- <select name="editUser_exit" id="editUser_exit" class="fillup" onchange="ready_change_time('editUser_exit','editUser_exitTime');" style="width: 185px; margin: 10px; position: relative; left: 5px;">
+                    <option value="" disabled selected hidden s> Exit Location </option>
+                    <option value="0"> DLSU LC -> DLSU Manila </option>
+                    <option value="1"> DLSU LC -> Paseo </option>
+                    <option value="2"> DLSU LC -> Carmona </option>
+                    <option value="3"> DLSU LC -> Pavilion Mall </option>
+                    <option value="4"> DLSU LC -> Walter Mart </option>
+                    <option value="5"> N/A </option>
+                </select> --}}
+                <h5 id="edit_help_exit_text">  </h5>
+                <select name="editUser_exitTime" id="editUser_exitTime" class="fillup" style="width: 120px;">
+                    <option value="" disabled selected hidden s> Time Slot </option>
+                    <option value="0"> 06:00 AM </option>
+                    <option value="1"> 07:30 AM </option>
+                    <option value="2"> 09:30 AM </option>
+                    <option value="3"> 11:00 AM </option>
+                    <option value="4"> 01:00 PM </option>
+                    <option value="5"> 02:30 PM </option>
+                    <option value="6"> 03:30 PM </option>
+                    <option value="7"> 05:10 PM </option>
+                    <option value="8"> 06:15 PM </option>
+                    <option value="9"> 05:10 PM </option>
+                    <option value="10"> 07:45 PM </option>
+                    <option value="11"> N/A </option>
+                </select>
+            </div>
+
+            <button type="submit" class="toggle_btn" id="edit_btn" onclick="hide_edit_form();"> Confirm <style> .toggle_btn{ font-size: large; font-weight: bold; margin-top: 15px;}</style></button>
+        </form>
+        
+    </div>
+
+    <div class="subtext">
+        <a onclick="cancel_edit_form();" style="cursor:pointer;">Cancel </a>
+    </div>
+
+</div>

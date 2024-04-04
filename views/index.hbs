@@ -1,276 +1,835 @@
 <!DOCTYPE html>
+<!-- Turn into HBS -->
 
 <html>
     <head>
-        <title> Arrow Express - Home  </title> 
+        <title> Arrows Express - Home  </title> 
         <link rel="icon" type="image/png" href="../images/DLSU_Logo.png">
-        <link rel="stylesheet" href="../css/Style.css">  <!-- Kailangan to if may separate CSS file -->
+        <link rel="stylesheet" href="../css/mobile.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <style> 
-            /*This removes the scrollbar for Chrome, Safari, and Opera*/
-            #staff::-webkit-scrollbar{
-                display: none;
+
+            .card_top{
+                display: flex;
+                flex-direction: column;
+                width: auto;
+                height: auto;
+                border-radius: 3rem 3rem 0 0;
+                background-image: linear-gradient(to bottom, rgba(15, 16, 16, .63), rgba(15, 16, 16, 1));
+                padding: 2rem 3rem 2rem 3rem;
+
+                backdrop-filter: blur(.5rem);
             }
-			
-			#schedules::-webkit-scrollbar{
-                display: none;
+
+            .card_bottom{
+                display: flex;
+                flex-direction: column;
+                width: auto;
+                height: auto;
+                background-color: rgba(15, 16, 16, 1);
+
+                gap: 4rem;
+                padding: 12rem 3rem 2rem 3rem;
             }
+
+            .card_bottom > div {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem
+            }
+
+            .member_list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+
+            .member_card {
+                background-image: linear-gradient(15deg, rgba(0, 119, 30, .39) 50%, rgba(0, 119, 30, 0) 50.1%);
+                width: 25rem;
+                height: 35rem;
+                border-radius: 2rem;
+                cursor:pointer;
+                transition:150ms scale;
+            }
+
+            .member_card > .triangle {
+                position:relative;
+
+                background-color: rgba(0, 119, 30, 1);
+                width: 22rem;
+                height: 17rem;
+
+                top: -6rem;
+                left: 3rem;
+                
+                clip-path: polygon(100% 42%, 0 81%, 76% 100%);
+
+            }
+
+            .member_card > img{
+                position: relative;
+                top: 3rem;
+                left: 2.5rem;
+                border-radius: 1rem;
+                width: 20rem;
+                height: 20rem;
+                background-size: cover;
+                filter: grayscale(100%);
+                transition: filter 200ms;
+            }
+
+            @keyframes card_click{
+                0%, 100% {scale: 1;}
+                20% {scale: .95;}
+            }
+
+            .member_card:active > img{
+                filter: grayscale(0%);
+            }
+
+            
+
+            .member_card:active{
+                animation: card_click 200ms ease-in-out;
+            }
+
+            .member_card > div {
+                position: relative;
+                left: -3rem;
+                top: -12rem;
+
+
+                text-align: end;
+                line-height: 0;
+                
+            }
+            
+            .member_card > div > h4 {
+                font-size: 1.5rem;
+                font-weight: 300;
+                letter-spacing: .3rem;
+            }
+
+            .member_card > h6 {
+                font-size: 1.5rem;
+                font-weight: 100;
+                letter-spacing: 0;
+                position: relative;
+                top: -10rem;
+                text-align: center;
+            }
+
+            .member_card:hover {
+                scale: 1.02;
+            }
+
+
+            .schedule_row {
+                display: flex; 
+                justify-content: space-between;
+                align-items: center;
+                padding: 1.25rem 0;
+                overflow-x: hidden;
+                overflow-y: hidden;
+                text-wrap:nowrap;
+                width: 100%;
+            }
+
+            .schedule_clickable_row {
+                display: flex; 
+                width: 100%;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1.25rem 0;
+                overflow-x: hidden;
+                overflow-y: hidden;
+                text-wrap:nowrap;
+
+                cursor:pointer;
+            }
+
+            .schedule_container {
+                overflow-x: hidden;
+                overflow-y: hidden;
+            }
+
+            .schedule_page {
+                width: 100% !important; 
+                height: auto;
+                overflow-x: hidden;
+            }
+
+            .navbar_desktop {
+                display: none;
+                margin-left: auto;
+                margin-right: 2rem;
+                height: 100%;
+            }
+
+            .navbar_desktop > a {
+                background-image: linear-gradient(to bottom, rgba(0, 119, 30, 0), rgba(0, 119, 30, 0), rgba(0, 119, 30, 0.24));
+                background-size: 100% 200%;
+                color: white;
+                text-decoration: none;
+                font-size: 2.5rem;
+                text-wrap: nowrap;
+                vertical-align: middle;
+
+                padding: 4rem 1vw;
+                width: auto;
+
+                background-position-y: 0%;
+                transition: scale 200ms, background-position-y 200ms;
+                
+            }
+
+            .navbar_desktop > a:hover {
+                scale: 1.05;
+                background-position-y: 100%;
+            }
+
+
+            @media (min-aspect-ratio: 4/3) {
+                :root {
+                    font-size: .58vw;
+                }
+
+                .navbar_desktop {
+                    display: flex;
+                    
+                }
+
+                #navbar_button{
+                    display: none;
+                }
+
+                .landing_box{
+                    margin: 20rem 20rem 10rem 20rem;
+                    display: flex;
+                    flex-direction: column;
+                    
+                    align-items: center;
+                    text-align: center;
+                    padding: 6rem 4rem;
+                    gap: 4rem;
+                    border-radius: 3rem;
+                    background-color: rgba(15, 16, 16, 0.63);
+                }
+                
+                .card_top {
+                    padding: 5rem 25rem 5rem 25rem;
+                }
+                
+                .card_bottom{
+                    padding: 12rem 25rem 2rem 25rem;
+                    gap: 5rem;
+                }
+
+                .navbar_content {
+                    display: none;
+                }
+
+                .arrow_h {
+                    transform: translateX(12rem) scaleX(0%) rotate(135deg);
+                }
+
+                .arrow_h_pressed {
+                    transform: translateX(12rem) scaleX(100%) rotate(135deg);
+                }
+
+            }
+
+
         </style>
     </head>
-
     <body>
-        <div class = "banner" id="top"> 
-            <div class="navbar">
-                <a href="#top"> <img src= "../images/DLSU_Logo.png" class = "website_logo"> </a>
-                <p style="position: absolute; color:white; left: 165px; font-weight: bolder; font-size: 25px;"> De La Salle University </p>
-                <ul>
-                    <li><a href="/Login"> Reserve Now </a></li>
-                    <li><a href="#schedules"> Schedules </a></li>
-                    <li><a href="#staff"> Staff </a></li>
-                    <li><a href="/Search"> Search </a></li>
-                    <li><a href="/Login"> {{#if isSecCodeValid}}{{firstName}}{{else}}Login{{/if}} </a></li>
-                </ul>
+        <div class="navbar">
+            <div class="navbar_top">
+                <img src="../images/DLSU_Logo.png">
+                <h2>De La Salle University</h2>
+                <button id="navbar_button"><div class="arrow"></div></button>
+                <div class="navbar_desktop">
+                    <a href="/">HOME</a>
+                    <a href="/Search">SEARCH</a>
+                    <a href="/Login">LOGIN</a>
+                </div>
+            </div>
+            <div class="navbar_content">
+                <a href="/">HOME</a>
+                <a href="/Search">SEARCH</a>
+                <a href="/Login">LOGIN</a>
+            </div>
+        </div>
+
+        <div class="landing_background"></div>
+        <div class="landing">
+            <div class="landing_box">
+                <div style="display: flex; flex-direction: column; gap: 0rem;">
+                    <h6>Welcome to</h6>
+                    <h1>ARROW EXPRESS</h1>
+                </div>
+
+                <p>Simplify your shuttle booking and secure your seat effortlessly with our user-friendly platform.  Experience the convenience of booking shuttles with just a few clicks and enjoy a stress-free journey to your destination.</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
+                    <button class="primary_button" onclick="window.location = '/SignUp'">Get Started</button>
+                    <button class="secondary_button" onclick="$('.card_bottom')[0].scrollIntoView({behavior: 'smooth', block: 'start'});">About Us</button>
+                </div>
             </div>
 
-            <div class = "content" id = "content" style="background-color: rgba(0, 0, 0, 0.63); border-radius:30px; left: 50%; transform: translate(-50%, -50%); padding-top: 20px; padding-bottom: 20px; width: 75%; z-index: 0;">
-                <h3> Welcome to </h3>
-                <h1> Arrow Express </h1>
-                <p> Simplify your shuttle booking and secure your seat effortlessly with our user-friendly platform. <br> 
-                    Experience the convenience of booking shuttles with just a few clicks and enjoy a stress-free journey to your destination. </p>
+            <div class="card_top" id="card_top">
+                <div class="schedule_row">
+                    <h2>Schedules</h2>
+                    <button id="schedule_button"><div class="arrow_h"></div></button>
+                </div>
+                <div class="schedule_container">
+                    <!-- SCHEDULE SELECTOR START -->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Destination</h3>
+                            <h3>Days</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_clickable_row">
+                            <p>Manila → Laguna </p>
+                            <p>M-S</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>Laguna → Manila </p>
+                            <p>M-S</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Central </p>
+                            <p>M-F</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Pavilion </p>
+                            <p>M-F</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Carmona </p>
+                            <p>M-F</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Waltermart </p>
+                            <p>M-F</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Paseo </p>
+                            <p>S</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Carmona </p>
+                            <p>S</p>
+                        </div>
+                        <div class="schedule_clickable_row">
+                            <p>DLSU Laguna ↔ Waltermart </p>
+                            <p>S</p>
+                        </div>
+                    </div>
+                    <!-- SCHEDULE SELECTOR END-->
+
+                    <!-- MANILA TO LAGUNA START-->
+                    <div class="schedule_page" >
+                        <div class="schedule_row">
+                            <h3>Line 1</h3>
+                            <h3>Manila → Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-S</h3>
+                            <h3>Yuchenco Bldg.</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>Trip #</h3>
+                            <h3>Designated Time</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE101</p>
+                            <p>6:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE102</p>
+                            <p>7:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE103</p>
+                            <p>9:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE104</p>
+                            <p>11:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE105</p>
+                            <p>1:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE106</p>
+                            <p>2:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE107</p>
+                            <p>3:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE108</p>
+                            <p>5:10 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE109</p>
+                            <p>6:15 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE110</p>
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- MANILA TO LAGUNA END-->
+
+                    <!-- LAGUNA TO MANILA START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 1</h3>
+                            <h3>Laguna → Manila</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-S</h3>
+                            <h3>East Canopy MMR</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>Trip #</h3>
+                            <h3>Designated Time</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE151</p>
+                            <p>5:45 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE152</p>
+                            <p>6:15 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE153</p>
+                            <p>7:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE154</p>
+                            <p>8:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE155</p>
+                            <p>9:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE156</p>
+                            <p>11:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE157</p>
+                            <p>1:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE158</p>
+                            <p>2:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE159</p>
+                            <p>3:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE160</p>
+                            <p>5:10 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE161</p>
+                            <p>6:15 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>AE162</p>
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- LAGUNA TO MANILA END-->
+
+                    <!-- DLSU LAGUNA TO LAGUNA CENTRAL START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 2</h3>
+                            <h3>DLSU Laguna ↔ Laguna Central</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-F</h3>
+                            <h3>Laguna Central</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Laguna Central</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>9:00 AM</p>
+                            <p>6:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>11:30 AM</p>
+                            <p>6:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>4:45 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:10 PM</p>
+                            <p>12:15 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:30 PM</p>
+                            <p>1:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>6:00 PM</p>
+                            <p>3:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>6:30 PM</p>
+                            <p>3:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>7:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO LAGUNA CENTRAL END-->
+                   
+                    <!-- DLSU LAGUNA TO PAVILION START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 3</h3>
+                            <h3>DLSU Laguna ↔ Pavilion</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-F</h3>
+                            <h3>Shell Pavillion</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Pavilion</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>4:45 PM</p>
+                            <p>5:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:10 PM</p>
+                            <p>6:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:30 PM</p>
+                            <p>6:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>6:00 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO PAVILION END-->
+
+                    <!-- DLSU LAGUNA TO CARMONA START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 4</h3>
+                            <h3>DLSU Laguna ↔ Carmona</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-F</h3>
+                            <h3>Carmona Covered Walk</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>7-Eleven Sto. Tomas</h3>
+                            <h3>Malamig Terminal</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Carmona</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>4:45 PM</p>
+                            <p>6:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:10 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>6:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO CARMONA END-->
+
+                    <!-- DLSU LAGUNA TO WALTERMART START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 4</h3>
+                            <h3>DLSU Laguna ↔ Waltermart</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>M-F</h3>
+                            <h3>Caltex Waltermart</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Waltermart</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>4:45 PM</p>
+                            <p>6:30 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:10 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>5:30 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>6:00 PM</p>
+                        </div>
+                        <div class="schedule_row">
+                            <p>7:45 PM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO WALTERMART END-->
+
+                    <!-- DLSU LAGUNA TO PASEO SAT START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 2</h3>
+                            <h3>DLSU Laguna ↔ Paseo</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>S</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Waltermart</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>12:10 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO PASEO SAT START END-->
+
+                    <!-- DLSU LAGUNA TO CARMONA SAT START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 4</h3>
+                            <h3>DLSU Laguna ↔ Carmona</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>S</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Carmona</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>12:10 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO CARMONA SAT START END-->
+
+                    <!-- DLSU LAGUNA TO WALTERMART SAT START-->
+                    <div class="schedule_page">
+                        <div class="schedule_row">
+                            <h3>Line 5</h3>
+                            <h3>DLSU Laguna ↔ Waltermart</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <h3>S</h3>
+                        </div>
+                        <hr>
+                        <div class="schedule_row">
+                            <h3>→ Waltermart</h3>
+                            <h3>→ DLSU Laguna</h3>
+                        </div>
+                        <div class="schedule_row">
+                            <p>12:10 PM</p>
+                            <p>7:00 AM</p>
+                        </div>
+                    </div>
+                    <!-- DLSU LAGUNA TO WALTERMART SAT START END-->
+                </div>
+                <hr>
+            </div>
+            <div class="card_bottom">
                 <div>
-                    <button type="button" onclick="window.location.href='/SignUp'"> <span></span> Get Started </button>
-                    <a href="#about"> <button type="button"> <span></span> About Us </button> </a>  <!-- onclick is to open a new html file within the window -->
+                    <h2 id="about">About Us</h2>
+                    <hr>
+                    <p>We are proud to present our STSWENG Project, originally designed by Mauries, Benmar, and Nathan. Our project aims to improve the existing scheduling system for the Arrows Express Shuttle, introducing innovative features and a user-friendly profile system for ease-of-access.</p>
+                    <div class="member_list">
+                        <div class="member_card"  onclick="window.open('https://github.com/ADichoso')">
+                            <img src="https://avatars.githubusercontent.com/u/39649018">
+                            <div class="triangle"></div>
+                            <div>
+                                <h3>Aaron Dichoso</h3>
+                                <h4>Developer</h4> 
+                            </div>
+                            <h6>aaron_dichoso@dlsu.edu.ph</h6>
+                        </div>
+                        <div class="member_card" onclick="window.open('https://github.com/ren-malthalash')">
+                            <img src="https://avatars.githubusercontent.com/u/154307471">
+                            <div class="triangle"></div>
+                            <div>
+                                <h3>Christian Tordillo</h3>
+                                <h4>Developer</h4> 
+                            </div>
+                            <h6>christian_tordillo@dlsu.edu.ph</h6>
+                        </div>
+                        <div class="member_card"  onclick="window.open('https://github.com/kenStinks')">
+                            <img src="https://avatars.githubusercontent.com/u/134857008">
+                            <div class="triangle"></div>
+                            <div>
+                                <h3>Ken Espiritu</h3>
+                                <h4>Developer</h4> 
+                            </div>
+                            <h6>john_kirsten_espiritu@dlsu.edu.ph</h6>
+                        </div>
+                        <div class="member_card"  onclick="window.open('https://github.com/Lunarianerino')">
+                            <img src="https://avatars.githubusercontent.com/u/71534058">
+                            <div class="triangle"></div>
+                            <div>
+                                <h3>Luis Razon</h3>
+                                <h4>Quality Assurance</h4> 
+                            </div>
+                            <h6>luis_razon@dlsu.edu.ph</h6>
+                        </div>
+                        <div class="member_card" onclick="window.open('https://github.com/austinatividad')">
+                            <img src="https://avatars.githubusercontent.com/u/114718588">
+                            <div class="triangle"></div>
+                            <div>
+                                <h3>Austin Natividad</h3>
+                                <h4>Quality Assurance</h4> 
+                            </div>
+                            <h6>austin_natividad@dlsu.edu.ph</h6>
+                        </div>
+                        <div class="member_card" onclick="window.open('https://github.com/mauries-lopez')">
+                            <img src="https://avatars.githubusercontent.com/u/102708347">
+                            <div class="triangle"></div>
+                            <div>
+                                <h3>Mauries Lopez</h3>
+                                <h4>Analyst</h4> 
+                            </div>
+                            <h6>mauries_lopez@dlsu.edu.ph</h6>
+                        </div>
+                        <div class="member_card" onclick="window.open('https://github.com/zivan-c')">
+                            <img src="https://avatars.githubusercontent.com/u/139564265">
+                            <div class="triangle"></div>
+                            <div>
+                                <h3>Merrick Malong</h3>
+                                <h4>Product Owner</h4> 
+                            </div>
+                            <h6>merrick_malong@dlsu.edu.ph</h6>
+                        </div>
+                        <div class="member_card">
+                            <img src="../images/staff8.png">
+                            <div class="triangle"></div>
+                            <div>
+                                <h3>Benmar Ramirez</h3>
+                                <h4>(Legacy) Developer</h4> 
+                            </div>
+                            <h6>sim_ramirez@dlsu.edu.ph</h6>
+                        </div>
+                        <div class="member_card">
+                            <img src="../images/staff9.png" >
+                            <div class="triangle"></div>
+                            <div>
+                                <h3>Nathan Asnan</h3>
+                                <h4>(Legacy) Developer</h4> 
+                            </div>
+                            <h6>nathan_andrei_asnan@email.com</h6>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                
+                <div>
+                    <h2>Dependencies</h2>
+                    <hr>
+                    <ul>
+                        <li>bcrypt 5.1.0</li>
+                        <li>connect-mongo 3.2.0</li>
+                        <li>express 4.18.2</li>
+                        <li>express-session 1.17.3</li>
+                        <li>express-validator 7.0.1</li>
+                        <li>hbs 4.2.0</li>
+                        <li>mongodb 3.5.5</li>
+                        <li>mongoose 7.3.4</li>
+                        <li>multer 1.4.5-lts.1</li>
+                    </ul>
+                </div>
+                
 
-        <div id="about" style="display:flex; gap: 10px; flex-direction: column;">
-            <div class="content-about" style="height: 400px; top: 33%;">
-                <h3>About Us</h3>
-                <p>We are proud to present our CCAPDEV Project, designed by Mauries, Benmar, and Nathan. Our project aims to improve the existing scheduling system for the Arrows Express Shuttle, introducing innovative features and a user-friendly profile system for ease-of-access.</p>
-                <p>With our collective expertise and passion for creating efficient solutions, we have developed a platform that enhances the shuttle-commuting experience of students, faculty, and staff at De La Salle University. Our project incorporates the concept of a profile system, allowing users to easily manage their reservations and personalize their shuttle experience.</p>
-                <p>We are dedicated to providing reliable and convenient ways to access shuttle services that align with the hard work and dedication of the DLSU community. By simplifying the scheduling process and introducing user-friendly features, we aim to ensure a comfortable and stress-free journey for all passengers.</p>
-                <p>A simplified booking experience for Arrows Express, designed by Mauries, Benmar, and Nathan, is a testament to our commitment to innovation and our drive to serve the needs of the DLSU community. Join us in experiencing a new level of convenience and efficiency in school transportation.</p>
-            </div>
-            <div class="content-about" style="width: 250px; height: 300px; top: 30%;">
-                <h3>Dependencies</h3>
-                <p> "bcrypt": "^5.1.0", </p>
-                <p> "connect-mongo": "^3.2.0", </p>
-                <p> "express": "^4.18.2", </p>
-                <p> "express-session": "^1.17.3", </p>
-                <p> "express-validator": "^7.0.1", </p>
-                <p> "hbs": "^4.2.0", </p>
-                <p> "mongodb": "^3.5.5", </p>
-                <p> "mongoose": "^7.3.4", </p>
-                <p> "multer": "^1.4.5-lts.1" </p>
-            </div>
-        </div>
-
-        <div class="arrows" id="schedules" style="overflow: scroll; -ms-overflow-style: none; scrollbar-width: none;">
-            <div class="schedule-container">
-              <div class="toprow">
-                <div class="tc">
-                  <h3>Line 1 (MON-SAT)</h3>
-                  <div class="s-title">Manila to Laguna</div>
-                  <table id="sc-table1" class="sc-table"></table>
+                <div>
+                    <hr>
+                    <p style="align-self: center;">XX22 Group 1 © 2024</p>
                 </div>
-                <div class="tc">
-                  <h3>&nbsp;</h3>
-                  <div class="s-title">Laguna to Manila</div>
-                  <table id="sc-table2" class="sc-table2"></table>
-                </div>
-              </div>
-              <div class="midrow">
-                <div class="tc">
-                  <h3>LINE 2 (MON-FRI)</h3>
-                  <div class="s-title">DLSU Laguna - Laguna Central</div>
-                  <table id="sc-table3" class="sc-table3">
-                  </table>
-                </div>
-                <div class="tc">
-                  <h3>LINE 3</h3>
-                  <div class="s-title">DLSU Laguna - Pavilion</div>
-                  <table id="sc-table4" class="sc-table4">
-                  </table>
-                </div>
-                <div class="tc">
-                  <h3>Line 4</h3>
-                  <div class="s-title">DLSU Laguna - Carmona</div>
-                  <table id="sc-table5" class="sc-table5">
-                  </table>
-                </div>
-                <div class="tc">
-                  <h3>Line 5</h3>
-                  <div class="s-title">DLSU Laguna - Waltermart</div>
-                  <table id="sc-table6" class="sc-table6">
-                  </table>
-                </div>
-              </div>
-              <div class="botrow">
-                <div class="tc">
-                  <h3>Line 2 (SAT)</h3>
-                  <div class="s-title">DLSU Laguna - Paseo</div>
-                  <table id="sc-table7" class="sc-table7">
-                  </table>
-                </div>
-                <div class="tc">
-                  <h3>Line 4</h3>
-                  <div class="s-title">DLSU Laguna - Carmona</div>
-                  <table id="sc-table8" class="sc-table8">
-                  </table>
-                </div>
-                <div class="tc">
-                  <h3>Line 5</h3>
-                  <div class="s-title">DLSU Laguna - Waltermart</div>
-                  <table id="sc-table9" class="sc-table9">
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div> 
-
-          <script src="../js/ScheduleArrayIndex.js"></script>      
-
-        <div id="staff" style="display: flex; flex-wrap: wrap; justify-content: center; overflow: scroll; -ms-overflow-style: none; scrollbar-width: none;">
-            <style>
-                #staff .unit{
-                    display: flex;
-                    flex-wrap: wrap;
-                    flex-direction: vertical;
-                    background-color: white;
-                    border-style: solid;
-                    border-color: gray;
-                    border-radius: 8px;
-                    border-width: 3px;
-                    margin: 35px;
-                    width: 280px;
-                    height: auto;
-                    max-height: 400px;
-                    box-shadow: 4px 4px lightgreen; 
-                    flex-grow: 1;
-                    min-width: 280px;
-                    max-width: 280px;
-                }
-                #staff .unit name{
-                    font-size: 24px;
-                    font-weight: 500;
-                    text-align:center;
-                    margin: 10px auto 10px auto;
-                    padding: 0px 10px 0px 10px;
-                }
-                #staff .unit photo{
-                    margin: 0px auto 0px auto;
-                    width: 240px;
-                    height: 240px;
-                    border: 3px solid gray;
-                    border-radius: 8px;
-                }
-                #staff .unit photo img{
-					width: 100%;
-					height: 100%;
-                    max-width: 100%;
-                    max-height: 100%;
-                }
-                #staff .unit description{
-                    text-align: center;
-                    margin: 10px auto 10px auto; 
-                    padding: 0px 10px 0px 10px;
-                }
-            </style>
-
-            <div class="unit">
-                <name>
-                    John Magsaysay
-                </name>
-                <photo>
-                    <img src="../images/staff1.png" title="https://ent.abs-cbn.com/starmagic/articles-photos/58052617-46-off-cam-photos-of-piolo-pascual-that-proved-hes-human-too-star-magic-12861">
-                </photo>
-                <description>
-                    Driver - Paseo <br>
-                    <a href="mailto: john_email@_email_?subject = Reservation Concerns&amp;body = Message"> john.magsaysay@gmail.com</a>
-                </description>
-            </div>
-
-            <div class="unit">
-                <name>
-                    May Flores
-                </name>
-                <photo> 
-					<img src="../images/staff2.png" title="https://play.nintendo.com/themes/friends/isabelle/"> 
-				</photo>
-                <description> Driver - Carmona <br> may.flores@gmail.com </description>
-            </div>
-            
-            <div class="unit">
-                <name>
-                    Juan Dela Cruz
-                </name>
-                <photo> 
-					<img src="../images/staff3.png" title="https://www.filipinojapanesejournal.com/coco-martin-is-filipino-japanese-journals-march-2023-cover-star/">
-				</photo>
-                <description> Driver - Pavilion <br> juan.cruz@gmail.com </description>
-            </div>
-            <div class="unit">
-                <name>
-                    Flynn Driver
-                </name>
-                <photo> 
-					<img src="../images/staff4.png" title="Disney's Tangled - Flynn Rider">
-				</photo>
-                <description> Driver - Walter Mart  <br> flynn.driver@gmail.com </description>
-            </div>
-            <div class="unit">
-                <name>
-                    Gil Puyat
-                </name>
-                <photo> 
-					<img src="../images/staff5.png" title="https://foursquare.com/v/lrt1--gil-puyat-station/4c10750aa6c19521885036dd?tipsPage=2">
-				</photo>
-                <description> Driver - Manila <br> gil.puyat.avenue@gmail.com </description>
-            </div>
-            <div class="unit">
-                <name>
-                    Sarah Do
-                </name>
-                <photo> 
-					<img src="../images/staff6.png" title="https://heroes-and-villain.fandom.com/wiki/Scooby-Doo?file=Scooby_Doo.webp">
-				</photo>
-                <description> Site Administrator <br> sarah.do@gmail.com </description>
-            </div>
-            <div class="unit">
-                <name>
-                    Mauries Lopez
-                </name>
-                <photo> 
-					<img src="../images/staff7.png">
-				</photo>
-                <description> Web Developer <br> mauries_lopez@dlsu.edu.ph </description>
-            </div>
-            <div class="unit">
-                <name>
-                    Benmar Ramirez
-                </name>
-                <photo> 
-					<img src="../images/staff8.png"> 
-				</photo>
-                <description> Web Developer <br> sim_ramirez@dlsu.edu.ph </description>
-            </div>
-            <div class="unit">
-                <name>
-                    Nathan Asnan
-                </name>
-                <photo> 
-					<img src="../images/staff9.png">
-				</photo>
-                <description> Web Developer <br> nathan_andrei_asnan@email.com </description>
-            </div>
-        </div>
-
-        <div class = "footer">
-            <div class = "footer_contents">
-                <a href="#staff"> Group Members </a> <br>
-                <a href="#about"> About the Website </a>
             </div>
         </div>
         
+
+        <script>
+            $(".navbar_top").on("click", function(){
+                $(".arrow").toggleClass("arrow_pressed");
+                $(".navbar_content").toggleClass("navbar_open");
+            })
+
+            
+
+            //schedule functionality
+            function show_schedule_page(x, duration){
+                $( ".schedule_page").each(function(i, obj) {
+                    if (i != x) $(obj).hide({duration: duration});
+                    else $(obj).show({duration: duration})
+
+                    if (x!=0) $(".arrow_h").addClass("arrow_h_pressed");
+                });
+            }
+
+            $("#schedule_button").on("click", function(){
+                if ($(".arrow_h").hasClass("arrow_h_pressed")){
+                    $(".arrow_h").removeClass("arrow_h_pressed");
+                    show_schedule_page(0, 400)
+                }
+            })
+
+            show_schedule_page(0,0);
+
+            $(".schedule_clickable_row").each(function(i, obj) {
+                $(obj).on("click", function(){
+                    show_schedule_page(i+1, 400);
+                })
+            });
+
+            
+        </script>
     </body>
 </html>

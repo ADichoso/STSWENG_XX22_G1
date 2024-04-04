@@ -1,0 +1,39 @@
+name: Robot Framework - Python
+on:
+  push:
+    branches: [ "integration", "Staging", "Production" ]  
+  pull_request:
+    branches: [ "integration", "Staging", "Production" ]
+ 
+permissions:
+  contents: read
+ 
+jobs:
+  test:
+    runs-on: ubuntu-latest
+     
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.12.1
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.12.1
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 123
+   
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install robotframework
+          pip install robotframework-seleniumlibrary
+   
+      - name: Test with RobotFramework
+        run: robot ./__test__/. 
+         
+      - name: Test Report Generation
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: Report                # Name of the folder
+          path: report.html
