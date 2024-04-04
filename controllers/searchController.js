@@ -19,7 +19,6 @@ const searchController = {
                 { last_name: { $regex: new RegExp('^' + payload + '.*', 'i') } },
                 { $expr: { $regexMatch: { input: { $concat: ['$first_name', ' ', '$last_name'] }, regex: new RegExp('^' + payload + '.*', 'i') } } },
                 { passenger_type: { $regex: new RegExp('^' + payload + '.*', 'i') } },
-                { id_number: parseInt(payload) || 0 },
                 { profile_picture: { $regex: new RegExp('^' + payload + '.*', 'i') } }
               ]
             },
@@ -63,12 +62,13 @@ const searchController = {
 
     get_search_reservation : async function (req, res) {
 
-        var userID = req.query.id_number;
+        var id_number = req.query.id_number;
 
-		    const result = await db.find_many(Reservation, {id_number: userID}, "-_id -__v");
+		    const result = await db.find_many(Reservation, {id_number: id_number}, "-_id -__v");
 
-        res.render('SearchReservation', {result: result, id_number: userID});
+        console.log({result: result});
 
+        res.render('SearchReservation', {result: result, id_number: id_number});
     }
 
 };

@@ -66,7 +66,7 @@
 							const result_container = document.getElementsByClassName('results_container')[0];
 							const user_care_template = document.getElementsByTagName('template')[0].content;
 							
-							fetch('user_search', {
+							fetch('/UserSearch', {
 								method: 'POST',
 								headers: { 'Content-Type': 'application/json' },
 								body: JSON.stringify({ payload: e.value })
@@ -82,14 +82,14 @@
 									const html_attribute = copy_user_card_template.querySelector(".htmlLink");
 									const img_element = copy_user_card_template.querySelector("img");
 
-									name_element.textContent = item.firstName + " " + item.lastName;
-									designation_element.textContent = item.passengerType;
+									name_element.textContent = item.first_name + " " + item.last_name;
+									designation_element.textContent = item.passenger_type;
 									html_attribute.setAttribute("href", "/SearchProfile?id_number=" + item.id_number);
 
 									if (item.profilePicture == null)
-										img_element.setAttribute("src", "images/Default.png");
+										img_element.setAttribute("src", "images/profilepictures/Default.png");
 									else
-										img_element.setAttribute("src", item.profilePicture);
+										img_element.setAttribute("src", `images/profilepictures/` + item.profile_picture);
 									
 									result_container.appendChild(copy_user_card_template);
 								});

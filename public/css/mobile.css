@@ -109,6 +109,7 @@ button{
 .navbar_content > a {
     background-image: linear-gradient(to bottom, rgba(0, 119, 30, 0), rgba(0, 119, 30, 0.24));
     color: white;
+    text-transform: uppercase;
     text-decoration: none;
     font-size: 3rem;
     padding: 2rem 4rem;
@@ -261,6 +262,7 @@ button{
     background-size: 100% 200%;
     color: white;
     text-decoration: none;
+    text-transform: uppercase;
     font-size: 2.5rem;
     text-wrap: nowrap;
     vertical-align: middle;

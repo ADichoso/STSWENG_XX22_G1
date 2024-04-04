@@ -23,7 +23,7 @@
                 ready_HTML({{display_UI}});
 				
 				{{!-- {{#each result}}
-					hideScheduleForm(true, ["{{start_campus}}", "{{date}}", "{{entry_loc}}", "{{entry_time}}", "{{exit_loc}}", "{{exit_time}}", {{id_number}}], false);
+					hide_schedule_form(true, ["{{start_campus}}", "{{date}}", "{{entry_loc}}", "{{entry_time}}", "{{exit_loc}}", "{{exit_time}}", {{id_number}}], false);
 				{{/each}} --}}
 
                 var adminLink = '/ProfileAdmin?id_number=' + {{id_number}};
@@ -90,7 +90,7 @@
         <div class = "banner" > 
 
             <div class="navbar">
-                <a href="" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
+                <a onclick="history.back()" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
 
                 <div id="success_box">
                     <p id="success_message"> Success! </p>
@@ -304,7 +304,7 @@
                                 </select>
                             </div>
 								
-                            <button type="submit" class="toggle_btn" id="reserve_btn" onclick="populate_fields()"><!--onclick="hideScheduleForm();"--> Reserve <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
+                            <button type="submit" class="toggle_btn" id="reserve_btn" onclick="populate_fields()"><!--onclick="hide_schedule_form();"--> Reserve <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
                         </form>
                         
                     </div>

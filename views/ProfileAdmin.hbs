@@ -231,13 +231,13 @@
                 <div class="navbar_desktop">
                     <a href="/">HOME</a>
                     <a href="/Search">SEARCH</a>
-                    <a href="/Profile">LOGIN</a>
+                    <a href="/Profile">{{details.first_name}}</a>
                 </div>
             </div>
             <div class="navbar_content">
                 <a href="/">HOME</a>
                 <a href="/Search">SEARCH</a>
-                <a href="/Login">Profile</a>
+                <a href="/Login">{{details.first_name}}</a>
             </div>
         </div>
 
@@ -285,7 +285,7 @@
                             </a>
                                                         
                             <a href="/ReservationAdmin?id_number={{details.id_number}}">
-                                <img src = "../images/Schedule_Logo.png" id = "schedule_logo">
+                                <img src = "../images/UserEdit_Logo.png" id = "schedule_logo">
                                 <div>
                                     <h2> Edit User Reservation </h2>
                                     <p> Edit reserved schedule of passengers </p>
@@ -378,7 +378,13 @@
             </div>  
 
         </div> --}}
-
+        <script>
+            $(".navbar_top").on("click", function(){
+                $(".arrow").toggleClass("arrow_pressed");
+                $(".navbar_content").toggleClass("navbar_open");
+            })
+        </script>
+        
     </body>
 
     <style>
