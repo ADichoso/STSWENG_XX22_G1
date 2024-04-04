@@ -142,12 +142,12 @@ describe('ForgotPassController - post_change_F_password', () => {
             
             await controller.post_change_F_password(req,res);
 
-            expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: 9999999, email: 'test'}, 'id_number password');
-            expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: 9999999, email: 'test'}, 'id_number password');
-            expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: 9999999, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: undefined, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: undefined, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: undefined, email: 'test'}, 'id_number password');
 
             expect(hash_mock).toHaveBeenCalledWith('password', 10);
-            expect(update_one_mock).toHaveBeenCalledWith(User, {id_number: 9999999, email: 'test'}, {password: 'hashed_password'});
+            expect(update_one_mock).toHaveBeenCalledWith(User, {id_number: undefined, email: 'test'}, {password: 'hashed_password'});
             expect(res.render).toHaveBeenCalledWith('Login', {code_change: true});
         });
 
@@ -161,12 +161,12 @@ describe('ForgotPassController - post_change_F_password', () => {
             
             await controller.post_change_F_password(req,res);
 
-            expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: 9999999, email: 'test'}, 'id_number password');
-            expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: 9999999, email: 'test'}, 'id_number password');
-            expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: 9999999, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: undefined, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: undefined, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: undefined, email: 'test'}, 'id_number password');
 
             expect(hash_mock).toHaveBeenCalledWith('password', 10);
-            expect(update_one_mock).toHaveBeenCalledWith(Admin, {id_number: 9999999, email: "test"}, {password: 'hashed_password'});
+            expect(update_one_mock).toHaveBeenCalledWith(Admin, {id_number: undefined, email: "test"}, {password: 'hashed_password'});
             expect(res.render).toHaveBeenCalledWith('Login', {code_change: true});
         });
 
@@ -180,12 +180,12 @@ describe('ForgotPassController - post_change_F_password', () => {
             
             await controller.post_change_F_password(req,res);
 
-            expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: 9999999, email: 'test'}, 'id_number password');
-            expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: 9999999, email: 'test'}, 'id_number password');
-            expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: 9999999, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: undefined, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: undefined, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: undefined, email: 'test'}, 'id_number password');
 
             expect(hash_mock).toHaveBeenCalledWith('password', 10);
-            expect(update_one_mock).toHaveBeenCalledWith(Driver, {id_number: 9999999, email: "test"}, {password: 'hashed_password'});
+            expect(update_one_mock).toHaveBeenCalledWith(Driver, {id_number: undefined, email: "test"}, {password: 'hashed_password'});
             expect(res.render).toHaveBeenCalledWith('Login', {code_change: true});
         });
 
@@ -197,9 +197,9 @@ describe('ForgotPassController - post_change_F_password', () => {
             
             await controller.post_change_F_password(req,res);
 
-            expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: 9999999, email: 'test'}, 'id_number password');
-            expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: 9999999, email: 'test'}, 'id_number password');
-            expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: 9999999, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(User, {id_number: undefined, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(Admin, {id_number: undefined, email: 'test'}, 'id_number password');
+            expect(find_one_mock).toHaveBeenCalledWith(Driver, {id_number: undefined, email: 'test'}, 'id_number password');
 
             expect(res.render).toHaveBeenCalledWith('ForgotPassword', res);
         });

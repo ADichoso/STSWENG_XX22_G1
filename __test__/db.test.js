@@ -5,7 +5,7 @@ const db = require('../models/db.js');
 describe('Database Functions Test', () => {
     describe('connect', () => {
         test('should connect to the database', async () => {
-            const url = 'mongodb+srv://MauriesLopez:679914164@shuttlereservation.nagtzpm.mongodb.net/?retryWrites=true&w=majority'
+            const url = 'mongodb+srv://dbUser:H4RCbGxtzVbJIHde@shuttlereservation.nagtzpm.mongodb.net/'
             const options = {
                 useUnifiedTopology: true,
                 useNewUrlParser: true
