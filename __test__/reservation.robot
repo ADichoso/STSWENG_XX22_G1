@@ -34,7 +34,7 @@ Login to Profile
     Set Selenium Speed    0.1
 
     #Login to User Profile
-    Input Text    id=id_number    ${id}
+    Input Text    id=user_id_number    ${id}
     Input Text    id=user_password    ${pass}
     Click Button    xpath=//button[@type='submit']
     Input Text    id=user_security_code    ${security_check}
@@ -370,7 +370,7 @@ Open Reservations
     Press Key    id=user_date    key=SHIFT+TAB
     Input Text    id=user_date    ${date}
 
-    Input Text    id=id_number    ${account_id}
+    Input Text    id=user_id_number    ${account_id}
 
     Click Button    id=reserve_btn
 
@@ -412,7 +412,7 @@ Open Reservations
     Press Key    id=user_date    key=SHIFT+TAB
     Input Text    id=user_date    ${date}
 
-    Input Text    id=id_number    ${account_id}
+    Input Text    id=user_id_number    ${account_id}
 
     Click Button    id=reserve_btn
 

@@ -17,7 +17,7 @@ ${account_security_check}   3443
 *** Keywords ***
 Login to Profile
     Go To    url=${URL}login
-    Input Text    id=id_number    ${account_id}
+    Input Text    id=user_id_number    ${account_id}
     Input Text    id=user_password    ${account_pass}
     Click Button    xpath=//button[@type='submit']
     Input Text    id=user_security_code    ${account_security_check}
