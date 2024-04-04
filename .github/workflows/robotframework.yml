@@ -1,9 +1,9 @@
 name: Robot Framework - Python
 on:
   push:
-    branches: [ "integration" ]
+    branches: [ "integration", "Staging", "Production" ]  
   pull_request:
-    branches: [ "integration" ]
+    branches: [ "integration", "Staging", "Production" ]
  
 permissions:
   contents: read

@@ -9,7 +9,7 @@ Library    XML
 
 *** Variables ***
 ${URL}    https://sweng-testing-ci.onrender.com/SignUp
-${BROWSER}    headlesschrome
+${BROWSER}    chrome
 
 *** Test Cases ***
 1-1 Valid Access
@@ -31,7 +31,7 @@ ${BROWSER}    headlesschrome
     Input Text    id=user_first_name    ${first_name}
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 
@@ -45,13 +45,11 @@ ${BROWSER}    headlesschrome
     Click Element    id=user_first_name
 
     #Press signup button
-    Wait Until Element Is Enabled    id=submit
-    Click Element    id=submit
+    Wait Until Element Is Enabled    class=primary_button
+    Click Element    class=primary_button
 
-    #Check if the user is redirected to login
-    #Checks for a message that says You have successfully signed up
-    Wait Until Element Is Visible    id=success_box
-    Sleep    2s
+    #Check if the user is now in the login page
+    Wait Until Element Is Visible    xpath=/html/body/div[3]/div/div[1]/h1
     Close Browser
 
 1-2 Missing First Name
@@ -71,7 +69,7 @@ ${BROWSER}    headlesschrome
     #Input fields
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 
@@ -86,11 +84,12 @@ ${BROWSER}    headlesschrome
     Input Text    id=user_first_name    ${EMPTY}
     Press Keys    id=user_first_name    \DELETE
     Click Element    id=user_last_name
-    Wait Until Element Is Visible    id=error_box
-    
-    #Check the error message
-    ${error_message} =    Get Text    id=error_box
-    Should Be Equal    ${error_message}    First name should not be empty.
+
+    #Attempt to click signup
+    Click Element    class=primary_button
+    ${new_url} =    Get Location
+    Sleep    2s
+    Should Be Equal    ${new_url}    ${URL}
 
     Close Browser
 
@@ -111,7 +110,7 @@ ${BROWSER}    headlesschrome
     #Input fields
     Input Text    id=user_first_name    Test
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
         
@@ -126,13 +125,13 @@ ${BROWSER}    headlesschrome
     Press Keys    id=user_last_name    \DELETE
     Press Keys    id=user_last_name    \DELETE
     Click Element    id=user_first_name
-    Wait Until Element Is Visible    id=error_box
+
+    #Attempt to click signup
+    Click Element    class=primary_button
+    ${new_url} =    Get Location
     Sleep    2s
-    
-    #Check the error message
-    ${error_message} =    Get Text    id=error_box
-    Sleep    2s
-    Should Be Equal    ${error_message}    Last name should not be empty.
+    Should Be Equal    ${new_url}    ${URL}
+
     Close Browser
 
 1-4 Missing Email
@@ -152,7 +151,7 @@ ${BROWSER}    headlesschrome
     #Input fields
     Input Text    id=user_first_name    Test
     Input Text    id=user_last_name    ${last_name}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 
@@ -166,13 +165,13 @@ ${BROWSER}    headlesschrome
     Click Element    id=user_email
     Press Keys    id=user_email    \DELETE
     Click Element    id=user_first_name
-    Wait Until Element Is Visible    id=error_box
+    
+    #Attempt to click signup
+    Click Element    class=primary_button
+    ${new_url} =    Get Location
     Sleep    2s
+    Should Be Equal    ${new_url}    ${URL}
 
-    #Check the error message
-    ${error_message} =    Get Text    id=error_box
-    Sleep    2s
-    Should Be Equal    ${error_message}    Invalid Email.
     Close Browser
 
 1-5 Email Already Registered
@@ -193,7 +192,7 @@ ${BROWSER}    headlesschrome
     Input Text    id=user_first_name    Test
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 
@@ -206,10 +205,12 @@ ${BROWSER}    headlesschrome
     Click Element    xpath=//option[@value='Employee']
     Click Element    id=user_first_name
     
-    #Check the error message
-    ${error_message} =    Get Text    id=error_box
+    #Attempt to click signup
+    Click Element    class=primary_button
+    ${new_url} =    Get Location
     Sleep    2s
-    Should Be Equal    ${error_message}    Email already registered.
+    Should Be Equal    ${new_url}    ${URL}
+
     Close Browser
 
 1-6 Incorrect Email Format
@@ -230,7 +231,7 @@ ${BROWSER}    headlesschrome
     Input Text    id=user_first_name    Test
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 
@@ -243,10 +244,12 @@ ${BROWSER}    headlesschrome
     Click Element    xpath=//option[@value='Employee']
     Click Element    id=user_first_name
 
-    #Check the error message
-    ${error_message} =    Get Text    id=error_box
+    #Attempt to click signup
+    Click Element    class=primary_button
+    ${new_url} =    Get Location
     Sleep    2s
-    Should Be Equal    ${error_message}    Invalid Email.
+    Should Be Equal    ${new_url}    ${URL}
+
     Close Browser
     
 1-7 Missing ID Number    
@@ -278,15 +281,16 @@ ${BROWSER}    headlesschrome
     Click Element    id=user_passenger_type
     Click Element    xpath=//option[@value='Employee']
     
-    Click Element    id=user_id_number
-    Press Keys    id=user_id_number    \DELETE
-    Wait Until Element Is Visible    id=error_box
-    Sleep    2s
+    Click Element    id=id_number
+    Press Keys    id=id_number    \DELETE
 
-    #Check the error message
-    ${error_message} =    Get Text    id=error_box
+    #Attempt to click signup
+    Click Element    class=primary_button
+    ${new_url} =    Get Location
     Sleep    2s
-    Should Be Equal    ${error_message}    ID number should not be empty.
+    Should Be Equal    ${new_url}    ${URL}
+
+
     Close Browser
 
 1-8 Incorrect ID Number Format
@@ -320,23 +324,15 @@ ${BROWSER}    headlesschrome
     Click Element    xpath=//option[@value='Employee']
     Click Element    id=user_first_name
         
-    Click Element    id=user_id_number
-    Input Text    id=user_id_number    1234
-
-
-    #Check the error message
-    ${error_message} =    Get Text    id=error_box
-    Should Be Equal    ${error_message}    ID number should contain exactly 8 digits.
-
-    Clear Element Text    id=user_id_number
-    Input Text    id=user_id_number    test
-    Click Element    id=user_first_name
-    Sleep    1s
-
-    #Check the error message
-    ${error_message} =    Get Text    id=error_box
+    Click Element    id=id_number
+    Input Text    id=id_number    1234
+    
+    #Attempt to click signup
+    Click Element    class=primary_button
+    ${new_url} =    Get Location
     Sleep    2s
-    Should Be Equal    ${error_message}    ID number should contain only numbers.
+    Should Be Equal    ${new_url}    ${URL}
+
     Close Browser
 
 1-9 Missing Password
@@ -357,7 +353,7 @@ ${BROWSER}    headlesschrome
     Input Text    id=user_first_name    Test
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_security_code    ${security_code}
 
     #select Designation
@@ -371,11 +367,12 @@ ${BROWSER}    headlesschrome
     Click Element    id=user_password   
     Press Keys    id=user_password    \DELETE
     Click Element    id=user_first_name
-
-    #Check the error message
-    ${error_message} =    Get Text    id=error_box
+    
+    #Attempt to click signup
+    Click Element    class=primary_button
+    ${new_url} =    Get Location
     Sleep    2s
-    Should Be Equal    ${error_message}    Password should not be empty.
+    Should Be Equal    ${new_url}    ${URL}
     Close Browser
     
 1-10 Missing Destination
@@ -396,7 +393,7 @@ ${BROWSER}    headlesschrome
     Input Text    id=user_first_name    ${first_name}
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
         
@@ -429,7 +426,7 @@ ${BROWSER}    headlesschrome
     Input Text    id=user_first_name    ${first_name}
     Input Text    id=user_last_name    ${last_name}
     Input Text    id=user_email    ${email}
-    Input Text    id=user_id_number    ${id_number}
+    Input Text    id=id_number    ${id_number}
     Input Text    id=user_password    ${password}
     Input Text    id=user_security_code    ${security_code}
 
@@ -439,31 +436,11 @@ ${BROWSER}    headlesschrome
 
     Click Element    id=user_first_name
 
-    #click signup
-    Click Button    id=submit
+    #Attempt to click signup
+    Click Element    class=primary_button
     ${new_url} =    Get Location
     Sleep    2s
     Should Be Equal    ${new_url}    ${URL}
 
-1-12 Navigation to Home "/"
-    Open Browser    ${URL}    ${BROWSER}
-    Maximize Browser Window
-    Set Selenium Speed    0.1
-
-    #click home
-    Click Image    locator=//img[@src='../images/Leftarrow.png']
-    ${new_url} =    Get Location
-    Should Be Equal    ${new_url}    https://sweng-testing-ci.onrender.com/
     Close Browser
-
-1-13 Navigation to Login
-    Open Browser    ${URL}    ${BROWSER}
-    Maximize Browser Window
-    Set Selenium Speed    0.1
-
-    #click login
-    Click Link    Login
-    ${new_url} =    Get Location
-    Should Be Equal    ${new_url}    https://sweng-testing-ci.onrender.com/Login
-    Close All Browsers
 

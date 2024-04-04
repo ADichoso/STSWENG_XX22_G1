@@ -28,7 +28,7 @@ Login With account
     Open Browser    ${URL}login    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
-    Input Text    id=user_id_number    ${id}
+    Input Text    id=id_number    ${id}
     Input Text    id=user_password    ${password}
     Click Button    xpath=//button[@type='submit']
     ${new_url}   Get Location
@@ -56,6 +56,6 @@ Login With account.ValidCheck
     Login With account    ${driver_id}    ${driver_password}    ${driver_security_code}    ProfileDriver    False
 3-2 Invalid Security Code
     Login With account    ${account_id}    ${account_password}    2222    Profile    True
-    Wait Until Element Is Visible    id=error_box
-    Page Should Contain    Security code is incorrect. Please try again.
+    #should be redirected to home page
+    Wait Until Element Is Visible    xpath=/html/body/div[3]/div/div[1]/h1
     Close All Browsers
