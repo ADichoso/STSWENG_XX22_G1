@@ -1,47 +1,36 @@
-name: Robot Framework CI
-
+name: Robot Framework - Python
 on:
   push:
-    branches:
-      - integration
+    branches: [ "integration" ]
   pull_request:
-    branches:
-      - integration
-      
-      
-      
+    branches: [ "integration" ]
+ 
 permissions:
-    contents: read
-
+  contents: read
+ 
 jobs:
-    Run-Test:
-      runs-on: ubuntu-20.04
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v1
-        - uses: actions/cache@v2
-          id: cache
-          with:
-            path: ~/.cache/pip
-            key: ${{ runner.os }}-pip-${{ hashFiles('**/requirement.txt') }}
-        - name: Install pip dependencies
-          run: |
-            pip install --upgrade pip
-            pip install -r requirement.txt
-        - name: Run Test
-          run: python -m robot --outputdir ./__test__/output/ ./__test__/. 
-        - name: Run Test and create report
-          run: python -m robot -d reports -x junit-report.xml ./__test__/output/
-        - name: Run Robot Framework tests and generate report
-          run: |
-             echo "ROBOT_RC=$?" >> "$GITHUB_ENV"  
-        # - name: If Auto Test Pass Rate Not 100%, Job Will Fail
-        #   if: env.ROBOT_RC != '0'
-        #   run: |
-        #     echo "Auto Test Pass Rate Not 100%, Please Check Test Result"
-        #     exit 1
-        - name: Publish test results
-          uses: actions/upload-artifact@v2
-          with:
-            name: robot-test-results
-            path: results
+  test:
+    runs-on: ubuntu-latest
+     
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.12.1
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.12.1
+   
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install robotframework
+          pip install robotframework-seleniumlibrary
+   
+      - name: Test with RobotFramework
+        run: robot ./__test__/. 
+         
+      - name: Test Report Generation
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: Report                # Name of the folder
+          path: report.html
