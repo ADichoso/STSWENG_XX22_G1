@@ -7,7 +7,7 @@ Library           SeleniumLibrary
 
 *** Variables ***
 ${URL}    https://sweng-testing-ci.onrender.com/
-${BROWSER}    Chrome
+${BROWSER}    headlesschrome
 ${account_id}    34433443
 ${account_password}    3443
 ${account_security_code}    3443
@@ -28,7 +28,7 @@ Login With account
     Open Browser    ${URL}login    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
-    Input Text    id=id_number    ${id}
+    Input Text    id=user_id_number    ${id}
     Input Text    id=user_password    ${password}
     Click Button    xpath=//button[@type='submit']
     ${new_url}   Get Location

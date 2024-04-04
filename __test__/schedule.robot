@@ -9,7 +9,7 @@ Library    XML
 Library    DateTime
 
 *** Variables ***
-${BROWSER}    Chrome
+${BROWSER}    headlesschrome
 ${URL}    https://sweng-testing-ci.onrender.com/
 ${account_id}    34433443
 ${account_pass}    3443
@@ -39,7 +39,7 @@ Open a Schedule
 
 *** Test Cases ***
 4-1 Checking the Schedule of a given date
-    Open Browser    ${URL}login    chrome
+    Open Browser    ${URL}login    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0
     
@@ -57,7 +57,7 @@ Open a Schedule
     Close All Browsers
 
 4-2 Cancelling the Schedule Input
-    Open Browser    ${URL}login    chrome
+    Open Browser    ${URL}login    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0
     
@@ -88,7 +88,7 @@ Open a Schedule
     Close All Browsers
 
 4-3 Missing Date
-    Open Browser    ${URL}login    chrome
+    Open Browser    ${URL}login    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0
     
@@ -111,7 +111,7 @@ Open a Schedule
 
 
 4-4 Missing Location
-    Open Browser    ${URL}login    chrome
+    Open Browser    ${URL}login    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0
     
@@ -131,7 +131,7 @@ Open a Schedule
     Close All Browsers
 
 4-5 Missing Time Slot
-    Open Browser    ${URL}login    chrome
+    Open Browser    ${URL}login    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0
     
