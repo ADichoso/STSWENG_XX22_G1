@@ -18,6 +18,9 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: 3.12.1
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 123
    
       - name: Install dependencies
         run: |
