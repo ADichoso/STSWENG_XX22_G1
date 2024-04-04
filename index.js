@@ -4,7 +4,7 @@ const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://MauriesLopez:679914164@shuttlereservation.nagtzpm.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://stagingUser:p0mLAsanPyUXVjQa@dlsushuttlereservation.1oeold4.mongodb.net/');
 
 // import module `hbs`
 const hbs = require('hbs');
