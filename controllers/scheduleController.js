@@ -105,6 +105,7 @@ const scheduleController = {
 					from_names: from_names
 				});
 			}
+			// console.log({location: location, to_laguna: to_laguna, from_laguna: from_laguna, is_admin: is_admin});
 
 			return res.status(200).json({location: location, to_laguna: to_laguna, from_laguna: from_laguna, is_admin: false});
 		} catch (err) {
@@ -112,6 +113,11 @@ const scheduleController = {
 			return res.status(500).json({ error: 'Failed to retrieve reservations' });
 		}
 	},
+	print_reservations: async (req, res) => {
+		const doc = new jsPDF();
+		doc.text("Hello world!", 10, 10);
+		return res.status(200).json({doc: doc});
+	}
 };
 
-module.exports = scheduleController;
+module.exports = scheduleController;	
