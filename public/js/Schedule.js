@@ -357,6 +357,8 @@ function generate_seats(data) {
 					to_list[element].forEach(passenger =>{
 						$(checker).append(`<tr><td>`+ passenger.last_name + " </td><td> " + passenger.first_name + " </td><td> " + passenger.id_number +`</td></tr>`);
 					});
+				} else {
+					to_container.append(`<h2>` + element + `</h2><h4>No Reservations</h4>`);
 				}
 			}
 		}
@@ -380,6 +382,8 @@ function generate_seats(data) {
 					from_list[element].forEach(passenger =>{
 						$(checker).append(`<tr><td>`+ passenger.last_name + " </td><td> " + passenger.first_name + " </td><td> " + passenger.id_number +`</td></tr>`);
 					});
+				} else {
+					from_container.append(`<h2>` + element + `</h2><h4>No Reservations</h4>`);
 				}
 			}
 		}
@@ -418,10 +422,12 @@ function print_schedule() {
 	$("#back_img").hide();
 	$("#Header-1").hide();
 	$("#P-1").hide();
+	$(".content").attr('style', 'height: fit-content;');
 	print();
 	$("#view_schedule_btn").show();
 	$("#print_schedule").show();
 	$("#back_img").show();
 	$("#Header-1").show();
 	$("#P-1").show();
+	$(".content").removeAttr('style');
 }

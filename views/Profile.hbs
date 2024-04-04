@@ -17,6 +17,7 @@
                 scale: 1.5;
                 position: relative;
                 top: 20rem;
+
             }
 
             .member_card > .triangle {
@@ -92,6 +93,9 @@
                 height: auto;
                 z-index: 100;
                 margin-top: auto;
+                flex-wrap: wrap;
+                align-items: flex-start;
+                justify-content: center;
 
                 overflow: hidden;
             }
@@ -99,7 +103,7 @@
             .nav_card_row > a {
                 display: flex;
                 color: white;
-                width: 50% !important;
+                width: 100% !important;
                 text-decoration: none;
                 border-radius: 1rem;
                 gap:2rem;
@@ -138,8 +142,10 @@
 
             .nav_card_row {
                 display: flex;
+                width: 100%;
                 gap: 0.1rem;
                 height: 20rem;
+                flex: 1;
             }
 
             @media (min-aspect-ratio: 4/3) {
@@ -174,7 +180,7 @@
             
             window.onload = function() {
     
-                    document.getElementById("success_box").style.display = "none";
+                    {{!-- document.getElementById("success_box").style.display = "none"; --}}
 
                     var info_change_success = new URLSearchParams(window.location.search).get('info_change_success');
                     var pw_change_success = new URLSearchParams(window.location.search).get('pw_change_success');
@@ -236,19 +242,19 @@
             <div class="profile_box">
 
                     <div class="member_card" id="info_box">
-                        <img src="{{profilePicture}}" id = "profile_picture">
+                        <img src="{{details.profile_picture}}" id = "profile_picture">
                         <div class="triangle"></div>
                         <div>
-                            <h3>{{firstName}} {{lastName}}</h3>
-                            <h4>{{passengerType}}</h4> 
+                            <h3>{{details.first_name}} {{details.last_name}}</h3>
+                            <h4>{{details.passenger_type}}</h4> 
                         </div>
-                        <h6>{{id_number}}</h6>
+                        <h6>{{details.id_number}}</h6>
                     </div>
                     
                    <div class="nav_card"> 
 
                         <div class="nav_card_row">
-                            <a href="/Reservation?id_number={{id_number}}">
+                            <a href="/Reservation?id_number={{details.id_number}}">
                                 <img src = "../images/Van_Logo.png" id = "van_logo">
                                 <div>
                                     <h2> Reserve Now </h2>
@@ -266,7 +272,7 @@
                         </div>
                         
                         <div class="nav_card_row">
-                            <a href="/Settings?id_number={{id_number}}">
+                            <a href="/Settings?id_number={{details.id_number}}">
                                 <img src = "../images/ProfileSettings_Logo.png" id = "logout_logo">
                                 <div>
                                     <h2> Settings </h2>
