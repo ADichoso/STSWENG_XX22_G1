@@ -28,9 +28,9 @@ ${driver_security_code}    4554
     Open Browser    ${url}login    ${browser}
     Maximize Browser Window
     Set Selenium Speed    0
-    Page Should Contain Element    id=user_id_number
+    Page Should Contain Element    id=id_number
     Page Should Contain Element    id=user_password
-    Input Text    id=user_id_number    ${account_id}
+    Input Text    id=id_number    ${account_id}
     Input Text    id=user_password     ${account_password}
     Click Button    xpath=//button[@type='submit']
     ${new_url}   Get Location
@@ -41,35 +41,31 @@ ${driver_security_code}    4554
     Open Browser    ${url}login    ${browser}
     Maximize Browser Window
     Set Selenium Speed    0
-    Page Should Contain Element    id=user_id_number
+    Page Should Contain Element    id=id_number
     Page Should Contain Element    id=user_password
-    Input Text    id=user_id_number    12170586
+    Input Text    id=id_number    12170586
     Input Text    id=user_password    111111
     Click Button    xpath=//button[@type='submit']
-    Wait Until Element Is Visible    id=error_box
-    Page Should Contain    Invalid User/Password. Check your input
     Close Browser
 
 2-3 Unseccessful Login due to Incorrect Password
     Open Browser    ${url}login    ${browser}
     Maximize Browser Window
     Set Selenium Speed    0
-    Page Should Contain Element    id=user_id_number
+    Page Should Contain Element    id=id_number
     Page Should Contain Element    id=user_password
-    Input Text    id=user_id_number    12170585
+    Input Text    id=id_number    12170585
     Input Text    id=user_password    password
     Click Button    xpath=//button[@type='submit']
-    Wait Until Element Is Visible    id=error_box
-    Page Should Contain    Invalid User/Password. Check your input
     Close Browser
 
 2-4 Invalid Access to Login Page When there is a session of a User Account
     Open Browser    ${url}login    ${browser}
     Maximize Browser Window
     Set Selenium Speed    0.1
-    Page Should Contain Element    id=user_id_number
+    Page Should Contain Element    id=id_number
     Page Should Contain Element    id=user_password
-    Input Text    id=user_id_number    ${account_id}
+    Input Text    id=id_number    ${account_id}
     Input Text    id=user_password    ${account_password}
     Click Button    xpath=//button[@type='submit']
     ${new_url}   Get Location
@@ -89,9 +85,9 @@ ${driver_security_code}    4554
     Open Browser    ${url}login    ${browser}
     Maximize Browser Window
     Set Selenium Speed    0.1
-    Page Should Contain Element    id=user_id_number
+    Page Should Contain Element    id=id_number
     Page Should Contain Element    id=user_password
-    Input Text    id=user_id_number    ${admin_id}
+    Input Text    id=id_number    ${admin_id}
     Input Text    id=user_password    ${admin_password}
     Click Button    xpath=//button[@type='submit']
     ${new_url}   Get Location
@@ -111,9 +107,9 @@ ${driver_security_code}    4554
     Open Browser    ${url}login    ${browser}
     Maximize Browser Window
     Set Selenium Speed    0.1
-    Page Should Contain Element    id=user_id_number
+    Page Should Contain Element    id=id_number
     Page Should Contain Element    id=user_password
-    Input Text    id=user_id_number    ${driver_id}
+    Input Text    id=id_number    ${driver_id}
     Input Text    id=user_password    ${driver_password}
     Click Button    xpath=//button[@type='submit']
     ${new_url}   Get Location

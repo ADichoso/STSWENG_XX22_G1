@@ -9,7 +9,7 @@ Library    XML
 
 *** Variables ***
 ${URL}    https://sweng-testing-ci.onrender.com/SignUp
-${BROWSER}    chrome
+${BROWSER}    headlesschrome
 
 *** Test Cases ***
 1-1 Valid Access
@@ -401,15 +401,15 @@ ${BROWSER}    chrome
     Click Element    id=user_passenger_type
     Click Element    xpath=//option[@value='Employee']
     Click Element    id=user_first_name
-
-    #click signup
-    Click Button    id=submit
+    
+    #Attempt to click signup
+    Click Element    class=primary_button
     ${new_url} =    Get Location
     Sleep    2s
     Should Be Equal    ${new_url}    ${URL}
 
 1-11 Missing Passenger Type
-    Open Browser    http://localhost:3000/SignUp    ${BROWSER}
+    Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 

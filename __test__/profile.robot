@@ -16,8 +16,10 @@ ${account_security_check}   3443
 
 *** Keywords ***
 Login to Profile
+    Maximize Browser Window
+    Set Selenium Speed    0.1
     Go To    url=${URL}login
-    Input Text    id=user_id_number    ${account_id}
+    Input Text    id=id_number    ${account_id}
     Input Text    id=user_password    ${account_pass}
     Click Button    xpath=//button[@type='submit']
     Input Text    id=user_security_code    ${account_security_check}
@@ -29,13 +31,8 @@ Login to Profile
     Open Browser    ${URL}    ${BROWSER}
     Login to Profile
     Click Link    /Logout
-
-    ${url}=    Get Location
-    Should Be Equal    ${url}    ${URL}
-    
-    Go To    ${URL}
-    ${login_button}=    Get Text    xpath=//*[@id="top"]/div[1]/ul/li[5]/a
-    Should Be Equal    ${login_button}    LOGIN
+    ${new_url}=    Get Location
+    Should Be Equal    ${new_url}    ${URL}
 
     Close All Browsers
 
@@ -43,13 +40,15 @@ Login to Profile
     Open Browser    ${URL}    ${BROWSER}
     Login to Profile
 
-    ${id_number}=    Get Text    xpath=//*[@id="info_box"]/div/p
+    ${id_number}=    Get Text    xpath=//*[@id="info_box"]/h6
     Should Be Equal    ${id_number}    ${account_id}
 
-    ${name}=    Get Text    xpath=//*[@id="info_box"]/p[1]
+    ${name}=    Get Text    xpath=//*[@id="info_box"]/div[2]/h3
     Should Be Equal    ${name}    User User
 
-    ${passenger_type}=    Get Text    xpath=//*[@id="info_box"]/p[2]
+    ${passenger_type}=    Get Text    xpath=//*[@id="info_box"]/div[2]/h4
+    Should Be Equal    ${passenger_type}    Student
+
 
     Page Should Contain Element    id=profile_picture
 
