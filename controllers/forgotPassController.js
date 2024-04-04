@@ -80,7 +80,7 @@ const forgotPassController = {
 
         if ( new_password == retype_password ){
 
-            var query = {id_number: req.body.user_id_number, email: req.body.user_email};
+            var query = {id_number: req.body.id_number, email: req.body.user_email};
             const projection = 'id_number password';
 
             const user_result = await db.find_one(User, query, projection);
