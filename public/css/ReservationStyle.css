@@ -68,7 +68,7 @@
     background-position: cover;
 }
 
-.form_box2 h2,h4{
+.form_box2 h2, h4, h5{
     position: relative;
     width: 200px;
     margin-left: 30px;
@@ -212,13 +212,16 @@
 .button_box{
     width: 320px;
     margin: 35px auto;
+    display: flex;
+    flex-direction: row;
     position: relative;
     background: #fff;
     border-radius: 30px;
 }
 
 .button_box button{
-    padding: 10px 55px;
+    padding: 10px 0px;
+    flex: 1;
     position: relative;
     background: transparent;
     border: none;

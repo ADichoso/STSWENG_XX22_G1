@@ -1,53 +1,53 @@
-var functionCalled = 0; // 0 = left (Laguna), 1 = right (Manila)
-var adminFunctionCall = 0; // 0 = registered user, 1 = admin
-var editFunctionCalled = 0;
+var function_called = 0; // 0 = left (Laguna), 1 = right (Manila)
+var admin_function_call = 0; // 0 = registered user, 1 = admin
+var edit_function_called = 0;
 var count = null;
 
-function leftClick(){
-    functionCalled = 0;
+function left_click(){
+    function_called = 0;
     btn.style.left = '0';
-    locationChangeFormHelper(0, false);
+    location_change_form_helper(0, false);
 }
 
-function rightClick(){
-    functionCalled = 1;
+function right_click(){
+    function_called = 1;
     btn.style.left = '160px';
-    locationChangeFormHelper(1, false);
+    location_change_form_helper(1, false);
 }
 
-function getStartCampus(){
-	return functionCalled;
+function get_start_campus(){
+	return function_called;
 }
 
-function eleftClick(){
-    editFunctionCalled = 0;
+function e_left_click(){
+    edit_function_called = 0;
     ebtn.style.left = '0';
-    locationChangeFormHelper(0, true);
+    location_change_form_helper(0, true);
 }
 
-function erightClick(){
-    editFunctionCalled = 1;
+function e_right_click(){
+    edit_function_called = 1;
     ebtn.style.left = '160px';
-    locationChangeFormHelper(1, true);
+    location_change_form_helper(1, true);
 }
 
-function egetStartCampus(){
-	return editFunctionCalled;
+function e_get_start_campus(){
+	return edit_function_called;
 }
 
-function showUserForm(){
-    adminFunctionCall = 0;
-    showScheduleForm();
+function show_user_form(){
+    admin_function_call = 0;
+    show_schedule_form();
 }
 
-function showAdminForm(){
-    adminFunctionCall = 1;
-    showScheduleForm();
+function show_admin_form(){
+    admin_function_call = 1;
+    show_schedule_form();
 }
 
-function readyHTML(displayUI){
+function ready_HTML(display_UI){
     
-    if ( displayUI == 1 ){ //Admin 
+    if ( display_UI == 1 ){ //Admin 
         document.getElementById('reserveUser_schedule_btn').style.display = 'inline';
     }
     else{ //User
@@ -57,17 +57,17 @@ function readyHTML(displayUI){
     
 }
 
-function showScheduleForm() {
+function show_schedule_form() {
 	var doc = document;
     var scheduleForm = null;
     var date_box = document.getElementById('user_date');
     var entry_box = doc.getElementById('user_entry');
     var entryTimeBox = doc.getElementById('user_entryTime');
-    var exitBox = doc.getElementById('user_exit');
+    // var exitBox = doc.getElementById('user_exit');
     var exitTimeBox = doc.getElementById('user_exitTime');
-    var idBox = doc.getElementById('user_idNumber');
+    var idBox = doc.getElementById('id_number');
 
-    if ( adminFunctionCall == 0 ){
+    if ( admin_function_call == 0 ){
         idBox.style.display = 'none';
         idBox.type = 'hidden';
         scheduleForm = document.getElementsByClassName('form_box')[0];
@@ -91,7 +91,7 @@ function showScheduleForm() {
 	date_box.value="";
 	entry_box.value="";
 	entryTimeBox.value="";
-	exitBox.value="";
+	// exitBox.value="";
 	exitTimeBox.value="";
 
 	var newOption = doc.createElement('option');
@@ -113,7 +113,7 @@ function showScheduleForm() {
 	exitTimeBox.appendChild(newOption);
 
 	newOption = doc.createElement('option');
-	optionText = doc.createTextNode('Entry Location');
+	optionText = doc.createTextNode('Select Trip');
 	newOption.appendChild(optionText);
 	newOption.setAttribute('value','');
 	newOption.setAttribute('selected','');
@@ -128,50 +128,47 @@ function showScheduleForm() {
 	newOption.setAttribute('selected','');
 	newOption.setAttribute('hidden','');
 	
-	exitBox.appendChild(newOption);
+	// exitBox.appendChild(newOption);
 	
     scheduleForm.style.display = 'block';
 	
 }
 
-function fillHiddenField(_box, _hiddenBox){
-	var box = document.getElementById(_box);
-	var hiddenBox = document.getElementById(_hiddenBox);
-	hiddenBox.value = box.options[box.selectedIndex].text;
-}
-function populateFields(){
-	var startCampusBox = document.getElementById('hiddenStartCampus');
-	
-	var idNumberBox = document.getElementById('user_idNumber');
-	var hiddenIdNumberBox = document.getElementById('hiddenIdNumber');
-	var adminIdBox = document.getElementById('adminId');
-	
-	adminIdBox.value = getIdNumber();
-	
-	var startVal;
-	if(!getStartCampus())
-		startVal = 'Laguna';
-	else
-		startVal = 'Manila';
-	
-	startCampusBox.value = startVal;
-	
-	if(idNumberBox.value != ""){
-		hiddenIdNumberBox.value = idNumberBox.value;
-	}
-	else
-		hiddenIdNumberBox.value = getIdNumber();
-	
-	fillHiddenField('user_entry', 'hiddenEntryLoc');
-	fillHiddenField('user_entryTime', 'hiddenEntryTime');
-	fillHiddenField('user_exit', 'hiddenExitLoc');
-	fillHiddenField('user_exitTime', 'hiddenExitTime');
+function fill_hidden_field(value, _hiddenBox){
+	$("#"+ _hiddenBox).val(value);
 }
 
-function getIdNumber(){
-	return new URLSearchParams(window.location.search).get('idNumber');
+function populate_fields(){
+	var startCampusBox = document.getElementById('hidden_start_campus');
+	
+	var id_number_box = document.getElementById('id_number');
+	var hidden_id_number_box = document.getElementById('hidden_ID_number');
+	var admin_id_box = document.getElementById('admin_id');
+	
+	admin_id_box.value = get_ID_number();
+	
+	var start_val;
+	if(!get_start_campus())
+		start_val = 'Laguna';
+	else
+		start_val = 'Manila';
+	
+	startCampusBox.value = start_val;
+	
+	if(id_number_box.value != ""){
+		hidden_id_number_box.value = id_number_box.value;
+	}
+	else
+    hidden_id_number_box.value = get_ID_number();
+
+    fill_hidden_field($('#user_entryTime option:selected').text(), 'hidden_entry_time');
+	fill_hidden_field($('#user_exitTime option:selected').text(), 'hidden_exit_time');
 }
-function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
+
+function get_ID_number(){
+	return new URLSearchParams(window.location.search).get('id_number');
+}
+function hide_schedule_form(fromLoad = 0, resultArr = [], isSearch){
 
     var scheduleContainer = document.getElementsByClassName('schedule_container')[0];
     var scheduleForm = document.getElementsByClassName('form_box')[0];
@@ -186,9 +183,9 @@ function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
 		
 	} 
 	div.setAttribute('id', count );
-	if(resultArr.length != 0) var userID = resultArr[6];
-	else var userID = getIdNumber();
-	div.setAttribute('linkedidnumber', userID); 
+	if(resultArr.length != 0) var user_id = resultArr[6];
+	else var user_id = get_ID_number();
+	div.setAttribute('linked_id_number', user_id); 
 	
     scheduleContainer.appendChild(div);
 	
@@ -203,14 +200,14 @@ function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
         edit_btn.className = 'edit_btn';
         edit_btn.setAttribute('type', 'button');
         edit_btn.setAttribute('id', 'e_btn' + count);
-        edit_btn.setAttribute('onclick','showEditForm(' + count + ')');
+        edit_btn.setAttribute('onclick','show_edit_form(' + count + ')');
         edit_btn.innerHTML = 'EDIT';
 
         var delete_btn = document.createElement('button');
         delete_btn.className = 'delete_btn';
         delete_btn.setAttribute('type', 'button');
         delete_btn.setAttribute('id', 'd_btn' + count);
-        delete_btn.setAttribute('onclick','showDeleteForm(' + count + ')');
+        delete_btn.setAttribute('onclick','show_delete_form(' + count + ')');
         delete_btn.innerHTML = 'DELETE';
 
         divBtn.appendChild(edit_btn);
@@ -218,26 +215,26 @@ function hideScheduleForm(fromLoad = 0, resultArr = [], isSearch){
     }
     
 	if( fromLoad ){ //is being called to populate the list from after loading screen
-		createTextInfo(div, resultArr);
+		create_text_info(div, resultArr);
 	}
 
 
 }
 
-function showEditForm(i) {
+function show_edit_form(i) {
 	var doc = document;
     var editForm = document.getElementById('edit_box');
 	var date_box = document.getElementById('user_date');
 	var entry_box = doc.getElementById('editUser_entry');
 	var entryTimeBox = doc.getElementById('editUser_entryTime');
-	var exitBox = doc.getElementById('editUser_exit');
+	// var exitBox = doc.getElementById('editUser_exit');
 	var exitTimeBox = doc.getElementById('editUser_exitTime');
-	
-	date_box.value="";
-	entry_box.value="";
-	entryTimeBox.value="";
-	exitBox.value="";
-	exitTimeBox.value="";
+
+	date_box.value = "";
+	entry_box.value = "";
+	entryTimeBox.value = "";
+	// exitBox.value = "";
+	exitTimeBox.value ="";
 	
 	var newOption = doc.createElement('option');
 	var optionText = doc.createTextNode('Time Slot');
@@ -258,110 +255,130 @@ function showEditForm(i) {
 	exitTimeBox.appendChild(newOption);
 	
 	var subBtn = document.getElementById('edit_btn');
-	subBtn.setAttribute('onclick', 'hideEditForm(' + i + ')');
+
+    var id_numberBox = document.getElementById('e_hidden_id_number');
+    id_numberBox.value = document.getElementById(i).getAttribute('linked_id_number'); //Get the number linked to the reservation instead
+
+    //^^^from edit form
+	//vvv get current data
+	var currCampus = document.getElementById('e_curr_start_campus');
+	var currID = document.getElementById('e_curr_id_number');
+	var currDate = document.getElementById('e_curr_date');
+	var currEntryL = document.getElementById('e_curr_entry_loc');
+	var currEntryT = document.getElementById('e_curr_entry_time');
+	var currExitL = document.getElementById('e_curr_exit_loc');
+	var currExitT = document.getElementById('e_curr_exit_time');
+	
+	var reserveText = document.getElementById(i).children[1];
+	//alert(reserveText);
+	currCampus.value = reserveText.children[0].innerHTML;
+	currID.value = document.getElementById(i).getAttribute('linked_id_number');
+	currDate.value = reserveText.children[2].innerHTML;
+	currEntryL.value = reserveText.children[4].textContent;
+	currEntryT.value = reserveText.children[5].innerHTML;
+	currExitL.value = reserveText.children[7].textContent;
+	currExitT.value = reserveText.children[8].innerHTML;
+
+
+	subBtn.setAttribute('onclick', 'hide_edit_form(' + i + ')');
 	
     editForm.style.display = 'block';
 	
 }
 
-function hideEditForm(i){
+function hide_edit_form(){
 	var editForm = document.getElementById('edit_box');
 	
-	var startCampusBox = document.getElementById('ehiddenStartCampus');
-	var idNumberBox = document.getElementById('ehiddenIdNumber');
+	var startCampusBox = document.getElementById('e_hidden_start_campus');
 	
 	var startVal;
-	if(!egetStartCampus())
+	if(!e_get_start_campus())
 		startVal = 'Laguna';
 	else
 		startVal = 'Manila';
 	
 	startCampusBox.value = startVal;
-	
-	idNumberBox.value = document.getElementById(i).getAttribute('linkedidnumber'); //Get the number linked to the reservation instead
-	
-	fillHiddenField('editUser_entry', 'ehiddenEntryLoc');
-	fillHiddenField('editUser_entryTime', 'ehiddenEntryTime');
-	fillHiddenField('editUser_exit', 'ehiddenExitLoc');
-	fillHiddenField('editUser_exitTime', 'ehiddenExitTime');
-	
-	//^^^from edit form
-	//vvv get current data
-	var currCampus = document.getElementById('eCurrStartCampus');
-	var currID = document.getElementById('eCurrIdNumber');
-	var currDate = document.getElementById('eCurrDate');
-	var currEntryL = document.getElementById('eCurrEntryLoc');
-	var currEntryT = document.getElementById('eCurrEntryTime');
-	var currExitL = document.getElementById('eCurrExitLoc');
-	var currExitT = document.getElementById('eCurrExitTime');
-	
-	var reserveText = document.getElementById(i).children[1];
-	//alert(reserveText);
-	currCampus.value = reserveText.children[0].innerHTML;
-	currID.value = document.getElementById(i).getAttribute('linkedidnumber');
-	currDate.value = reserveText.children[2].innerHTML;
-	currEntryL.value = reserveText.children[4].textContent;
-	currEntryT.value = reserveText.children[5].innerHTML;
-	currExitL.value = reserveText.children[7].textContent;
-	currExitT.value = reserveText.children[8].innerHTML;
-		
+
 	editForm.style.display="none";
+
+	fill_hidden_field($('#editUser_entryTime option:selected').text(), 'e_hidden_entry_time');
+	fill_hidden_field($('#editUser_exitTime option:selected').text(), 'e_hidden_exit_time');
 }
 
-function cancelEditForm(){
+function cancel_edit_form(){
     var editForm = document.getElementById('edit_box');
-	
+	$("#edit_help_entry_text").empty();
+    $("#edit_help_exit_text").empty();
 	editForm.style.display="none";
 }
 
-function showDeleteForm(i) {
-	var doc = document;
+function show_delete_form(i) {
     var deleteForm = document.getElementById('delete_box');	
-	var deleteButton = doc.getElementById('delete_btn');
-	
-    deleteForm.style.display = 'block';
-
-	deleteButton.setAttribute('onclick', 'hideDeleteForm(' + i + ')');
-}
-
-function hideDeleteForm(i){
-	var deleteForm = document.getElementById('delete_box');
-		
-	var currCampus = document.getElementById('dCurrStartCampus');
-	var currID = document.getElementById('dCurrIdNumber');
-	var currDate = document.getElementById('dCurrDate');
-	var currEntryL = document.getElementById('dCurrEntryLoc');
-	var currEntryT = document.getElementById('dCurrEntryTime');
-	var currExitL = document.getElementById('dCurrExitLoc');
-	var currExitT = document.getElementById('dCurrExitTime');
+	var deleteButton = document.getElementById('delete_btn');
+    		
+	var currCampus = document.getElementById('d_curr_start_campus');
+	var currID = document.getElementById('d_curr_id_number');
+	var currDate = document.getElementById('d_curr_date');
+	var currEntryL = document.getElementById('d_curr_entry_loc');
+	var currEntryT = document.getElementById('d_curr_entry_time');
+	var currExitL = document.getElementById('d_curr_exit_loc');
+	var currExitT = document.getElementById('d_curr_exit_time');
 	
 
 	var reserveText = document.getElementById(i).children[1];
 	currCampus.value = reserveText.children[0].innerHTML;
-	currID.value = document.getElementById(i).getAttribute('linkedidnumber');
+	currID.value = document.getElementById(i).getAttribute('linked_id_number');
 	currDate.value = reserveText.children[2].innerHTML;
 	currEntryL.value = reserveText.children[4].textContent;
 	currEntryT.value = reserveText.children[5].innerHTML;
 	currExitL.value = reserveText.children[7].textContent;
 	currExitT.value = reserveText.children[8].innerHTML;
+
+
+    deleteForm.style.display = 'block';
+    
+	deleteButton.setAttribute('onclick', 'hide_delete_form()');
+}
+
+function hide_delete_form(){
+	var deleteForm = document.getElementById('delete_box');
 	
 	deleteForm.style.display = "none";
 }
 
-function cancelDeleteForm(){
+function cancel_delete_form(){
+    var deleteButton = document.getElementById('delete_btn');
 	var deleteForm = document.getElementById('delete_box');
 	
+    var currCampus = document.getElementById('d_curr_start_campus');
+	var currID = document.getElementById('d_curr_id_number');
+	var currDate = document.getElementById('d_curr_date');
+	var currEntryL = document.getElementById('d_curr_entry_loc');
+	var currEntryT = document.getElementById('d_curr_entry_time');
+	var currExitL = document.getElementById('d_curr_exit_loc');
+	var currExitT = document.getElementById('d_curr_exit_time');
+	
+
+	currCampus.value = "";
+	currID.value = "";
+	currDate.value = "";
+	currEntryL.value = "";
+	currEntryT.value = "";
+	currExitL.value = "";
+	currExitT.value = "";
+
+    deleteButton.setAttribute('onclick', '')
 	deleteForm.style.display="none";
 }
 
-function createTextInfo(main_div, resultArr = []){
+function create_text_info(main_div, resultArr = []){
     var hasResults = resultArr.length;
     var text_info = document.createElement('div');
     text_info.className = 'text_reserved_schedule';
     main_div.appendChild(text_info);
 
     var locationValue;
-    if ( functionCalled == 0 ){
+    if ( function_called == 0 ){
         locationValue = document.getElementById('laguna_btn');
     }
     else{
@@ -460,17 +477,16 @@ function createTextInfo(main_div, resultArr = []){
 
 }
 
-function cancelScheduleForm(){
+function cancel_schedule_form(){
     var scheduleForm = document.getElementsByClassName('form_box')[0];
     scheduleForm.style.display = 'none';
 }
 
-function readyChangeTime( location_id, time_id ){
-    changeEntryTimeSlots(location_id, time_id);
-
+function ready_change_time(location_id, time_id ){
+    change_entry_time_slots(location_id, time_id);
 }
 
-function changeEntryTimeSlots(location_id, time_id){
+function change_entry_time_slots(location_id, time_id){
     
     var timeSlots = document.getElementById(time_id);
     timeSlots.innerHTML = '';
@@ -478,138 +494,172 @@ function changeEntryTimeSlots(location_id, time_id){
     var selectedLocation = document.getElementById(location_id);
     var location = selectedLocation.options[selectedLocation.selectedIndex].value;
 
-    if( functionCalled == 0 || editFunctionCalled == 0 ){ //From Laguna
-
-
-        if ( location_id == 'user_entry' || location_id == 'editUser_entry'){ //Entry Point
-            if ( location == 0 ){
-                var storage_time = ["06:00 AM", "06:30 AM", "07:00 AM", "07:30 AM", "08:00 AM", 
-                                    "08:30 AM", "09:00 AM", "09:30 AM", "10:30 AM", "11:30 AM", 
-                                    "12:30 PM", "01:00 PM", "02:00 PM", "03:00 PM", "03:30 PM",
-                                    "04:40 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 1 ){
-                var storage_time = ["06:30 AM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 2 ){
-                var storage_time = ["05:30 AM", "06:00 AM", "06:30 AM", "07:30 AM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 3 ){
-                var storage_time = ["06:30 AM", "07:00 AM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else{
-                var storage_time = ["N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-        }
+    console.log(location_id);
+    console.log(location);
     
-        else if ( location_id = 'user_exit' || location_id == 'editUser_exit'){ //Exit Point 
-            if ( location == 0 ){
-                var storage_time = ["05:45 AM", "06:15 AM", "07:00 AM", "08:00 AM", "09:00 AM", 
-                                    "11:00 AM", "01:00 PM", "02:30 PM", "03:30 PM", "05:10 PM", 
-                                    "06:15 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 1 ){
-                var storage_time = ["09:00 AM", "11:30 AM", "04:45 PM", "05:10 AM", "05:30 PM", 
-                                    "06:00 PM", "06:30 PM", "07:00 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 2 ){
-                var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
-                                    "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 3 ){
-                var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
-                                    "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 4 ){
-                var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
-                                    "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else{
-                var storage_time = ["N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-        }
-    }
-    else if (functionCalled == 1 || editFunctionCalled == 1)
-    { //From Manila
+    storage_time_0 = to_laguna_time_slots[location];
+    storage_time_1 = from_laguna_time_slots[location];
 
-        if ( location_id == 'user_entry' || location_id == 'editUser_entry'){ //Entry Point
-            if ( location == 0 ){
-                var storage_time = ["06:00 AM", "07:30 AM", "09:30 PM", "11:00 AM", "01:00 PM",
-                                    "02:30 PM", "03:30 PM", "05:10 PM", "06:15 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 1 ){
-                var storage_time = ["05:45 AM", "06:15 AM", "07:00 AM", "11:00 AM", "01:00 PM",
-                                    "02:30 PM", "03:30 PM", "05:10 PM", "06:15 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-        }
+    console.log(storage_time_0);
+    console.log(storage_time_1);
 
-        else if ( location_id = 'user_exit' || location_id == 'editUser_exit'){ //Exit Point
-            if ( location == 0 ){
-                var storage_time = ["05:45 AM", "06:15 AM", "07:00 AM", "08:00 AM", "09:00 AM", 
-                                    "11:00 AM", "01:00 PM", "02:30 PM", "03:30 PM", "05:10 PM", 
-                                    "06:15 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 1 ){
-                var storage_time = ["09:00 AM", "11:30 AM", "04:45 PM", "05:10 AM", "05:30 PM", 
-                                    "06:00 PM", "06:30 PM", "07:00 PM", "07:45 PM", "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 2 ){
-                var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
-                                    "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 3 ){
-                var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
-                                    "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else if ( location == 4 ){
-                var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
-                                    "N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-            else{
-                var storage_time = ["N/A"];
-                changeTimeHelper( time_id, storage_time );
-            }
-        }
-        
+    console.log(to_laguna_campus_tags[location]);
+    console.log(from_laguna_campus_tags[location]);
+
+    $(`#help_entry_text`).empty();
+    $(`#help_exit_text`).empty();
+    $(`#edit_help_entry_text`).empty();
+    $(`#edit_help_exit_text`).empty();
+
+    if (location_id == 'user_entry') {
+        $(`#help_entry_text`).append(to_laguna_campus_tags[location]);
+        $(`#help_exit_text`).append(from_laguna_campus_tags[location]);
+    } else {
+        $(`#edit_help_entry_text`).append(to_laguna_campus_tags[location]);
+        $(`#edit_help_exit_text`).append(from_laguna_campus_tags[location]);
     }
+
+
+
+    change_time_helper( 'user_entryTime', storage_time_0 );
+    change_time_helper( 'editUser_entryTime', storage_time_0 );
+
+    change_time_helper( 'user_exitTime', storage_time_1 );
+    change_time_helper( 'editUser_exitTime', storage_time_1 );
+
+    fill_hidden_field(to_laguna_campus_tags[location], 'e_hidden_entry_loc');
+	fill_hidden_field(from_laguna_campus_tags[location], 'e_hidden_exit_loc');
+    fill_hidden_field(to_laguna_campus_tags[location], 'hidden_entry_loc');
+	fill_hidden_field(from_laguna_campus_tags[location], 'hidden_exit_loc');
+    // if( function_called == 0 || edit_function_called == 0 ){ //From Laguna
+
+    //     if ( location_id == 'user_entry' || location_id == 'editUser_entry'){ //Entry Point
+
+    //         change_time_helper( time_id, storage_time );
+
+    //         // if ( location == 0 ){
+    //         //     var storage_time = ["06:00 AM", "06:30 AM", "07:00 AM", "07:30 AM", "08:00 AM", 
+    //         //                         "08:30 AM", "09:00 AM", "09:30 AM", "10:30 AM", "11:30 AM", 
+    //         //                         "12:30 PM", "01:00 PM", "02:00 PM", "03:00 PM", "03:30 PM",
+    //         //                         "04:40 PM", "N/A"];
+    //         //     change_time_helper( time_id, storage_time );
+    //         // }
+    //         // else if ( location == 1 ){
+    //         //     var storage_time = ["06:30 AM", "N/A"];
+    //         //     change_time_helper( time_id, storage_time );
+    //         // }
+    //         // else if ( location == 2 ){
+    //         //     var storage_time = ["05:30 AM", "06:00 AM", "06:30 AM", "07:30 AM", "N/A"];
+    //         //     change_time_helper( time_id, storage_time );
+    //         // }
+    //         // else if ( location == 3 ){
+    //         //     var storage_time = ["06:30 AM", "07:00 AM", "N/A"];
+    //         //     change_time_helper( time_id, storage_time );
+    //         // }
+    //         // else{
+    //         //     var storage_time = ["N/A"];
+    //         //     change_time_helper( time_id, storage_time );
+    //         // }
+    //     }
     
+    //     else if ( location_id = 'user_exit' || location_id == 'editUser_exit'){ //Exit Point 
+    //         if ( location == 0 ){
+    //             var storage_time = ["05:45 AM", "06:15 AM", "07:00 AM", "08:00 AM", "09:00 AM", 
+    //                                 "11:00 AM", "01:00 PM", "02:30 PM", "03:30 PM", "05:10 PM", 
+    //                                 "06:15 PM", "07:45 PM", "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //         else if ( location == 1 ){
+    //             var storage_time = ["09:00 AM", "11:30 AM", "04:45 PM", "05:10 AM", "05:30 PM", 
+    //                                 "06:00 PM", "06:30 PM", "07:00 PM", "07:45 PM", "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //         else if ( location == 2 ){
+    //             var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
+    //                                 "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //         else if ( location == 3 ){
+    //             var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
+    //                                 "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //         else if ( location == 4 ){
+    //             var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
+    //                                 "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //         else{
+    //             var storage_time = ["N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //     }
+    // }
+    // else if (function_called == 1 || edit_function_called == 1)
+    // { //From Manila
 
+    //     if ( location_id == 'user_entry' || location_id == 'editUser_entry'){ //Entry Point
+    //         if ( location == 0 ){
+    //             var storage_time = ["06:00 AM", "07:30 AM", "09:30 PM", "11:00 AM", "01:00 PM",
+    //                                 "02:30 PM", "03:30 PM", "05:10 PM", "06:15 PM", "07:45 PM", "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //         else if ( location == 1 ){
+    //             var storage_time = ["05:45 AM", "06:15 AM", "07:00 AM", "11:00 AM", "01:00 PM",
+    //                                 "02:30 PM", "03:30 PM", "05:10 PM", "06:15 PM", "07:45 PM", "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //     }
+
+    //     else if ( location_id = 'user_exit' || location_id == 'editUser_exit'){ //Exit Point
+    //         if ( location == 0 ){
+    //             var storage_time = ["05:45 AM", "06:15 AM", "07:00 AM", "08:00 AM", "09:00 AM", 
+    //                                 "11:00 AM", "01:00 PM", "02:30 PM", "03:30 PM", "05:10 PM", 
+    //                                 "06:15 PM", "07:45 PM", "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //         else if ( location == 1 ){
+    //             var storage_time = ["09:00 AM", "11:30 AM", "04:45 PM", "05:10 AM", "05:30 PM", 
+    //                                 "06:00 PM", "06:30 PM", "07:00 PM", "07:45 PM", "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //         else if ( location == 2 ){
+    //             var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
+    //                                 "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //         else if ( location == 3 ){
+    //             var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
+    //                                 "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //         else if ( location == 4 ){
+    //             var storage_time = ["04:45 PM", "05:10 PM", "05:30 PM", "06:00 PM", "07:45 PM", 
+    //                                 "N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //         else{
+    //             var storage_time = ["N/A"];
+    //             change_time_helper( time_id, storage_time );
+    //         }
+    //     }
+    // }
+    
 }
 
-function changeTimeHelper( time_id, storage_time ){
+function change_time_helper( time_id, storage_time ){
 
-    var timeSlots = document.getElementById(time_id);
+    // var timeSlots = document.getElementById(time_id);
+    $(`#` + time_id).empty();
 
     for ( var i = 0; i < storage_time.length; i++ ){
-        var option = document.createElement('option');
-        option.value = i;
-        option.innerHTML = storage_time[i];
-        timeSlots.appendChild(option);
+        $(`#` + time_id).append(`<option value="` + i + `">` + storage_time[i] + `</option>`);
     }
 }
 
-function locationChangeFormHelper(location, isEditButton){
+function location_change_form_helper(location, isEditButton){
     //Location 0 - Laguna || 1 - Manila
 
-        
     if ( isEditButton == false )
     {
         var selectEntryContainer = document.getElementById('user_entry');
@@ -659,8 +709,8 @@ function locationChangeFormHelper(location, isEditButton){
     
         }
 
-        changeEntryTimeSlots('user_entry', 'user_entryTime')
-        changeEntryTimeSlots('user_exit', 'user_exitTime')
+        change_entry_time_slots('user_entry', 'user_entryTime')
+        change_entry_time_slots('user_exit', 'user_exitTime')
 
     }
     else{
@@ -707,8 +757,8 @@ function locationChangeFormHelper(location, isEditButton){
             }
         }
 
-        changeEntryTimeSlots('editUser_entry', 'editUser_entryTime')
-        changeEntryTimeSlots('editUser_exit', 'editUser_exitTime')
+        change_entry_time_slots('editUser_entry', 'editUser_entryTime')
+        change_entry_time_slots('editUser_exit', 'editUser_exitTime')
 
     }
   

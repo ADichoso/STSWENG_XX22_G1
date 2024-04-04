@@ -7,7 +7,7 @@ function hideErrorBox(){
     document.getElementById('error_box').style.display = "none";
 }
 
-function logoutAccount(){
+function logout_account(){
   localStorage.removeItem('loggedInUser');
 }
 

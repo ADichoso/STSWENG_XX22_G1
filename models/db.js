@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 // ccapdev-mongoose is the name of the database
-const url = 'mongodb+srv://MauriesLopez:679914164@shuttlereservation.nagtzpm.mongodb.net/?retryWrites=true&w=majority';
+const url = 'mongodb+srv://dbUser:H4RCbGxtzVbJIHde@shuttlereservation.nagtzpm.mongodb.net/';
 
 
 // additional connection options
@@ -26,14 +26,14 @@ const database = {
     /*
         inserts a single `doc` to the database based on the model `model`
     */
-    insertOne: async function(model, doc) {
+    insert_one: async function(model, doc) {
         return await model.create(doc);
     },
 
     /*
         inserts multiple `docs` to the database based on the model `model`
     */
-    insertMany: async function(model, docs) {
+    insert_many: async function(model, docs) {
         return await model.insertMany(docs);
     },
 
@@ -43,7 +43,7 @@ const database = {
         limits the fields returned based on the string `projection`
         callback function is called after the execution of findOne() function
     */
-    findOne: async function(model, query, projection) {
+    find_one: async function(model, query, projection) {
         return model.findOne(query, projection);
     },
 
@@ -53,7 +53,7 @@ const database = {
         limits the fields returned based on the string `projection`
         callback function is called after the execution of findMany() function
     */
-    findMany: async function(model, query, projection) {
+    find_many: async function(model, query, projection) {
         return await model.find(query, projection);
     },
 
@@ -62,7 +62,7 @@ const database = {
         on a single document based on the model `model`
         filtered by the object `filter`
     */
-    updateOne: async function(model, filter, update) {
+    update_one: async function(model, filter, update) {
         return await model.updateOne(filter, update);
     },
 
@@ -71,7 +71,7 @@ const database = {
         on multiple documents based on the model `model`
         filtered using the object `filter`
     */
-    updateMany: async function(model, filter, update) {
+    update_many: async function(model, filter, update) {
         return await model.updateMany(filter, update);
     },
 
@@ -79,7 +79,7 @@ const database = {
         deletes a single document based on the model `model`
         filtered using the object `conditions`
     */
-    deleteOne: async function(model, conditions) {
+    delete_one: async function(model, conditions) {
         return await model.deleteOne(conditions);
     },
 
@@ -87,7 +87,7 @@ const database = {
         deletes multiple documents based on the model `model`
         filtered using the object `conditions`
     */
-    deleteMany: async function(model, conditions) {
+    delete_many: async function(model, conditions) {
         return await model.deleteMany(conditions);
     }
 

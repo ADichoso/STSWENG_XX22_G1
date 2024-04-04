@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
-var ReservationSchema = new mongoose.Schema({
-    startCampus: {
+var reservation_schema = new mongoose.Schema({
+    start_campus: {
         type: String,
         required: true,
     },
@@ -9,26 +9,26 @@ var ReservationSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    entryLoc: {
+    entry_loc: {
         type: String,
         required: true,
     },
-    entryTime: {
+    entry_time: {
         type: String,
         required: true,
     },
-    exitLoc: {
+    exit_loc: {
         type: String,
         required: true,
     },
-    exitTime: {
+    exit_time: {
         type: String,
         required: true,
     },
-    idNumber: { //This is used to bind a reservation to a user. Many-to-one relation.
+    id_number: { //This is used to bind a reservation to a user. Many-to-one relation.
         type: Number,
         required: false,
     }
 });
 
-module.exports = mongoose.model('Reservation', ReservationSchema);
+module.exports = mongoose.model('Reservation', reservation_schema);

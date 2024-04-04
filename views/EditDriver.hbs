@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title> Arrows Express - Reserve (Admin) </title>
+        <link rel="icon" type="image/png" href="../images/DLSU_Logo.png">
+        <link rel="stylesheet" href="../css/FormStyle.css">  <!-- Kailangan to if may separate CSS file -->
+        <link rel="stylesheet" href="../css/ReservationStyle.css">
+        <script src="../js/User.js"> </script>
+        <script src="../js/EditDrivers.js" defer> </script>
+        <script src="../js/UserAdmin.js" defer> </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+
+    <body>
+       <script>
+            window.onload = function() {
+
+                document.getElementById("success_box").style.display = "none";
+                document.getElementById("error_box").style.display = "none";
+				
+				console.log({{id_number}});
+				function admin_id_check(admin_id = null)
+                {
+					if (admin_id == null){
+						var ID_num = new URLSearchParams(window.location.search).get('id_number');
+						document.getElementById('backButton').setAttribute('href', '/ProfileAdmin?id_number='+ ID_num);
+						document.getElementById('admin_id').value = ID_num;
+					}
+					else{
+						document.getElementById('admin_id').value = admin_id;
+						document.getElementById('d_admin_id').value = admin_id;
+					}
+				}
+				admin_id_check({{id_number}});
+
+                var search_user_status = new URLSearchParams(window.location.search).get('is_search_user_valid');
+                var search_user_resv_list_status = new URLSearchParams(window.location.search).get('reservation_list');
+                var search_user_update_status = "{{is_update_success}}";
+                var search_user_delete_status = "{{is_delete_success}}";
+
+                if ( search_user_status == "false" ){
+                    document.getElementById("error_box").style.display = "block";
+                    $("#error_message").text("No user found. Check the inputted ID Number.");
+
+                    setTimeout(function(){
+                        document.getElementById("error_box").style.display = "none";
+                    }, 3000);
+                }
+
+                if ( search_user_resv_list_status == "false" ){
+                    document.getElementById("error_box").style.display = "block";
+                    $("#error_message").text("No reservation/s found.");
+
+                    setTimeout(function(){
+                        document.getElementById("error_box").style.display = "none";
+                    }, 3000);
+                }
+
+                if ( search_user_update_status == "true" ){
+                    document.getElementById("success_box").style.display = "block";
+                    $("#success_message").text('Reservation successfully updated!');
+
+                    setTimeout(function(){
+                        document.getElementById("success_box").style.display = "none";
+                    }, 3000);
+                }
+                else if ( search_user_update_status == "false" ){
+                    document.getElementById("error_box").style.display = "block";
+                    $("#error_message").text("Reservation failed to update. Try again.");
+
+                    setTimeout(function(){
+                        document.getElementById("error_box").style.display = "none";
+                    }, 3000);
+
+                }
+
+                if ( search_user_delete_status == "true" ){
+                    document.getElementById("success_box").style.display = "block";
+                    $("#success_message").text('Reservation successfully deleted!');
+
+                    setTimeout(function(){
+                        document.getElementById("success_box").style.display = "none";
+                    }, 3000);
+                }
+				
+            };
+        </script>
+		
+        <div class = "banner"> 
+            <div class="navbar">
+				<a href="/ProfileAdmin?id_number={{admin_id}}" id="backButton"><img src="../images/Leftarrow.png" class = "back_img"></a>
+
+                <div id="success_box">
+                    <p id="success_message"> Success! </p>
+                </div>
+
+                <div id="error_box">
+                    <p id="error_message"> Invalid User/Password. Check your input </p>
+                </div>
+
+                <a href="/"> <img src= "../images/DLSU_Logo.png" class = "website_logo"></a>
+
+                <style>
+                    img:hover{
+                        cursor: default;
+                    }
+                </style>   
+            </div>
+            
+            <div class="content">
+
+                <h1 style="position: relative; color: white; left: 50px; top: 40px;"> Admin Manage Drivers </h1>
+                <p style="position: relative; color: white; left: 50px; margin-top: 40px; font-style: italic;"> Add/Remove a Driver </p>
+                <button id="search_user_btn" onclick="show_new_driver_form();" style="margin-left: 50px;"> Add New Driver  </button> 
+                <style> 
+                    #search_user_btn{
+                        position: absolute; 
+                        left: 85%; 
+                        top: 5%; 
+                        padding: 15px; 
+                        font-weight: bold; 
+                        background: transparent;
+                        border: 5px solid yellow;
+                        color: white;
+                        cursor: pointer; 
+                        border-radius: 30px; 
+                    }
+
+                    #search_user_btn:hover{
+                        background: yellow;
+                        color: black;
+                    } 
+
+                </style>
+
+                <hr style="position: relative; margin-top: 30px; border: 2px solid white;">
+
+                <div class = "schedule_container">
+                    {{#each result}}
+					 {{>driver_entry this}};
+				    {{/each}}
+                </div>
+            </div>
+
+                <style>
+					#delete_btn{
+						margin-top: 50px; 
+						background-color: rgb(131, 0, 0); 
+						color: rgb(255, 255, 255);
+					}
+					#delete_btn:hover{
+						margin-top: 50px; 
+						background-color: rgb(255, 0, 0); 
+						color: rgb(255, 255, 255);
+					}
+
+				</style>
+
+                <div class="form_box2" id="insert_box" style="display: none; height: auto;">
+                    <div id="blur_box"> </div>
+                    <h2 style="width: 80%;"> Add Driver Account</h2>
+                    <hr>
+                    <div class="input">
+                        <form action="/DriverInsert" method="post">
+                            
+							<input type="hidden" id="admin_id" name="admin_id" value="">
+                            <label for="curr_first_name">First Name</label>
+							<input type="text" id="curr_first_name" required name="curr_first_name" value="">
+                            <br>
+                            <label for="curr_last_name">Last Name</label>
+							<input type="text" id="curr_last_name" required name="curr_last_name" value="">
+                            <br>
+                            <label for="curr_email">Email Address</label>
+                            <input type="text" id="curr_email" name="curr_email" value="">
+                            <br>
+                            <label for="curr_id_number">ID Number</label>
+							<input type="text" id="curr_id_number" name="curr_id_number" value="">
+                            <br>
+                            <button type="submit" class="toggle_btn" id="insert_btn" onclick="hide_new_driver_form();"> Insert <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
+						</form>
+                            <button type="submit" class="toggle_btn" id="cancel_btn" onclick="hide_new_driver_form();"> Cancel</button>        
+                    </div>
+                </div>
+
+				<div class="form_box2" id="delete_box" style="display: none; height: auto;">
+                    <div id="blur_box"> </div>
+                    <h2 style="width: 80%;"> Delete Driver Account</h2>
+					<h4 style="width: 80%"> Are you sure you want to delete this driver account?? </h4>
+                    <hr>
+                    <div class="input">
+                        <form action="/DriverDelete" method="post">
+							<input type="hidden" id="d_admin_id" name="d_admin_id" value="">
+							<input type="hidden" id="d_curr_first_name" required name="d_curr_first_name" value="">
+							<input type="hidden" id="d_curr_last_name" required name="d_curr_last_name" value="">
+                            <input type="hidden" id="d_curr_email" name="d_curr_email" value="">
+							<input type="hidden" id="d_curr_id_number" name="d_curr_id_number" value="">
+                            <button type="submit" class="toggle_btn" id="d_delete_btn" onclick="hide_delete_driver_form();"> Delete <style> .toggle_btn{ font-size: large; font-weight: bold;}</style></button>
+						</form>
+                            <button type="submit" class="toggle_btn" id="d_cancel_btn" onclick="hide_delete_driver_form();"> Cancel</button>        
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </body>
+
+    <style>
+
+        .form_box{
+            height: 420px;
+        }
+
+        .form_box .input{
+            top: 10px;
+        }
+
+        .toggle_btn{
+            top: -50px;
+        }
+
+        .subtext{
+            position: relative;
+            top: 10px;
+        }
+        
+        .text_reserved_schedule p{
+            position: relative;
+            font-size: 13px;
+            font-weight: bolder;
+        }
+
+        #success_box{
+            width: 380px;
+            height: 20px;
+            top: 0%;
+            margin: auto;
+            background: rgb(97, 255, 77);
+            padding: 5px;
+            border-radius: 20px;
+            display: none;
+        }
+
+        #success_box p{
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 13px;
+            position: relative;
+            top: 3px;
+        }
+
+        #error_box{
+            width: 380px;
+            height: 20px;
+            top: 0%;
+            margin: auto;
+            background: rgb(255, 54, 54);
+            padding: 5px;
+            position: relative;
+            border-radius: 20px;
+            display: none;
+        }
+
+        #error_box p{
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 13px;
+            position: relative;
+            top: 3px;
+        }           
+
+
+    </style>
+
+</html>
