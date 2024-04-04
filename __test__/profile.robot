@@ -7,7 +7,7 @@ Library           SeleniumLibrary
 
 
 *** Variables ***
-${BROWSER}    Chrome
+${BROWSER}    headlesschrome
 ${URL}    https://sweng-testing-ci.onrender.com/
 ${account_id}    34433443
 ${account_pass}    3443

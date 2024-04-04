@@ -9,11 +9,11 @@ Library    XML
 
 *** Variables ***
 ${URL}    https://sweng-testing-ci.onrender.com/SignUp
-${BROWSER}    Chrome
+${BROWSER}    headlesschrome
 
 *** Test Cases ***
 1-1 Valid Access
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    http://localhost:3000/SignUp    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 
@@ -412,7 +412,7 @@ ${BROWSER}    Chrome
     Should Be Equal    ${new_url}    ${URL}
 
 1-11 Missing Passenger Type
-    Open Browser    http://localhost:3000/SignUp    Chrome
+    Open Browser    http://localhost:3000/SignUp    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    0.1
 

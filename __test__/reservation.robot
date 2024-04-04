@@ -8,7 +8,7 @@ Library           SeleniumLibrary
 Library    XML
 
 *** Variables ***
-${BROWSER}    Chrome
+${BROWSER}    headlesschrome
 ${URL}    https://sweng-testing-ci.onrender.com/
 
 #user role account
